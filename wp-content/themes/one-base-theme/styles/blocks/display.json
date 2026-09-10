@@ -3,13 +3,17 @@
     "version": 3,
     "title": "Display",
     "slug": "display",
-    "blockTypes": ["core/heading"],
+    "blockTypes": [
+        "core/heading"
+    ],
     "styles": {
         "typography": {
+            "fontFamily": "var:preset|font-family|sans",
             "fontSize": "var:preset|font-size|hero",
-            "fontWeight": "var:custom|typography|font-weight|medium",
-            "lineHeight": "var:custom|typography|line-height|tight",
-            "letterSpacing": "var:custom|typography|letter-spacing|tight"
+            "fontWeight": "700",
+            "lineHeight": "0.933333",
+            "letterSpacing": "-0.5px",
+            "textTransform": "none"
         }
     }
 }

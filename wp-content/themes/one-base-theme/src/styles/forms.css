@@ -14,7 +14,7 @@
 	--one-form-padding-block: 0.75rem;
 	--one-form-placeholder: var(--wp--preset--color--muted, #6b6c73);
 	--one-form-focus: var(--wp--preset--color--contrast, #191a23);
-	--one-form-error: #b42318;
+	--one-form-error: var(--wp--preset--color--error);
 	--one-form-disabled-background: var(--wp--preset--color--surface, #f3f3f3);
 	--one-form-label-weight: 600;
 	--one-form-gap: var(--wp--preset--spacing--md, 1.5rem);

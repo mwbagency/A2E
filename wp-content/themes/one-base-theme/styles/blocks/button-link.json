@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "title": "Link",
+    "slug": "link",
+    "blockTypes": [
+        "core/button"
+    ],
+    "styles": {
+        "border": {
+            "radius": "0",
+            "width": "0"
+        },
+        "color": {
+            "background": "transparent",
+            "text": "var:preset|color|accent"
+        },
+        "spacing": {
+            "padding": {
+                "top": "0",
+                "bottom": "0",
+                "left": "0",
+                "right": "0"
+            }
+        },
+        "typography": {
+            "textDecoration": "underline"
+        }
+    }
+}

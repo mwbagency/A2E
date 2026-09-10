@@ -62,7 +62,7 @@ html {
 .one-202x-head__logo,
 .one-202x-head__logo img {
     flex: 0 0 auto;
-    max-height: 2.5rem;
+    max-height: 43px;
     width: auto;
 }
 
@@ -315,7 +315,7 @@ body .one-202x-mobile-nav .one-202x-mobile-nav__top {
 .one-202x-mobile-nav__logo,
 .one-202x-mobile-nav__logo img {
     flex: 0 0 auto;
-    max-height: 2.75rem;
+    max-height: 43px;
     width: auto;
 }
 

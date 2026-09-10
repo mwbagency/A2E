@@ -59,17 +59,11 @@ final class BlockStyles
         ];
 
         foreach ($heading_labels as $level => $label) {
-            $rhythm = $level === 1 ? 'tight' : 'regular';
             register_block_style('core/paragraph', [
                 'name' => 'heading-' . $level,
                 'label' => $label,
                 'style_data' => [
-                    'typography' => [
-                        'fontSize' => 'var:preset|font-size|h-' . $level,
-                        'fontWeight' => 'var:custom|typography|font-weight|regular',
-                        'lineHeight' => 'var:custom|typography|line-height|' . $rhythm,
-                        'letterSpacing' => 'var:custom|typography|letter-spacing|' . $rhythm,
-                    ],
+                    'typography' => wp_get_global_styles(['elements', 'h' . $level, 'typography']),
                 ],
             ]);
         }

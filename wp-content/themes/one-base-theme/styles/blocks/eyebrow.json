@@ -3,12 +3,16 @@
     "version": 3,
     "title": "Eyebrow",
     "slug": "eyebrow",
-    "blockTypes": ["core/paragraph"],
+    "blockTypes": [
+        "core/paragraph"
+    ],
     "styles": {
         "typography": {
-            "fontSize": "var:preset|font-size|h-6",
-            "fontWeight": "var:custom|typography|font-weight|semibold",
-            "lineHeight": "var:custom|typography|line-height|loose"
+            "fontSize": "var:preset|font-size|overline",
+            "fontWeight": "600",
+            "lineHeight": "1.25",
+            "letterSpacing": "1.5px",
+            "textTransform": "uppercase"
         }
     }
 }

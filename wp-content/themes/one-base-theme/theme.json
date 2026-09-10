@@ -17,29 +17,79 @@
             "defaultPalette": false,
             "palette": [
                 {
-                    "name": "Base",
+                    "name": "White / Base",
                     "slug": "base",
-                    "color": "#ffffff"
+                    "color": "#FFFFFF"
                 },
                 {
-                    "name": "Contrast",
+                    "name": "Blue / Contrast",
                     "slug": "contrast",
-                    "color": "#191a23"
+                    "color": "#024959"
                 },
                 {
-                    "name": "Accent",
+                    "name": "Red / Accent",
                     "slug": "accent",
-                    "color": "#b9ff66"
+                    "color": "#F24530"
                 },
                 {
-                    "name": "Surface",
+                    "name": "Green",
+                    "slug": "green",
+                    "color": "#038C73"
+                },
+                {
+                    "name": "Yellow",
+                    "slug": "yellow",
+                    "color": "#F0C577"
+                },
+                {
+                    "name": "Grey 50 / Surface",
                     "slug": "surface",
-                    "color": "#f3f3f3"
+                    "color": "#F9F9F9"
                 },
                 {
-                    "name": "Muted",
+                    "name": "Grey 100",
+                    "slug": "grey-100",
+                    "color": "#EDEDED"
+                },
+                {
+                    "name": "Grey 200",
+                    "slug": "grey-200",
+                    "color": "#D3D3D3"
+                },
+                {
+                    "name": "Grey 400 / Muted",
                     "slug": "muted",
-                    "color": "#6b6c73"
+                    "color": "#A0A0A0"
+                },
+                {
+                    "name": "Grey 600",
+                    "slug": "grey-600",
+                    "color": "#444444"
+                },
+                {
+                    "name": "Grey 800",
+                    "slug": "grey-800",
+                    "color": "#3F3F3F"
+                },
+                {
+                    "name": "Error",
+                    "slug": "error",
+                    "color": "#FF0000"
+                },
+                {
+                    "name": "Success",
+                    "slug": "success",
+                    "color": "#1BCD32"
+                },
+                {
+                    "name": "Warning",
+                    "slug": "warning",
+                    "color": "#EC841A"
+                },
+                {
+                    "name": "Button outline",
+                    "slug": "button-outline",
+                    "color": "#1E411E"
                 }
             ]
         },
@@ -90,18 +140,62 @@
             "fluid": true,
             "fontFamilies": [
                 {
-                    "name": "Primary sans",
+                    "name": "Galano Grotesque",
                     "slug": "sans",
-                    "fontFamily": "\"Space Grotesk\", Inter, system-ui, sans-serif",
+                    "fontFamily": "\"Galano Grotesque\", Arial, sans-serif",
                     "fontFace": [
                         {
-                            "fontFamily": "Space Grotesk",
+                            "fontFamily": "Galano Grotesque",
                             "fontStyle": "normal",
-                            "fontWeight": "400 700",
+                            "fontWeight": "300",
                             "fontDisplay": "swap",
-                            "fontStretch": "normal",
                             "src": [
-                                "file:./assets/fonts/space-grotesk/space-grotesk-variable.woff2"
+                                "file:./assets/fonts/galano-grotesque/GalanoGrotesque-Light.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "Galano Grotesque",
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/galano-grotesque/GalanoGrotesque-Regular.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "Galano Grotesque",
+                            "fontStyle": "normal",
+                            "fontWeight": "500",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/galano-grotesque/GalanoGrotesque-Medium.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "Galano Grotesque",
+                            "fontStyle": "normal",
+                            "fontWeight": "600",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/galano-grotesque/GalanoGrotesque-SemiBold.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "Galano Grotesque",
+                            "fontStyle": "normal",
+                            "fontWeight": "700",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/galano-grotesque/GalanoGrotesque-Bold.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "Galano Grotesque",
+                            "fontStyle": "italic",
+                            "fontWeight": "400",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/galano-grotesque/GalanoGrotesque-Italic.woff2"
                             ]
                         }
                     ]
@@ -111,42 +205,83 @@
                 {
                     "name": "Body",
                     "slug": "body",
-                    "size": "clamp(1rem, 0.96rem + 0.18vw, 1.125rem)"
+                    "size": "1.25rem",
+                    "fluid": false
+                },
+                {
+                    "name": "Small",
+                    "slug": "small",
+                    "size": "1rem",
+                    "fluid": false
+                },
+                {
+                    "name": "Button",
+                    "slug": "button",
+                    "size": "1.125rem",
+                    "fluid": false
+                },
+                {
+                    "name": "Overline",
+                    "slug": "overline",
+                    "size": "1rem",
+                    "fluid": false
                 },
                 {
                     "name": "Heading 6",
                     "slug": "h-6",
-                    "size": "1rem"
+                    "size": "1.25rem",
+                    "fluid": false
                 },
                 {
                     "name": "Heading 5",
                     "slug": "h-5",
-                    "size": "1.125rem"
+                    "size": "1.5rem",
+                    "fluid": false
                 },
                 {
                     "name": "Heading 4",
                     "slug": "h-4",
-                    "size": "clamp(1.25rem, 1.14rem + 0.45vw, 1.55rem)"
+                    "size": "2rem",
+                    "fluid": {
+                        "min": "1.5rem",
+                        "max": "2rem"
+                    }
                 },
                 {
                     "name": "Heading 3",
                     "slug": "h-3",
-                    "size": "clamp(1.5rem, 1.31rem + 0.74vw, 2rem)"
+                    "size": "2.625rem",
+                    "fluid": {
+                        "min": "1.75rem",
+                        "max": "2.625rem"
+                    }
                 },
                 {
                     "name": "Heading 2",
                     "slug": "h-2",
-                    "size": "clamp(2rem, 1.7rem + 1.15vw, 2.75rem)"
+                    "size": "3.75rem",
+                    "fluid": {
+                        "min": "2.25rem",
+                        "max": "3.75rem"
+                    }
                 },
                 {
                     "name": "Heading 1",
                     "slug": "h-1",
-                    "size": "clamp(2.75rem, 2.15rem + 2.4vw, 4.5rem)"
+                    "size": "5.625rem",
+                    "fluid": {
+                        "min": "3rem",
+                        "max": "5.625rem"
+                    }
                 },
                 {
                     "name": "Hero",
                     "slug": "hero",
-                    "size": "clamp(3rem, 2.25rem + 3vw, 5.25rem)"
+                    "size": "5.625rem",
+                    "fluid": {
+                        "min": "3rem",
+                        "max": "5.625rem"
+                    }
                 }
             ]
         },
@@ -156,34 +291,41 @@
                     "regular": "400",
                     "medium": "500",
                     "semibold": "600",
-                    "bold": "700"
+                    "bold": "700",
+                    "light": "300"
                 },
                 "lineHeight": {
-                    "tight": "1.06",
-                    "regular": "1.15",
-                    "loose": "1.45"
+                    "tight": "0.933333",
+                    "regular": "1.2",
+                    "loose": "1.4"
                 },
                 "letterSpacing": {
-                    "tight": "-0.04em",
+                    "tight": "-1.3px",
                     "regular": "0",
-                    "loose": "0.04em"
+                    "loose": "1.5px"
                 }
             },
             "radius": {
                 "card": "2.5rem",
-                "control": "0.875rem",
+                "control": "100px",
                 "panel": "3rem"
             },
             "shadow": {
-                "card": "0 0.375rem 0 #191a23"
+                "card": "0 0.375rem 0 var(--wp--preset--color--contrast)"
+            },
+            "button": {
+                "hoverOpacity": "0.75",
+                "disabledOpacity": "0.2"
             }
         }
     },
     "customTemplates": [
         {
             "name": "page-with-title",
-            "title": "Page — automatic title",
-            "postTypes": ["page"]
+            "title": "Page \u2014 automatic title",
+            "postTypes": [
+                "page"
+            ]
         }
     ],
     "templateParts": [
@@ -218,66 +360,112 @@
             "fontFamily": "var:preset|font-family|sans",
             "fontSize": "var:preset|font-size|body",
             "fontWeight": "400",
-            "lineHeight": "1.45"
+            "lineHeight": "1.4",
+            "letterSpacing": "0.5px"
         },
         "elements": {
             "h1": {
                 "typography": {
+                    "fontFamily": "var:preset|font-family|sans",
                     "fontSize": "var:preset|font-size|h-1",
-                    "fontWeight": "500",
-                    "lineHeight": "1.06",
-                    "letterSpacing": "-0.04em"
+                    "fontWeight": "700",
+                    "lineHeight": "0.933333",
+                    "letterSpacing": "-0.5px",
+                    "textTransform": "none"
                 }
             },
             "h2": {
                 "typography": {
+                    "fontFamily": "var:preset|font-family|sans",
                     "fontSize": "var:preset|font-size|h-2",
-                    "fontWeight": "500",
-                    "lineHeight": "1.1",
-                    "letterSpacing": "-0.035em"
+                    "fontWeight": "600",
+                    "lineHeight": "0.933333",
+                    "letterSpacing": "-1.3px",
+                    "textTransform": "none"
                 }
             },
             "h3": {
                 "typography": {
+                    "fontFamily": "var:preset|font-family|sans",
                     "fontSize": "var:preset|font-size|h-3",
-                    "fontWeight": "500",
-                    "lineHeight": "1.15"
+                    "fontWeight": "300",
+                    "lineHeight": "1.047619",
+                    "letterSpacing": "0",
+                    "textTransform": "none"
                 }
             },
             "h4": {
                 "typography": {
+                    "fontFamily": "var:preset|font-family|sans",
                     "fontSize": "var:preset|font-size|h-4",
-                    "fontWeight": "500"
+                    "fontWeight": "600",
+                    "lineHeight": "1.125",
+                    "letterSpacing": "0.25px",
+                    "textTransform": "none"
                 }
             },
             "h5": {
                 "typography": {
+                    "fontFamily": "var:preset|font-family|sans",
                     "fontSize": "var:preset|font-size|h-5",
-                    "fontWeight": "600"
+                    "fontWeight": "600",
+                    "lineHeight": "1.25",
+                    "letterSpacing": "0",
+                    "textTransform": "none"
                 }
             },
             "h6": {
                 "typography": {
+                    "fontFamily": "var:preset|font-family|sans",
                     "fontSize": "var:preset|font-size|h-6",
-                    "fontWeight": "700",
-                    "letterSpacing": "0.04em",
-                    "textTransform": "uppercase"
+                    "fontWeight": "500",
+                    "lineHeight": "1.2",
+                    "letterSpacing": "0.15px",
+                    "textTransform": "none"
                 }
-            }
-        },
-        "blocks": {
-            "core/button": {
-                "border": {
-                    "radius": "0.875rem"
-                },
+            },
+            "link": {
                 "color": {
-                    "background": "var:preset|color|contrast",
-                    "text": "var:preset|color|base"
+                    "text": "var:preset|color|accent"
+                },
+                "typography": {
+                    "textDecoration": "underline"
                 },
                 ":hover": {
                     "color": {
-                        "background": "var:preset|color|accent",
-                        "text": "var:preset|color|contrast"
+                        "text": "var:preset|color|grey-800"
+                    }
+                }
+            },
+            "button": {
+                "border": {
+                    "radius": "var:custom|radius|control",
+                    "width": "0"
+                },
+                "color": {
+                    "background": "var:preset|color|accent",
+                    "text": "var:preset|color|base"
+                },
+                "spacing": {
+                    "padding": {
+                        "top": "0.75rem",
+                        "bottom": "0.75rem",
+                        "left": "2rem",
+                        "right": "2rem"
+                    }
+                },
+                "typography": {
+                    "fontFamily": "var:preset|font-family|sans",
+                    "fontSize": "var:preset|font-size|button",
+                    "fontWeight": "700",
+                    "lineHeight": "1.111111",
+                    "letterSpacing": "0",
+                    "textDecoration": "none"
+                },
+                ":active": {
+                    "color": {
+                        "background": "var:preset|color|grey-800",
+                        "text": "var:preset|color|base"
                     }
                 },
                 ":focus-visible": {
@@ -286,6 +474,41 @@
                         "offset": "0.25rem",
                         "style": "solid",
                         "width": "0.125rem"
+                    }
+                }
+            }
+        },
+        "blocks": {
+            "core/button": {
+                "variations": {
+                    "outline": {
+                        "border": {
+                            "color": "var:preset|color|button-outline",
+                            "style": "solid",
+                            "width": "1px",
+                            "radius": "var:custom|radius|control"
+                        },
+                        "color": {
+                            "background": "var:preset|color|base",
+                            "text": "var:preset|color|accent"
+                        },
+                        "spacing": {
+                            "padding": {
+                                "top": "calc(0.75rem - 1px)",
+                                "bottom": "calc(0.75rem - 1px)",
+                                "left": "calc(2rem - 1px)",
+                                "right": "calc(2rem - 1px)"
+                            }
+                        },
+                        ":active": {
+                            "border": {
+                                "color": "var:preset|color|grey-800"
+                            },
+                            "color": {
+                                "background": "var:preset|color|base",
+                                "text": "var:preset|color|grey-800"
+                            }
+                        }
                     }
                 }
             },
@@ -307,6 +530,9 @@
                         "blockGap": "1rem"
                     }
                 }
+            },
+            "core/paragraph": {
+                "css": "&.has-small-font-size { line-height: 1.25; letter-spacing: 0; }"
             }
         }
     }

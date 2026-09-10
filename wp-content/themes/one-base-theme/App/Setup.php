@@ -34,8 +34,8 @@ final class Setup
         ]);
 
         add_theme_support('custom-logo', [
-            'height'      => 100,
-            'width'       => 400,
+            'height'      => 43,
+            'width'       => 116,
             'flex-height' => true,
             'flex-width'  => true,
         ]);

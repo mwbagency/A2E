@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
     <div class="wp-block-group one-202x-mobile-nav__top">
         <!-- wp:group {"className":"one-202x-mobile-nav__brand","layout":{"type":"flex","flexWrap":"nowrap"}} -->
         <div class="wp-block-group one-202x-mobile-nav__brand">
-            <!-- wp:site-logo {"width":44,"shouldSyncIcon":false,"className":"one-202x-mobile-nav__logo"} /-->
+            <!-- wp:site-logo {"width":116,"shouldSyncIcon":false,"className":"one-202x-mobile-nav__logo"} /-->
             <!-- wp:site-title {"level":0,"className":"one-202x-mobile-nav__title"} /-->
         </div>
         <!-- /wp:group -->

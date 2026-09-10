@@ -23,3 +23,16 @@ html {
 :where(p, h1, h2, h3, h4, h5, h6, .wp-block-site-title) {
 	overflow-wrap: anywhere;
 }
+
+.wp-element-button:hover {
+	opacity: var(--wp--custom--button--hover-opacity);
+}
+
+.wp-element-button:active {
+	opacity: 1;
+}
+
+.wp-element-button:is(:disabled, [aria-disabled="true"]) {
+	opacity: var(--wp--custom--button--disabled-opacity);
+	pointer-events: none;
+}
