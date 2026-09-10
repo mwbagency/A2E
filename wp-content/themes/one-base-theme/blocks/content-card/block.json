@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/content-card",
+    "version": "1.0.0",
+    "title": "Content Card",
+    "description": "Show the current post or select content, using the card designed for its content type.",
+    "category": "theme",
+    "icon": "index-card",
+    "textdomain": "one-base-theme",
+    "keywords": [
+        "card",
+        "post",
+        "content"
+    ],
+    "attributes": {
+        "postId": {
+            "type": "number",
+            "default": 0
+        },
+        "headingLevel": {
+            "type": "number",
+            "enum": [
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "default": 3
+        }
+    },
+    "usesContext": [
+        "postId",
+        "postType",
+        "queryId"
+    ],
+    "supports": {
+        "anchor": true,
+        "html": false,
+        "spacing": {
+            "margin": true
+        },
+        "interactivity": {
+            "clientNavigation": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

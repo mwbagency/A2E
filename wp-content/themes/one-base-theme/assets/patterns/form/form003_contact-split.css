@@ -1,0 +1,1 @@
+.one-202x-pattern-form003_contact-split{:where(a[href^="mailto:"],a[href^="tel:"]){overflow-wrap:anywhere}:where(.wp-block-list){list-style:none;padding-inline-start:0;li+li{margin-block-start:.5rem}}}

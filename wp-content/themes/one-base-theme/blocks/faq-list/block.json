@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-faqs/faqs",
+    "version": "1.0.0",
+    "title": "FAQ List",
+    "description": "Display the latest FAQs or choose up to eight manually.",
+    "category": "theme",
+    "icon": "editor-help",
+    "textdomain": "one-base-theme",
+    "attributes": {
+        "faqIds": {
+            "type": "array",
+            "items": {
+                "type": "integer"
+            },
+            "default": []
+        },
+        "limit": {
+            "type": "number",
+            "default": 8
+        },
+        "columns": {
+            "type": "number",
+            "default": 1
+        },
+        "singleOpen": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "supports": {
+        "align": [
+            "wide",
+            "full"
+        ],
+        "anchor": true,
+        "html": false,
+        "spacing": {
+            "margin": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "viewScript": "file:./view.js",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

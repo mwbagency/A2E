@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/post-details",
+    "version": "1.0.0",
+    "title": "Post Details",
+    "description": "Display the current team member, case study or event's structured details.",
+    "category": "theme",
+    "icon": "id-alt",
+    "textdomain": "one-base-theme",
+    "usesContext": ["postId", "postType"],
+    "attributes": { "previewPostId": { "type": "number", "default": 0 } },
+    "supports": { "html": false, "anchor": true, "spacing": { "margin": true } },
+    "editorScript": "file:./index.js",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

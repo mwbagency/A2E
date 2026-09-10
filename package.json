@@ -1,0 +1,36 @@
+{
+  "name": "gutenberg-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Root asset build tools for the Gutenberg Site project.",
+  "license": "GPL-2.0-or-later",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "dev": "concurrently --kill-others-on-fail --names css,js \"npm run dev:css\" \"npm run dev:js\"",
+    "dev:css": "chokidar \"wp-content/themes/one-base-theme/src/styles/**/*.css\" \"wp-content/themes/one-base-theme/config/custom-media.css\" \"postcss.config.cjs\" --command \"npm run build:css\" --initial --polling --poll-interval 200",
+    "dev:js": "chokidar \"wp-content/themes/one-base-theme/src/scripts/**/*.js\" \"scripts/build-js.mjs\" --command \"npm run build:js\" --initial --polling --poll-interval 200",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "npm run build:css:global && npm run build:css:core && npm run build:css:patterns && npm run build:css:blocks",
+    "build:css:global": "postcss \"wp-content/themes/one-base-theme/src/styles/*.css\" --base wp-content/themes/one-base-theme/src/styles --dir wp-content/themes/one-base-theme/assets/css --no-map",
+    "build:css:core": "postcss \"wp-content/themes/one-base-theme/src/styles/blocks/core-*.css\" --base wp-content/themes/one-base-theme/src/styles/blocks --dir wp-content/themes/one-base-theme/assets/blocks --no-map",
+    "build:css:patterns": "postcss \"wp-content/themes/one-base-theme/src/styles/patterns/**/*.css\" --base wp-content/themes/one-base-theme/src/styles/patterns --dir wp-content/themes/one-base-theme/assets/patterns --no-map",
+    "build:css:blocks": "postcss \"wp-content/themes/one-base-theme/src/styles/blocks/*/*.css\" --base wp-content/themes/one-base-theme/src/styles/blocks --dir wp-content/themes/one-base-theme/blocks --no-map",
+    "build:js": "node scripts/build-js.mjs",
+    "prod": "npm run prod:css && npm run prod:js",
+    "prod:css": "NODE_ENV=production npm run build:css",
+    "prod:js": "node scripts/build-js.mjs --production"
+  },
+  "devDependencies": {
+    "@csstools/postcss-global-data": "^4.0.0",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^10.0.5",
+    "cssnano": "^7.1.9",
+    "esbuild": "^0.28.2",
+    "postcss": "^8.5.28",
+    "postcss-cli": "^11.0.1",
+    "postcss-custom-media": "^12.0.1"
+  }
+}

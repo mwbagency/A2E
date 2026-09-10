@@ -1,0 +1,84 @@
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME:-wordpress_db}
+      MYSQL_USER: ${WORDPRESS_DB_USER:-wordpress_user}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress_pass}
+      MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_ROOT_PASSWORD:-root_pass}
+    volumes:
+      - db:/var/lib/mysql
+
+  dependencies:
+    image: composer:2
+    working_dir: /app
+    command:
+      - install
+      - --no-interaction
+      - --prefer-dist
+    environment:
+      COMPOSER_AUTH: >-
+        {"http-basic":{"connect.advancedcustomfields.com":{"username":"${ACF_PRO_LICENSE:-}","password":"${ACF_PRO_SITE_URL:-http://localhost:8000}"},"composer.gravity.io":{"username":"${GF_LICENSE_KEY:-}","password":"${GF_SITE_URL:-http://localhost:8000}"}}}
+    volumes:
+      - ./:/app
+
+  wpcli:
+    image: wordpress:cli
+    profiles:
+      - tools
+    depends_on:
+      db:
+        condition: service_started
+      dependencies:
+        condition: service_completed_successfully
+    environment:
+      WORDPRESS_DB_HOST: db
+      WP_ENVIRONMENT_TYPE: ${WP_ENVIRONMENT_TYPE:-local}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-wordpress_db}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-wordpress_user}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress_pass}
+      ACF_PRO_LICENSE: ${ACF_PRO_LICENSE:-}
+      GF_LICENSE_KEY: ${GF_LICENSE_KEY:-}
+      WORDPRESS_CONFIG_EXTRA: |
+        $$acfProLicense = getenv( 'ACF_PRO_LICENSE' );
+        if ( is_string( $$acfProLicense ) && $$acfProLicense !== '' && ! defined( 'ACF_PRO_LICENSE' ) ) {
+            define( 'ACF_PRO_LICENSE', $$acfProLicense );
+        }
+        $$gravityFormsLicense = getenv( 'GF_LICENSE_KEY' );
+        if ( is_string( $$gravityFormsLicense ) && $$gravityFormsLicense !== '' && ! defined( 'GF_LICENSE_KEY' ) ) {
+            define( 'GF_LICENSE_KEY', $$gravityFormsLicense );
+        }
+    entrypoint:
+      - wp
+    volumes:
+      - ./:/var/www/html
+
+  wordpress:
+    image: wordpress
+    depends_on:
+      dependencies:
+        condition: service_completed_successfully
+    ports:
+      - "${WORDPRESS_PORT:-8000}:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WP_ENVIRONMENT_TYPE: ${WP_ENVIRONMENT_TYPE:-local}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-wordpress_db}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-wordpress_user}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress_pass}
+      ACF_PRO_LICENSE: ${ACF_PRO_LICENSE:-}
+      GF_LICENSE_KEY: ${GF_LICENSE_KEY:-}
+      WORDPRESS_CONFIG_EXTRA: |
+        $$acfProLicense = getenv( 'ACF_PRO_LICENSE' );
+        if ( is_string( $$acfProLicense ) && $$acfProLicense !== '' && ! defined( 'ACF_PRO_LICENSE' ) ) {
+            define( 'ACF_PRO_LICENSE', $$acfProLicense );
+        }
+        $$gravityFormsLicense = getenv( 'GF_LICENSE_KEY' );
+        if ( is_string( $$gravityFormsLicense ) && $$gravityFormsLicense !== '' && ! defined( 'GF_LICENSE_KEY' ) ) {
+            define( 'GF_LICENSE_KEY', $$gravityFormsLicense );
+        }
+    volumes:
+      - ./:/var/www/html
+
+volumes:
+  db:

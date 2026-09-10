@@ -1,0 +1,11 @@
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+auth.json
+wp-config.php
+wp-content/advanced-cache.php
+wp-content/cache
+wp-content/settings/cache-enabler
+wp-content/uploads

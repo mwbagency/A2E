@@ -1,0 +1,3 @@
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20" class="icon-chevron-up-down">
+            <path d="m6.847 8.353 3.147-3.146 3.146 3.146a.498.498 0 0 0 .707 0 .5.5 0 0 0 0-.707l-3.5-3.5a.5.5 0 0 0-.707 0l-3.5 3.5a.5.5 0 0 0 .707.707Zm6.293 4.293-3.146 3.147-3.147-3.147a.5.5 0 0 0-.707.707l3.5 3.5a.498.498 0 0 0 .707 0l3.5-3.5a.5.5 0 0 0-.707-.707Z" fill="currentColor"/>
+        </svg>

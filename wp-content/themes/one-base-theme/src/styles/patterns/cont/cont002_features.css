@@ -1,0 +1,33 @@
+.one-202x-service-card {
+    & .one-202x-service-card__title {
+        &.has-background {
+            padding: 0;
+            background-color: transparent !important;
+        }
+        
+        &.has-base-background-color { --title-highlight: var(--wp--preset--color--base);}
+        &.has-contrast-background-color { --title-highlight: var(--wp--preset--color--contrast);}
+        &.has-accent-background-color { --title-highlight: var(--wp--preset--color--accent); }
+        &.has-surface-background-color { --title-highlight: var(--wp--preset--color--surface);}
+        &.has-muted-background-color { --title-highlight: var(--wp--preset--color--muted);}
+        
+        &.has-base-color { --title-color: var(--wp--preset--color--base); }
+        &.has-contrast-color {--title-color: var(--wp--preset--color--contrast); }
+        &.has-accent-color { --title-color: var(--wp--preset--color--accent); }
+        &.has-surface-color { --title-color: var(--wp--preset--color--surface); }
+        &.has-muted-color { --title-color: var(--wp--preset--color--muted); }
+
+        mark {
+            background-color: var(--title-highlight, transparent);
+            color: var(--title-color, inherit);
+        }
+    }
+}
+
+.one-202x-pattern-cont002_features .one-202x-services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.one-202x-pattern-cont002_features .one-202x-service-card {
+    min-width: 0;
+}

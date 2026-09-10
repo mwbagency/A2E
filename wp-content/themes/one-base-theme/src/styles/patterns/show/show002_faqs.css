@@ -1,0 +1,13 @@
+.one-202x-pattern-show002_faqs {
+    & .one-202x-show002-faqs__intro {
+        max-width: 48rem;
+        margin-inline: auto;
+        margin-block-end: var(--wp--preset--spacing--xl);
+    }
+
+    @media (--mobile) {
+        & .one-202x-show002-faqs__intro {
+            margin-block-end: var(--wp--preset--spacing--lg);
+        }
+    }
+}

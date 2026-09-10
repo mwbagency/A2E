@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/content-listing",
+    "version": "1.0.0",
+    "title": "Content Listing (legacy)",
+    "description": "Existing listings remain editable. For new listings, insert a News grid or Case study grid pattern.",
+    "category": "theme",
+    "icon": "screenoptions",
+    "textdomain": "one-base-theme",
+    "keywords": [
+        "listing",
+        "cards",
+        "posts"
+    ],
+    "attributes": {
+        "postType": {
+            "type": "string",
+            "enum": [
+                "case_study",
+                "event",
+                "service",
+                "team_member",
+                "testimonial"
+            ],
+            "default": "case_study"
+        },
+        "limit": {
+            "type": "number",
+            "default": 6
+        },
+        "columns": {
+            "type": "number",
+            "enum": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "default": 3
+        },
+        "showFilters": {
+            "type": "boolean",
+            "default": true
+        },
+        "headingLevel": {
+            "type": "number",
+            "enum": [2, 3, 4, 5, 6],
+            "default": 3
+        },
+        "showPagination": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "supports": {
+        "inserter": false,
+        "align": [
+            "wide",
+            "full"
+        ],
+        "anchor": true,
+        "html": false,
+        "spacing": {
+            "margin": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

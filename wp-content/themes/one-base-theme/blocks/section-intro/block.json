@@ -1,0 +1,67 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/section-intro",
+    "version": "1.0.0",
+    "title": "Section Intro",
+    "category": "design",
+    "icon": "heading",
+    "description": "A reusable section heading with optional supporting text and button.",
+    "keywords": [
+        "heading",
+        "introduction",
+        "section"
+    ],
+    "textdomain": "one-base-theme",
+    "attributes": {
+        "subtitle": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "title": {
+            "type": "string",
+            "default": "Section title",
+            "role": "content"
+        },
+        "description": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "titleLevel": {
+            "type": "number",
+            "enum": [2, 3, 4, 5, 6],
+            "default": 2
+        },
+        "alignment": {
+            "type": "string",
+            "enum": ["left", "center"],
+            "default": "left"
+        },
+        "showSubtitle": {
+            "type": "boolean",
+            "default": true
+        },
+        "showDescription": {
+            "type": "boolean",
+            "default": true
+        },
+        "showButton": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "supports": {
+        "align": ["wide"],
+        "anchor": true,
+        "html": false,
+        "spacing": {
+            "margin": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

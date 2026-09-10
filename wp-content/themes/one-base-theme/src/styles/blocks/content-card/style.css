@@ -1,0 +1,92 @@
+.wp-block-one-202x-content-card {
+    box-sizing: border-box;
+    height: 100%;
+
+    &.one-202x-content-card {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        min-height: 100%;
+        padding: var(--wp--preset--spacing--md);
+        background: var(--wp--preset--color--surface);
+        color: var(--wp--preset--color--contrast);
+    }
+
+    &.one-202x-content-card--service {
+        background: var(--wp--preset--color--accent);
+    }
+
+    &.one-202x-content-card--testimonial {
+        background: var(--wp--preset--color--contrast);
+        color: var(--wp--preset--color--base);
+    }
+
+    & .one-202x-content-card__media {
+        margin-bottom: var(--wp--preset--spacing--md);
+    }
+
+    & .one-202x-content-card__image {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+    }
+
+    &.one-202x-content-card--team-member .one-202x-content-card__image,
+    &.one-202x-content-card--testimonial .one-202x-content-card__image {
+        aspect-ratio: 1;
+    }
+
+    & .one-202x-content-card__content {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--wp--preset--spacing--sm);
+    }
+
+    & :where(
+        .one-202x-content-card__eyebrow,
+        .one-202x-content-card__title,
+        .one-202x-content-card__meta,
+        .one-202x-content-card__summary,
+        .one-202x-content-card__rating,
+        .one-202x-content-card__quote,
+        .one-202x-content-card__quote p,
+        .one-202x-content-card__person,
+        .one-202x-content-card__contacts
+    ) {
+        margin: 0;
+    }
+
+    & .one-202x-content-card__eyebrow,
+    & .one-202x-content-card__meta,
+    & .one-202x-content-card__rating {
+        color: var(--wp--preset--color--muted);
+    }
+
+    &.one-202x-content-card--testimonial :where(
+        .one-202x-content-card__meta,
+        .one-202x-content-card__rating
+    ) {
+        color: inherit;
+    }
+
+    & .one-202x-content-card__title a,
+    & .one-202x-content-card__link,
+    & .one-202x-content-card__contacts a {
+        color: inherit;
+    }
+
+    & .one-202x-content-card__link {
+        margin-top: auto;
+    }
+
+    & .one-202x-content-card__contacts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wp--preset--spacing--sm);
+        padding: 0;
+        list-style: none;
+    }
+}

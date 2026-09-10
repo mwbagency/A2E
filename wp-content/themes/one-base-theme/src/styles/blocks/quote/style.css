@@ -1,0 +1,48 @@
+.one-202x-quote {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wp--preset--spacing--md);
+    margin: 0;
+    min-inline-size: 0;
+    block-size: 100%;
+
+    & .one-202x-quote__text {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        font-size: var(--wp--preset--font-size--h-5);
+        line-height: 1.5;
+    }
+
+    & p { margin: 0; }
+
+    & .one-202x-quote__attribution {
+        display: flex;
+        align-items: center;
+        gap: var(--wp--preset--spacing--sm);
+        margin-block-start: auto;
+        font-size: var(--wp--preset--font-size--body);
+        color: inherit;
+    }
+
+    & .one-202x-quote__image {
+        display: block;
+        flex: 0 0 4rem;
+        inline-size: 4rem;
+        block-size: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    & .one-202x-quote__name { font-weight: 700; }
+    & .one-202x-quote__job { font-size: 0.875em; }
+    & .one-202x-quote__attribution > div:last-child {
+        flex: 1;
+        min-inline-size: 0;
+    }
+
+    &.is-style-featured .one-202x-quote__text {
+        font-size: clamp(1.75rem, 3vw, 3rem);
+        line-height: 1.3;
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/query-filters",
+    "version": "1.0.0",
+    "title": "Query Filters",
+    "description": "Let visitors filter a Query Loop by its content categories.",
+    "category": "theme",
+    "icon": "filter",
+    "textdomain": "one-base-theme",
+    "ancestor": ["core/query"],
+    "usesContext": ["query", "queryId"],
+    "attributes": {
+        "orientation": { "type": "string", "enum": ["horizontal", "vertical"], "default": "horizontal" },
+        "heading": { "type": "string", "default": "", "role": "content" },
+        "previewPostType": { "type": "string", "default": "" },
+        "previewQueryId": { "type": "number", "default": 0 }
+    },
+    "supports": {
+        "anchor": true,
+        "html": false,
+        "spacing": { "margin": true },
+        "interactivity": { "clientNavigation": true }
+    },
+    "editorScript": "file:./index.js",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,5 @@
+@custom-media --mobile (width <= 37.5rem);
+@custom-media --tablet (37.5rem < width <= 64rem);
+@custom-media --desktop (width > 64rem);
+@custom-media --tablet-down (width <= 64rem);
+@custom-media --tablet-up (width > 37.5rem);

@@ -1,0 +1,3 @@
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20" class="icon-card-payment">
+            <path d="M17.5 3h-15A2.502 2.502 0 0 0 0 5.5v10A2.502 2.502 0 0 0 2.5 18h15a2.502 2.502 0 0 0 2.5-2.5v-10A2.502 2.502 0 0 0 17.5 3ZM19 15.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 1 15.5V9h18v6.5ZM19 8H1V5.5A1.5 1.5 0 0 1 2.5 4h15A1.5 1.5 0 0 1 19 5.5V8ZM4.5 13h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0 0 1Z" fill="currentColor"/>
+        </svg>

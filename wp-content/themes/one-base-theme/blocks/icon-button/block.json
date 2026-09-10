@@ -1,0 +1,103 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/icon-button",
+    "version": "1.0.0",
+    "title": "Icon Button",
+    "category": "design",
+    "icon": "button",
+    "description": "A button-style link with a selectable icon.",
+    "keywords": [
+        "button",
+        "link",
+        "icon"
+    ],
+    "textdomain": "one-base-theme",
+    "attributes": {
+        "text": {
+            "type": "string",
+            "default": "Learn more",
+            "role": "content"
+        },
+        "url": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "linkTarget": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "rel": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "iconPosition": {
+            "type": "string",
+            "enum": [
+                "left",
+                "right"
+            ],
+            "default": "left"
+        },
+        "showIcon": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "supports": {
+        "anchor": true,
+        "html": false,
+        "color": {
+            "background": true,
+            "text": true,
+            "gradients": true
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true,
+            "__experimentalFontFamily": true,
+            "__experimentalFontWeight": true,
+            "__experimentalLetterSpacing": true
+        },
+        "__experimentalBorder": {
+            "color": true,
+            "radius": true,
+            "style": true,
+            "width": true
+        }
+    },
+    "styles": [
+        {
+            "name": "fill",
+            "label": "Fill",
+            "isDefault": true
+        },
+        {
+            "name": "outline",
+            "label": "Outline"
+        },
+        {
+            "name": "outline-dark",
+            "label": "Outline Dark"
+        },
+        {
+            "name": "icon-link",
+            "label": "Icon Link"
+        },
+        {
+            "name": "icon-link-accent",
+            "label": "Icon Link Accent"
+        }
+    ],
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,331 @@
+# Deployment settings are grouped here. Only edit this section for a new site.
+# Normally set only SSH connection details and the two plugin licence keys.
+# The website, database and first administrator are set up automatically; overrides are below.
+# For passwords/licences: Buddy Project settings -> YAML tools -> Encrypt.
+# Paste the COMPLETE !encrypted result and keep encrypted: true. Examples are not ciphertext.
+# Server: cPanel, PHP 8.3+ (CLI and web), Composer 2, WP-CLI, rsync and MySQL tools.
+# Run staging successfully before deploying the same commit to production.
+- pipeline: Deploy to production
+  on: CLICK
+  refs:
+    - :default
+  fail_on_prepare_env_warning: true
+  always_from_scratch: true
+  variables:
+    # 1. Server connection (required).
+    - key: PRODUCTION_SSH_HOST
+      value: '77.72.5.95'
+    - key: PRODUCTION_SSH_PORT
+      value: '722'
+    - key: PRODUCTION_SSH_USERNAME
+      value: 'cpanel_account'
+    - key: PRODUCTION_SSH_PASSWORD
+      value: '!encrypted PASTE_BUDDY_ENCRYPTED_SSH_PASSWORD_HERE'
+      encrypted: true
+
+    # 2. Website overrides (optional). Default folder: public_html in the SSH account home.
+    # URL: keep an installed site's URL, otherwise use the cPanel account's primary domain.
+    # Set an explicit URL for a different document root; use separate staging/production targets.
+    - key: PRODUCTION_WORDPRESS_PATH
+      value: '/public_html'
+    # - key: PRODUCTION_WORDPRESS_URL
+    #   value: 'https://www.example.com'
+    - key: WORDPRESS_VERSION
+      value: '7.1'
+    - key: WORDPRESS_LOCALE
+      value: en_GB
+
+    # 3. Plugin licence keys (required). Licence URLs default to the detected website URL.
+    # Override a licence URL only when its authorised URL needs to differ.
+    # Gravity Forms Composer downloads need an Elite or legacy Developer licence.
+    # - key: PRODUCTION_ACF_PRO_LICENSE
+    #   value: '!encrypted PASTE_BUDDY_ENCRYPTED_ACF_VALUE_HERE'
+    #   encrypted: true
+    # - key: PRODUCTION_ACF_PRO_SITE_URL
+    #   value: 'https://www.example.com'
+    # - key: PRODUCTION_GF_LICENSE_KEY
+    #   value: '!encrypted PASTE_BUDDY_ENCRYPTED_GRAVITY_FORMS_VALUE_HERE'
+    #   encrypted: true
+    # - key: PRODUCTION_GF_SITE_URL
+    #   value: 'https://www.example.com'
+
+    # 4. Database overrides (optional). Existing wp-config.php credentials are retained.
+    # New database/user default to <account>_prd; a strong password is generated once.
+    # Generated passwords are saved privately on the server and reused if setup is retried.
+    # - key: PRODUCTION_WORDPRESS_DB_NAME
+    #   value: 'cpanel_account_prd'
+    # - key: PRODUCTION_WORDPRESS_DB_USER
+    #   value: 'cpanel_account_prd'
+    # - key: PRODUCTION_WORDPRESS_DB_PASSWORD
+    #   value: '!encrypted PASTE_BUDDY_ENCRYPTED_DATABASE_PASSWORD_HERE'
+    #   encrypted: true
+    # Optional defaults: disable creation for a database already provided by your host.
+    # - key: PRODUCTION_CREATE_DATABASE
+    #   value: 'true'
+    # - key: PRODUCTION_WORDPRESS_DB_HOST
+    #   value: 'localhost'
+    # - key: PRODUCTION_WORDPRESS_DB_PREFIX
+    #   value: 'wp_'
+
+    # 5. Initial administrator overrides (optional), using the defaults from the old pipeline.
+    # Password: generated once, saved privately on the server. Existing users are untouched.
+    # - key: PRODUCTION_WORDPRESS_ADMIN_USER
+    #   value: 'mwb'
+    # - key: PRODUCTION_WORDPRESS_ADMIN_EMAIL
+    #   value: 'dev@mwb-agency.com'
+    # - key: PRODUCTION_WORDPRESS_ADMIN_PASSWORD
+    #   value: '!encrypted PASTE_BUDDY_ENCRYPTED_ADMIN_PASSWORD_HERE'
+    #   encrypted: true
+    # Optional: the site title defaults to the Buddy project name.
+    # - key: PRODUCTION_WORDPRESS_TITLE
+    #   value: 'Your website name'
+
+    # 6. Optional server tools. Leave commented when the SSH PATH is already correct.
+    # PHP_DIRECTORY prepends the chosen PHP bin directory; confirm its path with the host.
+    # WP_CLI_BIN and COMPOSER_BIN accept a command name or an absolute executable path.
+    # - key: PRODUCTION_PHP_DIRECTORY
+    #   value: '/opt/alt/php83/usr/bin'
+    # - key: PRODUCTION_WP_CLI_BIN
+    #   value: 'wp'
+    # - key: PRODUCTION_COMPOSER_BIN
+    #   value: 'composer'
+
+  # Deployment actions. Site settings belong in the section above.
+  actions:
+    - action: Build theme
+      type: BUILD
+      docker_image_name: node
+      docker_image_tag: "22-bookworm"
+      working_directory: /buddy/one-base
+      volume_mappings:
+        - /:/buddy/one-base
+      shell: BASH
+      commands: |-
+        set -euo pipefail
+        npm ci
+        npm run prod
+        rm -rf .artifacts/buddy
+        mkdir -p .artifacts/buddy
+        # Upload only site code: no .env, WordPress config, uploads or development plugin.
+        tar --exclude=wp-content/themes/one-base-theme/src \
+          --exclude=.DS_Store --exclude=custom-media.css --exclude='*.pot' \
+          -czf .artifacts/buddy/site.tar.gz composer.json composer.lock .htaccess \
+          wp-content/mu-plugins wp-content/themes/one-base-theme
+    - action: Check PHP
+      type: BUILD
+      docker_image_name: php
+      docker_image_tag: "8.3-cli"
+      working_directory: /buddy/one-base
+      volume_mappings:
+        - /:/buddy/one-base
+      commands: php scripts/check-php.php
+    - action: Upload site code
+      type: TRANSFER
+      input_type: BUILD_ARTIFACTS
+      local_path: /.artifacts/buddy
+      remote_path: /home/${PRODUCTION_SSH_USERNAME}/deploy-cache-production
+      always_from_scratch: true
+      deletion_disabled: true
+      use_temporary_files: true
+      targets:
+        - target: production-server
+          type: SSH
+          host: $PRODUCTION_SSH_HOST
+          port: $PRODUCTION_SSH_PORT
+          auth:
+            method: PASSWORD
+            username: $PRODUCTION_SSH_USERNAME
+            password: $PRODUCTION_SSH_PASSWORD
+    - action: Install or update WordPress and deploy
+      type: SSH_COMMAND
+      working_directory: /home/${PRODUCTION_SSH_USERNAME}
+      shell: BASH
+      run_as_script: true
+      commands: |-
+        set -euo pipefail
+        set +x
+        umask 022
+        export PATH="${PRODUCTION_PHP_DIRECTORY:+$PRODUCTION_PHP_DIRECTORY:}$PATH"
+        wp() { command "${PRODUCTION_WP_CLI_BIN:-wp}" "$@"; }
+        composer() { command "${PRODUCTION_COMPOSER_BIN:-composer}" "$@"; }
+        site="${PRODUCTION_WORDPRESS_PATH:-public_html}"
+        case "$site" in
+          /public_html) site="$PWD/public_html" ;;
+          /*) ;;
+          *) site="$PWD/$site" ;;
+        esac
+        cache="$PWD/deploy-cache-production"
+        # Separate document roots for staging/production, directly under the SSH home.
+        [[ "$(dirname "$site")" == "$PWD" && "$(basename "$site")" =~ ^[a-zA-Z0-9][a-zA-Z0-9_.-]*$ \
+          && "$(basename "$site")" != deploy-cache-* && ! -L "$site" ]]
+        exec 9>"$PWD/.deploy-production.lock"
+        flock -n 9
+        php -r 'exit(PHP_VERSION_ID >= 80300 && PHP_VERSION_ID < 90000 ? 0 : 1);'
+        chmod 700 "$cache"
+        # Check UAPI's JSON status without printing credentials or full API responses.
+        cpanel() {
+          uapi --output=json "$@" | php -r '$r=json_decode(stream_get_contents(STDIN),true); if (($r["result"]["status"] ?? 0) != 1) { fwrite(STDERR,"cPanel request failed; check the account in cPanel.\n"); exit(1); } echo json_encode($r["result"]["data"]);'
+        }
+        generated_password() {
+          local file="$cache/$1"
+          if [ ! -s "$file" ]; then (umask 077; php -r 'echo bin2hex(random_bytes(24));' > "$file"); fi
+          chmod 600 "$file"
+          cat "$file"
+        }
+        # Use the existing site's canonical URL before falling back to cPanel discovery.
+        url="${PRODUCTION_WORDPRESS_URL:-}"
+        if [ -z "$url" ] && [ -f "$site/wp-config.php" ] && wp --path="$site" core is-installed --skip-plugins --skip-themes; then
+          url=$(wp --path="$site" option get home --skip-plugins --skip-themes)
+        fi
+        if [ -z "$url" ]; then
+          if [ "$site" != "$PWD/public_html" ]; then echo 'Set PRODUCTION_WORDPRESS_URL for this custom document root.' >&2; exit 1; fi
+          domain=$(cpanel DomainInfo primary_domain | php -r '$d=json_decode(stream_get_contents(STDIN),true); if (empty($d["primary_domain"])) { fwrite(STDERR,"Could not determine the primary domain.\n"); exit(1); } echo $d["primary_domain"];')
+          url="https://$domain"
+        fi
+        url="${url%/}"
+        [[ "$url" == https://* ]]
+        export PRODUCTION_ACF_PRO_SITE_URL="${PRODUCTION_ACF_PRO_SITE_URL:-$url}"
+        export PRODUCTION_GF_SITE_URL="${PRODUCTION_GF_SITE_URL:-$url}"
+
+        # Install the committed plugin versions privately before changing the website.
+        app="$cache/app"
+        rm -rf "$app"
+        mkdir "$app"
+        tar -xzf "$cache/site.tar.gz" -C "$app"
+        cd "$app"
+        export PRODUCTION_ACF_PRO_LICENSE PRODUCTION_ACF_PRO_SITE_URL PRODUCTION_GF_LICENSE_KEY PRODUCTION_GF_SITE_URL
+        export COMPOSER_AUTH="$(php -r '
+          $auth = ["http-basic" => [
+            "connect.advancedcustomfields.com" => ["username" => getenv("PRODUCTION_ACF_PRO_LICENSE"), "password" => getenv("PRODUCTION_ACF_PRO_SITE_URL")],
+            "composer.gravity.io" => ["username" => getenv("PRODUCTION_GF_LICENSE_KEY"), "password" => getenv("PRODUCTION_GF_SITE_URL")]
+          ]];
+          foreach ($auth["http-basic"] as $credentials) {
+            if (!$credentials["username"] || !$credentials["password"]) { fwrite(STDERR, "Set both plugin licence keys in the top settings or Buddy variables.\n"); exit(1); }
+          }
+          echo json_encode($auth, JSON_THROW_ON_ERROR);
+        ')"
+        test -n "$COMPOSER_AUTH"
+        composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+        composer check-platform-reqs --no-dev
+        unset COMPOSER_AUTH
+        mapfile -t plugins < <(php -r 'foreach (json_decode(file_get_contents("composer.lock"), true)["packages"] as $p) { if ($p["type"] === "wordpress-plugin") { echo ($p["extra"]["installer-name"] ?? explode("/", $p["name"])[1]), "\n"; } }')
+
+        mkdir -p "$site"
+        cd "$site"
+        # File presence is not installation status: an empty database still needs core install.
+        if [ ! -f wp-load.php ]; then
+          wp core download --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE" --skip-content --force
+        fi
+        if [ ! -f wp-config.php ]; then
+          export PRODUCTION_WORDPRESS_DB_NAME="${PRODUCTION_WORDPRESS_DB_NAME:-${PRODUCTION_SSH_USERNAME}_prd}"
+          export PRODUCTION_WORDPRESS_DB_USER="${PRODUCTION_WORDPRESS_DB_USER:-${PRODUCTION_SSH_USERNAME}_prd}"
+          if [ "${PRODUCTION_CREATE_DATABASE:-true}" = true ]; then
+            [[ "$PRODUCTION_WORDPRESS_DB_NAME" == "${PRODUCTION_SSH_USERNAME}_"* && "$PRODUCTION_WORDPRESS_DB_USER" == "${PRODUCTION_SSH_USERNAME}_"* ]]
+            users=$(cpanel Mysql list_users)
+            databases=$(cpanel Mysql list_databases)
+            user_exists=false
+            if php -r 'exit(in_array(getenv("PRODUCTION_WORDPRESS_DB_USER"), array_column(json_decode($argv[1],true) ?? [], "user"), true) ? 0 : 1);' "$users"; then user_exists=true; fi
+            if [ "$user_exists" = true ] && [ -z "${PRODUCTION_WORDPRESS_DB_PASSWORD:-}" ] && [ ! -s "$cache/database-password" ]; then
+              echo 'Set PRODUCTION_WORDPRESS_DB_PASSWORD for the existing database user; its password will not be reset.' >&2; exit 1
+            fi
+            if [ -z "${PRODUCTION_WORDPRESS_DB_PASSWORD:-}" ]; then PRODUCTION_WORDPRESS_DB_PASSWORD=$(generated_password database-password); fi
+            export PRODUCTION_WORDPRESS_DB_PASSWORD
+            if [ "$user_exists" = false ]; then
+              cpanel Mysql create_user name="$PRODUCTION_WORDPRESS_DB_USER" password="$PRODUCTION_WORDPRESS_DB_PASSWORD" >/dev/null
+            fi
+            if ! php -r 'exit(in_array(getenv("PRODUCTION_WORDPRESS_DB_NAME"), array_column(json_decode($argv[1],true) ?? [], "database"), true) ? 0 : 1);' "$databases"; then
+              cpanel Mysql create_database name="$PRODUCTION_WORDPRESS_DB_NAME" >/dev/null
+            fi
+            cpanel Mysql set_privileges_on_database user="$PRODUCTION_WORDPRESS_DB_USER" database="$PRODUCTION_WORDPRESS_DB_NAME" privileges=ALL%20PRIVILEGES >/dev/null
+          else
+            : "${PRODUCTION_WORDPRESS_DB_PASSWORD:?Set the password for the host-provided database}"
+            export PRODUCTION_WORDPRESS_DB_PASSWORD
+          fi
+          # Finish a private config before moving it into place, so a failed write can be retried.
+          wp config create --dbname="$PRODUCTION_WORDPRESS_DB_NAME" --dbuser="$PRODUCTION_WORDPRESS_DB_USER" \
+            --dbhost="${PRODUCTION_WORDPRESS_DB_HOST:-localhost}" --dbprefix="${PRODUCTION_WORDPRESS_DB_PREFIX:-wp_}" \
+            --dbpass=temporary-placeholder --skip-check --force --config-file="$cache/new-wp-config.php"
+          wp config set DB_PASSWORD "$(php -r 'echo var_export(getenv("PRODUCTION_WORDPRESS_DB_PASSWORD"), true);')" --raw --config-file="$cache/new-wp-config.php" >/dev/null
+          chmod 600 "$cache/new-wp-config.php"
+          mv "$cache/new-wp-config.php" wp-config.php
+        fi
+        chmod 600 wp-config.php
+        installed=false
+        if wp core is-installed --skip-plugins --skip-themes; then
+          installed=true
+          test "$(wp option get home --skip-plugins --skip-themes)" = "$url"
+          wp eval 'if (is_multisite()) { WP_CLI::error("This pipeline supports single-site WordPress."); }' --skip-plugins --skip-themes
+          current_version=$(wp core version)
+          php -r 'exit(version_compare($argv[1], $argv[2], ">") ? 1 : 0);' "$current_version" "$WORDPRESS_VERSION"
+          mkdir -p "$cache/backups"
+          # One pre-deployment backup; keep the host's normal off-server backups as well.
+          wp db export "$cache/backups/before-deploy.sql.tmp"
+          chmod 600 "$cache/backups/before-deploy.sql.tmp"
+          mv "$cache/backups/before-deploy.sql.tmp" "$cache/backups/before-deploy.sql"
+          wp maintenance-mode activate
+        else
+          # A connection error or an unfamiliar nonempty database stops deployment.
+          tables=$(wp db query 'SHOW TABLES;' --batch --skip-column-names)
+          if [ -n "$tables" ]; then echo 'Database is not empty; refusing a fresh install.' >&2; exit 1; fi
+          PRODUCTION_WORDPRESS_ADMIN_USER="${PRODUCTION_WORDPRESS_ADMIN_USER:-mwb}"
+          PRODUCTION_WORDPRESS_ADMIN_EMAIL="${PRODUCTION_WORDPRESS_ADMIN_EMAIL:-dev@mwb-agency.com}"
+          generated_admin_password=false
+          if [ -z "${PRODUCTION_WORDPRESS_ADMIN_PASSWORD:-}" ]; then
+            PRODUCTION_WORDPRESS_ADMIN_PASSWORD=$(generated_password administrator-password)
+            generated_admin_password=true
+          fi
+        fi
+
+        # Pin core intentionally. The check above prevents downgrading an existing site.
+        wp core download --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE" --skip-content --force
+        wp core verify-checksums --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
+        wp config set WP_ENVIRONMENT_TYPE production
+        wp config set WP_DEBUG false --raw
+        wp config set WP_DEBUG_DISPLAY false --raw
+        wp config set DISALLOW_FILE_EDIT true --raw
+        wp config set WP_AUTO_UPDATE_CORE false --raw
+        wp config set WP_CACHE true --raw
+        wp config set ACF_PRO_LICENSE "$(php -r 'echo var_export(getenv("PRODUCTION_ACF_PRO_LICENSE"), true);')" --raw >/dev/null
+        wp config set GF_LICENSE_KEY "$(php -r 'echo var_export(getenv("PRODUCTION_GF_LICENSE_KEY"), true);')" --raw >/dev/null
+        # Preserve host PHP handlers and redirects in an existing .htaccess.
+        if [ ! -f .htaccess ]; then cp "$app/.htaccess" .htaccess; fi
+        if [ "$installed" = false ]; then
+          rm -f index.html index.htm
+          wp core install --url="$url" --title="${PRODUCTION_WORDPRESS_TITLE:-${BUDDY_PROJECT_NAME:-WordPress}}" \
+            --admin_user="$PRODUCTION_WORDPRESS_ADMIN_USER" --admin_email="$PRODUCTION_WORDPRESS_ADMIN_EMAIL" \
+            --prompt=admin_password --skip-email <<< "$PRODUCTION_WORDPRESS_ADMIN_PASSWORD"
+          if [ "$generated_admin_password" = true ]; then echo "Initial administrator password is saved in $cache/administrator-password (SSH account only)."; fi
+          wp rewrite structure '/%postname%/'
+        else
+          wp core update-db --skip-plugins --skip-themes
+        fi
+
+        # Delete stale files only inside repository-owned code. Retain uploads and other plugins.
+        mkdir -p wp-content/themes/one-base-theme wp-content/mu-plugins wp-content/plugins
+        rsync -a --delete "$app/wp-content/themes/one-base-theme/" wp-content/themes/one-base-theme/
+        rsync -a --delete --include='/one-*/***' --include='/one-*.php' --exclude='*' "$app/wp-content/mu-plugins/" wp-content/mu-plugins/
+        for plugin in "${plugins[@]}"; do
+          mkdir -p "wp-content/plugins/$plugin"
+          rsync -a --delete "$app/wp-content/plugins/$plugin/" "wp-content/plugins/$plugin/"
+        done
+        rsync -a --delete "$app/vendor/" vendor/
+        cp "$app/composer.json" "$app/composer.lock" .
+        wp plugin activate "${plugins[@]}"
+        wp plugin auto-updates disable "${plugins[@]}"
+        wp theme activate one-base-theme
+        wp theme auto-updates disable one-base-theme
+        wp option update blog_public 1
+        wp rewrite flush
+        wp cache flush
+        wp eval 'if (class_exists("Cache_Enabler")) { Cache_Enabler::clear_complete_cache(); } if (!class_exists("One202x\\Platform\\Plugin") || !class_exists("GFForms") || !function_exists("acf")) { WP_CLI::error("Required site components did not load."); }'
+        wp maintenance-mode deactivate
+        echo 'Production deployment complete.'
+      targets:
+        - target: production-server
+          type: SSH
+          host: $PRODUCTION_SSH_HOST
+          port: $PRODUCTION_SSH_PORT
+          auth:
+            method: PASSWORD
+            username: $PRODUCTION_SSH_USERNAME
+            password: $PRODUCTION_SSH_PASSWORD

@@ -1,0 +1,67 @@
+{
+    "name": "christopher/gutenberg-site",
+    "description": "Local WordPress development site and its managed dependencies.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://connect.advancedcustomfields.com",
+            "only": [
+                "wpengine/advanced-custom-fields-pro"
+            ]
+        },
+        {
+            "type": "composer",
+            "url": "https://composer.gravity.io",
+            "only": [
+                "gravity/gravityforms"
+            ]
+        },
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*"
+            ]
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "composer/installers": "^2.3",
+        "gravity/gravityforms": "^3.1",
+        "wpackagist-plugin/cache-enabler": "^1.0",
+        "wpackagist-plugin/post-type-archive-mapping": "^5.6",
+        "wpackagist-plugin/seo-by-rank-math": "^1.0",
+        "wpengine/advanced-custom-fields-pro": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "One202x\\Platform\\": "wp-content/mu-plugins/one-202x-platform/src/",
+            "One202x\\CaseStudies\\": "wp-content/mu-plugins/one-case-studies/src/",
+            "One202x\\Events\\": "wp-content/mu-plugins/one-events/src/",
+            "One202x\\Faqs\\": "wp-content/mu-plugins/one-faqs/src/",
+            "One202x\\Services\\": "wp-content/mu-plugins/one-services/src/",
+            "One202x\\TeamMembers\\": "wp-content/mu-plugins/one-team-members/src/",
+            "One202x\\Testimonials\\": "wp-content/mu-plugins/one-testimonials/src/",
+            "One202x\\Theme\\": "wp-content/themes/one-base-theme/App/"
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "wp-content/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        },
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.3.33"
+        },
+        "sort-packages": true
+    }
+}

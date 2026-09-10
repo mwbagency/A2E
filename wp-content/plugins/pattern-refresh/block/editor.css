@@ -1,0 +1,237 @@
+.wp-block-pattern-refresh-instance {
+	min-height: 44px;
+	outline: 1px dashed color-mix(in srgb, #3858e9 55%, transparent);
+	outline-offset: 4px;
+	position: relative;
+}
+
+.wp-block-pattern-refresh-instance::before {
+	background: #3858e9;
+	border-radius: 2px;
+	color: #fff;
+	content: attr(data-pattern-refresh-label);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-size: 10px;
+	font-weight: 600;
+	left: -5px;
+	line-height: 18px;
+	max-width: min(320px, 85%);
+	overflow: hidden;
+	padding: 0 6px;
+	position: absolute;
+	text-overflow: ellipsis;
+	top: -27px;
+	white-space: nowrap;
+	z-index: 2;
+}
+
+.wp-block-pattern-refresh-instance:not(.is-selected):not(.has-child-selected)::before {
+	display: none;
+}
+
+.pattern-refresh-sidebar .components-base-control,
+.pattern-refresh-sidebar .components-notice {
+	margin-bottom: 12px;
+}
+
+.pattern-refresh-sidebar__actions > .components-button {
+	justify-content: center;
+	margin-bottom: 12px;
+	width: 100%;
+}
+
+.pattern-refresh-sidebar__source {
+	background: #f6f7f7;
+	border-left: 3px solid #3858e9;
+	margin: -4px 0 16px;
+	padding: 8px 10px;
+}
+
+.pattern-refresh-sidebar__source strong,
+.pattern-refresh-sidebar__source code {
+	display: block;
+}
+
+.pattern-refresh-sidebar__source code {
+	font-size: 11px;
+	margin-top: 3px;
+	overflow-wrap: anywhere;
+}
+
+.pattern-refresh-sidebar__watched {
+	border-top: 1px solid #ddd;
+	margin-top: 20px;
+	padding-top: 16px;
+}
+
+.pattern-refresh-sidebar__watched h3 {
+	font-size: 13px;
+	margin: 0 0 12px;
+}
+
+.pattern-refresh-sidebar__watch {
+	background: #f6f7f7;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.pattern-refresh-sidebar__watch > strong,
+.pattern-refresh-sidebar__watch > span {
+	display: block;
+}
+
+.pattern-refresh-sidebar__watch > span {
+	color: #757575;
+	font-size: 12px;
+	margin-top: 2px;
+}
+
+.pattern-refresh-sidebar__watch-source {
+	display: block;
+	font-size: 11px;
+	margin-top: 6px;
+	overflow-wrap: anywhere;
+}
+
+.pattern-refresh-sidebar__watch .pattern-refresh-sidebar__write-protected {
+	color: #8a2424;
+	font-weight: 600;
+}
+
+.pattern-refresh-sidebar__watch .pattern-refresh-sidebar__write-saved {
+	color: #008a20;
+	font-weight: 600;
+}
+
+.pattern-refresh-sidebar__watch-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-top: 8px;
+}
+
+.pattern-refresh-sidebar__summary {
+	color: #757575;
+	font-size: 12px;
+	margin-top: 0;
+}
+
+.pattern-refresh-export-modal {
+	width: min(900px, calc(100% - 32px));
+}
+
+.pattern-refresh-export-modal h3 {
+	margin: 24px 0 4px;
+}
+
+.pattern-refresh-export-modal .components-button + .components-base-control {
+	margin-top: 12px;
+}
+
+.pattern-refresh-export-modal textarea {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	font-size: 12px;
+	white-space: pre;
+}
+
+.pattern-refresh-export-modal__source code {
+	overflow-wrap: anywhere;
+}
+
+.pattern-refresh-quick-watch__menu {
+	box-sizing: border-box;
+	padding: 16px;
+	width: 300px;
+}
+
+.pattern-refresh-quick-watch__menu h3 {
+	font-size: 14px;
+	margin: 0 0 8px;
+}
+
+.pattern-refresh-quick-watch__menu > p {
+	margin: 0 0 16px;
+}
+
+.pattern-refresh-quick-watch__menu .components-base-control {
+	margin-bottom: 12px;
+}
+
+.pattern-refresh-quick-watch__menu > .components-button {
+	justify-content: center;
+	width: 100%;
+}
+
+.pattern-refresh-quick-watch__source {
+	background: #f0f0f0;
+	display: block;
+	font-size: 11px;
+	overflow-wrap: anywhere;
+	padding: 8px;
+}
+
+.pattern-refresh-quick-watch__help {
+	color: #757575;
+	font-size: 12px;
+	margin: 10px 0 12px !important;
+}
+
+.pattern-refresh-sidebar .components-panel__body > .components-button {
+	justify-content: center;
+	width: 100%;
+}
+
+.gutenberg-tools-create-modal {
+	width: min(620px, calc(100% - 32px));
+}
+
+.gutenberg-tools-create-modal .components-button[type="submit"] {
+	justify-content: center;
+	width: 100%;
+}
+
+.gutenberg-tools-quality__issues {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.gutenberg-tools-quality__issue {
+	border-left: 4px solid #dba617;
+	margin-bottom: 12px;
+	padding: 2px 0 2px 10px;
+}
+
+.gutenberg-tools-quality__issue.is-error {
+	border-left-color: #cc1818;
+}
+
+.gutenberg-tools-quality__issue strong,
+.gutenberg-tools-quality__criterion {
+	display: block;
+}
+
+.gutenberg-tools-quality__criterion {
+	color: #50575e;
+	font-size: 11px;
+	margin-top: 2px;
+}
+
+.gutenberg-tools-quality__issue p {
+	margin: 6px 0;
+}
+
+.gutenberg-tools-quality__manual {
+	margin-top: 16px;
+}
+
+.gutenberg-tools-quality__manual summary {
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.gutenberg-tools-quality__manual li {
+	margin-bottom: 6px;
+}

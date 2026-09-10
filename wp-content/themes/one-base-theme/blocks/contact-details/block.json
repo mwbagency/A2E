@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/contact-details",
+    "version": "1.0.0",
+    "title": "Shared Contact Details",
+    "description": "Display the public business details managed in Site contacts.",
+    "category": "theme",
+    "icon": "location",
+    "textdomain": "one-base-theme",
+    "attributes": {
+        "display": { "type": "string", "enum": ["all", "locations", "phones", "emails", "primary-phone"], "default": "all" }
+    },
+    "supports": { "html": false, "anchor": true, "spacing": { "margin": true } },
+    "editorScript": "file:./index.js",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,40 @@
+# WordPress core and local configuration.
+/wp-admin/
+/wp-content/index.php
+/wp-content/languages/
+/wp-content/plugins/index.php
+/wp-content/themes/index.php
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/wp-*.php
+/xmlrpc.php
+wp-config.php
+
+# Credentials.
+/.env
+/.env.*
+!/.env.example
+/auth.json
+
+# Third-party dependencies; keep the site-owned development plugin.
+/vendor/
+/node_modules/
+/wp-content/themes/one-base-theme/vendor/
+/wp-content/themes/twenty*/
+/wp-content/plugins/*
+!/wp-content/plugins/pattern-refresh/
+!/wp-content/plugins/pattern-refresh/**
+
+# Local uploads, plugin cache and generated files.
+/wp-content/uploads/
+/wp-content/advanced-cache.php
+/wp-content/cache/
+/wp-content/settings/cache-enabler/
+/wp-content/themes/one-base-theme/**/*.pot
+/wp-content/mu-plugins/**/*.pot
+/.artifacts/
+/.codex/
+*.log
+.DS_Store

@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "title": "Eyebrow",
+    "slug": "eyebrow",
+    "blockTypes": ["core/paragraph"],
+    "styles": {
+        "typography": {
+            "fontSize": "var:preset|font-size|h-6",
+            "fontWeight": "var:custom|typography|font-weight|semibold",
+            "lineHeight": "var:custom|typography|line-height|loose"
+        }
+    }
+}

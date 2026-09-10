@@ -1,0 +1,52 @@
+.editor-styles-wrapper .wp-block-one-202x-media-cover {
+	min-height: 20rem;
+}
+
+.editor-styles-wrapper .wp-block-one-202x-media-cover.has-no-media {
+	display: grid;
+	place-items: center;
+}
+
+.editor-styles-wrapper .wp-block-one-202x-media-cover .block-editor-media-placeholder {
+	z-index: 2;
+	width: min(100% - 2rem, 36rem);
+	margin: 1rem;
+}
+
+.editor-styles-wrapper .wp-block-one-202x-media-cover .one-202x-media-cover__media {
+	pointer-events: none;
+}
+
+.editor-styles-wrapper .wp-block-one-202x-media-cover .one-202x-media-cover__inner-container {
+	min-height: 8rem;
+}
+
+.editor-styles-wrapper .wp-block-one-202x-media-cover .one-202x-media-cover__editor-badge {
+	position: absolute;
+	z-index: 3;
+	top: 1rem;
+	right: 1rem;
+	padding: 0.35rem 0.6rem;
+	border-radius: 999px;
+	background: rgba(25, 26, 35, 0.88);
+	color: #fff;
+	font-size: 0.75rem;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.one-202x-media-cover__poster-control {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-bottom: 1.5rem;
+}
+
+.one-202x-media-cover__poster-control img {
+	display: block;
+	width: 100%;
+	max-height: 10rem;
+	border-radius: 0.25rem;
+	object-fit: cover;
+}

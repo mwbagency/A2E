@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "title": "Display",
+    "slug": "display",
+    "blockTypes": ["core/heading"],
+    "styles": {
+        "typography": {
+            "fontSize": "var:preset|font-size|hero",
+            "fontWeight": "var:custom|typography|font-weight|medium",
+            "lineHeight": "var:custom|typography|line-height|tight",
+            "letterSpacing": "var:custom|typography|letter-spacing|tight"
+        }
+    }
+}

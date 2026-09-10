@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pattern-refresh/instance",
+	"version": "2.5.0",
+	"title": "Legacy Linked Pattern",
+	"category": "design",
+	"icon": "update",
+	"description": "A legacy Pattern Refresh 1.x wrapper that can be converted to ordinary blocks.",
+	"keywords": ["pattern", "refresh", "development"],
+	"textdomain": "pattern-refresh",
+	"attributes": {
+		"slug": {
+			"type": "string",
+			"default": ""
+		},
+		"sourceHash": {
+			"type": "string",
+			"default": ""
+		},
+		"autoRefresh": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"inserter": false,
+		"reusable": false
+	}
+}

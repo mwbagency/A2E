@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "one-202x/logo-marquee",
+  "title": "Logo marquee",
+  "category": "media",
+  "icon": "images-alt2",
+  "description": "A looping row of logos with direction and pause controls. Edit the images using the Gallery inside.",
+  "textdomain": "one-base-theme",
+  "attributes": {
+    "direction": { "type": "string", "enum": ["left", "right"], "default": "left" },
+    "duration": { "type": "number", "default": 30 }
+  },
+  "supports": { "html": false, "anchor": true, "align": ["wide", "full"] },
+  "editorScript": "file:./index.js",
+  "viewScript": "file:./view.js",
+  "style": "file:./style.css",
+  "render": "file:./render.php"
+}

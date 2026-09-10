@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "one-202x/hubspot-form",
+  "title": "HubSpot form",
+  "category": "widgets",
+  "icon": "feedback",
+  "description": "Paste a HubSpot form embed code. Only the form settings are saved; arbitrary scripts are never run.",
+  "textdomain": "one-base-theme",
+  "attributes": {
+    "portalId": { "type": "string", "default": "", "role": "content" },
+    "formId": { "type": "string", "default": "", "role": "content" },
+    "region": { "type": "string", "default": "na1", "role": "content" },
+    "embedType": { "type": "string", "enum": ["current", "legacy"], "default": "current" },
+    "locale": { "type": "string", "default": "", "role": "content" }
+  },
+  "supports": { "html": false, "anchor": true },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

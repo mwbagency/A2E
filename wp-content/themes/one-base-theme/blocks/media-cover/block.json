@@ -1,0 +1,113 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/media-cover",
+    "version": "1.0.0",
+    "title": "Media Cover",
+    "category": "design",
+    "icon": "cover-image",
+    "description": "An image or controlled video background with editable content layered above it.",
+    "keywords": [
+        "cover",
+        "image",
+        "video",
+        "background"
+    ],
+    "textdomain": "one-base-theme",
+    "attributes": {
+        "mediaId": {
+            "type": "integer",
+            "role": "content"
+        },
+        "mediaUrl": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "mediaType": {
+            "type": "string",
+            "enum": [
+                "image",
+                "video"
+            ],
+            "default": "image"
+        },
+        "alt": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "posterId": {
+            "type": "integer",
+            "role": "content"
+        },
+        "posterUrl": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "focalPoint": {
+            "type": "object",
+            "default": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        "overlayColor": {
+            "type": "string",
+            "default": "#ffffff"
+        },
+        "overlayOpacity": {
+            "type": "number",
+            "default": 60
+        },
+        "playbackMode": {
+            "type": "string",
+            "enum": [
+                "manual",
+                "autoplay"
+            ],
+            "default": "manual"
+        },
+        "videoLabel": {
+            "type": "string",
+            "default": "Background video"
+        },
+        "captionsUrl": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "captionsLabel": {
+            "type": "string",
+            "default": "English"
+        },
+        "captionsLanguage": {
+            "type": "string",
+            "default": "en"
+        }
+    },
+    "supports": {
+        "align": [
+            "wide",
+            "full"
+        ],
+        "anchor": true,
+        "html": false,
+        "color": {
+            "text": true,
+            "background": true
+        },
+        "dimensions": {
+            "minHeight": true
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}
