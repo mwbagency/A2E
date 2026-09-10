@@ -19,11 +19,11 @@
         gap: 2rem;
         padding-block-end: 2.0625rem;
         border-block-end: 1px solid currentColor;
-    }
 
-    & .one-202x-support-card__contact > .wp-block-icon {
-        width: 3.125rem;
-        height: 3.125rem;
+        & > .wp-block-icon {
+            width: 3.125rem;
+            height: 3.125rem;
+        }
     }
 
     & .one-202x-support-card__copy {
@@ -64,20 +64,20 @@
 
     & .is-style-icon-link {
         justify-content: space-between;
-    }
 
-    & .is-style-icon-link .wp-block-icon {
-        width: 1.5rem;
-        height: 1.5rem;
-        padding: 0;
-        border-radius: 0;
-        background: transparent;
-        color: inherit;
-    }
+        & .wp-block-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: 0;
+            border-radius: 0;
+            background: transparent;
+            color: inherit;
 
-    & .is-style-icon-link .wp-block-icon svg {
-        width: 0.4125rem;
-        height: 0.75rem;
+            & svg {
+                width: 0.4125rem;
+                height: 0.75rem;
+            }
+        }
     }
 }
 

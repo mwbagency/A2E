@@ -3,10 +3,8 @@
         max-width: 48rem;
         margin-inline: auto;
         margin-block-end: var(--wp--preset--spacing--xl);
-    }
 
-    @media (--mobile) {
-        & .one-202x-show002-faqs__intro {
+        @media (--mobile) {
             margin-block-end: var(--wp--preset--spacing--lg);
         }
     }

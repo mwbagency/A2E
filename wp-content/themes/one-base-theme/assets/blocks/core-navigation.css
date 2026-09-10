@@ -1,0 +1,250 @@
+/* A2E Services menu: native Navigation submenus populated from service categories. */
+
+.one-202x-head {
+    position: relative;
+    z-index: 20;
+
+    body & .wp-block-navigation .a2e-services-menu {
+        & .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+            box-sizing: border-box;
+            min-height: 0;
+            padding: 0.5rem 1.5rem;
+            color: var(--wp--preset--color--contrast);
+            font-size: 1rem;
+            font-weight: var(--wp--custom--typography--font-weight--regular);
+            line-height: 1.25;
+            letter-spacing: 0;
+            text-decoration: none;
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        & li.a2e-services-menu__heading {
+            margin-block-end: 1.5rem;
+
+            & > .wp-block-navigation-item__content {
+                padding: 0;
+                font-weight: var(--wp--custom--typography--font-weight--semibold);
+                letter-spacing: 0.09375rem;
+                text-transform: uppercase;
+            }
+        }
+
+        & li.a2e-services-menu__area > .wp-block-navigation-item__content {
+            display: flex;
+            flex: 1;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+    }
+}
+
+.a2e-services-menu__area > .wp-block-navigation-item__content::before {
+    content: "";
+    box-sizing: border-box;
+    flex: 0 0 2rem;
+    width: 2rem;
+    height: 2rem;
+    border: 0.25px solid var(--wp--preset--color--contrast);
+    background: url("../icons/a2e-puzzle.svg") center / 1.5rem 1.5rem no-repeat;
+}
+
+.a2e-services-menu {
+    body .one-202x-head .wp-block-navigation & li:is(.a2e-services-menu__area, .a2e-services-menu__level) > .wp-block-navigation__submenu-icon {
+        display: inline-flex;
+        flex: 0 0 2.25rem;
+        width: 2.25rem;
+        height: auto;
+        min-height: 2.75rem;
+        align-self: stretch;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        color: inherit;
+        background: transparent;
+        border: 0;
+        pointer-events: auto;
+    }
+
+    & li:is(.a2e-services-menu__area, .a2e-services-menu__level) > .wp-block-navigation__submenu-icon {
+        &::before {
+            content: "";
+            width: 0.625rem;
+            height: 0.625rem;
+            background: currentColor;
+            mask: url("../icons/a2e-arrow.svg") center / contain no-repeat;
+            transform: scaleX(-1);
+        }
+
+        & svg {
+            display: none;
+        }
+    }
+
+    body .one-202x-head .wp-block-navigation & li {
+        &:is(.a2e-services-menu__area, .a2e-services-menu__level):has(> button[aria-expanded="true"]) > :is(a, button),
+        &:is(.a2e-services-menu__area, .a2e-services-menu__level, .a2e-services-menu__course) > a:hover {
+            background-color: var(--wp--preset--color--grey-100);
+            text-decoration: none;
+        }
+
+        &:is(.a2e-services-menu__area, .a2e-services-menu__level):has(> button[aria-expanded="true"]) > .wp-block-navigation-item__content {
+            font-weight: var(--wp--custom--typography--font-weight--bold);
+            letter-spacing: 0.015625rem;
+        }
+
+        &.a2e-services-menu__all {
+            margin-block-start: 1.5rem;
+
+            & > .wp-block-navigation-item__content {
+                display: inline-flex;
+                flex: 0 1 auto;
+                width: auto;
+                padding: 0.75rem 2rem;
+                border-radius: var(--wp--custom--radius--control);
+                color: var(--wp--preset--color--base);
+                background: var(--wp--preset--color--accent);
+                font-size: var(--wp--preset--font-size--button);
+                font-weight: var(--wp--custom--typography--font-weight--bold);
+                line-height: 1.25rem;
+
+                &:focus-visible {
+                    outline-color: var(--wp--preset--color--contrast);
+                }
+            }
+        }
+    }
+
+    body .one-202x-head .one-202x-mobile-nav__menu.wp-block-navigation & {
+        & > .wp-block-navigation__submenu-icon {
+            display: inline-flex;
+        }
+
+        & .wp-block-navigation-item__content {
+            min-height: 2.75rem;
+        }
+
+        & li:is(.a2e-services-menu__area, .a2e-services-menu__level) {
+            & > a {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            & > .wp-block-navigation-submenu__toggle {
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            & > button[aria-expanded="true"]::before {
+                transform: rotate(90deg) scaleX(-1);
+            }
+        }
+
+        & li:is(.a2e-services-menu__level, .a2e-services-menu__course) > .wp-block-navigation-item__content {
+            padding-inline: 0.5rem;
+        }
+
+        & .wp-block-navigation__submenu-container {
+            padding-inline: 0.5rem 0;
+        }
+
+        & li.a2e-services-menu__heading {
+            margin-block: 0.5rem;
+        }
+    }
+}
+
+@container one-202x-head (width > 70rem) {
+    .one-202x-head__navigation {
+        &,
+        & > .wp-block-navigation__responsive-container:not(.is-menu-open),
+        & > .wp-block-navigation__responsive-container:not(.is-menu-open) :is(
+            .wp-block-navigation__responsive-close,
+            .wp-block-navigation__responsive-dialog,
+            .wp-block-navigation__responsive-container-content,
+            .wp-block-navigation__container
+        ),
+        & .a2e-services-menu,
+        & .a2e-services-menu .wp-block-navigation-item {
+            position: static;
+        }
+
+        body .one-202x-head &.wp-block-navigation {
+            & :is(.a2e-services-menu, .a2e-services-menu__area, .a2e-services-menu__level) {
+                & > .wp-block-navigation__submenu-container {
+                    display: none;
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 0;
+                    overflow: visible;
+                    color: var(--wp--preset--color--contrast);
+                    background: var(--wp--preset--color--base);
+                    border-radius: 0;
+                    box-shadow: none;
+                }
+
+                & > button[aria-expanded="true"] ~ .wp-block-navigation__submenu-container {
+                    display: flex;
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+
+            & .a2e-services-menu {
+                & > .wp-block-navigation__submenu-container {
+                    position: absolute;
+                    z-index: 30;
+                    inset: 100% 0 auto;
+                    box-sizing: border-box;
+                    width: calc(100% - 2 * clamp(1.5rem, 5vw, 4.5rem));
+                    max-width: 1280px;
+                    min-height: 32rem;
+                    height: auto;
+                    margin: 0 auto;
+                    padding: 1.5rem 1rem;
+                    border: 0.25px solid var(--wp--preset--color--contrast);
+
+                    & > .wp-block-navigation-item {
+                        width: calc(100% / 3 - 1rem);
+                        flex: 0 0 auto;
+                    }
+                }
+
+                & li {
+                    &:is(.a2e-services-menu__area, .a2e-services-menu__level) > .wp-block-navigation__submenu-container {
+                        position: absolute;
+                        box-sizing: border-box;
+                        inset: 0 auto auto calc(100% / 3);
+                        width: calc(100% / 3);
+                        min-width: 0;
+                        height: 100%;
+                        padding: 1.5rem 0;
+                        border: 0;
+                        border-inline-start: 0.5px solid var(--wp--preset--color--grey-100);
+                    }
+
+                    &.a2e-services-menu__level > .wp-block-navigation__submenu-container {
+                        inset-inline-start: 100%;
+                        width: 100%;
+                        overflow-y: auto;
+                    }
+
+                    &.a2e-services-menu__level > a {
+                        flex: 1;
+                        padding-inline-end: 0;
+                    }
+
+                    &.a2e-services-menu__level > .wp-block-navigation__submenu-icon {
+                        min-height: 2.25rem;
+                    }
+
+                    &.a2e-services-menu__all {
+                        margin-block-start: auto;
+                        padding-block-start: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+}

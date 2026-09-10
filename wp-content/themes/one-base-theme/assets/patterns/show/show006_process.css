@@ -3,13 +3,13 @@
     gap: var(--wp--preset--spacing--lg);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
     padding-inline-start: 1.5em;
-}
 
-.one-202x-pattern-show006_process .one-202x-process li {
-    padding-inline: 0.25em 1em;
-    margin: 0;
-}
+    & li {
+        padding-inline: 0.25em 1em;
+        margin: 0;
 
-.one-202x-pattern-show006_process .one-202x-process li::marker {
-    font-weight: 600;
+        &::marker {
+            font-weight: 600;
+        }
+    }
 }

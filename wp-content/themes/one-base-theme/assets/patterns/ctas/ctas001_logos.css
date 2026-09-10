@@ -5,17 +5,19 @@
         justify-content: center;
         align-items: center;
         gap: var(--wp--preset--spacing--lg);
-    }
 
-    & .wp-block-gallery.has-nested-images figure.wp-block-image:not(#individual-image) {
-        flex: 0 1 8rem;
-        inline-size: 8rem;
-        margin: 0;
-    }
+        & figure.wp-block-image {
+            &:not(#individual-image) {
+                flex: 0 1 8rem;
+                inline-size: 8rem;
+                margin: 0;
+            }
 
-    & .wp-block-gallery.has-nested-images figure.wp-block-image img {
-        inline-size: 100%;
-        block-size: 4rem;
-        object-fit: contain;
+            & img {
+                inline-size: 100%;
+                block-size: 4rem;
+                object-fit: contain;
+            }
+        }
     }
 }

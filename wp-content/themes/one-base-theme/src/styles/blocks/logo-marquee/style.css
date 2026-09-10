@@ -8,19 +8,21 @@
         align-items: center;
         gap: var(--one-marquee-gap);
         margin: 0;
-    }
 
-    & .wp-block-gallery.has-nested-images figure.wp-block-image:not(#individual-image) {
-        flex: 0 0 10rem;
-        inline-size: 10rem;
-        max-inline-size: 100%;
-        margin: 0;
-    }
+        & figure.wp-block-image {
+            &:not(#individual-image) {
+                flex: 0 0 10rem;
+                inline-size: 10rem;
+                max-inline-size: 100%;
+                margin: 0;
+            }
 
-    & .wp-block-gallery.has-nested-images figure.wp-block-image img {
-        inline-size: 100%;
-        block-size: 5rem;
-        object-fit: contain;
+            & img {
+                inline-size: 100%;
+                block-size: 5rem;
+                object-fit: contain;
+            }
+        }
     }
 
     & .one-202x-logo-marquee__toggle {
@@ -33,43 +35,85 @@
         border: 1px solid currentColor;
         border-radius: 0.25rem;
         cursor: pointer;
+
+        &[hidden] {
+            display: none;
+        }
     }
 
-    & .one-202x-logo-marquee__toggle[hidden] { display: none; }
-    & [data-marquee-clone] { display: none; pointer-events: none; }
-}
+    & [data-marquee-clone] {
+        display: none;
+        pointer-events: none;
+    }
 
-@media (prefers-reduced-motion: no-preference) {
-    .one-202x-logo-marquee.is-moving {
-        & .one-202x-logo-marquee__viewport { overflow: hidden; }
-        & .one-202x-logo-marquee__belt {
-            display: flex;
-            direction: ltr;
-            inline-size: max-content;
-            animation: one-logo-marquee var(--one-marquee-duration, 30s) linear infinite;
-        }
-        & .one-202x-logo-marquee__track {
-            flex: 0 0 auto;
-            padding-inline-end: var(--one-marquee-gap);
-        }
-        & .wp-block-gallery.has-nested-images { flex-wrap: nowrap; }
-        & [data-marquee-clone] { display: block; }
-        &[data-direction="right"] .one-202x-logo-marquee__belt { animation-direction: reverse; }
-        &.is-paused .one-202x-logo-marquee__belt,
-        &:hover .one-202x-logo-marquee__belt { animation-play-state: paused; }
+    @media (prefers-reduced-motion: no-preference) {
+        &.is-moving {
+            & .one-202x-logo-marquee__viewport {
+                overflow: hidden;
+            }
 
-        /* Show every original when a logo is focused, so no link is off-screen. */
-        & .one-202x-logo-marquee__viewport:focus-within {
-            overflow: visible;
-            & .one-202x-logo-marquee__belt { animation: none; inline-size: auto; }
-            & .one-202x-logo-marquee__track { flex: 1; padding: 0; }
-            & .wp-block-gallery.has-nested-images { flex-wrap: wrap; }
-            & [data-marquee-clone] { display: none; }
+            & .one-202x-logo-marquee__belt {
+                display: flex;
+                direction: ltr;
+                inline-size: max-content;
+                animation: one-logo-marquee var(--one-marquee-duration, 30s) linear infinite;
+            }
+
+            & .one-202x-logo-marquee__track {
+                flex: 0 0 auto;
+                padding-inline-end: var(--one-marquee-gap);
+            }
+
+            & .wp-block-gallery.has-nested-images {
+                flex-wrap: nowrap;
+            }
+
+            & [data-marquee-clone] {
+                display: block;
+            }
+
+            &[data-direction="right"] .one-202x-logo-marquee__belt {
+                animation-direction: reverse;
+            }
+
+            &.is-paused .one-202x-logo-marquee__belt,
+            &:hover .one-202x-logo-marquee__belt {
+                animation-play-state: paused;
+            }
+
+            /* Show every original when a logo is focused, so no link is off-screen. */
+
+            & .one-202x-logo-marquee__viewport:focus-within {
+                overflow: visible;
+
+                & .one-202x-logo-marquee__belt {
+                    animation: none;
+                    inline-size: auto;
+                }
+
+                & .one-202x-logo-marquee__track {
+                    flex: 1;
+                    padding: 0;
+                }
+
+                & .wp-block-gallery.has-nested-images {
+                    flex-wrap: wrap;
+                }
+
+                & [data-marquee-clone] {
+                    display: none;
+                }
+            }
         }
     }
 }
 
 @keyframes one-logo-marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(var(--one-marquee-distance)); }
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(var(--one-marquee-distance));
+    }
 }

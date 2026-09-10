@@ -51,20 +51,20 @@
     & li + li {
         margin-block-start: 0.5rem;
     }
-}
 
-.wp-block-details > :not(summary) {
-    margin: 0 1rem 1rem;
-}
+    & > :not(summary) {
+        margin: 0 1rem 1rem;
+    }
 
-.wp-block-details[open] {
-    padding-block-end: 1.5rem;
-}
+    &[open] {
+        padding-block-end: 1.5rem;
 
-.wp-block-details[open] > :last-child {
-    margin-block-end: 0;
-}
+        & > :last-child {
+            margin-block-end: 0;
+        }
+    }
 
-.wp-block-details + .wp-block-details {
-    margin-block-start: -0.5px;
+    & + .wp-block-details {
+        margin-block-start: -0.5px;
+    }
 }

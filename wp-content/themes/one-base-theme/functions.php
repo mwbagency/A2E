@@ -5,8 +5,6 @@ defined('ABSPATH') || exit;
 // The theme is self-contained; site-owned MU plugins use the root Composer loader.
 $components = [
     'Setup',
-    'Branding',
-    'Navigation',
     'Assets',
     'Blocks',
     'BlockStyles',

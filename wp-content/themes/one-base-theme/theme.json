@@ -340,6 +340,11 @@
             "title": "Footer"
         },
         {
+            "area": "uncategorized",
+            "name": "social-links",
+            "title": "Social links"
+        },
+        {
             "area": "navigation-overlay",
             "name": "head-navigation-overlay",
             "title": "Head Navigation Overlay"

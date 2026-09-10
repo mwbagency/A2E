@@ -2,31 +2,31 @@
     display: grid;
     gap: var(--wp--preset--spacing--md);
     overflow-wrap: anywhere;
-}
 
-.wp-block-one-202x-contact-details ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: var(--wp--preset--spacing--sm);
-}
+    & ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: var(--wp--preset--spacing--sm);
+    }
 
-.wp-block-one-202x-contact-details li > strong {
-    display: block;
-    margin-block-end: 0.25em;
-}
+    & li > strong {
+        display: block;
+        margin-block-end: 0.25em;
+    }
 
-.wp-block-one-202x-contact-details address {
-    font-style: normal;
-}
+    & address {
+        font-style: normal;
+    }
 
-.wp-block-one-202x-contact-details .one-202x-contact-details__locations {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-    gap: var(--wp--preset--spacing--md);
-}
+    & .one-202x-contact-details__locations {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+        gap: var(--wp--preset--spacing--md);
+    }
 
-.wp-block-one-202x-contact-details .one-202x-icon-button__label {
-    direction: ltr;
-    unicode-bidi: isolate;
+    & .one-202x-icon-button__label {
+        direction: ltr;
+        unicode-bidi: isolate;
+    }
 }

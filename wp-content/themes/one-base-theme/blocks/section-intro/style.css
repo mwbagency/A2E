@@ -4,7 +4,12 @@
     align-items: flex-start;
     gap: var(--wp--preset--spacing--sm);
 
-    & > :where(.one-202x-section-intro__subtitle, .one-202x-section-intro__title, .one-202x-section-intro__description, .one-202x-section-intro__actions) {
+    & > :where(
+        .one-202x-section-intro__subtitle,
+        .one-202x-section-intro__title,
+        .one-202x-section-intro__description,
+        .one-202x-section-intro__actions
+    ) {
         margin-block: 0;
     }
 

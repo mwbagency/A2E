@@ -11,5 +11,6 @@ final class Plugin
         (new ServicePostType())->register_hooks();
         (new ServiceTaxonomy())->register_hooks();
         (new ServiceFields())->register_hooks();
+        (new ServicesMenu())->register_hooks();
     }
 }
