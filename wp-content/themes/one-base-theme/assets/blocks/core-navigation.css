@@ -155,7 +155,7 @@
     }
 }
 
-@container one-202x-head (width > 70rem) {
+@container one-202x-head (width > 78rem) {
     .one-202x-head__navigation {
         &,
         & > .wp-block-navigation__responsive-container:not(.is-menu-open),

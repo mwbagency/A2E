@@ -34,9 +34,12 @@ html {
     scrollbar-gutter: stable;
 }
 
-.one-202x-head {
+.wp-block-template-part:has(> .one-202x-head) {
     container-name: one-202x-head;
     container-type: inline-size;
+}
+
+.one-202x-head {
     color: var(--wp--preset--color--contrast);
     background: var(--wp--preset--color--base);
 
@@ -585,7 +588,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
     }
 }
 
-@container one-202x-head (width > 70rem) {
+@container one-202x-head (width > 78rem) {
     body .one-202x-head {
         & .one-202x-head__utility-navigation {
             display: flex;
@@ -598,6 +601,84 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
 
             & > .wp-block-navigation__responsive-container-open:not(.always-shown) {
                 display: none;
+            }
+        }
+    }
+}
+
+.one-202x-head__mobile-search {
+    display: none;
+}
+
+@container one-202x-head (width <= 78rem) {
+    .one-202x-head {
+        &.has-background {
+            padding: 1rem;
+            color: var(--wp--preset--color--base) !important;
+            background-color: var(--wp--preset--color--contrast) !important;
+        }
+
+        & .one-202x-head__bar {
+            min-height: 2.5rem;
+            gap: 0.5rem;
+        }
+
+        & .one-202x-head__logo img {
+            content: url("../images/a-to-e-logo-light.svg");
+            width: 5.4375rem;
+            height: 2.015625rem;
+        }
+
+        & .one-202x-head__navigation {
+            min-width: 2.5rem;
+            margin-inline-start: auto;
+            color: inherit;
+
+            body & > .wp-block-navigation__responsive-container-open {
+                width: 2.5rem;
+                height: 2.5rem;
+                min-width: 2.5rem;
+                min-height: 2.5rem;
+                padding: 0.5rem;
+
+                & svg {
+                    display: none;
+                }
+
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 1.5rem;
+                    height: 0.825rem;
+                    background: currentColor;
+                    mask: url("../icons/a2e-menu.svg") center / contain no-repeat;
+                }
+            }
+        }
+
+        & .one-202x-head__mobile-search {
+            display: block;
+            flex: 0 0 1.25rem;
+            width: 1.25rem;
+            min-width: 1.25rem;
+            color: inherit;
+
+            body &.wp-block-search .wp-block-search__button {
+                width: 1.5rem;
+                height: 2.5rem;
+                min-width: 1.5rem;
+                margin-inline: -0.125rem;
+                padding: 0.125rem;
+
+                &::before {
+                    flex: 0 0 1.25rem;
+                    width: 1.25rem;
+                    height: 1.25rem;
+                }
+            }
+
+            body & .wp-block-search__input {
+                width: min(20rem, calc(100vw - 2rem)) !important;
             }
         }
     }

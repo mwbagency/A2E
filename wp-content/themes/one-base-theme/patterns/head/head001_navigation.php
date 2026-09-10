@@ -34,6 +34,14 @@ defined('ABSPATH') || exit;
                 'className' => 'one-202x-head__navigation',
                 'layout' => ['type' => 'flex', 'justifyContent' => 'right', 'flexWrap' => 'nowrap'],
             ]); ?> /-->
+
+            <!-- wp:search <?php echo wp_json_encode([
+                'label' => __('Search', 'one-base-theme'),
+                'showLabel' => false,
+                'buttonPosition' => 'button-only',
+                'buttonUseIcon' => true,
+                'className' => 'one-202x-head__search one-202x-head__mobile-search',
+            ]); ?> /-->
         </div>
         <!-- /wp:group -->
     </div>
