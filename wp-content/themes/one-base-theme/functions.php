@@ -6,6 +6,7 @@ defined('ABSPATH') || exit;
 $components = [
     'Setup',
     'Branding',
+    'Navigation',
     'Assets',
     'Blocks',
     'BlockStyles',

@@ -2,7 +2,7 @@
 /**
  * Title: Learner support card
  * Slug: one-202x/cont008_support-card
- * Categories: one-202x, one-202x-cont
+ * Categories: a2e
  * Description: An editable sidebar contact card with supporting links. Set the destinations using each button's link control.
  * Keywords: support, sidebar, contact, card
  * Viewport Width: 416

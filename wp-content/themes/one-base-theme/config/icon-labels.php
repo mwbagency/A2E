@@ -13,6 +13,7 @@ return [
     'a2e-play' => _x('A to E play', 'Icon name', 'one-base-theme'),
     'a2e-plus' => _x('A to E plus', 'Icon name', 'one-base-theme'),
     'a2e-puzzle' => _x('A to E puzzle piece', 'Icon name', 'one-base-theme'),
+    'a2e-search' => _x('A to E search', 'Icon name', 'one-base-theme'),
     'a2e-vision' => _x('A to E vision', 'Icon name', 'one-base-theme'),
     'account' => _x('Account', 'Icon name', 'one-base-theme'),
     'address' => _x('Address', 'Icon name', 'one-base-theme'),

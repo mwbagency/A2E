@@ -10,6 +10,7 @@ final class Setup
     {
         add_action('after_setup_theme', [$this, 'setup']);
         add_action('init', [$this, 'register_pattern_category']);
+        add_filter('block_categories_all', [$this, 'register_block_category']);
         add_filter('default_template_types', [$this, 'describe_page_template']);
     }
 
@@ -47,6 +48,8 @@ final class Setup
 
     public function register_pattern_category(): void
     {
+        register_block_pattern_category('a2e', ['label' => __('A2E', 'one-base-theme')]);
+
         register_block_pattern_category(
             'one-202x',
             [
@@ -65,6 +68,17 @@ final class Setup
         foreach ($categories as $type => $label) {
             register_block_pattern_category('one-202x-' . $type, ['label' => $label]);
         }
+    }
+
+    public function register_block_category(array $categories): array
+    {
+        // Only blocks and patterns newly created for A2E use "a2e"; inherited components keep their categories.
+        array_unshift($categories, [
+            'slug' => 'a2e',
+            'title' => __('A2E', 'one-base-theme'),
+        ]);
+
+        return $categories;
     }
 
     /**

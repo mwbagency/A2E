@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "one-202x/booking-card",
   "title": "Booking card",
-  "category": "widgets",
+  "category": "a2e",
   "icon": "calendar-alt",
   "description": "An editable booking card design, ready for a future booking integration. Controls are inactive.",
   "textdomain": "one-base-theme",

@@ -6,7 +6,7 @@
         "useRootPaddingAwareAlignments": true,
         "layout": {
             "contentSize": "760px",
-            "wideSize": "1200px"
+            "wideSize": "1280px"
         },
         "viewport": {
             "mobile": "37.5rem",

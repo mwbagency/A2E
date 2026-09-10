@@ -2,7 +2,7 @@
 /**
  * Title: Course details — accordion
  * Slug: one-202x/show007_course-details
- * Categories: one-202x, one-202x-show
+ * Categories: a2e
  * Description: Editable framework specifications using native Details blocks.
  * Keywords: course, accordion, curriculum, specifications
  * Viewport Width: 856
