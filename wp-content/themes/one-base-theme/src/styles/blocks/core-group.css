@@ -1,11 +1,11 @@
 .wp-block-group:is(.is-style-card-light, .is-style-card-accent, .is-style-card-dark) {
 	border: 1px solid var(--wp--preset--color--contrast);
-	border-radius: var(--wp--custom--radius--card, 2.5rem);
-	box-shadow: var(--wp--custom--shadow--card, 0 0.375rem 0 #191a23);
+	border-radius: var(--wp--custom--radius--card, 2px);
+	box-shadow: var(--wp--custom--shadow--card, none);
 }
 
 .wp-block-group.is-style-card-light {
-	background: var(--wp--preset--color--surface);
+	background: var(--wp--preset--color--base);
 	color: var(--wp--preset--color--contrast);
 }
 
@@ -25,6 +25,7 @@
 }
 
 /* Backward compatibility for icon links inserted before the Icon Button block. */
+
 .wp-block-group:is(.is-style-icon-link, .is-style-icon-link-accent) {
 	position: relative;
 	display: inline-flex;

@@ -50,3 +50,14 @@
 	border-radius: 0.25rem;
 	object-fit: cover;
 }
+
+.wp-block-one-202x-media-cover.is-style-video-card.has-video .one-202x-media-cover__media::after {
+	content: "";
+	position: absolute;
+	inset: 50% auto auto 50%;
+	translate: -50% -50%;
+	width: 5.5rem;
+	height: 5.5rem;
+	pointer-events: none;
+	background: url("../../assets/icons/a2e-play.svg") center / contain no-repeat;
+}

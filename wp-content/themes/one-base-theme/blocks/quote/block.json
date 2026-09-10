@@ -5,19 +5,55 @@
   "title": "Quote card",
   "category": "text",
   "icon": "format-quote",
-  "description": "A quotation with a portrait, name and job description. Shared by single quotes, quote grids and testimonial cards.",
+  "description": "A quotation with an optional logo or image, name and role. Shared by single quotes, quote grids and testimonial cards.",
   "textdomain": "one-base-theme",
   "attributes": {
-    "quote": { "type": "string", "default": "", "role": "content" },
-    "personName": { "type": "string", "default": "", "role": "content" },
-    "jobDescription": { "type": "string", "default": "", "role": "content" },
-    "imageId": { "type": "integer", "default": 0, "role": "content" },
-    "imageUrl": { "type": "string", "default": "", "role": "content" }
+    "quote": {
+      "type": "string",
+      "default": "",
+      "role": "content"
+    },
+    "personName": {
+      "type": "string",
+      "default": "",
+      "role": "content"
+    },
+    "jobDescription": {
+      "type": "string",
+      "default": "",
+      "role": "content"
+    },
+    "imageId": {
+      "type": "integer",
+      "default": 0,
+      "role": "content"
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": "",
+      "role": "content"
+    }
   },
-  "supports": { "html": false, "anchor": true, "align": ["wide"], "spacing": { "margin": true } },
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide"
+    ],
+    "spacing": {
+      "margin": true
+    }
+  },
   "styles": [
-    { "name": "default", "label": "Standard", "isDefault": true },
-    { "name": "featured", "label": "Large quote" }
+    {
+      "name": "default",
+      "label": "Testimonial card",
+      "isDefault": true
+    },
+    {
+      "name": "featured",
+      "label": "Pull quote"
+    }
   ],
   "editorScript": "file:./index.js",
   "style": "file:./style.css",

@@ -28,6 +28,49 @@
                 6
             ],
             "default": 3
+        },
+        "cardStyle": {
+            "type": "string",
+            "default": "auto",
+            "enum": [
+                "auto",
+                "resource",
+                "page-image",
+                "page-solid",
+                "programme",
+                "product",
+                "course"
+            ]
+        },
+        "number": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "label": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "detail": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "price": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "priceNote": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "duration": {
+            "type": "string",
+            "default": "",
+            "role": "content"
         }
     },
     "usesContext": [

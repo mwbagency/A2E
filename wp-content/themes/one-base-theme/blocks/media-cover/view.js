@@ -60,11 +60,32 @@
 
 		// Keep native captions, volume and fullscreen controls for manual playback.
 		if (video.dataset.playbackMode !== 'autoplay') {
+			const isVideoCard = block.classList.contains('is-style-video-card');
 			function updateManualPlayback() {
-				block.classList.toggle('is-one-202x-media-playing', !video.paused && !video.ended);
+				const playing = !video.paused && !video.ended;
+				block.classList.toggle('is-one-202x-media-playing', playing);
+				if (isVideoCard) {
+					control.hidden = playing;
+				}
+			}
+			if (isVideoCard) {
+				control.addEventListener('click', function () {
+					video.controls = true;
+					video.tabIndex = 0;
+					video.play().then(function () {
+						video.focus();
+					}).catch(function () {
+						updateManualPlayback();
+					});
+				});
+				video.addEventListener('error', function () {
+					control.hidden = true;
+					video.controls = true;
+				});
+				video.tabIndex = -1;
 			}
 
-			video.controls = true;
+			video.controls = !isVideoCard;
 			video.addEventListener('play', updateManualPlayback);
 			video.addEventListener('pause', updateManualPlayback);
 			video.addEventListener('ended', updateManualPlayback);

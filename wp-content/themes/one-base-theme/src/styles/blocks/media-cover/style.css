@@ -26,8 +26,7 @@
 	height: 100%;
 	margin: 0;
 	object-fit: cover;
-	object-position:
-		var(--one-202x-media-cover-focal-x, 50%)
+	object-position: var(--one-202x-media-cover-focal-x, 50%)
 		var(--one-202x-media-cover-focal-y, 50%);
 }
 
@@ -45,6 +44,7 @@
 }
 
 /* Keep manual playback controls clear of the cover text and overlay. */
+
 .wp-block-one-202x-media-cover[data-playback-mode="manual"] .one-202x-media-cover__inner-container {
 	padding-block-end: 4rem;
 }
@@ -77,8 +77,7 @@
 	color: var(--wp--preset--color--contrast, #191a23);
 	cursor: pointer;
 	place-items: center;
-	transition:
-		background-color 160ms ease,
+	transition: background-color 160ms ease,
 		color 160ms ease,
 		transform 160ms ease;
 }
@@ -113,5 +112,34 @@
 
 	.wp-block-one-202x-media-cover .one-202x-media-cover__video-control:hover {
 		transform: none;
+	}
+}
+
+.wp-block-one-202x-media-cover.is-style-video-card {
+	aspect-ratio: 330 / 485;
+	min-height: 0;
+	padding: 0;
+	background: var(--wp--preset--color--contrast);
+
+	& .one-202x-media-cover__overlay {
+		display: none;
+	}
+
+	& .one-202x-media-cover__inner-container:empty {
+		display: none;
+	}
+
+	& .one-202x-media-cover__video-control {
+		inset: 50% auto auto 50%;
+		translate: -50% -50%;
+		width: 5.5rem;
+		height: 5.5rem;
+		padding: 0;
+		border: 0;
+		background: transparent url("../../assets/icons/a2e-play.svg") center / contain no-repeat;
+
+		& .one-202x-media-cover__control-icon {
+			display: none;
+		}
 	}
 }

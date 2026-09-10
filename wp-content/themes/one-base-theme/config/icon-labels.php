@@ -6,6 +6,14 @@
 defined('ABSPATH') || exit;
 
 return [
+    'a2e-arrow' => _x('A to E arrow left', 'Icon name', 'one-base-theme'),
+    'a2e-chevron-down' => _x('A to E chevron down', 'Icon name', 'one-base-theme'),
+    'a2e-chevron-right' => _x('A to E chevron right', 'Icon name', 'one-base-theme'),
+    'a2e-minus' => _x('A to E minus', 'Icon name', 'one-base-theme'),
+    'a2e-play' => _x('A to E play', 'Icon name', 'one-base-theme'),
+    'a2e-plus' => _x('A to E plus', 'Icon name', 'one-base-theme'),
+    'a2e-puzzle' => _x('A to E puzzle piece', 'Icon name', 'one-base-theme'),
+    'a2e-vision' => _x('A to E vision', 'Icon name', 'one-base-theme'),
     'account' => _x('Account', 'Icon name', 'one-base-theme'),
     'address' => _x('Address', 'Icon name', 'one-base-theme'),
     'air-pollution' => _x('Air pollution', 'Icon name', 'one-base-theme'),

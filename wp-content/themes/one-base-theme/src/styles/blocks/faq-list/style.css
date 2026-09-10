@@ -1,92 +1,95 @@
+.one-faqs-faqs__item,
+.wp-block-one-faqs-accordion-item {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0.5px solid var(--wp--preset--color--contrast);
+    color: var(--wp--preset--color--contrast);
+    background: var(--wp--preset--color--base);
+    font-size: var(--wp--preset--font-size--small);
+    line-height: 1.25;
+    letter-spacing: 0;
+
+    & > summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3.125rem;
+        margin: 0;
+        padding: 1rem;
+        cursor: pointer;
+        font-size: var(--wp--preset--font-size--h-6);
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: 0.15px;
+        list-style: none;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &::after {
+            content: "";
+            flex: 0 0 1.25rem;
+            block-size: 1.25rem;
+            background: currentColor;
+            mask: url("../../assets/icons/a2e-plus.svg") center / contain no-repeat;
+        }
+
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: -4px;
+        }
+    }
+
+    &[open] > summary {
+        padding-block-start: 1.5rem;
+
+        &::after {
+            mask-image: url("../../assets/icons/a2e-minus.svg");
+        }
+    }
+
+    & li + li {
+        margin-block-start: 0.5rem;
+    }
+}
+
 .wp-block-one-faqs-faqs {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .one-faqs-faqs__items {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr);
-	column-gap: clamp(1.5rem, 4vw, 4rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 1.5rem;
 }
 
 .one-faqs-faqs--columns-2 .one-faqs-faqs__items {
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.one-faqs-faqs__item,
-.wp-block-one-faqs-accordion-item {
-	margin: 0;
-	border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-}
-
-.one-faqs-faqs__item > summary,
-.wp-block-one-faqs-accordion-item > summary {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1.5rem;
-	margin: 0;
-	padding-block: 1.25rem;
-	cursor: pointer;
-	font-size: 1.25rem;
-	font-weight: 700;
-	line-height: 1.2;
-	list-style: none;
-}
-
-.one-faqs-faqs__item > summary::-webkit-details-marker,
-.wp-block-one-faqs-accordion-item > summary::-webkit-details-marker {
-	display: none;
-}
-
-.one-faqs-faqs__item > summary::after,
-.wp-block-one-faqs-accordion-item > summary::after {
-	width: 0.65rem;
-	height: 0.65rem;
-	flex: 0 0 auto;
-	border-right: 2px solid currentColor;
-	border-bottom: 2px solid currentColor;
-	content: "";
-	transform: rotate(45deg);
-	transition: transform 160ms ease;
-}
-
-.one-faqs-faqs__item[open] > summary::after,
-.wp-block-one-faqs-accordion-item[open] > summary::after {
-	transform: rotate(225deg);
-}
-
-.one-faqs-faqs__item > summary:focus-visible,
-.wp-block-one-faqs-accordion-item > summary:focus-visible {
-	outline: 2px solid currentColor;
-	outline-offset: 0.25rem;
+.one-faqs-faqs__item + .one-faqs-faqs__item {
+    margin-block-start: -0.5px;
 }
 
 .one-faqs-faqs__answer {
-	padding-block: 0 1.25rem;
-	padding-inline: 0 2.25rem;
+    padding: 0 1rem 1.5rem;
 }
 
 .one-faqs-faqs__answer > :first-child {
-	margin-top: 0;
+    margin-block-start: 0;
 }
 
 .one-faqs-faqs__answer > :last-child {
-	margin-bottom: 0;
+    margin-block-end: 0;
 }
 
 .one-faqs-faqs__empty {
-	margin: 0;
+    margin: 0;
 }
 
 @media (--tablet-down) {
-	.one-faqs-faqs--columns-2 .one-faqs-faqs__items {
-		grid-template-columns: minmax(0, 1fr);
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.one-faqs-faqs__item > summary::after,
-	.wp-block-one-faqs-accordion-item > summary::after {
-		transition: none;
-	}
+    .one-faqs-faqs--columns-2 .one-faqs-faqs__items {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }

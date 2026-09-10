@@ -8,6 +8,10 @@ $media_type = ($attributes['mediaType'] ?? '') === 'video'
 $playback_mode = ($attributes['playbackMode'] ?? '') === 'autoplay'
     ? 'autoplay'
     : 'manual';
+$is_video_card = in_array('is-style-video-card', explode(' ', (string) ($attributes['className'] ?? '')), true);
+if ($is_video_card) {
+    $playback_mode = 'manual';
+}
 $media_id = absint($attributes['mediaId'] ?? 0);
 $media_url = isset($attributes['mediaUrl']) ? esc_url((string) $attributes['mediaUrl']) : '';
 $poster_url = isset($attributes['posterUrl']) ? esc_url((string) $attributes['posterUrl']) : '';

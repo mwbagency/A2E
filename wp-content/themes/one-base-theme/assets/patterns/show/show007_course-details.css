@@ -1,0 +1,41 @@
+.one-202x-pattern-show007_course-details {
+    & > * {
+        margin-block: 0;
+    }
+
+    & .one-202x-course-details__heading {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        border: 0.5px solid var(--wp--preset--color--contrast);
+        background: var(--wp--preset--color--base);
+        color: var(--wp--preset--color--contrast);
+
+        & > * {
+            margin: 0;
+        }
+
+        & .wp-block-icon {
+            flex: 0 0 2rem;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        & h3 {
+            font-size: var(--wp--preset--font-size--h-5);
+            font-weight: 600;
+            line-height: 1.25;
+            letter-spacing: 0;
+        }
+    }
+
+    & > .wp-block-details {
+        margin-block-start: -0.5px;
+    }
+}
+
+.one-202x-course-details__heading > .wp-block-icon svg {
+    width: 100%;
+    height: 100%;
+}

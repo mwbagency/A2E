@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "one-202x/booking-card",
+  "title": "Booking card",
+  "category": "widgets",
+  "icon": "calendar-alt",
+  "description": "An editable booking card design, ready for a future booking integration. Controls are inactive.",
+  "textdomain": "one-base-theme",
+  "attributes": {
+    "rateLabel": {
+      "type": "string",
+      "default": "Standard rate",
+      "role": "content"
+    },
+    "price": {
+      "type": "string",
+      "default": "",
+      "role": "content"
+    },
+    "priceNote": {
+      "type": "string",
+      "default": "inc. VAT",
+      "role": "content"
+    },
+    "badge": {
+      "type": "string",
+      "default": "",
+      "role": "content"
+    },
+    "locationLabel": {
+      "type": "string",
+      "default": "Select training hub",
+      "role": "content"
+    },
+    "locationPlaceholder": {
+      "type": "string",
+      "default": "Choose a location\u2026",
+      "role": "content"
+    },
+    "dateLabel": {
+      "type": "string",
+      "default": "Available dates",
+      "role": "content"
+    },
+    "datePlaceholder": {
+      "type": "string",
+      "default": "Select a date\u2026",
+      "role": "content"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Book online",
+      "role": "content"
+    },
+    "note": {
+      "type": "string",
+      "default": "Online booking will be available soon.",
+      "role": "content"
+    }
+  },
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "spacing": {
+      "margin": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css",
+  "render": "file:./render.php"
+}

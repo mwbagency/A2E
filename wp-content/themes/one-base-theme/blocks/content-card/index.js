@@ -3,7 +3,7 @@
 
 	const { InspectorControls, useBlockProps } = wp.blockEditor;
 	const { registerBlockType } = wp.blocks;
-	const { Button, ComboboxControl, Disabled, Notice, PanelBody, Placeholder, SelectControl, Spinner } = wp.components;
+	const { Button, ComboboxControl, Disabled, Notice, PanelBody, Placeholder, SelectControl, Spinner, TextControl } = wp.components;
 	const { createElement: el, Fragment, useEffect, useState } = wp.element;
 	const { decodeEntities } = wp.htmlEntities;
 	const { __, sprintf } = wp.i18n;
@@ -147,7 +147,25 @@
 							options: [2, 3, 4, 5, 6].map(function (level) { return { label: 'H' + level, value: String(level) }; }),
 							onChange: function (value) { setAttributes({ headingLevel: Number(value) }); },
 						}),
-						el('p', null, __('The content type automatically selects the card design. Posts show their publication date; other content uses its matching card.', 'one-base-theme'))
+						el(SelectControl, {
+							label: __('Card design', 'one-base-theme'), value: attributes.cardStyle || 'auto',
+							options: [
+								{ label: __('Automatic', 'one-base-theme'), value: 'auto' },
+								{ label: __('Article / resource', 'one-base-theme'), value: 'resource' },
+								{ label: __('Page — image', 'one-base-theme'), value: 'page-image' },
+								{ label: __('Page — solid', 'one-base-theme'), value: 'page-solid' },
+								{ label: __('Programme', 'one-base-theme'), value: 'programme' },
+								{ label: __('Product', 'one-base-theme'), value: 'product' },
+								{ label: __('Course / search result', 'one-base-theme'), value: 'course' },
+							],
+							onChange: (cardStyle) => setAttributes({ cardStyle }),
+						}),
+						el(TextControl, { label: __('Card number', 'one-base-theme'), value: attributes.number || '', onChange: (number) => setAttributes({ number }) }),
+						el(TextControl, { label: __('Category / level override', 'one-base-theme'), value: attributes.label || '', onChange: (label) => setAttributes({ label }) }),
+						el(TextControl, { label: __('Supporting details', 'one-base-theme'), help: __('For example, duration, certification validity or a discount note.', 'one-base-theme'), value: attributes.detail || '', onChange: (detail) => setAttributes({ detail }) }),
+						el(TextControl, { label: __('Programme duration', 'one-base-theme'), value: attributes.duration || '', onChange: (duration) => setAttributes({ duration }) }),
+						el(TextControl, { label: __('Price override', 'one-base-theme'), help: __('Leave empty to use the event or product price.', 'one-base-theme'), value: attributes.price || '', onChange: (price) => setAttributes({ price }) }),
+						el(TextControl, { label: __('Price note', 'one-base-theme'), value: attributes.priceNote || '', onChange: (priceNote) => setAttributes({ priceNote }) })
 					)
 				),
 				el('div', blockProps, postId > 0

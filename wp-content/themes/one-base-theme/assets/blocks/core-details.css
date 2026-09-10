@@ -1,0 +1,70 @@
+.wp-block-details {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0.5px solid var(--wp--preset--color--contrast);
+    color: var(--wp--preset--color--contrast);
+    background: var(--wp--preset--color--base);
+    font-size: var(--wp--preset--font-size--small);
+    line-height: 1.25;
+    letter-spacing: 0;
+
+    & > summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3.125rem;
+        margin: 0;
+        padding: 1rem;
+        cursor: pointer;
+        font-size: var(--wp--preset--font-size--h-6);
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: 0.15px;
+        list-style: none;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &::after {
+            content: "";
+            flex: 0 0 1.25rem;
+            block-size: 1.25rem;
+            background: currentColor;
+            mask: url("../icons/a2e-plus.svg") center / contain no-repeat;
+        }
+
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: -4px;
+        }
+    }
+
+    &[open] > summary {
+        padding-block-start: 1.5rem;
+
+        &::after {
+            mask-image: url("../icons/a2e-minus.svg");
+        }
+    }
+
+    & li + li {
+        margin-block-start: 0.5rem;
+    }
+}
+
+.wp-block-details > :not(summary) {
+    margin: 0 1rem 1rem;
+}
+
+.wp-block-details[open] {
+    padding-block-end: 1.5rem;
+}
+
+.wp-block-details[open] > :last-child {
+    margin-block-end: 0;
+}
+
+.wp-block-details + .wp-block-details {
+    margin-block-start: -0.5px;
+}

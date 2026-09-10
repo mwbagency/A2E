@@ -306,12 +306,12 @@
                 }
             },
             "radius": {
-                "card": "2.5rem",
+                "card": "2px",
                 "control": "100px",
                 "panel": "3rem"
             },
             "shadow": {
-                "card": "0 0.375rem 0 var(--wp--preset--color--contrast)"
+                "card": "none"
             },
             "button": {
                 "hoverOpacity": "0.75",

@@ -116,6 +116,8 @@
 				});
 			}
 
+			const isVideoCard = (attributes.className || '').split(' ').includes('is-style-video-card');
+			const effectivePlaybackMode = isVideoCard ? 'manual' : playbackMode;
 			const blockProps = useBlockProps({
 				className: [
 					'one-202x-media-cover-editor',
@@ -184,7 +186,8 @@
 					mediaType === 'video' &&
 						el(SelectControl, {
 							label: __('Playback preset', 'one-base-theme'),
-							value: playbackMode,
+							value: effectivePlaybackMode,
+							disabled: isVideoCard,
 							options: [
 								{
 									label: __('Video manual play', 'one-base-theme'),
@@ -196,7 +199,7 @@
 								},
 							],
 							help:
-								playbackMode === 'manual'
+								effectivePlaybackMode === 'manual'
 									? __(
 										'Starts stopped and plays with sound after the visitor presses Play.',
 										'one-base-theme'
@@ -289,7 +292,7 @@
 						onChange: (value) => setAttributes({ overlayOpacity: value }),
 					})
 				),
-				mediaType === 'video' && playbackMode === 'manual' &&
+				mediaType === 'video' && effectivePlaybackMode === 'manual' &&
 					el(
 						PanelBody,
 						{
@@ -381,7 +384,7 @@
 						el(
 							'span',
 							{ className: 'one-202x-media-cover__editor-badge' },
-							playbackMode === 'manual'
+							effectivePlaybackMode === 'manual'
 								? __('Manual play', 'one-base-theme')
 								: __('Muted autoplay on frontend', 'one-base-theme')
 						),

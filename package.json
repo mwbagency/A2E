@@ -27,7 +27,6 @@
     "@csstools/postcss-global-data": "^4.0.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^10.0.5",
-    "cssnano": "^7.1.9",
     "esbuild": "^0.28.2",
     "postcss": "^8.5.28",
     "postcss-cli": "^11.0.1",
