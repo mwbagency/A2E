@@ -548,7 +548,6 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
             overflow: hidden;
             padding: 0;
             opacity: 0;
-            visibility: hidden;
             pointer-events: none;
         }
     }
@@ -677,7 +676,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
                 }
             }
 
-            body & .wp-block-search__input {
+            body &:not(.wp-block-search__searchfield-hidden) .wp-block-search__input {
                 width: min(20rem, calc(100vw - 2rem)) !important;
             }
         }

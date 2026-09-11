@@ -12,6 +12,12 @@ html {
     }
 }
 
+.wp-site-blocks {
+    & > * {
+        margin-block-start: 0;
+    }
+}
+
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 0.25rem;

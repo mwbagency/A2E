@@ -1,0 +1,175 @@
+.wp-block-group.one-202x-pattern-hero003_shapebanner {
+    --a2e-hero-gutter: clamp(1.5rem, 5vw, 4.5rem);
+    --a2e-hero-mask: url("../../images/masks/hero-shape-1.png");
+    --a2e-hero-media-width: 137.1163%;
+    --a2e-hero-media-offset: -37.1163%;
+    --a2e-hero-media-ratio: 990 / 583;
+
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 574fr) minmax(0, 722fr);
+    grid-template-areas: "content media";
+    gap: var(--a2e-hero-gutter);
+    min-height: 36.4375rem;
+    padding: 0 0 0 var(--a2e-hero-gutter);
+
+    &.a2e-hero003--shape-2 {
+        --a2e-hero-mask: url("../../images/masks/hero-shape-2.png");
+        --a2e-hero-media-width: 120.3436%;
+        --a2e-hero-media-ratio: 868.881 / 583;
+    }
+
+    &.a2e-hero003--shape-3 {
+        --a2e-hero-mask: url("../../images/masks/hero-shape-3.png");
+        --a2e-hero-media-width: 149.6015%;
+        --a2e-hero-media-offset: -49.6015%;
+        --a2e-hero-media-ratio: 1080.123 / 583;
+    }
+
+    &.a2e-hero003--shape-4 {
+        --a2e-hero-mask: url("../../images/masks/hero-shape-4.png");
+        --a2e-hero-media-width: 100.9701%;
+        --a2e-hero-media-ratio: 729.004 / 583;
+    }
+
+    &.a2e-hero003--shape-5 {
+        --a2e-hero-mask: url("../../images/masks/hero-shape-5.png");
+        --a2e-hero-media-width: 103.3093%;
+        --a2e-hero-media-offset: -3.3093%;
+        --a2e-hero-media-ratio: 745.893 / 583;
+    }
+
+    &.a2e-hero003--media-left {
+        --a2e-hero-media-offset: 0%;
+
+        grid-template-columns: minmax(0, 722fr) minmax(0, 574fr);
+        grid-template-areas: "media content";
+        padding: 0 var(--a2e-hero-gutter) 0 0;
+
+        & .a2e-hero003__title {
+            padding-inline-end: 0;
+        }
+
+        & .one-202x-media-cover__video-control {
+            inset-inline: 25% auto;
+        }
+    }
+
+    & > .a2e-hero003__content {
+        grid-area: content;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        min-width: 0;
+        margin: 0;
+        padding-block: 6rem 4.5rem;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    & .a2e-hero003__title {
+        margin: 0 0 -1px;
+        padding-inline-end: 3.75rem;
+        font-weight: 600;
+        line-height: 0.933333;
+        letter-spacing: -1.3px;
+    }
+
+    & .a2e-hero003__details,
+    & .a2e-hero003__description {
+        margin: 0;
+    }
+
+    & .a2e-hero003__description {
+        font-size: var(--wp--preset--font-size--body);
+        line-height: 1.4;
+        letter-spacing: 0.5px;
+    }
+
+    & .a2e-hero003__statistics {
+        gap: 1.5rem 2rem;
+        margin-block-start: 1.5rem;
+    }
+
+    & .a2e-hero003__statistic {
+        & p {
+            margin: 0;
+            line-height: 1.25;
+            letter-spacing: 0;
+        }
+
+        & .a2e-hero003__number {
+            font-weight: 600;
+            line-height: 1.125;
+            letter-spacing: 0.25px;
+        }
+    }
+
+    & .a2e-hero003__actions {
+        gap: 1rem;
+        margin-block-start: 2.5rem;
+    }
+
+    & > .a2e-hero003__media {
+        grid-area: media;
+        width: var(--a2e-hero-media-width);
+        min-height: 0;
+        margin: 0 0 0 var(--a2e-hero-media-offset);
+
+        /* Each variation uses its exported Figma alpha mask. */
+        & .one-202x-media-cover__media,
+        & .one-202x-media-cover__overlay {
+            mask-image: var(--a2e-hero-mask);
+            mask-mode: alpha;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            mask-size: 100% 100%;
+        }
+
+        & .one-202x-media-cover__video-control {
+            inset-inline-end: 25%;
+        }
+
+        /* Native manual-video controls need the full rectangular player. */
+        &[data-playback-mode="manual"] {
+            width: 100%;
+            margin: 0;
+
+            & .one-202x-media-cover__media {
+                mask-image: none;
+            }
+        }
+    }
+
+    @media (max-width: 68.75rem) {
+        &,
+        &.a2e-hero003--media-left {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-areas: "content" "media";
+            gap: 0;
+            min-height: 0;
+            padding: 0;
+        }
+
+        & > .a2e-hero003__content {
+            gap: 1.5rem;
+            padding: 3rem var(--a2e-hero-gutter);
+        }
+
+        & .a2e-hero003__title {
+            max-width: 34rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        & .a2e-hero003__description {
+            max-width: 36rem;
+        }
+
+        & > .a2e-hero003__media {
+            width: 100%;
+            margin: 0;
+            aspect-ratio: var(--a2e-hero-media-ratio);
+        }
+    }
+}
