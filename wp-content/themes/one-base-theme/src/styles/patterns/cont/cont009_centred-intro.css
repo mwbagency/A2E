@@ -1,0 +1,39 @@
+.one-202x-pattern-cont009_centred-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-block: 4.5rem;
+    padding-inline: var(--wp--style--root--padding-left, 1.25rem);
+    text-align: center;
+
+    & > * {
+        min-inline-size: 0;
+        max-inline-size: 48.125rem;
+        margin-block: 0;
+    }
+
+    & > .a2e-centred-intro__title {
+        max-inline-size: 41.875rem;
+    }
+
+    & > .is-style-eyebrow + .a2e-centred-intro__title {
+        margin-block-start: 0.5rem;
+    }
+
+    & > .a2e-centred-intro__description {
+        margin-block-start: 1.6875rem;
+    }
+
+    & > .a2e-centred-intro__actions {
+        margin-block-start: var(--wp--preset--spacing--lg);
+    }
+
+    & > :first-child {
+        margin-block-start: 0;
+    }
+
+    @media (max-width: 37.5rem) {
+        padding-block: 3rem;
+    }
+}

@@ -1,0 +1,49 @@
+<?php
+/**
+ * Title: Popular courses — selected or latest
+ * Slug: one-202x/show008_popular-courses
+ * Categories: a2e
+ * Description: An editable introduction and three course cards. Choose courses in order or show the latest courses.
+ * Keywords: courses, programmes, cards, popular, selected
+ * Viewport Width: 1440
+ */
+
+defined('ABSPATH') || exit;
+?>
+<!-- wp:query {"namespace":"one-202x/selected-content","query":{"perPage":3,"one202xSelection":true,"one202xLatestCount":3,"pages":0,"offset":0,"postType":"course","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"ignore","inherit":false},"align":"full","className":"one-202x-pattern-show008_popular-courses","layout":{"type":"default"}} -->
+<div class="wp-block-query alignfull one-202x-pattern-show008_popular-courses">
+    <!-- wp:group {"className":"a2e-popular-courses__intro","layout":{"type":"default"}} -->
+    <div class="wp-block-group a2e-popular-courses__intro">
+        <!-- wp:heading {"fontSize":"h-2"} -->
+        <h2 class="wp-block-heading has-h-2-font-size"><?php esc_html_e('Check out some of our popular courses!', 'one-base-theme'); ?></h2>
+        <!-- /wp:heading -->
+
+        <!-- wp:group {"className":"a2e-popular-courses__description","layout":{"type":"default"}} -->
+        <div class="wp-block-group a2e-popular-courses__description">
+            <!-- wp:paragraph -->
+            <p><?php esc_html_e('Lorem ipsum dolor sit amet consectetur. Pellentesque a diam hac nec in commodo enim facilisi donec.', 'one-base-theme'); ?></p>
+            <!-- /wp:paragraph -->
+
+            <!-- wp:buttons -->
+            <div class="wp-block-buttons">
+                <!-- wp:button {"backgroundColor":"contrast","textColor":"base"} -->
+                <div class="wp-block-button"><a class="wp-block-button__link has-base-color has-contrast-background-color has-text-color has-background wp-element-button"><?php esc_html_e('View all courses', 'one-base-theme'); ?></a></div>
+                <!-- /wp:button -->
+            </div>
+            <!-- /wp:buttons -->
+        </div>
+        <!-- /wp:group -->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+        <!-- wp:one-202x/content-card {"headingLevel":3,"cardStyle":"programme"} /-->
+    <!-- /wp:post-template -->
+
+    <!-- wp:query-no-results -->
+        <!-- wp:paragraph -->
+        <p><?php esc_html_e('No courses are available yet.', 'one-base-theme'); ?></p>
+        <!-- /wp:paragraph -->
+    <!-- /wp:query-no-results -->
+</div>
+<!-- /wp:query -->

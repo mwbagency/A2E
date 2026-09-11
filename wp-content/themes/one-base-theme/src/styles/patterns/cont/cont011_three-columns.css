@@ -1,0 +1,88 @@
+.one-202x-pattern-cont011_three-columns {
+    --column-gap: clamp(3rem, 5.5556vw, 5rem);
+
+    padding-block: 0 4.5rem;
+    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+
+    & > .wp-block-columns {
+        gap: var(--column-gap);
+        margin-block: 0;
+
+        & > .wp-block-column {
+            position: relative;
+            min-inline-size: 0;
+
+            & + .wp-block-column::before {
+                position: absolute;
+                inset-block: 0;
+                inset-inline-start: calc(var(--column-gap) / -2);
+                border-inline-start: 1px solid currentColor;
+                content: "";
+            }
+
+            & > .wp-block-heading {
+                margin-block: 0;
+                font-weight: 700;
+                line-height: 1.4;
+                letter-spacing: 0;
+            }
+
+            & > p {
+                margin-block: 1.6875rem 0;
+                line-height: 1.25;
+                letter-spacing: 0;
+            }
+        }
+    }
+
+    & > .wp-block-buttons {
+        margin-block: var(--wp--preset--spacing--lg) 0;
+    }
+
+    &.a2e-columns--icons {
+        & > .wp-block-columns > .wp-block-column > .wp-block-icon {
+            display: flex;
+            align-items: center;
+            inline-size: 4.5rem;
+            block-size: 4.5rem;
+            margin: 0;
+
+            & svg {
+                inline-size: 100%;
+                block-size: 80%;
+            }
+
+            & + .wp-block-heading {
+                margin-block-start: 1.6875rem;
+            }
+        }
+
+        @media (781px < width <= 64rem) {
+            & > .wp-block-columns {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+
+                & > .wp-block-column:nth-child(odd)::before {
+                    content: none;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 781px) {
+        padding-block-end: 3rem;
+
+        & > .wp-block-columns {
+            gap: 2rem;
+
+            & > .wp-block-column + .wp-block-column {
+                padding-block-start: 2rem;
+                border-block-start: 1px solid currentColor;
+
+                &::before {
+                    content: none;
+                }
+            }
+        }
+    }
+}

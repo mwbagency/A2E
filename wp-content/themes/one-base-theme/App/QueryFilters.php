@@ -19,9 +19,12 @@ final class QueryFilters
     /** @var array<int, true> */
     private array $used_query_ids = [];
 
+    /** @var array<string, true> */
+    private array $used_parameters = [];
+
     public function register_hooks(): void
     {
-        add_filter('render_block_data', [$this, 'prepare_query']);
+        add_filter('render_block_data', [$this, 'prepare_query'], 9);
         add_filter('query_loop_block_query_vars', [$this, 'filter_query'], 10, 2);
     }
 
@@ -70,7 +73,21 @@ final class QueryFilters
         $query_id = (int) $query_id;
         $this->used_query_ids[$query_id] = true;
         $parsed_block['attrs']['queryId'] = $query_id;
-        $parameter = 'one-query-' . $query_id . '-terms';
+
+        // Copied listings need independent filter parameters.
+        $base_parameter = self::parameter_name(
+            $post_type,
+            (string) ($parsed_block['attrs']['anchor'] ?? '')
+        );
+        $parameter = $base_parameter;
+        $suffix = 2;
+
+        while (isset($this->used_parameters[$parameter])) {
+            $parameter = $base_parameter . '-' . $suffix++;
+        }
+
+        $this->used_parameters[$parameter] = true;
+
         $query[self::CONTEXT_KEY] = [
             'post_type' => $post_type,
             'taxonomy' => $taxonomy,
@@ -115,7 +132,7 @@ final class QueryFilters
     {
         $taxonomies = array_filter(
             get_object_taxonomies($post_type, 'objects'),
-            static fn (WP_Taxonomy $taxonomy): bool => $taxonomy->hierarchical
+            static fn(WP_Taxonomy $taxonomy): bool => $taxonomy->hierarchical
                 && is_taxonomy_viewable($taxonomy)
         );
 
@@ -129,38 +146,49 @@ final class QueryFilters
         return is_string($taxonomy) && isset($taxonomies[$taxonomy]) ? $taxonomy : '';
     }
 
+    public static function parameter_name(
+        string $post_type,
+        string $anchor = ''
+    ): string {
+        $prefix = sanitize_title($anchor);
+
+        if ($prefix === '') {
+            $prefix = $post_type === 'post'
+                ? 'resource'
+                : str_replace('_', '-', sanitize_key($post_type));
+        }
+
+        return $prefix . '-category';
+    }
+
     /** @return list<int> */
     private function requested_terms(string $parameter, string $taxonomy): array
     {
-        $values = isset($_GET[$parameter]) ? wp_unslash($_GET[$parameter]) : []; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only public filters.
-        $values = is_array($values) ? $values : [$values];
-        $ids = [];
+        $value = isset($_GET[$parameter]) ? wp_unslash($_GET[$parameter]) : []; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only public filters.
+        $values = is_array($value) ? $value : explode(',', (string) $value, 101);
+        $slugs = [];
 
-        foreach ($values as $value) {
-            if (!is_scalar($value)) {
+        foreach (array_slice($values, 0, 100) as $value) {
+            if (!is_string($value)) {
                 continue;
             }
 
-            $id = filter_var($value, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+            $slug = sanitize_title($value);
 
-            if ($id !== false) {
-                $ids[] = $id;
-            }
-            // Keep public query URLs bounded, even when constructed by hand.
-            if (count($ids) >= 100) {
-                break;
+            if ($slug !== '') {
+                $slugs[] = $slug;
             }
         }
 
-        $ids = array_values(array_unique($ids));
+        $slugs = array_values(array_unique($slugs));
 
-        if ($ids === []) {
+        if ($slugs === []) {
             return [];
         }
 
         $valid_ids = get_terms([
             'taxonomy' => $taxonomy,
-            'include' => $ids,
+            'slug' => $slugs,
             'fields' => 'ids',
             'hide_empty' => false,
         ]);

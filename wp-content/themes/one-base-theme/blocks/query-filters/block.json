@@ -8,21 +8,58 @@
     "category": "theme",
     "icon": "filter",
     "textdomain": "one-base-theme",
-    "ancestor": ["core/query"],
-    "usesContext": ["query", "queryId"],
+    "ancestor": [
+        "core/query"
+    ],
+    "usesContext": [
+        "query",
+        "queryId",
+        "enhancedPagination"
+    ],
     "attributes": {
-        "orientation": { "type": "string", "enum": ["horizontal", "vertical"], "default": "horizontal" },
-        "heading": { "type": "string", "default": "", "role": "content" },
-        "previewPostType": { "type": "string", "default": "" },
-        "previewQueryId": { "type": "number", "default": 0 }
+        "orientation": {
+            "type": "string",
+            "enum": [
+                "horizontal",
+                "vertical"
+            ],
+            "default": "horizontal"
+        },
+        "heading": {
+            "type": "string",
+            "default": "",
+            "role": "content"
+        },
+        "previewPostType": {
+            "type": "string",
+            "default": ""
+        },
+        "previewQueryId": {
+            "type": "number",
+            "default": 0
+        }
     },
     "supports": {
         "anchor": true,
         "html": false,
-        "spacing": { "margin": true },
-        "interactivity": { "clientNavigation": true }
+        "spacing": {
+            "margin": true
+        },
+        "interactivity": true
     },
+    "viewScriptModule": "file:./view.js",
     "editorScript": "file:./index.js",
     "style": "file:./style.css",
-    "render": "file:./render.php"
+    "render": "file:./render.php",
+    "styles": [
+        {
+            "name": "default",
+            "label": "Checkboxes",
+            "isDefault": true
+        },
+        {
+            "name": "a2e-category-tabs",
+            "label": "A2E category links"
+        }
+    ]
 }

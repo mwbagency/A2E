@@ -1,0 +1,84 @@
+.one-social-sharing {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    color: inherit;
+
+    & .one-social-sharing__control {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+
+        &::after {
+            position: absolute;
+            inset: -0.625rem;
+            content: "";
+        }
+
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 4px;
+        }
+    }
+
+    & .one-social-sharing__icon {
+        display: block;
+        inline-size: 1.25rem;
+        block-size: 1.25rem;
+        background: currentColor;
+        mask: var(--share-icon) center / contain no-repeat;
+
+        &.one-social-sharing__icon--linkedin {
+            --share-icon: url("icons/linkedin.svg");
+        }
+        &.one-social-sharing__icon--x {
+            --share-icon: url("icons/x.svg");
+        }
+        &.one-social-sharing__icon--facebook {
+            --share-icon: url("icons/facebook.svg");
+        }
+        &.one-social-sharing__icon--copy {
+            --share-icon: url("icons/copy.svg");
+        }
+    }
+
+    & .one-social-sharing__status {
+        position: absolute;
+        inset-block-start: calc(100% + 0.5rem);
+        inset-inline-end: 0;
+        inline-size: max-content;
+        max-inline-size: 100%;
+        font-size: 0.875rem;
+    }
+
+    & .one-social-sharing__fallback {
+        flex-basis: 100%;
+        min-inline-size: 0;
+    }
+
+    &:has(.one-social-sharing__fallback:not([hidden])) {
+        & .one-social-sharing__status {
+            position: static;
+            flex-basis: 100%;
+            inline-size: auto;
+        }
+    }
+
+    & [hidden] {
+        display: none;
+    }
+}
+
+.editor-styles-wrapper .one-social-sharing {
+    & [data-share-copy] {
+        display: inline-flex;
+    }
+}

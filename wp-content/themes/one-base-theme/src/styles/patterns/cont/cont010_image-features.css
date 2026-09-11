@@ -1,0 +1,166 @@
+.one-202x-pattern-cont010_image-features {
+    --a2e-image-features-gap: clamp(1.5rem, 5vw, 4.5rem);
+
+    display: grid;
+    grid-template-columns: 50% minmax(0, 1fr);
+    align-items: center;
+    padding-block: 4.5rem;
+    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+
+    /* Keep previously inserted Group-based sections working. */
+    &.wp-block-group {
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: var(--a2e-image-features-gap);
+    }
+
+    & > .wp-block-media-text__content {
+        min-inline-size: 0;
+        padding: 0;
+    }
+
+    & > .wp-block-media-text__media {
+        box-sizing: border-box;
+        padding-inline-end: var(--a2e-image-features-gap);
+    }
+
+    &.has-media-on-the-right {
+        grid-template-columns: minmax(0, 1fr) 50%;
+
+        & > .wp-block-media-text__media {
+            padding-inline: var(--a2e-image-features-gap) 0;
+        }
+    }
+
+    & > *,
+    & > .wp-block-group,
+    & .wp-block-group > * {
+        min-inline-size: 0;
+        margin-block: 0;
+    }
+
+    & .a2e-image-features__image,
+    & > .wp-block-media-text__media {
+        margin-inline: 0;
+
+        & img,
+        & video {
+            display: block;
+            inline-size: 100%;
+            block-size: auto;
+            aspect-ratio: 680 / 706;
+            object-fit: cover;
+        }
+    }
+
+    & .a2e-image-features__content,
+    & .a2e-image-features__heading,
+    & .a2e-image-features__details,
+    & .a2e-image-features__list,
+    & .a2e-image-features__point-text {
+        display: flex;
+        flex-direction: column;
+        gap: var(--wp--preset--spacing--lg);
+    }
+
+    & .a2e-image-features__heading {
+        gap: var(--wp--preset--spacing--sm);
+    }
+
+    & .a2e-image-features__details {
+        padding-inline-end: var(--wp--preset--spacing--lg);
+    }
+
+    & .a2e-image-features__list {
+        gap: var(--wp--preset--spacing--md);
+    }
+
+    & .a2e-image-features__point {
+        display: grid;
+        grid-template-columns: 3.125rem minmax(0, 1fr);
+        align-items: start;
+        gap: var(--wp--preset--spacing--md);
+
+        & > .wp-block-icon {
+            display: grid;
+            place-items: center;
+            inline-size: 3.125rem;
+            block-size: 3.125rem;
+
+            & svg {
+                width: 100%;
+                height: 100%;
+                fill: currentColor;
+
+                & [fill]:not([fill="none"]) {
+                    fill: currentColor;
+                }
+            }
+        }
+    }
+
+    & .a2e-image-features__point-text {
+        gap: 0.5rem;
+
+        & h3 {
+            font-size: var(--wp--preset--font-size--body);
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: 0;
+        }
+    }
+
+    & .a2e-image-features__information {
+        display: grid;
+        grid-template-columns: 1.5rem minmax(0, 1fr);
+        align-items: start;
+        gap: 1.25rem;
+        padding: 1rem;
+
+        & > .wp-block-icon,
+        & > .wp-block-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+
+    @media (--tablet-down) {
+        /* Native Media & Text saves its column widths inline. */
+        &.is-stacked-on-mobile,
+        &.wp-block-group {
+            grid-template-columns: 100% !important;
+            gap: 3rem;
+        }
+
+        padding-block: 3rem;
+
+        & .a2e-image-features__image,
+        &.is-stacked-on-mobile > .wp-block-media-text__media {
+            grid-column: 1;
+            grid-row: 1;
+            padding: 0;
+            inline-size: 100%;
+            max-inline-size: 42.5rem;
+            justify-self: center;
+        }
+
+        &.is-stacked-on-mobile > .wp-block-media-text__content {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        & .a2e-image-features__details {
+            padding-inline-end: 0;
+        }
+    }
+
+    @media (--mobile) {
+        & .a2e-image-features__content,
+        & .a2e-image-features__details {
+            gap: 1.5rem;
+        }
+
+        & .a2e-image-features__point {
+            gap: 1rem;
+        }
+    }
+}

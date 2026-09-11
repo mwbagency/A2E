@@ -34,6 +34,7 @@ if ($card_style === 'auto') {
     $card_style = match ($card_name) {
         'page', 'service' => has_post_thumbnail($post_id) ? 'page-image' : 'page-solid',
         'event' => 'course',
+        'course' => 'programme',
         'post' => 'resource',
         'product' => 'product',
         default => 'auto',

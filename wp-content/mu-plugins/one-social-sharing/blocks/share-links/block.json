@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-social-sharing/share-links",
+    "title": "Social share links",
+    "description": "Share the current article on LinkedIn, X or Facebook, or copy its permalink.",
+    "category": "a2e",
+    "icon": "share",
+    "textdomain": "one-social-sharing",
+    "usesContext": ["postId", "postType"],
+    "attributes": {"previewPostId": {"type": "number", "default": 0}},
+    "supports": {"html": false},
+    "editorScript": "file:./index.js",
+    "viewScript": "file:./view.js",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

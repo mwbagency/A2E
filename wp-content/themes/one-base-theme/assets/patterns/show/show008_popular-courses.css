@@ -1,0 +1,83 @@
+.one-202x-pattern-show008_popular-courses {
+    padding: clamp(1.25rem, 5vw, 4.5rem);
+    background: var(--wp--preset--color--base);
+    color: var(--wp--preset--color--contrast);
+
+    & > * {
+        margin-block: 0;
+    }
+
+    /* Older insertions have a colour Group added by the Query block migration. */
+    & > .wp-block-group.has-background {
+        padding: 0;
+    }
+
+    & .a2e-popular-courses__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 50%;
+        gap: clamp(2rem, 9.7222vw, 8.75rem);
+
+        & > * {
+            min-inline-size: 0;
+            margin: 0;
+        }
+    }
+
+    & .a2e-popular-courses__description {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2.625rem;
+
+        & > * {
+            margin: 0;
+        }
+    }
+
+    & .wp-block-post-template {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.625rem;
+        margin-block-start: 3.125rem;
+
+        & > li {
+            min-inline-size: 0;
+            inline-size: auto;
+            margin: 0;
+        }
+    }
+
+    & .one-202x-content-card--layout-programme {
+        min-block-size: 29.4375rem;
+    }
+
+    & .wp-block-query-no-results {
+        margin-block-start: 3.125rem;
+    }
+
+    @media (width <= 64rem) {
+        & .a2e-popular-courses__intro {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 2rem;
+        }
+
+        & .wp-block-post-template {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (width <= 37.5rem) {
+        & .a2e-popular-courses__intro,
+        & .wp-block-post-template {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        & .a2e-popular-courses__description {
+            gap: 1.5rem;
+        }
+
+        & .wp-block-post-template {
+            margin-block-start: 2rem;
+        }
+    }
+}

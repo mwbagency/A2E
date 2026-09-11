@@ -29,6 +29,13 @@ $booking_url = '';
 $action_url = $url;
 $action_label = __('Read more', 'one-base-theme');
 
+if ($post_type === 'course' && class_exists(\One202x\Courses\CourseValues::class)) {
+    $values = (new \One202x\Courses\CourseValues())->all($post_id, [], ['source' => 'content_card']);
+    $detail = $detail !== '' ? $detail : (string) ($values['certification_validity'] ?? '');
+    $duration = $duration !== '' ? $duration : (string) ($values['duration'] ?? '');
+    $price = $price !== '' ? $price : (string) ($values['price'] ?? '');
+}
+
 if ($post_type === 'event' && class_exists(\One202x\Events\EventValues::class)) {
     $values = (new \One202x\Events\EventValues())->all($post_id, [], ['source' => 'content_card']);
     $booking_url = trim((string) ($values['booking_url'] ?? ''));
@@ -94,7 +101,17 @@ $reading_minutes = max(1, (int) ceil($word_count / 200));
         </<?php echo esc_attr($heading_tag); ?>>
         <?php if ($show_excerpt && $excerpt !== '') : ?><div class="one-202x-content-card__summary"><?php echo wp_kses_post($excerpt); ?></div><?php endif; ?>
         <?php if ($layout === 'programme') : ?>
-            <?php if ($detail !== '' || $duration !== '' || $price !== '') : ?><div class="one-202x-content-card__metadata one-202x-content-card__programme-details"><span><?php echo esc_html($detail); ?></span><?php if ($duration !== '') : ?><span><?php echo esc_html($duration); ?></span><?php endif; ?><?php if ($price !== '') : ?><span class="one-202x-content-card__tag one-202x-content-card__price"><?php echo esc_html($price); ?></span><?php endif; ?></div><?php endif; ?>
+            <?php if ($detail !== '' || $duration !== '' || $price !== '') : ?>
+                <div class="one-202x-content-card__metadata one-202x-content-card__programme-details">
+                    <?php if ($detail !== '' || $duration !== '') : ?>
+                        <div class="one-202x-content-card__programme-facts">
+                            <?php if ($detail !== '') : ?><span><?php echo esc_html($detail); ?></span><?php endif; ?>
+                            <?php if ($duration !== '') : ?><span><?php echo esc_html($duration); ?></span><?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($price !== '') : ?><span class="one-202x-content-card__tag one-202x-content-card__price"><?php echo esc_html($price); ?></span><?php endif; ?>
+                </div>
+            <?php endif; ?>
         <?php elseif ($layout !== 'page-image') : ?>
             <div class="one-202x-content-card__footer">
                 <?php if ($layout === 'course' && $date !== '') : ?><time datetime="<?php echo esc_attr($datetime); ?>"><?php echo esc_html($date); ?></time><?php endif; ?>

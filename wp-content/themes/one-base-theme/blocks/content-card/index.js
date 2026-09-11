@@ -164,7 +164,7 @@
 						el(TextControl, { label: __('Category / level override', 'one-base-theme'), value: attributes.label || '', onChange: (label) => setAttributes({ label }) }),
 						el(TextControl, { label: __('Supporting details', 'one-base-theme'), help: __('For example, duration, certification validity or a discount note.', 'one-base-theme'), value: attributes.detail || '', onChange: (detail) => setAttributes({ detail }) }),
 						el(TextControl, { label: __('Programme duration', 'one-base-theme'), value: attributes.duration || '', onChange: (duration) => setAttributes({ duration }) }),
-						el(TextControl, { label: __('Price override', 'one-base-theme'), help: __('Leave empty to use the event or product price.', 'one-base-theme'), value: attributes.price || '', onChange: (price) => setAttributes({ price }) }),
+						el(TextControl, { label: __('Price override', 'one-base-theme'), help: __('Leave empty to use the course, event or product price.', 'one-base-theme'), value: attributes.price || '', onChange: (price) => setAttributes({ price }) }),
 						el(TextControl, { label: __('Price note', 'one-base-theme'), value: attributes.priceNote || '', onChange: (priceNote) => setAttributes({ priceNote }) })
 					)
 				),

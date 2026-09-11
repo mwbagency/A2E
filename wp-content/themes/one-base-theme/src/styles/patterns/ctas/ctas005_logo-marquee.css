@@ -1,0 +1,38 @@
+.one-202x-pattern-ctas005_logo-marquee {
+    --one-marquee-logo-width: auto;
+    --one-marquee-image-width: auto;
+    --one-marquee-logo-height: 3.5rem;
+    --one-marquee-gap: 2.5rem;
+
+    position: relative;
+    padding-block: 4.375rem;
+    background: var(--wp--preset--color--base);
+    color: var(--wp--preset--color--contrast);
+
+    & .wp-block-gallery.has-nested-images {
+        justify-content: center;
+    }
+
+    & .one-202x-logo-marquee__toggle {
+        position: absolute;
+        inset-block-end: 0.5rem;
+        inset-inline-end: 1.25rem;
+        margin: 0;
+        border: 0;
+        font-size: var(--wp--preset--font-size--small);
+        opacity: 0;
+    }
+
+    &:hover,
+    &:focus-within {
+        & .one-202x-logo-marquee__toggle {
+            opacity: 1;
+        }
+    }
+
+    @media (hover: none) {
+        & .one-202x-logo-marquee__toggle {
+            opacity: 1;
+        }
+    }
+}

@@ -11,15 +11,15 @@
 
         & figure.wp-block-image {
             &:not(#individual-image) {
-                flex: 0 0 10rem;
-                inline-size: 10rem;
+                flex: 0 0 var(--one-marquee-logo-width, 10rem);
+                inline-size: var(--one-marquee-logo-width, 10rem);
                 max-inline-size: 100%;
                 margin: 0;
             }
 
             & img {
-                inline-size: 100%;
-                block-size: 5rem;
+                inline-size: var(--one-marquee-image-width, 100%);
+                block-size: var(--one-marquee-logo-height, 5rem);
                 object-fit: contain;
             }
         }

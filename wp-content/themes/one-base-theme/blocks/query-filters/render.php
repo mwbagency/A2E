@@ -14,7 +14,7 @@ if ($is_rest_request && $preview_post_type !== '') {
     $query_id = (int) ($attributes['previewQueryId'] ?? 0);
     $configuration = [
         'taxonomy' => QueryFilters::taxonomy_for_post_type($preview_post_type),
-        'parameter' => 'one-query-' . $query_id . '-terms',
+        'parameter' => QueryFilters::parameter_name($preview_post_type),
         'page_parameter' => 'query-' . $query_id . '-page',
         'selected_terms' => [],
     ];
@@ -34,10 +34,18 @@ $heading = $heading !== '' ? $heading : __('Categories', 'one-base-theme');
 $orientation = ($attributes['orientation'] ?? '') === 'vertical' ? 'vertical' : 'horizontal';
 $filter_id = trim((string) ($attributes['anchor'] ?? ''));
 $filter_id = $filter_id !== '' ? $filter_id : wp_unique_prefixed_id('one-202x-query-filters-');
-$wrapper_attributes = get_block_wrapper_attributes([
+$wrapper = [
     'id' => $filter_id,
     'class' => 'one-202x-query-filters is-' . $orientation,
-]);
+];
+
+if (!$is_rest_request && !empty($block->context['enhancedPagination'])) {
+    $wrapper['data-wp-interactive'] = 'one-202x/query-filters';
+    $wrapper['data-wp-on--click'] = 'actions.navigate';
+    $wrapper['data-wp-on--submit'] = 'actions.navigate';
+}
+
+$wrapper_attributes = get_block_wrapper_attributes($wrapper);
 $terms = $taxonomy !== ''
     ? get_terms(['taxonomy' => $taxonomy, 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC'])
     : [];
@@ -47,6 +55,29 @@ $form_action = $is_rest_request ? '' : remove_query_arg(array_keys($request_valu
 $form_action .= '#' . rawurlencode($filter_id);
 $clear_url = $is_rest_request ? '' : remove_query_arg([$parameter, $page_parameter]);
 $clear_url .= '#' . rawurlencode($filter_id);
+
+if (in_array('is-style-a2e-category-tabs', explode(' ', (string) ($attributes['className'] ?? '')), true)) :
+?>
+    <nav <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            ?> aria-label="<?php echo esc_attr($heading); ?>">
+        <ul class="one-202x-query-filters__options">
+            <li>
+                <a href="<?php echo esc_url($clear_url); ?>" <?php if ($selected_terms === []) : ?> aria-current="true" <?php endif; ?>><?php esc_html_e('All', 'one-base-theme'); ?></a>
+            </li>
+            <?php foreach ($terms as $term) : ?>
+                <?php if ($term instanceof WP_Term) : ?>
+                    <li>
+                        <a
+                            href="<?php echo esc_url(add_query_arg($parameter, $term->slug, $clear_url)); ?>"
+                            <?php if (in_array($term->term_id, $selected_terms, true)) : ?>aria-current="true" <?php endif; ?>><?php echo esc_html($term->name); ?></a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+<?php
+    return;
+endif;
 
 // Preserve nested GET values exactly, including another Query's page or filters.
 $hidden_fields = static function (string $name, mixed $value) use (&$hidden_fields): void {
@@ -59,8 +90,14 @@ $hidden_fields = static function (string $name, mixed $value) use (&$hidden_fiel
     }
 };
 ?>
-<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-    <form class="one-202x-query-filters__form" method="get" action="<?php echo esc_url($form_action); ?>">
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        ?>>
+    <form
+        class="one-202x-query-filters__form"
+        method="get"
+        action="<?php echo esc_url($form_action); ?>"
+        data-filter-parameter="<?php echo esc_attr($parameter); ?>"
+    >
         <fieldset>
             <legend class="one-202x-query-filters__heading"><?php echo esc_html($heading); ?></legend>
 
@@ -77,9 +114,8 @@ $hidden_fields = static function (string $name, mixed $value) use (&$hidden_fiel
                                     <input
                                         type="checkbox"
                                         name="<?php echo esc_attr($parameter); ?>[]"
-                                        value="<?php echo esc_attr((string) $term->term_id); ?>"
-                                        <?php checked(in_array($term->term_id, $selected_terms, true)); ?>
-                                    >
+                                        value="<?php echo esc_attr($term->slug); ?>"
+                                        <?php checked(in_array($term->term_id, $selected_terms, true)); ?>>
                                     <span><?php echo esc_html($term->name); ?></span>
                                 </label>
                             </li>

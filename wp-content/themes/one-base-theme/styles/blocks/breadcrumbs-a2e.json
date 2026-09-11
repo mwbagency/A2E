@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "title": "A2E",
+    "slug": "a2e",
+    "blockTypes": ["core/breadcrumbs"],
+    "styles": {
+        "color": {
+            "background": "var:preset|color|grey-100",
+            "text": "var:preset|color|contrast"
+        },
+        "border": {
+            "bottom": {
+                "color": "var:preset|color|grey-100",
+                "style": "solid",
+                "width": "1px"
+            }
+        },
+        "spacing": {
+            "padding": {
+                "top": "1rem",
+                "bottom": "1.0625rem",
+                "left": "clamp(1.25rem, 2.2222vw, 2rem)",
+                "right": "clamp(1.25rem, 2.2222vw, 2rem)"
+            }
+        },
+        "typography": {
+            "fontFamily": "var:preset|font-family|inter",
+            "fontSize": "0.875rem",
+            "fontWeight": "400",
+            "lineHeight": "1.428571",
+            "letterSpacing": "0"
+        },
+        "elements": {
+            "link": {
+                "color": {"text": "var:preset|color|muted"},
+                "typography": {"textDecoration": "none"},
+                ":hover": {
+                    "color": {"text": "var:preset|color|contrast"},
+                    "typography": {"textDecoration": "underline"}
+                }
+            }
+        }
+    }
+}

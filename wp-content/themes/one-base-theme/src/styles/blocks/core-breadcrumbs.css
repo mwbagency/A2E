@@ -1,0 +1,35 @@
+.wp-block-breadcrumbs.is-style-a2e {
+    & ol {
+        gap: 0.5rem 0;
+    }
+
+    & li {
+        min-inline-size: 0;
+        max-inline-size: 100%;
+
+        &:not(:last-child)::after {
+            flex: 0 0 0.875rem;
+            inline-size: 0.875rem;
+            block-size: 0.875rem;
+            margin-inline: 0.5rem;
+            background: url("../icons/a2e-breadcrumb-chevron.svg") center / contain no-repeat;
+            opacity: 1;
+            content: "";
+        }
+    }
+
+    &:dir(rtl) li:not(:last-child)::after {
+        transform: scaleX(-1);
+    }
+
+    & a,
+    & span {
+        min-inline-size: 0;
+        overflow-wrap: anywhere;
+    }
+
+    & a:focus-visible {
+        outline: 2px solid var(--wp--preset--color--contrast);
+        outline-offset: 3px;
+    }
+}

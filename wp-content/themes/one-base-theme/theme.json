@@ -140,6 +140,27 @@
             "fluid": true,
             "fontFamilies": [
                 {
+                    "name": "Inter",
+                    "slug": "inter",
+                    "fontFamily": "Inter, Arial, sans-serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "Inter",
+                            "fontStyle": "normal",
+                            "fontWeight": "100 900",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/inter/InterVariable.woff2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Accent serif",
+                    "slug": "serif",
+                    "fontFamily": "\"Caslon 540 BT\", \"Times New Roman\", serif"
+                },
+                {
                     "name": "Galano Grotesque",
                     "slug": "sans",
                     "fontFamily": "\"Galano Grotesque\", Arial, sans-serif",
@@ -534,6 +555,11 @@
                     "spacing": {
                         "blockGap": "1rem"
                     }
+                }
+            },
+            "core/post-content": {
+                "spacing": {
+                    "blockGap": "0"
                 }
             },
             "core/paragraph": {

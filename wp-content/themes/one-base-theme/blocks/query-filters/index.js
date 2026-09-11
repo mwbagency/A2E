@@ -47,7 +47,9 @@
 							],
 							onChange: function (orientation) { setAttributes({ orientation }); },
 						}),
-						el('p', null, __('Categories follow the Query Loop content type automatically. Visitors can select several categories and apply them together.', 'one-base-theme'))
+						el('p', null, (attributes.className || '').split(' ').includes('is-style-a2e-category-tabs')
+							? __('Categories follow the Query Loop content type automatically. Each link selects one category; All clears the selection.', 'one-base-theme')
+							: __('Categories follow the Query Loop content type automatically. Visitors can select several categories and apply them together.', 'one-base-theme'))
 					)
 				),
 				el('div', blockProps, preview)

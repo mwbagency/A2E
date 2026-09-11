@@ -1,0 +1,102 @@
+.one-202x-pattern-form005_training-enquiry {
+    --one-form-border: var(--wp--preset--color--contrast);
+    --one-form-placeholder: var(--wp--preset--color--contrast);
+    --one-form-radius: 0.625rem;
+    --one-form-line-height: 1.25;
+    --one-form-label-weight: 400;
+    --one-form-padding-inline: 0.75rem;
+    --one-form-gap: 1.25rem;
+    --one-form-button-background: var(--wp--preset--color--accent);
+    --one-form-button-hover-text: var(--wp--preset--color--base);
+
+    padding-block: 4.5rem;
+    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+
+    & > .wp-block-columns {
+        gap: clamp(2.5rem, 9.7222vw, 8.75rem);
+        margin-block: 0;
+
+        & > .wp-block-column {
+            min-inline-size: 0;
+
+            & > :first-child {
+                margin-block: 0;
+            }
+
+            & > .wp-block-buttons {
+                margin-block: 2.625rem 0;
+            }
+
+            & > .a2e-training-enquiry__form {
+                margin-block: 3.125rem 0;
+            }
+        }
+    }
+
+    & .gform_wrapper {
+        margin: 0;
+        letter-spacing: 0;
+
+        & .gform_fields {
+            column-gap: 1rem;
+        }
+
+        & .gfield_label {
+            margin-block-end: 0.5rem;
+            font-size: var(--wp--preset--font-size--small);
+            line-height: 1.25;
+        }
+
+        & .gfield_required {
+            color: inherit;
+        }
+
+        & .gform_required_legend {
+            position: absolute;
+            inline-size: 1px;
+            block-size: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+        }
+
+        & .gfield textarea.textarea {
+            --gf-ctrl-textarea-radius: var(--one-form-radius);
+            --gf-ctrl-textarea-line-height: var(--one-form-line-height);
+
+            min-block-size: 5.5rem;
+            block-size: 5.5rem;
+            resize: vertical;
+        }
+
+        & select {
+            background-image: url("../../images/icons/a2e-select-chevron.svg");
+            background-position: right 1.125rem center;
+            background-size: 0.75rem auto;
+        }
+
+        & .gform_footer {
+            margin-block: 2.5rem 0;
+            padding: 0;
+
+            & .gform_button {
+                --gf-ctrl-btn-radius: var(--wp--custom--radius--control);
+                --gf-ctrl-btn-size: 2.75rem;
+                --gf-ctrl-btn-font-size: var(--wp--preset--font-size--button);
+                --gf-ctrl-btn-font-weight: 700;
+
+                inline-size: 100%;
+                line-height: 1.111111;
+                letter-spacing: 0;
+            }
+        }
+    }
+
+    @media (--tablet-down) {
+        padding-block: 3rem;
+
+        & > .wp-block-columns {
+            flex-direction: column;
+            gap: 2rem;
+        }
+    }
+}

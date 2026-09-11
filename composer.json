@@ -39,6 +39,7 @@
         "psr-4": {
             "One202x\\Platform\\": "wp-content/mu-plugins/one-202x-platform/src/",
             "One202x\\CaseStudies\\": "wp-content/mu-plugins/one-case-studies/src/",
+            "One202x\\Courses\\": "wp-content/mu-plugins/one-courses/src/",
             "One202x\\Events\\": "wp-content/mu-plugins/one-events/src/",
             "One202x\\Faqs\\": "wp-content/mu-plugins/one-faqs/src/",
             "One202x\\Services\\": "wp-content/mu-plugins/one-services/src/",

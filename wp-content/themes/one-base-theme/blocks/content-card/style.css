@@ -271,6 +271,24 @@
     & .one-202x-content-card__price {
         background: var(--wp--preset--color--base);
         color: var(--wp--preset--color--contrast);
+        margin-inline-start: auto;
+    }
+
+    & .one-202x-content-card__programme-facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.375rem;
+    }
+
+    & .one-202x-content-card__title a::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+    }
+
+    &:focus-within {
+        outline: 2px solid var(--wp--preset--color--contrast);
+        outline-offset: 3px;
     }
 }
 
