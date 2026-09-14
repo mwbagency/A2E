@@ -30,6 +30,10 @@
         margin: 0;
     }
 
+    & .one-202x-quote__text > p + p {
+        margin-block-start: 0.5rem;
+    }
+
     & .one-202x-quote__attribution {
         margin-block-start: auto;
         color: inherit;

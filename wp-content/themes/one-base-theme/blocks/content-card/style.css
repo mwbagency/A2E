@@ -321,19 +321,29 @@
             border-radius: 50%;
         }
     }
+}
 
-    .one-202x-content-card--testimonial& {
-        padding: 0;
-        border: 0;
-        background: transparent;
+.one-202x-content-card--testimonial:is(.one-202x-content-card--layout-auto, .one-202x-content-card--layout-testimonial) {
+    padding: 0;
+    border: 0;
+    background: transparent;
 
-        & .one-202x-content-card__content {
-            display: block;
-        }
+    & .one-202x-content-card__content {
+        display: block;
+    }
 
-        & .one-202x-content-card__rating {
-            font-size: var(--wp--preset--font-size--small);
-            margin-block-end: 0.5rem;
-        }
+    & .one-202x-content-card__rating {
+        font-size: var(--wp--preset--font-size--small);
+        margin-block-end: 0.5rem;
+    }
+}
+
+.one-202x-content-card--layout-testimonial-video {
+    display: block;
+    padding: 0;
+    border: 0;
+
+    & .is-style-video-card {
+        border-radius: 1rem;
     }
 }

@@ -21,7 +21,39 @@ final class TestimonialFields extends FieldGroup
 
     public function fields(): array
     {
+        $video_enabled = [[[
+            'field' => 'field_one202x_testimonial_details_video_enabled',
+            'operator' => '==',
+            'value' => '1',
+        ]]];
+
         return [
+            [
+                'id' => 'video_enabled',
+                'label' => __('Video testimonial', 'one-testimonials'),
+                'type' => 'true_false',
+                'ui' => true,
+                'default_value' => false,
+                'instructions' => __('Enable to include this testimonial in the video slider.', 'one-testimonials'),
+            ],
+            [
+                'id' => 'video',
+                'label' => __('Video upload', 'one-testimonials'),
+                'type' => 'file',
+                'return_format' => 'id',
+                'mime_types' => 'mp4,webm,ogv',
+                'required' => true,
+                'conditional_logic' => $video_enabled,
+            ],
+            [
+                'id' => 'video_poster',
+                'label' => __('Video poster', 'one-testimonials'),
+                'type' => 'image',
+                'return_format' => 'id',
+                'preview_size' => 'medium',
+                'instructions' => __('Optional cover image shown before playback. Portrait images work best.', 'one-testimonials'),
+                'conditional_logic' => $video_enabled,
+            ],
             [
                 'id' => 'person_name',
                 'label' => __('Person Name', 'one-testimonials'),
@@ -46,6 +78,11 @@ final class TestimonialFields extends FieldGroup
                 'label' => __('Quote', 'one-testimonials'),
                 'type' => 'textarea',
                 'required' => true,
+                'conditional_logic' => [[[
+                    'field' => 'field_one202x_testimonial_details_video_enabled',
+                    'operator' => '!=',
+                    'value' => '1',
+                ]]],
                 'rows' => 5,
                 'new_lines' => '',
                 'allow_in_bindings' => true,

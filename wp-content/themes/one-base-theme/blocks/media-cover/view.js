@@ -5,42 +5,13 @@
 	const VIDEO_SELECTOR = 'video';
 	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 	const initializedBlocks = new WeakSet();
-	const coordinatedVideos = new WeakSet();
 
-	function isAudible(video) {
-		return (
-			video.dataset.playbackMode !== 'autoplay' &&
-			!video.muted &&
-			video.volume > 0
-		);
-	}
-
-	function pauseOtherAudibleVideos(currentVideo) {
+	// Capture play events from every native video, including dynamically added ones.
+	function pauseOtherVideos(event) {
+		if (!(event.target instanceof HTMLVideoElement) || event.target.paused) return;
 		document.querySelectorAll(VIDEO_SELECTOR).forEach(function (video) {
-			if (
-				video !== currentVideo &&
-				!video.paused &&
-				isAudible(video)
-			) {
-				video.pause();
-			}
+			if (video !== event.target && !video.paused) video.pause();
 		});
-	}
-
-	function coordinateVideo(video) {
-		if (coordinatedVideos.has(video)) {
-			return;
-		}
-
-		function coordinateIfAudible() {
-			if (!video.paused && isAudible(video)) {
-				pauseOtherAudibleVideos(video);
-			}
-		}
-
-		video.addEventListener('play', coordinateIfAudible);
-		video.addEventListener('volumechange', coordinateIfAudible);
-		coordinatedVideos.add(video);
 	}
 
 	function initializeBlock(block) {
@@ -89,7 +60,6 @@
 			video.addEventListener('play', updateManualPlayback);
 			video.addEventListener('pause', updateManualPlayback);
 			video.addEventListener('ended', updateManualPlayback);
-			coordinateVideo(video);
 			updateManualPlayback();
 			initializedBlocks.add(block);
 			return;
@@ -189,7 +159,6 @@
 		control.hidden = false;
 		block.classList.add('is-one-202x-media-ready');
 		enforceMutedAutoplay();
-		coordinateVideo(video);
 
 		if (!reducedMotion.matches) {
 			playVideo();
@@ -210,15 +179,11 @@
 			initializeBlock(root);
 		}
 
-		if (root !== document && root.matches(VIDEO_SELECTOR)) {
-			coordinateVideo(root);
-		}
-
 		root.querySelectorAll(BLOCK_SELECTOR).forEach(initializeBlock);
-		root.querySelectorAll(VIDEO_SELECTOR).forEach(coordinateVideo);
 	}
 
 	function initialize() {
+		document.addEventListener('play', pauseOtherVideos, true);
 		scan(document);
 
 		const observer = new MutationObserver(function (mutations) {

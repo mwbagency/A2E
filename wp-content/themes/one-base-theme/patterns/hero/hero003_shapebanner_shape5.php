@@ -65,16 +65,16 @@ $image_url = wp_get_upload_dir()['baseurl'] . '/2026/09/quilia-1-aA2Fadydc-unspl
             </div>
             <!-- /wp:group -->
 
-            <!-- wp:buttons {"className":"a2e-hero003__actions","layout":{"type":"flex","flexWrap":"wrap"}} -->
-            <div class="wp-block-buttons a2e-hero003__actions">
-                <!-- wp:button -->
-                <div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e('Button 1', 'one-base-theme'); ?></a></div>
-                <!-- /wp:button -->
-                <!-- wp:button {"className":"is-style-outline","borderColor":"accent"} -->
-                <div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-border-color has-accent-border-color wp-element-button"><?php esc_html_e('Button 2', 'one-base-theme'); ?></a></div>
-                <!-- /wp:button -->
+            <!-- wp:group {"className":"a2e-hero003__actions a2e-button-group","layout":{"type":"flex","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}}} -->
+            <div class="wp-block-group a2e-hero003__actions a2e-button-group">
+                <!-- wp:one-202x/icon-button {"className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Button 1', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                    <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+                <!-- /wp:one-202x/icon-button -->
+                <!-- wp:one-202x/icon-button {"className":"is-style-outline a2e-button","borderColor":"accent","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Button 2', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                    <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+                <!-- /wp:one-202x/icon-button -->
             </div>
-            <!-- /wp:buttons -->
+            <!-- /wp:group -->
         </div>
         <!-- /wp:group -->
     </div>

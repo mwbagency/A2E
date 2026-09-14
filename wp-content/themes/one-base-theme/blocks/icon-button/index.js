@@ -21,6 +21,7 @@
 		Spinner,
 		TextControl,
 		ToolbarButton,
+		ToolbarDropdownMenu,
 		ToggleControl,
 	} = components;
 	const { useDispatch, useSelect } = data;
@@ -219,7 +220,7 @@
 				},
 				[clientId]
 			);
-			const { updateBlockAttributes } = useDispatch(blockEditor.store);
+			const { replaceInnerBlocks, updateBlockAttributes } = useDispatch(blockEditor.store);
 			const selectedIcon = iconBlock ? iconBlock.attributes.icon : '';
 			const linkValue = useMemo(
 				function () {
@@ -260,6 +261,38 @@
 						onClick: function () {
 							setIsEditingURL(!isEditingURL);
 						},
+					}),
+					el(ToolbarButton, {
+						icon: 'star-empty',
+						showTooltip: true,
+						'aria-haspopup': 'dialog',
+						onClick: function () {
+							setAttributes({ showIcon: true });
+							setIconLibraryOpen(true);
+						},
+					}, showIcon
+						? __('Change icon', 'one-base-theme')
+						: __('Add icon', 'one-base-theme')
+					),
+					showIcon && el(ToolbarDropdownMenu, {
+						icon: 'ellipsis',
+						label: __('Icon options', 'one-base-theme'),
+						controls: [
+							{
+								title: __('Icon before text', 'one-base-theme'),
+								isActive: iconPosition === 'left',
+								onClick: () => setAttributes({ iconPosition: 'left' }),
+							},
+							{
+								title: __('Icon after text', 'one-base-theme'),
+								isActive: iconPosition === 'right',
+								onClick: () => setAttributes({ iconPosition: 'right' }),
+							},
+							{
+								title: __('Remove icon', 'one-base-theme'),
+								onClick: () => setAttributes({ showIcon: false }),
+							},
+						],
 					})
 				),
 				isSelected &&
@@ -412,6 +445,11 @@
 						onChange: function (icon) {
 							if (iconBlock) {
 								updateBlockAttributes(iconBlock.clientId, { icon });
+							} else {
+								replaceInnerBlocks(clientId, [blocks.createBlock('core/icon', {
+									icon,
+									lock: { move: true, remove: true },
+								})], false);
 							}
 							setIconLibraryOpen(false);
 						},

@@ -27,7 +27,11 @@ if (!$has_quote && !$has_attribution && !$has_image) {
             <img class="one-202x-quote__image" src="<?php echo $image_url; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- esc_url above. ?>" alt="" width="101" height="41" loading="lazy" decoding="async" />
         <?php endif; ?>
         <?php if ($has_quote) : ?>
-            <blockquote class="one-202x-quote__text"><p><?php echo $quote; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Restricted inline markup. ?></p></blockquote>
+            <blockquote class="one-202x-quote__text">
+                <?php foreach (preg_split('/\R\s*\R/', trim($quote)) as $paragraph) : ?>
+                    <p><?php echo nl2br($paragraph); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Restricted inline markup. ?></p>
+                <?php endforeach; ?>
+            </blockquote>
         <?php endif; ?>
     </div>
     <?php if ($has_attribution) : ?>

@@ -36,7 +36,13 @@ defined('ABSPATH') || exit;
                 <!-- /wp:paragraph -->
             </div>
             <!-- /wp:group -->
-            <!-- wp:one-social-sharing/share-links /-->
+            <!-- wp:group {"className":"a2e-post-header__sharing","layout":{"type":"default"}} -->
+            <div class="wp-block-group a2e-post-header__sharing">
+                <!-- wp:shortcode -->
+                [addtoany]
+                <!-- /wp:shortcode -->
+            </div>
+            <!-- /wp:group -->
         </div>
         <!-- /wp:group -->
     </div>

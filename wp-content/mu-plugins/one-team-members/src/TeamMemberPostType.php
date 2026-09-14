@@ -36,6 +36,7 @@ final class TeamMemberPostType
                     'editor',
                     'excerpt',
                     'thumbnail',
+                    'custom-fields', // Required for ACF's REST-based editor saves.
                     'page-attributes',
                     'revisions',
                 ],

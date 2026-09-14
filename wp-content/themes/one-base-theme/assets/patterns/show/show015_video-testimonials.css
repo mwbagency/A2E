@@ -1,0 +1,15 @@
+.one-202x-pattern-show013_testimonials.one-202x-pattern-show015_video-testimonials {
+    padding: 0;
+
+    & .wp-block-post-template {
+        grid-auto-columns: min(20.625rem, 100%);
+        gap: 2.5rem;
+    }
+
+    @media (width <= 37.5rem) {
+        & .wp-block-post-template {
+            grid-auto-columns: min(20.625rem, 85%);
+            gap: 1.5rem;
+        }
+    }
+}

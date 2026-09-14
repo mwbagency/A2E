@@ -16,10 +16,13 @@ store('one-202x/query-filters', {
 
             let url;
             let selectedHref = null;
-            const isForm = event.type === 'submit';
+            let selectedValue;
+            const isForm = event.type === 'submit' || event.type === 'change';
+            const controlId = event.target.id;
+            const region = ref.closest('.wp-block-query[data-wp-router-region]');
 
             if (isForm) {
-                const form = event.target;
+                const form = event.type === 'change' ? event.target.closest('form') : event.target;
 
                 if (!(form instanceof HTMLFormElement)) {
                     return;
@@ -28,7 +31,7 @@ store('one-202x/query-filters', {
                 const parameter = form.dataset.filterParameter;
                 const parameters = new URLSearchParams(new FormData(form));
 
-                if (parameter) {
+                if (parameter && parameters.has(`${parameter}[]`)) {
                     const selected = parameters.getAll(`${parameter}[]`);
 
                     parameters.delete(`${parameter}[]`);
@@ -61,6 +64,7 @@ store('one-202x/query-filters', {
                 }
 
                 selectedHref = link.href;
+                selectedValue = link.dataset.filterValue;
                 url = new URL(selectedHref);
             }
 
@@ -79,6 +83,7 @@ store('one-202x/query-filters', {
             const navigation = ++latestNavigation;
             const filterId = ref.id;
             const previousFocus = document.activeElement;
+            region.setAttribute('aria-busy', 'true');
 
             try {
                 const { actions } = yield import('@wordpress/interactivity-router');
@@ -111,14 +116,18 @@ store('one-202x/query-filters', {
                 }
 
                 const focusTarget = isForm
-                    ? filters.querySelector('button[type="submit"]')
+                    ? (document.getElementById(controlId) || filters.querySelector('button[type="submit"]'))
                     : Array.from(filters.querySelectorAll('a[href]'))
-                        .find((link) => link.href === selectedHref);
+                        .find((link) => selectedValue !== undefined ? link.dataset.filterValue === selectedValue : link.href === selectedHref) || filters.querySelector('[data-query-more]') || filters.querySelector('[role="status"]');
 
                 focusTarget?.focus({ preventScroll: true });
             } catch {
                 if (navigation === latestNavigation) {
                     window.location.assign(url.href);
+                }
+            } finally {
+                if (navigation === latestNavigation) {
+                    document.querySelectorAll('.wp-block-query[aria-busy="true"]').forEach((query) => query.removeAttribute('aria-busy'));
                 }
             }
         }),

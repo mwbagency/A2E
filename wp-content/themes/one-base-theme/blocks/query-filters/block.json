@@ -2,9 +2,9 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "one-202x/query-filters",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "Query Filters",
-    "description": "Let visitors filter a Query Loop by its content categories.",
+    "description": "Filter the enclosing Query Loop by taxonomy or public custom field, or change its sort order.",
     "category": "theme",
     "icon": "filter",
     "textdomain": "one-base-theme",
@@ -37,6 +37,14 @@
         "previewQueryId": {
             "type": "number",
             "default": 0
+        },
+        "source": {
+            "type": "string",
+            "default": ""
+        },
+        "options": {
+            "type": "array",
+            "default": []
         }
     },
     "supports": {
@@ -60,6 +68,10 @@
         {
             "name": "a2e-category-tabs",
             "label": "A2E category links"
+        },
+        {
+            "name": "a2e-filter-buttons",
+            "label": "A2E filter buttons"
         }
     ]
 }

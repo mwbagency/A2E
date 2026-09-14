@@ -35,7 +35,8 @@ final class QuerySelection
         }
 
         $type = $query['postType'] ?? '';
-        if (!is_string($type) || !is_post_type_viewable($type)) {
+        if (!is_string($type) || !post_type_exists($type)
+            || (!is_post_type_viewable($type) && $type !== 'testimonial')) {
             $args['post__in'] = [0];
             return $args;
         }

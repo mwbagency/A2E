@@ -2,6 +2,9 @@
 
 defined('ABSPATH') || exit;
 
+// Referenced patterns render after WordPress processes template shortcodes.
+add_filter('render_block_core/shortcode', 'do_shortcode');
+
 // The theme is self-contained; site-owned MU plugins use the root Composer loader.
 $components = [
     'Setup',

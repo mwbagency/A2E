@@ -35,7 +35,8 @@
         }
     }
 
-    & > .wp-block-buttons {
+    & > .wp-block-buttons,
+    & > .a2e-button-group {
         margin-block: var(--wp--preset--spacing--lg) 0;
     }
 

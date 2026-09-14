@@ -88,6 +88,39 @@
         }
     }
 
+    & .a2e-post-header__sharing {
+        & .addtoany_list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.25rem;
+            line-height: 1;
+
+            & a {
+                display: inline-flex;
+                padding: 0;
+                color: inherit;
+
+                &:focus-visible {
+                    outline: 2px solid currentColor;
+                    outline-offset: 4px;
+                }
+            }
+
+            & .a2a_svg {
+                inline-size: 1.25rem;
+                block-size: 1.25rem;
+                border-radius: 0;
+                background: transparent !important;
+                line-height: 1.25rem;
+
+                & path {
+                    fill: currentColor;
+                }
+            }
+        }
+    }
+
     @media (--tablet-down) {
         padding-block: 3rem;
 

@@ -157,6 +157,8 @@
 								{ label: __('Programme', 'one-base-theme'), value: 'programme' },
 								{ label: __('Product', 'one-base-theme'), value: 'product' },
 								{ label: __('Course / search result', 'one-base-theme'), value: 'course' },
+								{ label: __('Testimonial — organisation', 'one-base-theme'), value: 'testimonial' },
+								{ label: __('Testimonial — video', 'one-base-theme'), value: 'testimonial-video' },
 							],
 							onChange: (cardStyle) => setAttributes({ cardStyle }),
 						}),

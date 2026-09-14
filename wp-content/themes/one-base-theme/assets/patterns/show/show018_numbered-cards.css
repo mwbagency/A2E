@@ -1,0 +1,112 @@
+.one-202x-pattern-show018_numbered-cards {
+    --card-gutter: clamp(1.25rem, 5vw, 4.5rem);
+
+    padding: 4.5rem 0;
+
+    & .a2e-numbered-cards__track {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: min(20.625rem, 100%);
+        grid-template-columns: none;
+        gap: 2.5rem;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--card-gutter);
+        scrollbar-width: thin;
+        scrollbar-color: var(--wp--preset--color--contrast) transparent;
+        margin: 0;
+        padding: 0 var(--card-gutter) 1rem;
+
+        &:focus-visible {
+            outline: 2px solid var(--wp--preset--color--contrast);
+            outline-offset: -2px;
+        }
+    }
+
+    & .a2e-numbered-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        min-inline-size: 0;
+        min-block-size: 30.3125rem;
+        margin: 0;
+        padding: 0;
+        scroll-snap-align: start;
+        overflow-wrap: anywhere;
+
+        & > * {
+            margin: 0;
+        }
+
+        & .a2e-numbered-card__content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1.5rem 1.5rem 0;
+
+            & > * {
+                margin: 0;
+            }
+        }
+
+        & .a2e-numbered-card__number {
+            font-weight: 600;
+            line-height: 1.25;
+            letter-spacing: 1.5px;
+        }
+
+        & .wp-block-heading {
+            max-inline-size: 17.063125rem;
+            font-weight: 600;
+            line-height: 1.125;
+            letter-spacing: 0.25px;
+        }
+
+        & .a2e-numbered-card__image {
+            position: relative;
+            flex: 1;
+            min-block-size: 18rem;
+
+            & img {
+                position: absolute;
+                inset: 0;
+                inline-size: 100%;
+                block-size: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &.a2e-numbered-card--solid {
+            padding: 1.5rem;
+            color: var(--wp--preset--color--base);
+            background: var(--wp--preset--color--contrast);
+
+            & .a2e-numbered-card__content {
+                padding: 0;
+            }
+
+            & .a2e-numbered-card__description {
+                margin-block-start: 0.5rem;
+            }
+
+            & .a2e-numbered-card__button {
+                justify-content: center;
+                inline-size: 100%;
+                margin-block-start: auto;
+                padding: 0.5rem 1rem;
+            }
+        }
+    }
+
+    @media (width <= 64rem) {
+        padding-block: 3rem;
+    }
+
+    @media (width <= 37.5rem) {
+        & .a2e-numbered-cards__track {
+            grid-auto-columns: min(20.625rem, 85%);
+            gap: 1.5rem;
+        }
+    }
+}

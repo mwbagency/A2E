@@ -45,7 +45,8 @@
 			const controller = new AbortController();
 			const endpoint = '/' + (type.rest_namespace || 'wp/v2') + '/' + type.rest_base;
 			const fetch = (params) => wp.apiFetch({
-				path: addQueryArgs(endpoint, { context: 'view', status: 'publish', _fields: 'id,title', ...params }),
+				path: addQueryArgs(endpoint, { context: 'view', status: 'publish', _fields: 'id,title',
+					...(query.postType === 'testimonial' && query.testimonialVideoOnly ? { testimonialVideoOnly: true } : {}), ...params }),
 				signal: controller.signal,
 			});
 			setLoading(true);
@@ -58,7 +59,7 @@
 			}).catch(() => { if (!controller.signal.aborted) { setError(true); } })
 				.finally(() => { if (!controller.signal.aborted) { setLoading(false); } });
 			return () => controller.abort();
-		}, [type, search, selectedKey]);
+		}, [type, search, selectedKey, query.testimonialVideoOnly]);
 
 		function update(next) {
 			const updated = {

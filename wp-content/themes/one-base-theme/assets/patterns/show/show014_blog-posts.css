@@ -1,0 +1,11 @@
+.one-202x-pattern-show011_content-feed.one-202x-pattern-show014_blog-posts {
+    padding-block: 4.5rem;
+
+    & > .wp-block-query {
+        margin-block-start: 3.125rem;
+    }
+
+    @media (width <= 64rem) {
+        padding-block: 3rem;
+    }
+}

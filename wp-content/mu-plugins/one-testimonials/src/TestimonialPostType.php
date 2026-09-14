@@ -11,6 +11,45 @@ final class TestimonialPostType
     public function register_hooks(): void
     {
         add_action('init', [$this, 'register']);
+        add_filter('rest_testimonial_collection_params', [$this, 'video_parameter']);
+        add_filter('rest_testimonial_query', [$this, 'filter_video_request'], 10, 2);
+        add_filter('query_loop_block_query_vars', [$this, 'filter_video_block'], 20, 2);
+    }
+
+    public function video_parameter(array $params): array
+    {
+        $params['testimonialVideoOnly'] = [
+            'description' => __('Only testimonials with an enabled video upload.', 'one-testimonials'),
+            'type' => 'boolean',
+            'default' => false,
+        ];
+        return $params;
+    }
+
+    public function filter_video_request(array $args, \WP_REST_Request $request): array
+    {
+        return $request->get_param('testimonialVideoOnly') ? $this->video_query($args) : $args;
+    }
+
+    public function filter_video_block(array $args, \WP_Block $block): array
+    {
+        $query = $block->context['query'] ?? [];
+        return ($query['postType'] ?? '') === self::POST_TYPE && !empty($query['testimonialVideoOnly'])
+            ? $this->video_query($args) : $args;
+    }
+
+    private function video_query(array $args): array
+    {
+        $meta = [
+            'relation' => 'AND',
+            ['key' => 'video_enabled', 'value' => '1'],
+            ['key' => 'video', 'value' => 0, 'compare' => '>', 'type' => 'NUMERIC'],
+        ];
+        if (!empty($args['meta_query'])) {
+            $meta[] = $args['meta_query'];
+        }
+        $args['meta_query'] = $meta;
+        return $args;
     }
 
     public function register(): void

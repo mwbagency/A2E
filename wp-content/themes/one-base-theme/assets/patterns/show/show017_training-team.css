@@ -1,0 +1,45 @@
+.one-202x-pattern-show016_team-members.one-202x-pattern-show017_training-team {
+    & .a2e-training-team__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 50%;
+        gap: clamp(2rem, 9.7222vw, 8.75rem);
+        margin: 0;
+
+        & > * {
+            min-inline-size: 0;
+            margin: 0;
+        }
+    }
+
+    & .a2e-training-team__description {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2.625rem;
+
+        & > * {
+            margin: 0;
+        }
+    }
+
+    & > .wp-block-query {
+        margin-block-start: 3.125rem;
+    }
+
+    @media (width <= 64rem) {
+        & .a2e-training-team__intro {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+        }
+    }
+
+    @media (width <= 37.5rem) {
+        & .a2e-training-team__intro {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        & .a2e-training-team__description {
+            gap: var(--wp--preset--spacing--md);
+        }
+    }
+}

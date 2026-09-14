@@ -23,7 +23,8 @@
                 margin-block: 0;
             }
 
-            & > .wp-block-buttons {
+            & > .wp-block-buttons,
+            & > .a2e-button-group {
                 margin-block: 2.625rem 0;
             }
 

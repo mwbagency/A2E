@@ -55,17 +55,17 @@ defined('ABSPATH') || exit;
             </div>
             <!-- /wp:group -->
 
-            <!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
-            <div class="wp-block-buttons">
-                <!-- wp:button {"backgroundColor":"yellow","textColor":"contrast"} -->
-                <div class="wp-block-button"><a class="wp-block-button__link has-contrast-color has-yellow-background-color has-text-color has-background wp-element-button"><?php esc_html_e('Lorem ipsum dolor', 'one-base-theme'); ?></a></div>
-                <!-- /wp:button -->
+            <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","flexWrap":"wrap"},"className":"a2e-button-group"} -->
+            <div class="wp-block-group a2e-button-group">
+                <!-- wp:one-202x/icon-button {"backgroundColor":"yellow","textColor":"contrast","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Lorem ipsum dolor', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                    <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+                <!-- /wp:one-202x/icon-button -->
 
-                <!-- wp:button {"textColor":"base","className":"is-style-outline","style":{"color":{"background":"transparent"}},"borderColor":"base"} -->
-                <div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-base-color has-text-color has-background has-border-color has-base-border-color wp-element-button" style="background-color:transparent"><?php esc_html_e('Lorem', 'one-base-theme'); ?></a></div>
-                <!-- /wp:button -->
+                <!-- wp:one-202x/icon-button {"textColor":"base","className":"is-style-outline a2e-button","style":{"color":{"background":"transparent"}},"borderColor":"base","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Lorem', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                    <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+                <!-- /wp:one-202x/icon-button -->
             </div>
-            <!-- /wp:buttons -->
+            <!-- /wp:group -->
         </div>
         <!-- /wp:group -->
     </div>

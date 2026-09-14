@@ -30,16 +30,16 @@ defined('ABSPATH') || exit;
     </div>
     <!-- /wp:columns -->
 
-    <!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
-    <div class="wp-block-buttons">
-        <!-- wp:button -->
-        <div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e('Primary button', 'one-base-theme'); ?></a></div>
-        <!-- /wp:button -->
+    <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"},"className":"a2e-button-group"} -->
+    <div class="wp-block-group a2e-button-group">
+        <!-- wp:one-202x/icon-button {"className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Primary button', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+            <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+        <!-- /wp:one-202x/icon-button -->
 
-        <!-- wp:button {"className":"is-style-outline","borderColor":"accent"} -->
-        <div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-border-color has-accent-border-color wp-element-button"><?php esc_html_e('Secondary button', 'one-base-theme'); ?></a></div>
-        <!-- /wp:button -->
+        <!-- wp:one-202x/icon-button {"className":"is-style-outline a2e-button","borderColor":"accent","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Secondary button', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+            <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+        <!-- /wp:one-202x/icon-button -->
     </div>
-    <!-- /wp:buttons -->
+    <!-- /wp:group -->
 </div>
 <!-- /wp:group -->

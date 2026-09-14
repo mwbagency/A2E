@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d6663d792f4119ebd512ca63c0fc744",
+    "content-hash": "f47cbd79b35f7b3e6dfebfa446b506a9",
     "packages": [
         {
             "name": "composer/installers",
@@ -163,6 +163,24 @@
                 "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin"
+        },
+        {
+            "name": "wpackagist-plugin/add-to-any",
+            "version": "1.8.18",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/add-to-any/",
+                "reference": "tags/1.8.18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/add-to-any.1.8.18.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/add-to-any/"
         },
         {
             "name": "wpackagist-plugin/cache-enabler",

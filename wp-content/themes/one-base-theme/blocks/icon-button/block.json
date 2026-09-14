@@ -2,7 +2,7 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "one-202x/icon-button",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "Icon Button",
     "category": "design",
     "icon": "button",
@@ -71,6 +71,9 @@
             "radius": true,
             "style": true,
             "width": true
+        },
+        "interactivity": {
+            "clientNavigation": true
         }
     },
     "styles": [

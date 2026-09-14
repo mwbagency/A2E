@@ -15,10 +15,18 @@ final class Blocks
      */
     public static function contains(array $blocks, string $name, array $seen_refs = []): bool
     {
+        return self::find($blocks, $name, $seen_refs) !== [];
+    }
+
+    /** Return matching blocks in this query, including synced patterns. */
+    public static function find(array $blocks, string $name, array $seen_refs = []): array
+    {
+        $matches = [];
         foreach ($blocks as $block) {
             $block_name = $block['blockName'] ?? '';
             if ($block_name === $name) {
-                return true;
+                $matches[] = $block;
+                continue;
             }
             if ($block_name === 'core/query') {
                 continue;
@@ -34,15 +42,13 @@ final class Blocks
                     continue;
                 }
                 $seen_refs[$reference] = true;
-                if (self::contains(parse_blocks($pattern->post_content), $name, $seen_refs)) {
-                    return true;
-                }
-            } elseif (self::contains($block['innerBlocks'] ?? [], $name, $seen_refs)) {
-                return true;
+                $matches = array_merge($matches, self::find(parse_blocks($pattern->post_content), $name, $seen_refs));
+            } else {
+                $matches = array_merge($matches, self::find($block['innerBlocks'] ?? [], $name, $seen_refs));
             }
         }
 
-        return false;
+        return $matches;
     }
 
     public function register_hooks(): void

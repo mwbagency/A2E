@@ -24,13 +24,13 @@ defined('ABSPATH') || exit;
             <p><?php esc_html_e('Lorem ipsum dolor sit amet consectetur. Pellentesque a diam hac nec in commodo enim facilisi donec.', 'one-base-theme'); ?></p>
             <!-- /wp:paragraph -->
 
-            <!-- wp:buttons -->
-            <div class="wp-block-buttons">
-                <!-- wp:button {"backgroundColor":"contrast","textColor":"base"} -->
-                <div class="wp-block-button"><a class="wp-block-button__link has-base-color has-contrast-background-color has-text-color has-background wp-element-button"><?php esc_html_e('View all courses', 'one-base-theme'); ?></a></div>
-                <!-- /wp:button -->
+            <!-- wp:group {"className":"a2e-button-group","layout":{"type":"flex","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}}} -->
+            <div class="wp-block-group a2e-button-group">
+                <!-- wp:one-202x/icon-button {"backgroundColor":"contrast","textColor":"base","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('View all courses', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                    <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+                <!-- /wp:one-202x/icon-button -->
             </div>
-            <!-- /wp:buttons -->
+            <!-- /wp:group -->
         </div>
         <!-- /wp:group -->
     </div>

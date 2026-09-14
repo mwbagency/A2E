@@ -28,17 +28,17 @@ defined('ABSPATH') || exit;
             <p><?php esc_html_e('Lorem ipsum dolor sit amet consectetur. Pellentesque a diam hac nec in commodo enim facilisi donec. Diam nisl nibh dolor blandit aliquet. Integer augue mattis est nam. Ullamcorper pellentesque potenti arcu imperdiet quam. Id.', 'one-base-theme'); ?></p>
             <!-- /wp:paragraph -->
 
-            <!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
-            <div class="wp-block-buttons">
-                <!-- wp:button -->
-                <div class="wp-block-button"><a class="wp-block-button__link wp-element-button"><?php esc_html_e('Read Our Case Studies', 'one-base-theme'); ?></a></div>
-                <!-- /wp:button -->
+            <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","flexWrap":"wrap"},"className":"a2e-button-group"} -->
+            <div class="wp-block-group a2e-button-group">
+                <!-- wp:one-202x/icon-button {"className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Read Our Case Studies', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                    <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+                <!-- /wp:one-202x/icon-button -->
 
-                <!-- wp:button {"className":"is-style-outline","borderColor":"accent"} -->
-                <div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-border-color has-accent-border-color wp-element-button"><?php esc_html_e('Read Testimonials', 'one-base-theme'); ?></a></div>
-                <!-- /wp:button -->
+                <!-- wp:one-202x/icon-button {"className":"is-style-outline a2e-button","borderColor":"accent","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Read Testimonials', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                    <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+                <!-- /wp:one-202x/icon-button -->
             </div>
-            <!-- /wp:buttons -->
+            <!-- /wp:group -->
 
             <!-- wp:group {"className":"a2e-training-enquiry__form","layout":{"type":"default"}} -->
             <div class="wp-block-group a2e-training-enquiry__form">

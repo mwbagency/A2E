@@ -18,17 +18,17 @@ defined('ABSPATH') || exit;
         <h2 class="wp-block-heading has-h-2-font-size"><?php esc_html_e('Frequently Asked Questions', 'one-base-theme'); ?></h2>
         <!-- /wp:heading -->
 
-        <!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}}} -->
-        <div class="wp-block-buttons">
-            <!-- wp:button {"backgroundColor":"contrast","textColor":"base"} -->
-            <div class="wp-block-button"><a class="wp-block-button__link has-base-color has-contrast-background-color has-text-color has-background wp-element-button"><?php esc_html_e('Book now', 'one-base-theme'); ?></a></div>
-            <!-- /wp:button -->
+        <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"className":"a2e-button-group","layout":{"type":"flex","flexWrap":"wrap"}} -->
+        <div class="wp-block-group a2e-button-group">
+            <!-- wp:one-202x/icon-button {"backgroundColor":"contrast","textColor":"base","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Book now', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+            <!-- /wp:one-202x/icon-button -->
 
-            <!-- wp:button {"className":"is-style-outline","backgroundColor":"base","textColor":"contrast","borderColor":"contrast"} -->
-            <div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-border-color has-contrast-border-color has-contrast-color has-base-background-color has-text-color has-background wp-element-button"><?php esc_html_e('Talk to us', 'one-base-theme'); ?></a></div>
-            <!-- /wp:button -->
+            <!-- wp:one-202x/icon-button {"className":"is-style-outline a2e-button","backgroundColor":"base","textColor":"contrast","borderColor":"contrast","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Talk to us', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
+            <!-- /wp:one-202x/icon-button -->
         </div>
-        <!-- /wp:buttons -->
+        <!-- /wp:group -->
     </div>
     <!-- /wp:group -->
 

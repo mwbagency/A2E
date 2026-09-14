@@ -1,0 +1,35 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "one-202x/query-results",
+    "title": "Query Results \u2014 load more and count",
+    "description": "Show the result count and load more cards in a filtered Query Loop.",
+    "category": "a2e",
+    "icon": "update",
+    "textdomain": "one-base-theme",
+    "ancestor": [
+        "core/query"
+    ],
+    "usesContext": [
+        "query",
+        "queryId",
+        "enhancedPagination"
+    ],
+    "attributes": {
+        "itemLabel": {
+            "type": "string",
+            "default": "results"
+        }
+    },
+    "supports": {
+        "html": false,
+        "interactivity": true
+    },
+    "editorScript": "file:./index.js",
+    "viewScriptModule": "one-202x-query-filters-view-script-module",
+    "render": "file:./render.php",
+    "style": "file:./style.css",
+    "allowedBlocks": [
+        "one-202x/icon-button"
+    ]
+}
