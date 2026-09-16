@@ -1,3 +1,10 @@
+/**
+ * Editor interface for the Icon Button block: editable text, a link and an optional icon.
+ * The button stores its text/link/display settings as attributes. A nested WordPress
+ * core/icon block stores the chosen artwork's registered name, such as
+ * "one-202x-regular/arrow-right". render.php builds the public-facing link from these.
+ * This file runs in the block editor; visitors do not need the picker JavaScript.
+ */
 (function (blocks, blockEditor, components, coreData, data, element, i18n) {
 	'use strict';
 
@@ -28,6 +35,8 @@
 	const { createElement: el, Fragment, useEffect, useMemo, useState } = element;
 	const { __, sprintf } = i18n;
 
+	// Keep one native Icon child inside the button. Locking its position/removal
+	// makes the button's own controls responsible for changing or hiding the icon.
 	const ALLOWED_BLOCKS = ['core/icon'];
 	const ICON_TEMPLATE = [
 		[
@@ -39,12 +48,18 @@
 		],
 	];
 
+	/**
+	 * Searchable picker shared by the toolbar and sidebar's "Change icon" controls.
+	 * It returns a registered icon name; the editor then applies that name to the child.
+	 */
 	function IconLibrary({ onChange, onClose, value }) {
 		const [search, setSearch] = useState('');
 		const [collection, setCollection] = useState(
 			value ? value.split('/')[0] : ''
 		);
 
+		// WordPress supplies both its built-in icons and the theme packs registered
+		// in App/Icons.php. Core Data fetches and caches these REST API records.
 		const collections = useSelect(function (select) {
 			return (
 				select(coreData.store).getEntityRecords('root', 'iconCollection') || []
@@ -68,6 +83,7 @@
 			[collection]
 		);
 
+		// Search the loaded collection locally. Typing does not issue a request per letter.
 		const filteredIcons = useMemo(
 			function () {
 				const normalizedSearch = search.trim().toLowerCase();
@@ -160,6 +176,8 @@
 											onChange(icon.name);
 										},
 									},
+									// Preview SVG markup comes from WordPress's registered icon API.
+									// The surrounding button provides its accessible name.
 									el('span', {
 										className: 'one-202x-icon-button__icon-library-preview',
 										'aria-hidden': true,
@@ -210,6 +228,8 @@
 			const [isIconLibraryOpen, setIconLibraryOpen] = useState(false);
 			const [isEditingURL, setIsEditingURL] = useState(false);
 			const [popoverAnchor, setPopoverAnchor] = useState(null);
+			// Read the actual child so the picker stays in sync if the icon is changed
+			// through native Icon controls, undo/redo, or a saved pattern.
 			const iconBlock = useSelect(
 				function (select) {
 					return select(blockEditor.store)
@@ -232,6 +252,7 @@
 				[linkTarget, url]
 			);
 
+			// Close the link popover when another block is selected; it belongs to this button.
 			useEffect(
 				function () {
 					if (!isSelected) {
@@ -290,6 +311,7 @@
 							},
 							{
 								title: __('Remove icon', 'one-base-theme'),
+								// Hide the icon without deleting its saved choice, so it can be restored.
 								onClick: () => setAttributes({ showIcon: false }),
 							},
 						],
@@ -420,6 +442,7 @@
 				el(
 					'div',
 					blockProps,
+					// Hiding the editor preview does not remove the stored InnerBlock.
 					showIcon &&
 						el(InnerBlocks, {
 							allowedBlocks: ALLOWED_BLOCKS,
@@ -443,6 +466,8 @@
 							setIconLibraryOpen(false);
 						},
 						onChange: function (icon) {
+							// Preserve the existing child and its other settings. If there is no
+							// child yet, create one with the same structure as the default template.
 							if (iconBlock) {
 								updateBlockAttributes(iconBlock.clientId, { icon });
 							} else {
@@ -458,6 +483,8 @@
 		},
 
 		save: function Save() {
+			// Save the Icon child in post content, even when hidden. The parent attributes
+			// are saved in the block comment; PHP renders the final link on each request.
 			return el(InnerBlocks.Content);
 		},
 	});

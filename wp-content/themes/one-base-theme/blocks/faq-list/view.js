@@ -30,19 +30,4 @@
 			makeSingleOpen(block.querySelectorAll('.one-faqs-faqs__item'));
 		});
 
-	const legacyGroups = new Set();
-
-	document
-		.querySelectorAll('[data-one-faqs-legacy-item="true"]')
-		.forEach(function (item) {
-			const group = item.closest('.wp-block-post-template');
-
-			if (group) {
-				legacyGroups.add(group);
-			}
-		});
-
-	legacyGroups.forEach(function (group) {
-		makeSingleOpen(group.querySelectorAll('[data-one-faqs-legacy-item="true"]'));
-	});
 })();

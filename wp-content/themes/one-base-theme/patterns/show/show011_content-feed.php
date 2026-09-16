@@ -26,7 +26,7 @@ defined('ABSPATH') || exit;
 
             <!-- wp:group {"className":"a2e-button-group","layout":{"type":"flex","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}}} -->
             <div class="wp-block-group a2e-button-group">
-                <!-- wp:one-202x/icon-button {"backgroundColor":"contrast","textColor":"base","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('See all news & updates', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"url":<?php echo wp_json_encode(get_post_type_archive_link('post'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                <!-- wp:one-202x/icon-button {"backgroundColor":"contrast","textColor":"base","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('See all news & updates', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"url":<?php echo wp_json_encode(home_url('/news/'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
                     <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
                 <!-- /wp:one-202x/icon-button -->
             </div>

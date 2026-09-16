@@ -1,6 +1,6 @@
 .one-202x-pattern-show011_content-feed {
     padding-block: var(--wp--preset--spacing--lg);
-    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
 
     & > * {
         margin-block: 0;

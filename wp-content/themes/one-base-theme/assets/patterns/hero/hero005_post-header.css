@@ -1,6 +1,6 @@
 .one-202x-pattern-hero005_post-header {
     padding-block: 4.5rem 3.125rem;
-    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
 
     & > .a2e-post-header__back {
         margin-block: 0;
@@ -88,39 +88,6 @@
         }
     }
 
-    & .a2e-post-header__sharing {
-        & .addtoany_list {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1.25rem;
-            line-height: 1;
-
-            & a {
-                display: inline-flex;
-                padding: 0;
-                color: inherit;
-
-                &:focus-visible {
-                    outline: 2px solid currentColor;
-                    outline-offset: 4px;
-                }
-            }
-
-            & .a2a_svg {
-                inline-size: 1.25rem;
-                block-size: 1.25rem;
-                border-radius: 0;
-                background: transparent !important;
-                line-height: 1.25rem;
-
-                & path {
-                    fill: currentColor;
-                }
-            }
-        }
-    }
-
     @media (width <= 64rem) {
         padding-block: 3rem;
 
@@ -135,6 +102,40 @@
 
         & .a2e-post-header__meta {
             justify-content: start;
+        }
+    }
+}
+
+/* AddToAny controls shared by the post header and article byline. */
+.a2e-post-header__sharing {
+    & .addtoany_list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.25rem;
+        line-height: 1;
+
+        & a {
+            display: inline-flex;
+            padding: 0;
+            color: inherit;
+
+            &:focus-visible {
+                outline: 2px solid currentColor;
+                outline-offset: 4px;
+            }
+        }
+
+        & .a2a_svg {
+            inline-size: 1.25rem;
+            block-size: 1.25rem;
+            border-radius: 0;
+            background: transparent !important;
+            line-height: 1.25rem;
+
+            & path {
+                fill: currentColor;
+            }
         }
     }
 }

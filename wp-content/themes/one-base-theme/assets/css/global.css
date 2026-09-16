@@ -4,6 +4,21 @@
     box-sizing: border-box;
 }
 
+/* Full-width sections keep their backgrounds, while their content follows theme.json.
+ * Use the containing section's width, including nested patterns and the editor canvas.
+ * Keep this inset separate from internal gaps, which must not grow on wide screens.
+ */
+:root {
+    --a2e-section-inset: max(
+        clamp(1.25rem, 5vw, 4.5rem),
+        calc((100cqi - var(--wp--style--global--wide-size)) / 2)
+    );
+}
+
+:where(.wp-site-blocks, .editor-styles-wrapper, .alignfull[class*="one-202x-pattern-"]) {
+    container-type: inline-size;
+}
+
 html {
     scroll-behavior: smooth;
 
@@ -21,6 +36,30 @@ html {
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 0.25rem;
+}
+
+/* Native touch/keyboard scrolling remains available. Snap resumes on release. */
+:is(
+    .a2e-numbered-cards__track,
+    .one-202x-pattern-show013_testimonials .wp-block-post-template,
+    .one-202x-pattern-show009_timeline > .wp-block-tab-list,
+    .is-style-a2e-category-tabs .one-202x-query-filters__options
+) {
+    @media (hover: hover) and (pointer: fine) {
+        cursor: grab;
+    }
+
+    &.is-dragging {
+        scroll-snap-type: none;
+        scroll-behavior: auto;
+        cursor: grabbing;
+        user-select: none;
+
+        & * {
+            cursor: grabbing;
+            user-select: none;
+        }
+    }
 }
 
 /* Wrap long URLs and translated headings. */

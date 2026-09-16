@@ -4,16 +4,26 @@ namespace One202x\Theme;
 
 defined('ABSPATH') || exit;
 
+/**
+ * Loads site-wide frontend assets and the shared form-field stylesheet.
+ * Block-specific files are registered by Blocks/BlockStyles; pattern-specific
+ * files are handled by PatternAssets. It also exposes a file-version helper for
+ * other theme components.
+ */
 final class Assets
 {
     public function register_hooks(): void
     {
+        // Site-wide assets belong to the public page; form styling is also needed
+        // inside the block editor so its previews use the same field appearance.
         add_action('wp_enqueue_scripts', [$this, 'enqueue']);
         add_action('enqueue_block_assets', [$this, 'form_fields']);
     }
 
     public function version(string $relative_path): string
     {
+        // Changing a built file changes its URL version, so browsers fetch the update.
+        // Theme file lookup respects child-theme overrides; missing files use the theme version.
         $path = get_theme_file_path($relative_path);
 
         return file_exists($path) ?
@@ -30,6 +40,7 @@ final class Assets
 
     public function enqueue(): void
     {
+        // These are built assets. Edit src/styles and src/scripts, then run the build.
         $global_stylesheet = 'assets/css/global.css';
 
         wp_enqueue_style(
@@ -39,6 +50,8 @@ final class Assets
             $this->version($global_stylesheet)
         );
 
+        // Give WordPress the filesystem path as well as the URL, allowing its
+        // stylesheet-loading logic to inspect the file or inline it when appropriate.
         wp_style_add_data(
             'one-202x-global',
             'path',
@@ -52,6 +65,7 @@ final class Assets
             return;
         }
 
+        // Global frontend JavaScript is an ES module, loaded in the footer.
         wp_enqueue_script_module(
             'one-202x-global',
             get_theme_file_uri($global_script),

@@ -198,7 +198,7 @@
                     inset: 100% 0 auto;
                     box-sizing: border-box;
                     width: calc(100% - 2 * clamp(1.5rem, 5vw, 4.5rem));
-                    max-width: 1280px;
+                    max-width: var(--wp--style--global--wide-size);
                     min-height: 32rem;
                     height: auto;
                     margin: 0 auto;

@@ -1,5 +1,6 @@
 .one-202x-pattern-show008_popular-courses {
-    padding: clamp(1.25rem, 5vw, 4.5rem);
+    padding-block: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
     background: var(--wp--preset--color--base);
     color: var(--wp--preset--color--contrast);
 

@@ -1,5 +1,5 @@
 .one-202x-pattern-show013_testimonials {
-    --testimonial-gutter: clamp(1.25rem, 5vw, 4.5rem);
+    --testimonial-gutter: var(--a2e-section-inset);
 
     padding-block: 4.5rem;
 

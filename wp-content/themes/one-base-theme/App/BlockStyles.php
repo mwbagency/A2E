@@ -4,6 +4,11 @@ namespace One202x\Theme;
 
 defined('ABSPATH') || exit;
 
+/**
+ * Adds appearance choices to existing WordPress blocks and connects their CSS.
+ * A style choice adds an is-style-* class to the saved block; it does not create
+ * a new block type. Custom blocks can declare their own choices in block.json.
+ */
 final class BlockStyles
 {
     private Assets $assets;
@@ -15,12 +20,15 @@ final class BlockStyles
 
     public function register_hooks(): void
     {
+        // Register both the editor's named choices and the matching block stylesheets.
         add_action('init', [$this, 'register_styles']);
         add_action('init', [$this, 'register_stylesheets']);
     }
 
     public function register_styles(): void
     {
+        // Keys are saved style names; labels are the translated names shown to editors.
+        // Renaming a key would disconnect blocks that already use its is-style-* class.
         $styles = [
             'core/button' => [
                 'outline-dark' => __('Outline Dark', 'one-base-theme'),
@@ -59,6 +67,8 @@ final class BlockStyles
         ];
 
         foreach ($heading_labels as $level => $label) {
+            // Give a paragraph a heading's typography while keeping its HTML as <p>.
+            // Read the active global styles so theme.json/customisations remain the source.
             register_block_style('core/paragraph', [
                 'name' => 'heading-' . $level,
                 'label' => $label,
@@ -71,6 +81,8 @@ final class BlockStyles
 
     public function register_stylesheets(): void
     {
+        // Filename convention: assets/blocks/core-navigation.css styles core/navigation.
+        // Scan parent then child so a child theme can supply a matching stylesheet.
         $stylesheets = [];
 
         foreach (array_unique([get_template_directory(), get_stylesheet_directory()]) as $theme_root) {
@@ -81,6 +93,8 @@ final class BlockStyles
         }
 
         foreach ($stylesheets as $block_name => $stylesheet) {
+            // Let WordPress manage this CSS for the named block in frontend/editor contexts.
+            // Use file modification times to invalidate cached CSS after a rebuild.
             wp_enqueue_block_style(
                 $block_name,
                 [

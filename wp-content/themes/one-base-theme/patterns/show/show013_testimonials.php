@@ -12,7 +12,7 @@ defined('ABSPATH') || exit;
 ?>
 <!-- wp:group {"tagName":"section","align":"full","className":"one-202x-pattern-show013_testimonials","ariaLabel":<?php echo wp_json_encode(__('Testimonials', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"layout":{"type":"default"}} -->
 <section class="wp-block-group alignfull one-202x-pattern-show013_testimonials" aria-label="<?php esc_attr_e('Testimonials', 'one-base-theme'); ?>">
-    <!-- wp:query {"namespace":"one-202x/selected-content","query":{"perPage":6,"one202xSelection":true,"one202xLatestCount":6,"pages":0,"offset":0,"postType":"testimonial","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"ignore","inherit":false},"layout":{"type":"default"}} -->
+    <!-- wp:query {"namespace":"one-202x/selected-content","query":{"perPage":6,"one202xSelection":true,"one202xLatestCount":6,"pages":0,"offset":0,"postType":"testimonial","testimonialTextOnly":true,"order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"ignore","inherit":false},"layout":{"type":"default"}} -->
     <div class="wp-block-query">
         <!-- wp:post-template -->
             <!-- wp:one-202x/content-card {"cardStyle":"testimonial"} /-->

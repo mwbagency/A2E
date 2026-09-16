@@ -5,7 +5,7 @@
         align-items: start;
         gap: 3.125rem;
         margin: 0;
-        padding: 4.5rem clamp(1.25rem, 5vw, 4.5rem);
+        padding: 4.5rem var(--a2e-section-inset);
         background: var(--wp--preset--color--base);
         color: var(--wp--preset--color--contrast);
 

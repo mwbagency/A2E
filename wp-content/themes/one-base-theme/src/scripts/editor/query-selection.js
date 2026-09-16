@@ -46,7 +46,8 @@
 			const endpoint = '/' + (type.rest_namespace || 'wp/v2') + '/' + type.rest_base;
 			const fetch = (params) => wp.apiFetch({
 				path: addQueryArgs(endpoint, { context: 'view', status: 'publish', _fields: 'id,title',
-					...(query.postType === 'testimonial' && query.testimonialVideoOnly ? { testimonialVideoOnly: true } : {}), ...params }),
+					...(query.postType === 'testimonial' && query.testimonialVideoOnly ? { testimonialVideoOnly: true } : {}),
+					...(query.postType === 'testimonial' && query.testimonialTextOnly ? { testimonialTextOnly: true } : {}), ...params }),
 				signal: controller.signal,
 			});
 			setLoading(true);
@@ -59,7 +60,7 @@
 			}).catch(() => { if (!controller.signal.aborted) { setError(true); } })
 				.finally(() => { if (!controller.signal.aborted) { setLoading(false); } });
 			return () => controller.abort();
-		}, [type, search, selectedKey, query.testimonialVideoOnly]);
+		}, [type, search, selectedKey, query.testimonialVideoOnly, query.testimonialTextOnly]);
 
 		function update(next) {
 			const updated = {
@@ -78,6 +79,7 @@
 		}
 		return el(PanelBody, { title: __('Content selection', 'one-base-theme'), initialOpen: true },
 			el('p', null, __('Leave the selection empty to show the most recent items. Selected items display in the order below.', 'one-base-theme')),
+			query.testimonialTextOnly && el('p', null, __('Only testimonials with Quote text and a Client logo are available here. Video testimonials can appear when both are provided.', 'one-base-theme')),
 			error && el(Notice, { status: 'error', isDismissible: false }, __('Content could not be loaded. Check the connection and try searching again.', 'one-base-theme')),
 			el(ComboboxControl, {
 				label: type?.name || __('Choose content', 'one-base-theme'),

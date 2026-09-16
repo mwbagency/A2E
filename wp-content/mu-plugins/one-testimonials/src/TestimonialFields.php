@@ -77,12 +77,7 @@ final class TestimonialFields extends FieldGroup
                 'id' => 'quote',
                 'label' => __('Quote', 'one-testimonials'),
                 'type' => 'textarea',
-                'required' => true,
-                'conditional_logic' => [[[
-                    'field' => 'field_one202x_testimonial_details_video_enabled',
-                    'operator' => '!=',
-                    'value' => '1',
-                ]]],
+                'instructions' => __('Add quote text and a Client logo to appear in the client testimonials slider. Video testimonials can also include these.', 'one-testimonials'),
                 'rows' => 5,
                 'new_lines' => '',
                 'allow_in_bindings' => true,

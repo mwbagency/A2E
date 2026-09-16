@@ -2,7 +2,7 @@
     --statistics-gap: clamp(3rem, 5.5556vw, 5rem);
 
     padding-block: 4.5rem;
-    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
 
     & > .wp-block-columns {
         gap: var(--statistics-gap);

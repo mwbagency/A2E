@@ -28,7 +28,7 @@ $heading_level = (int) ($attributes['headingLevel'] ?? 3);
 $heading_level = in_array($heading_level, array(2, 3, 4, 5, 6), true) ? $heading_level : 3;
 $card_name = str_replace('_', '-', sanitize_key($card_post->post_type));
 $card_style = sanitize_key($attributes['cardStyle'] ?? 'auto');
-$card_styles = ['auto', 'resource', 'page-image', 'page-solid', 'programme', 'product', 'course', 'testimonial', 'testimonial-video'];
+$card_styles = ['auto', 'resource', 'page-image', 'page-solid', 'programme', 'product', 'course', 'search', 'testimonial', 'testimonial-video'];
 $card_style = in_array($card_style, $card_styles, true) ? $card_style : 'auto';
 if ($card_style === 'auto') {
     $card_style = match ($card_name) {

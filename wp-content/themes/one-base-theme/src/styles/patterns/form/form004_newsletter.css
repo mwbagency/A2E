@@ -12,13 +12,14 @@
     --one-form-button-hover-background: var(--wp--preset--color--accent);
     --one-form-button-hover-text: var(--wp--preset--color--base);
 
-    padding: clamp(1.25rem, 5vw, 4.5rem);
+    padding-block: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
 
     & > .one-202x-pattern-cont009_centred-intro {
         margin: 0;
 
         & > * {
-            max-inline-size: 39.625rem;
+            max-inline-size: min(39.625rem, var(--wp--style--global--content-size));
         }
 
         & > .a2e-centred-intro__title,

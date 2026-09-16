@@ -6,7 +6,7 @@
         grid-template-columns: minmax(0, 8fr) minmax(0, 9fr);
         gap: var(--a2e-filtered-listing-gutter);
         margin: 0;
-        padding: clamp(4.5rem, 10vw, 9rem) var(--a2e-filtered-listing-gutter) 3.125rem;
+        padding: clamp(4.5rem, 10vw, 9rem) var(--a2e-section-inset) 3.125rem;
 
         & > * {
             min-width: 0;
@@ -42,7 +42,7 @@
         top: 0;
         z-index: 10;
         margin: 0;
-        padding: 0 var(--a2e-filtered-listing-gutter) 1.5rem;
+        padding: 0 var(--a2e-section-inset) 1.5rem;
         background: var(--wp--preset--color--contrast);
         color: var(--wp--preset--color--base);
         scroll-margin-block-start: 2rem;
@@ -50,7 +50,7 @@
 
     & > .a2e-filtered-listing__results {
         margin: 0;
-        padding: 3rem var(--a2e-filtered-listing-gutter);
+        padding: 3rem var(--a2e-section-inset);
     }
 
     @media (max-width: 56rem) {

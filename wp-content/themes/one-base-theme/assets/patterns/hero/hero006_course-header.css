@@ -1,7 +1,7 @@
 .one-202x-pattern-hero006_course-header {
     min-block-size: 37.86125rem;
     padding-block: 6.75rem;
-    padding-inline: clamp(1.25rem, 8.3333vw, 7.5rem);
+    padding-inline: max(clamp(1.25rem, 8.3333vw, 7.5rem), var(--a2e-section-inset));
     background: var(--wp--preset--color--base);
     color: var(--wp--preset--color--base);
 

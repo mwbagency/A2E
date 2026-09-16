@@ -17,6 +17,10 @@
         "enhancedPagination"
     ],
     "attributes": {
+        "allLabel": {
+            "type": "string",
+            "default": ""
+        },
         "orientation": {
             "type": "string",
             "enum": [

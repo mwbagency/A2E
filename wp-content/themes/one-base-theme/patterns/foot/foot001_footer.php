@@ -13,7 +13,7 @@ $institution_links = [
     [__('Our Services', 'one-base-theme'), get_post_type_archive_link('service')],
     [__('Who We Help', 'one-base-theme'), home_url('/who-we-help/')],
     [__('Careers', 'one-base-theme'), home_url('/careers/')],
-    [__('Knowledge Hub', 'one-base-theme'), home_url('/knowledge-hub/')],
+    [__('Knowledge Hub', 'one-base-theme'), home_url('/news/')],
 ];
 
 $legal_links = [

@@ -23,6 +23,7 @@ $heading = $heading !== '' ? $heading : ($source === 'sort' ? __('Sort by', 'one
 $filter_id = trim((string) ($attributes['anchor'] ?? '')) ?: wp_unique_prefixed_id('one-202x-query-filters-');
 $classes = explode(' ', (string) ($attributes['className'] ?? ''));
 $is_tabs = in_array('is-style-a2e-category-tabs', $classes, true);
+$all_label = trim((string) ($attributes['allLabel'] ?? '')) ?: __('All', 'one-base-theme');
 $is_buttons = in_array('is-style-a2e-filter-buttons', $classes, true);
 $wrapper = ['id' => $filter_id, 'class' => 'one-202x-query-filters is-' . (($attributes['orientation'] ?? '') === 'vertical' ? 'vertical' : 'horizontal')];
 if (!$is_preview && !empty($block->context['enhancedPagination'])) {
@@ -44,7 +45,7 @@ if ($is_tabs || $is_buttons) : ?>
         <?php if ($is_buttons) : ?><p class="one-202x-query-filters__heading"><?php echo esc_html($heading); ?></p><?php endif; ?>
         <ul class="one-202x-query-filters__options">
             <?php if ($is_tabs) : ?>
-                <li><a data-filter-value="" href="<?php echo esc_url($clear_url); ?>" <?php if ($selected === []) : ?>aria-current="true"<?php endif; ?>><?php esc_html_e('All', 'one-base-theme'); ?></a></li>
+                <li><a data-filter-value="" href="<?php echo esc_url($clear_url); ?>" <?php if ($selected === []) : ?>aria-current="true"<?php endif; ?>><?php echo esc_html($all_label); ?></a></li>
             <?php endif; ?>
             <?php foreach ($options as $slug => $option) :
                 $active = in_array((string) $slug, $selected, true);

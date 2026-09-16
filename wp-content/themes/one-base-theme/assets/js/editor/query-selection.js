@@ -55,6 +55,7 @@
           status: "publish",
           _fields: "id,title",
           ...query.postType === "testimonial" && query.testimonialVideoOnly ? { testimonialVideoOnly: true } : {},
+          ...query.postType === "testimonial" && query.testimonialTextOnly ? { testimonialTextOnly: true } : {},
           ...params
         }),
         signal: controller.signal
@@ -79,7 +80,7 @@
         }
       });
       return () => controller.abort();
-    }, [type, search, selectedKey, query.testimonialVideoOnly]);
+    }, [type, search, selectedKey, query.testimonialVideoOnly, query.testimonialTextOnly]);
     function update(next) {
       const updated = {
         ...query,
@@ -104,6 +105,7 @@
       PanelBody,
       { title: __("Content selection", "one-base-theme"), initialOpen: true },
       el("p", null, __("Leave the selection empty to show the most recent items. Selected items display in the order below.", "one-base-theme")),
+      query.testimonialTextOnly && el("p", null, __("Only testimonials with Quote text and a Client logo are available here. Video testimonials can appear when both are provided.", "one-base-theme")),
       error && el(Notice, { status: "error", isDismissible: false }, __("Content could not be loaded. Check the connection and try searching again.", "one-base-theme")),
       el(ComboboxControl, {
         label: type?.name || __("Choose content", "one-base-theme"),

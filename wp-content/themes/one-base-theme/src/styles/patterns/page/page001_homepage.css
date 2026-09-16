@@ -1,0 +1,23 @@
+/* Small homepage adjustments to the existing hero and linked pathway cards. */
+.wp-block-group.one-202x-pattern-page001_homepage {
+    & .a2e-hero003__actions {
+        margin-block-start: 1.5rem;
+    }
+
+    & .a2e-numbered-card .wp-block-heading a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+            text-decoration: underline;
+        }
+    }
+
+    @media (min-width: 90rem) {
+        & .a2e-hero003__actions {
+            inline-size: max-content;
+            flex-wrap: nowrap;
+        }
+    }
+}

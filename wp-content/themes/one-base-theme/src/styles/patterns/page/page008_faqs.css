@@ -1,0 +1,21 @@
+.one-202x-pattern-page008_faqs {
+    & > .a2e-search-results__intro > .a2e-centred-intro__description {
+        max-inline-size: var(--wp--style--global--content-size);
+    }
+
+    & .a2e-faqs-page__search .wp-block-search__input::placeholder {
+        color: var(--wp--preset--color--contrast);
+        opacity: 1;
+    }
+
+    & .a2e-faqs-page__status:not(.screen-reader-text) {
+        padding-inline: var(--a2e-section-inset);
+        text-align: center;
+    }
+
+    /* Grid display on the reused section must not override search's hidden state. */
+    & .a2e-faqs-page__category[hidden],
+    & .one-faqs-faqs__item[hidden] {
+        display: none;
+    }
+}

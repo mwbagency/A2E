@@ -4,19 +4,29 @@ namespace One202x\Theme;
 
 defined('ABSPATH') || exit;
 
+/**
+ * Makes the theme's SVG files available in WordPress's native icon library.
+ * Both the core Icon block and our Icon Button picker use this same library.
+ * This class registers the available artwork; it does not output a button or
+ * save the editor's chosen icon. That choice belongs to a core/icon block.
+ */
 final class Icons
 {
     public function register_hooks(): void
     {
+        // Register on each WordPress request, once the icon API is available.
+        // This builds the runtime library without creating database records.
         add_action('init', [$this, 'register']);
     }
 
     public function register(): void
     {
+        // Older WordPress versions without the icon API cannot register these packs.
         if (!function_exists('wp_register_icon_collection') || !function_exists('wp_register_icon')) {
             return;
         }
 
+        // Each key names a folder under assets/icons; an empty key means that folder itself.
         // The root collection keeps the identifiers already used in saved content.
         $collections = [
             '' => __('One Base', 'one-base-theme'),
@@ -33,6 +43,8 @@ final class Icons
         $labels = apply_filters('one202x/icons/labels', require __DIR__ . '/../config/icon-labels.php');
 
         foreach ($collections as $pack => $label) {
+            // Example: assets/icons/regular/arrow-right.svg becomes
+            // "one-202x-regular/arrow-right". Saved Icon blocks store this identifier.
             $collection = 'one-202x' . ($pack !== '' ? '-' . $pack : '');
             wp_register_icon_collection($collection, ['label' => $label]);
 
@@ -58,6 +70,8 @@ final class Icons
         $files = [];
         $relative_path = '/assets/icons' . ($pack !== '' ? '/' . $pack : '');
 
+        // Read the parent first and the child second. A matching filename in the
+        // child replaces the parent path while keeping the saved icon identifier.
         foreach (array_unique([get_template_directory(), get_stylesheet_directory()]) as $theme_path) {
             foreach (glob($theme_path . $relative_path . '/*.svg') ?: [] as $file_path) {
                 $slug = pathinfo($file_path, PATHINFO_FILENAME);

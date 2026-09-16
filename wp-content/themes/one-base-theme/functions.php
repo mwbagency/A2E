@@ -3,6 +3,8 @@
 defined('ABSPATH') || exit;
 
 // Referenced patterns render after WordPress processes template shortcodes.
+// Remove wpautop's paragraph wrapper before a shortcode returns block-level HTML.
+add_filter('render_block_core/shortcode', 'shortcode_unautop', 9);
 add_filter('render_block_core/shortcode', 'do_shortcode');
 
 // The theme is self-contained; site-owned MU plugins use the root Composer loader.
@@ -13,7 +15,6 @@ $components = [
     'BlockStyles',
     'PatternAssets',
     'Icons',
-    'FaqsBlock',
     'QueryLoops',
     'QueryFilters',
     'QuerySelection',

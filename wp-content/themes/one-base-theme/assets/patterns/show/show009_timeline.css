@@ -2,14 +2,14 @@
     --timeline-padding: clamp(1.25rem, 5vw, 4.5rem);
 
     padding-block: 4.5rem;
-    padding-inline: var(--timeline-padding) 0;
+    padding-inline: var(--a2e-section-inset);
 
     & > .wp-block-tab-list {
         display: flex;
         flex-wrap: nowrap;
         gap: clamp(2.5rem, 13.1944vw, 11.875rem);
         margin-block: 0;
-        padding-inline-end: var(--timeline-padding);
+        padding-inline-end: 0;
         overflow-x: auto;
         background: linear-gradient(currentColor, currentColor) left center / 100% 2px no-repeat;
 
@@ -48,7 +48,7 @@
 
     & > .wp-block-tab-panels {
         margin-block: 3.125rem 0;
-        padding-inline-end: var(--timeline-padding);
+        padding-inline-end: 0;
     }
 
     & .wp-block-tab-panel > .wp-block-media-text {

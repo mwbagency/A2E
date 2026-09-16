@@ -46,6 +46,12 @@
                 el(InspectorControls, null,
                     el(PanelBody, { title: __('Filter settings', 'one-base-theme'), initialOpen: true },
                         el(TextControl, { label: __('Heading', 'one-base-theme'), value: attributes.heading || '', onChange: (heading) => setAttributes({ heading }) }),
+                        (attributes.className || '').includes('is-style-a2e-category-tabs') && el(TextControl, {
+                            label: __('All categories label', 'one-base-theme'),
+                            value: attributes.allLabel || '',
+                            placeholder: __('All', 'one-base-theme'),
+                            onChange: (allLabel) => setAttributes({ allLabel }),
+                        }),
                         el(SelectControl, {
                             label: __('Filter source', 'one-base-theme'), value: attributes.source || '',
                             options: [

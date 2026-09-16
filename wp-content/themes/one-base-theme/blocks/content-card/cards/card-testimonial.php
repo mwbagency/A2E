@@ -15,6 +15,11 @@ $person_name = trim((string) ($values['person_name'] ?? ''));
 $job_title = trim((string) ($values['job_title'] ?? ''));
 $organisation = trim((string) ($values['organisation'] ?? ''));
 $organisation_style = ($args['card_style'] ?? 'auto') === 'testimonial';
+$logo_id = (int) get_post_thumbnail_id($post_id);
+// Also guard standalone/manual cards that are not inside the filtered Query Loop.
+if ($organisation_style && ($quote === '' || !wp_get_attachment_image_url($logo_id, 'full'))) {
+    return;
+}
 $name = $organisation_style && $organisation !== '' ? $organisation : $person_name;
 $description = $organisation_style
     ? implode(', ', array_filter([$person_name !== $name ? $person_name : '', $job_title]))
@@ -45,7 +50,7 @@ $rating = isset($values['rating']) && is_numeric($values['rating'])
                 'quote' => esc_html($quote),
                 'personName' => $name,
                 'jobDescription' => $description,
-                'imageId' => (int) get_post_thumbnail_id($post_id),
+                'imageId' => $logo_id,
             ),
             'innerBlocks' => array(),
             'innerHTML' => '',

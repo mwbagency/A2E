@@ -19,8 +19,13 @@ $price_note = trim((string) ($attributes['priceNote'] ?? ''));
 $date = (string) ($args['published_date'] ?? '');
 $datetime = (string) ($args['published_datetime'] ?? '');
 $post_type = get_post_type($post_id);
+$is_search = $layout === 'search';
 $taxonomy = $post_type === 'post' ? 'category' : $post_type . '_category';
-$terms = taxonomy_exists($taxonomy) ? get_the_terms($post_id, $taxonomy) : false;
+$terms = !$is_search && taxonomy_exists($taxonomy) ? get_the_terms($post_id, $taxonomy) : false;
+// Search cards identify the content type, so mixed results remain easy to scan.
+if ($is_search && $label === '') {
+    $label = $post_type === 'post' ? __('Knowledge Hub', 'one-base-theme') : (get_post_type_object($post_type)->labels->name ?? '');
+}
 if ($label === '' && is_array($terms)) {
     $label = $terms[0]->name;
 }
@@ -29,14 +34,14 @@ $booking_url = '';
 $action_url = $url;
 $action_label = __('Read more', 'one-base-theme');
 
-if ($post_type === 'course' && class_exists(\One202x\Courses\CourseValues::class)) {
+if (!$is_search && $post_type === 'course' && class_exists(\One202x\Courses\CourseValues::class)) {
     $values = (new \One202x\Courses\CourseValues())->all($post_id, [], ['source' => 'content_card']);
     $detail = $detail !== '' ? $detail : (string) ($values['certification_validity'] ?? '');
     $duration = $duration !== '' ? $duration : (string) ($values['duration'] ?? '');
     $price = $price !== '' ? $price : (string) ($values['price'] ?? '');
 }
 
-if ($post_type === 'event' && class_exists(\One202x\Events\EventValues::class)) {
+if (!$is_search && $post_type === 'event' && class_exists(\One202x\Events\EventValues::class)) {
     $values = (new \One202x\Events\EventValues())->all($post_id, [], ['source' => 'content_card']);
     $booking_url = trim((string) ($values['booking_url'] ?? ''));
     $price = $price !== '' ? $price : (string) ($values['price'] ?? '');
@@ -57,7 +62,7 @@ if ($layout === 'product') {
     if ($product && $price === '') {
         $price = wp_strip_all_tags($product->get_price_html());
     }
-} elseif ($layout === 'course') {
+} elseif ($layout === 'course' || $is_search) {
     $action_label = __('View result', 'one-base-theme');
     if ($label === '' && $post_type === 'event') {
         $label = __('Courses', 'one-base-theme');
@@ -70,7 +75,12 @@ if ($booking_url !== '') {
     $action_label = __('Book this event', 'one-base-theme');
 }
 $action_target = ($action['target'] ?? '') === '_blank' ? '_blank' : '';
-$show_image = $image !== '' && !in_array($layout, ['page-solid', 'course'], true);
+if ($is_search) {
+    // A result opens the matching page, even when its service has a separate CTA.
+    $action_url = $url;
+    $action_target = '';
+}
+$show_image = $image !== '' && !in_array($layout, ['page-solid', 'course', 'search'], true);
 $show_excerpt = !in_array($layout, ['page-image', 'resource', 'product', 'programme'], true);
 $word_count = str_word_count(wp_strip_all_tags(strip_shortcodes((string) get_post_field('post_content', $post_id))));
 $reading_minutes = max(1, (int) ceil($word_count / 200));
@@ -81,7 +91,7 @@ $reading_minutes = max(1, (int) ceil($word_count / 200));
     <?php endif; ?>
     <div class="one-202x-content-card__content">
         <?php if ($number !== '') : ?><p class="one-202x-content-card__number"><?php echo esc_html($number); ?></p><?php endif; ?>
-        <?php if (in_array($layout, ['resource', 'programme', 'course'], true) && ($label !== '' || $layout === 'resource')) : ?>
+        <?php if (in_array($layout, ['resource', 'programme', 'course', 'search'], true) && ($label !== '' || $layout === 'resource')) : ?>
             <div class="one-202x-content-card__metadata">
                 <?php if ($label !== '') : ?><span class="one-202x-content-card__tag"><?php echo esc_html($label); ?></span><?php endif; ?>
                 <?php if ($layout === 'resource') : ?><span class="one-202x-content-card__reading-time"><?php
@@ -114,7 +124,7 @@ $reading_minutes = max(1, (int) ceil($word_count / 200));
             <?php endif; ?>
         <?php elseif ($layout !== 'page-image') : ?>
             <div class="one-202x-content-card__footer">
-                <?php if ($layout === 'course' && $date !== '') : ?><time datetime="<?php echo esc_attr($datetime); ?>"><?php echo esc_html($date); ?></time><?php endif; ?>
+                <?php if (($layout === 'course' || $is_search) && $date !== '') : ?><time datetime="<?php echo esc_attr($datetime); ?>"><?php echo esc_html($date); ?></time><?php endif; ?>
                 <?php if ($action_url !== '') : ?><a class="one-202x-content-card__link" href="<?php echo esc_url($action_url); ?>"<?php if ($action_target) : ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>><?php echo esc_html($action_label); ?><span class="screen-reader-text">: <?php echo esc_html($title); ?><?php if ($action_target) { esc_html_e(' (opens in a new tab)', 'one-base-theme'); } ?></span></a><?php endif; ?>
             </div>
         <?php endif; ?>

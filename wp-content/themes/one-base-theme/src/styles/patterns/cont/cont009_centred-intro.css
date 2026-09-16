@@ -4,17 +4,17 @@
     align-items: center;
     gap: 0;
     padding-block: 4.5rem;
-    padding-inline: var(--wp--style--root--padding-left, 1.25rem);
+    padding-inline: var(--a2e-section-inset);
     text-align: center;
 
     & > * {
         min-inline-size: 0;
-        max-inline-size: 48.125rem;
+        max-inline-size: var(--wp--style--global--content-size);
         margin-block: 0;
     }
 
     & > .a2e-centred-intro__title {
-        max-inline-size: 41.875rem;
+        max-inline-size: min(41.875rem, var(--wp--style--global--content-size));
     }
 
     & > .is-style-eyebrow + .a2e-centred-intro__title {

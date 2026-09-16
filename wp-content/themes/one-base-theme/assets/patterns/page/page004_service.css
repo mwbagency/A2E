@@ -1,0 +1,47 @@
+.one-202x-pattern-page004_service {
+    & .a2e-service-page__copy {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    & .a2e-numbered-card .wp-block-heading a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+            text-decoration: underline;
+        }
+    }
+
+    /* The training section uses a narrow, tall image beside the longer copy. */
+    & .a2e-service-page__training {
+        & > .wp-block-media-text__media {
+            padding-inline: 0;
+
+            & img,
+            & video {
+                aspect-ratio: 1 / 3;
+            }
+        }
+
+        & > .wp-block-media-text__content {
+            padding-inline-end: clamp(3rem, 11.5385vw, 10.3846rem);
+        }
+
+        @media (width <= 64rem) {
+            & > .wp-block-media-text__content {
+                padding-inline-end: 0;
+            }
+
+            & > .wp-block-media-text__media {
+                max-inline-size: 100%;
+
+                & img,
+                & video {
+                    aspect-ratio: 16 / 9;
+                }
+            }
+        }
+    }
+}

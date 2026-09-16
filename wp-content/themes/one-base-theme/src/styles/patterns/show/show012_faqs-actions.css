@@ -3,7 +3,7 @@
     grid-template-columns: minmax(0, 1fr) 50%;
     gap: clamp(2rem, 9.7222vw, 8.75rem);
     padding-block: 4.5rem;
-    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
 
     & > * {
         min-inline-size: 0;

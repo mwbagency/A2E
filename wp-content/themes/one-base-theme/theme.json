@@ -342,10 +342,39 @@
     },
     "customTemplates": [
         {
+            "name": "faqs-page",
+            "title": "FAQs page — A2E",
+            "postTypes": [
+                "page"
+            ]
+        },
+        {
+            "name": "service-page",
+            "title": "Service page — A2E",
+            "postTypes": [
+                "service",
+                "page"
+            ]
+        },
+        {
             "name": "page-with-title",
             "title": "Page \u2014 automatic title",
             "postTypes": [
                 "page"
+            ]
+        },
+        {
+            "name": "news-page",
+            "title": "News page — A2E",
+            "postTypes": [
+                "page"
+            ]
+        },
+        {
+            "name": "single-post",
+            "title": "Post — A2E",
+            "postTypes": [
+                "post"
             ]
         }
     ],

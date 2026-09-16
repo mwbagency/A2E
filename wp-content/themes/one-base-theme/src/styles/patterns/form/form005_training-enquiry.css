@@ -10,7 +10,7 @@
     --one-form-button-hover-text: var(--wp--preset--color--base);
 
     padding-block: 4.5rem;
-    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
 
     & > .wp-block-columns {
         gap: clamp(2.5rem, 9.7222vw, 8.75rem);

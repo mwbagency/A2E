@@ -50,7 +50,7 @@ html {
 
     body & .one-202x-head__inner.alignwide {
         display: flex;
-        max-width: 1280px;
+        max-width: var(--wp--style--global--wide-size);
         flex-direction: column;
         gap: 0.5rem;
         box-sizing: border-box;

@@ -1,6 +1,6 @@
 .one-202x-pattern-show016_team-members {
     padding-block: 4.5rem;
-    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
 
     & > .wp-block-query {
         margin: 0;

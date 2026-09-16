@@ -1,0 +1,26 @@
+.one-202x-pattern-page006_news {
+    & .a2e-filtered-listing__results {
+        padding-block: 4.5rem;
+
+        & .wp-block-post-template {
+            gap: 1.5rem 0;
+        }
+    }
+
+    /* Keep the live result announcement available without adding a visible
+       count beneath the load-more button in this design. */
+    & .a2e-query-results > [role="status"] {
+        position: absolute;
+        inline-size: 1px;
+        block-size: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    @media (width <= 37.5rem) {
+        & .a2e-filtered-listing__results {
+            padding-block: 3rem;
+        }
+    }
+}

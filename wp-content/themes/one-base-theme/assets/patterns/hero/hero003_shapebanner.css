@@ -11,7 +11,9 @@
     grid-template-areas: "content media";
     gap: var(--a2e-hero-gutter);
     min-height: 36.4375rem;
-    padding: 0 0 0 var(--a2e-hero-gutter);
+    /* Align the copy with the content; allow the mask one gutter of visual bleed. */
+    padding-block: 0;
+    padding-inline: var(--a2e-section-inset) max(0px, calc(var(--a2e-section-inset) - var(--a2e-hero-gutter)));
 
     &.a2e-hero003--shape-2 {
         --a2e-hero-mask: url("../../images/masks/hero-shape-2.png");
@@ -44,7 +46,7 @@
 
         grid-template-columns: minmax(0, 722fr) minmax(0, 574fr);
         grid-template-areas: "media content";
-        padding: 0 var(--a2e-hero-gutter) 0 0;
+        padding-inline: max(0px, calc(var(--a2e-section-inset) - var(--a2e-hero-gutter))) var(--a2e-section-inset);
 
         & .a2e-hero003__title {
             padding-inline-end: 0;

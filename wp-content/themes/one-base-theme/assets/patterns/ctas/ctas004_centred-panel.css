@@ -1,11 +1,12 @@
 .one-202x-pattern-ctas004_centred-panel {
-    padding: clamp(1.25rem, 5vw, 4.5rem);
+    padding-block: clamp(1.25rem, 5vw, 4.5rem);
+    padding-inline: var(--a2e-section-inset);
 
     & > .one-202x-pattern-cont009_centred-intro {
         margin: 0;
 
         & > .a2e-centred-intro__description {
-            max-inline-size: 41.875rem;
+            max-inline-size: min(41.875rem, var(--wp--style--global--content-size));
         }
     }
 }

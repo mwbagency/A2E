@@ -21,7 +21,6 @@
 		|| wp.serverSideRender;
 
 	const BLOCK_NAME = 'one-faqs/faqs';
-	const LEGACY_BLOCK_NAME = 'one-faqs/accordion-item';
 	const MAX_FAQS = 8;
 	const FAQ_QUERY_ARGS = {
 		context: 'edit',
@@ -64,6 +63,21 @@
 		const selectionKey = faqIds.join(',');
 		const [searchInput, setSearchInput] = useState('');
 		const [search, setSearch] = useState('');
+		const categories = useSelect(function (select) {
+			return select(coreDataStore).getEntityRecords('taxonomy', 'faq_category', {
+				per_page: -1,
+				hide_empty: false,
+			}) || [];
+		}, []);
+		const categoryOptions = [
+			{ label: __('All categories', 'one-base-theme'), value: '' },
+			...categories.map(function (category) {
+				return { label: decodeEntities(category.name), value: category.slug };
+			}),
+		];
+		if (attributes.categorySlug && !categories.some(category => category.slug === attributes.categorySlug)) {
+			categoryOptions.push({ label: attributes.categorySlug, value: attributes.categorySlug });
+		}
 
 		useEffect(function () {
 			const timer = window.setTimeout(function () {
@@ -174,12 +188,31 @@
 						value: Number(attributes.limit || MAX_FAQS),
 						min: 1,
 						max: MAX_FAQS,
-						disabled: faqIds.length > 0,
+						disabled: faqIds.length > 0 || attributes.showAll,
 						help: faqIds.length > 0
 							? __('Manual selection replaces the latest FAQ limit.', 'one-base-theme')
 							: __('Used when no FAQs are manually selected.', 'one-base-theme'),
 						onChange(value) {
 							setAttributes({ limit: Number(value) || MAX_FAQS });
+						},
+					}),
+					el(SelectControl, {
+						label: __('FAQ category', 'one-base-theme'),
+						value: attributes.categorySlug || '',
+						options: categoryOptions,
+						disabled: faqIds.length > 0,
+						help: __('Manage categories under FAQs. Manual selection overrides this filter.', 'one-base-theme'),
+						onChange(categorySlug) {
+							setAttributes({ categorySlug });
+						},
+					}),
+					el(ToggleControl, {
+						label: __('Show all matching FAQs', 'one-base-theme'),
+						checked: Boolean(attributes.showAll),
+						disabled: faqIds.length > 0,
+						help: __('Include every answer in this category, without the latest FAQ limit.', 'one-base-theme'),
+						onChange(showAll) {
+							setAttributes({ showAll });
 						},
 					}),
 					!queryState.isResolved && !queryState.error && el(Spinner),
@@ -226,41 +259,4 @@
 		},
 	});
 
-	/* Hidden editor support for Query Loop content saved before FAQ List. */
-	registerBlockType(LEGACY_BLOCK_NAME, {
-		edit({ context }) {
-			const postId = Number(context?.postId || 0);
-			const postType = context?.postType;
-			const record = useSelect(function (select) {
-				if (postType !== 'faq' || postId < 1) {
-					return null;
-				}
-
-				return select(coreDataStore).getEditedEntityRecord(
-					'postType',
-					'faq',
-					postId
-				);
-			}, [postId, postType]);
-			const title = plainText(record?.title?.rendered || record?.title?.raw)
-				|| __('Untitled FAQ', 'one-base-theme');
-			const answer = plainText(record?.acf?.answer)
-				|| __('The FAQ answer will appear here.', 'one-base-theme');
-			const blockProps = useBlockProps();
-
-			return el(
-				'details',
-				{ ...blockProps, open: true },
-				el('summary', null, title),
-				el(
-					'div',
-					{ className: 'one-faqs-faqs__answer' },
-					answer
-				)
-			);
-		},
-		save() {
-			return null;
-		},
-	});
 })(window.wp);

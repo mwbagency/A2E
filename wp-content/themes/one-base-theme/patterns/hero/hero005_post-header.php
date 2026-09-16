@@ -13,7 +13,7 @@ defined('ABSPATH') || exit;
 <!-- wp:group {"align":"full","className":"one-202x-pattern-hero005_post-header","backgroundColor":"contrast","textColor":"base","layout":{"type":"default"}} -->
 <div class="wp-block-group alignfull one-202x-pattern-hero005_post-header has-base-color has-contrast-background-color has-text-color has-background">
     <!-- wp:paragraph {"className":"a2e-post-header__back","fontSize":"small"} -->
-    <p class="a2e-post-header__back has-small-font-size"><a href="<?php echo esc_url(get_post_type_archive_link('post')); ?>"><?php esc_html_e('< All news', 'one-base-theme'); ?></a></p>
+    <p class="a2e-post-header__back has-small-font-size"><a href="<?php echo esc_url(home_url('/news/')); ?>"><?php esc_html_e('< All News & Updates', 'one-base-theme'); ?></a></p>
     <!-- /wp:paragraph -->
 
     <!-- wp:group {"className":"a2e-post-header__row","layout":{"type":"default"}} -->

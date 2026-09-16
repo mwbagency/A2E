@@ -25,7 +25,7 @@ defined('ABSPATH') || exit;
             <!-- /wp:paragraph -->
         </div>
         <!-- /wp:group -->
-        <!-- wp:one-202x/icon-button {"text":<?php echo wp_json_encode(__('Contact A to E', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"showIcon":false} /-->
+        <!-- wp:one-202x/icon-button {"url":<?php echo wp_json_encode(home_url('/contact-us/'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"text":<?php echo wp_json_encode(__('Contact A to E', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"showIcon":false} /-->
     </div>
     <!-- /wp:group -->
     <!-- wp:group {"className":"one-202x-support-card__explore","layout":{"type":"default"}} -->
@@ -35,8 +35,12 @@ defined('ABSPATH') || exit;
         <!-- /wp:paragraph -->
         <!-- wp:group {"className":"one-202x-support-card__links","layout":{"type":"default"}} -->
         <div class="wp-block-group one-202x-support-card__links">
-        <?php foreach ([__('Knowledge Hub', 'one-base-theme'), __('Our Services', 'one-base-theme'), __('About Us', 'one-base-theme')] as $link_label) : ?>
-            <!-- wp:one-202x/icon-button {"text":<?php echo wp_json_encode($link_label, JSON_HEX_TAG | JSON_HEX_AMP); ?>,"iconPosition":"right","className":"is-style-icon-link"} -->
+        <?php foreach ([
+            [__('Knowledge Hub', 'one-base-theme'), home_url('/news/')],
+            [__('Our Services', 'one-base-theme'), ''],
+            [__('About Us', 'one-base-theme'), ''],
+        ] as [$link_label, $link_url]) : ?>
+            <!-- wp:one-202x/icon-button {"text":<?php echo wp_json_encode($link_label, JSON_HEX_TAG | JSON_HEX_AMP); ?>,"url":<?php echo wp_json_encode($link_url, JSON_HEX_TAG | JSON_HEX_AMP); ?>,"iconPosition":"right","className":"is-style-icon-link"} -->
                 <!-- wp:icon {"icon":"one-202x/a2e-chevron-right","lock":{"move":true,"remove":true}} /-->
             <!-- /wp:one-202x/icon-button -->
         <?php endforeach; ?>

@@ -1,0 +1,29 @@
+.one-202x-pattern-hero007_service-header {
+    & > .a2e-hero003__content {
+        gap: 1.5rem;
+    }
+
+    /* The native Featured Image uses the same exported mask as the media hero. */
+    & > .a2e-hero003__media {
+        position: relative;
+        overflow: hidden;
+        background: url("../../images/placeholders/a2e-square.png") center / cover;
+        mask-image: url("../../images/masks/hero-shape-2.png");
+        mask-mode: alpha;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: 100% 100%;
+
+        & .wp-block-post-featured-image {
+            position: absolute;
+            inset: 0;
+            margin: 0;
+
+            & img {
+                inline-size: 100%;
+                block-size: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}

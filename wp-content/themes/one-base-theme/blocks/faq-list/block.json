@@ -4,11 +4,19 @@
     "name": "one-faqs/faqs",
     "version": "1.0.0",
     "title": "FAQ List",
-    "description": "Display the latest FAQs or choose up to eight manually.",
+    "description": "Display FAQs by category, show all or the latest, or choose up to eight manually.",
     "category": "theme",
     "icon": "editor-help",
     "textdomain": "one-base-theme",
     "attributes": {
+        "categorySlug": {
+            "type": "string",
+            "default": ""
+        },
+        "showAll": {
+            "type": "boolean",
+            "default": false
+        },
         "faqIds": {
             "type": "array",
             "items": {
