@@ -38,16 +38,16 @@
     # 3. Plugin licence keys (required). Licence URLs default to the detected website URL.
     # Override a licence URL only when its authorised URL needs to differ.
     # Gravity Forms Composer downloads need an Elite or legacy Developer licence.
-    # - key: STAGING_ACF_PRO_LICENSE
-    #   value: '!encrypted PASTE_BUDDY_ENCRYPTED_ACF_VALUE_HERE'
-    #   encrypted: true
-    # - key: STAGING_ACF_PRO_SITE_URL
-    #   value: 'https://staging.example.com'
-    # - key: STAGING_GF_LICENSE_KEY
-    #   value: '!encrypted PASTE_BUDDY_ENCRYPTED_GRAVITY_FORMS_VALUE_HERE'
-    #   encrypted: true
-    # - key: STAGING_GF_SITE_URL
-    #   value: 'https://staging.example.com'
+    - key: STAGING_ACF_PRO_LICENSE
+      value: '!encrypted wMLA2haH6TKszGnWzUZyt+v87V8DqKMygjX9a2rr7bIm0TPCJzMfFJJOyB3e99fE2O0ZZdu+4FCPfHx9TOgXgQTDcsZUz9b7wMXP0ycjewg=.2w8XoBy9LSV+kBtRBt+YPg=='
+      encrypted: true
+    - key: STAGING_ACF_PRO_SITE_URL
+      value: 'https://a2e.mwb.digital'
+    - key: STAGING_GF_LICENSE_KEY
+      value: '!encrypted 3eyXsR3ddySieHLl+XQmufTq0Jzh+r8DLdDVZkM+3Ef9g/KzGyn+xGUbS6S/zvL0.WqmRCPjeE1GOehMcQfqJlg=='
+      encrypted: true
+    - key: STAGING_GF_SITE_URL
+      value: 'https://a2e.mwb.digital'
 
     # 4. Database overrides (optional). Existing wp-config.php credentials are retained.
     # New database/user default to <account>_stg; a strong password is generated once.
