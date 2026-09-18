@@ -69,13 +69,13 @@
 
     # 5. Initial administrator overrides (optional), using the defaults from the old pipeline.
     # Password: generated once, saved privately on the server. Existing users are untouched.
-    # - key: STAGING_WORDPRESS_ADMIN_USER
-    #   value: 'mwb'
-    # - key: STAGING_WORDPRESS_ADMIN_EMAIL
-    #   value: 'dev@mwb-agency.com'
-    # - key: STAGING_WORDPRESS_ADMIN_PASSWORD
-    #   value: '!encrypted PASTE_BUDDY_ENCRYPTED_ADMIN_PASSWORD_HERE'
-    #   encrypted: true
+    - key: STAGING_WORDPRESS_ADMIN_USER
+      value: 'administrator_8s9J3nNk'
+    - key: STAGING_WORDPRESS_ADMIN_EMAIL
+      value: 'dev@mwb-agency.com'
+    - key: STAGING_WORDPRESS_ADMIN_PASSWORD
+      value: '!encrypted D9UDipOeExhIbZ3q8NrOXEG4taIySwh2Qupx4qIuDCrlR0MJ9DZishG/cEQYnRtd.YGxhcNs8U9ncbJ8FMsDf1g=='
+      encrypted: true
     # Optional: the site title defaults to the Buddy project name.
     # - key: STAGING_WORDPRESS_TITLE
     #   value: 'Your website name'
@@ -315,9 +315,11 @@
         if [ ! -f .htaccess ]; then cp "$app/.htaccess" .htaccess; fi
         if [ "$installed" = false ]; then
           rm -f index.html index.htm
+          # WP-CLI can echo prompted passwords to stdout.
           wp core install --url="$url" --title="${STAGING_WORDPRESS_TITLE:-${BUDDY_PROJECT_NAME:-WordPress}}" \
             --admin_user="$STAGING_WORDPRESS_ADMIN_USER" --admin_email="$STAGING_WORDPRESS_ADMIN_EMAIL" \
-            --prompt=admin_password --skip-email <<< "$STAGING_WORDPRESS_ADMIN_PASSWORD"
+            --prompt=admin_password --skip-email <<< "$STAGING_WORDPRESS_ADMIN_PASSWORD" >/dev/null
+          echo 'Success: WordPress installed successfully.'
           if [ "$generated_admin_password" = true ]; then echo "Initial administrator password is saved in $cache/administrator-password (SSH account only)."; fi
           wp rewrite structure '/%postname%/'
         else
@@ -326,9 +328,13 @@
 
         deploy_site_code
         wp plugin activate "${plugins[@]}"
-        wp plugin auto-updates disable "${plugins[@]}"
+        for plugin in "${plugins[@]}"; do
+          auto_update=$(wp plugin auto-updates status "$plugin" --field=status)
+          if [ "$auto_update" = enabled ]; then wp plugin auto-updates disable "$plugin"; fi
+        done
         wp theme activate one-base-theme
-        wp theme auto-updates disable one-base-theme
+        auto_update=$(wp theme auto-updates status one-base-theme --field=status)
+        if [ "$auto_update" = enabled ]; then wp theme auto-updates disable one-base-theme; fi
         wp option update blog_public 0
         wp rewrite flush
         wp cache flush

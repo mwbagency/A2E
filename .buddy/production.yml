@@ -315,9 +315,11 @@
         if [ ! -f .htaccess ]; then cp "$app/.htaccess" .htaccess; fi
         if [ "$installed" = false ]; then
           rm -f index.html index.htm
+          # WP-CLI can echo prompted passwords to stdout.
           wp core install --url="$url" --title="${PRODUCTION_WORDPRESS_TITLE:-${BUDDY_PROJECT_NAME:-WordPress}}" \
             --admin_user="$PRODUCTION_WORDPRESS_ADMIN_USER" --admin_email="$PRODUCTION_WORDPRESS_ADMIN_EMAIL" \
-            --prompt=admin_password --skip-email <<< "$PRODUCTION_WORDPRESS_ADMIN_PASSWORD"
+            --prompt=admin_password --skip-email <<< "$PRODUCTION_WORDPRESS_ADMIN_PASSWORD" >/dev/null
+          echo 'Success: WordPress installed successfully.'
           if [ "$generated_admin_password" = true ]; then echo "Initial administrator password is saved in $cache/administrator-password (SSH account only)."; fi
           wp rewrite structure '/%postname%/'
         else
@@ -326,9 +328,13 @@
 
         deploy_site_code
         wp plugin activate "${plugins[@]}"
-        wp plugin auto-updates disable "${plugins[@]}"
+        for plugin in "${plugins[@]}"; do
+          auto_update=$(wp plugin auto-updates status "$plugin" --field=status)
+          if [ "$auto_update" = enabled ]; then wp plugin auto-updates disable "$plugin"; fi
+        done
         wp theme activate one-base-theme
-        wp theme auto-updates disable one-base-theme
+        auto_update=$(wp theme auto-updates status one-base-theme --field=status)
+        if [ "$auto_update" = enabled ]; then wp theme auto-updates disable one-base-theme; fi
         wp option update blog_public 1
         wp rewrite flush
         wp cache flush
