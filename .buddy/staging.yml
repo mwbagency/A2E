@@ -219,7 +219,9 @@
         composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
         composer check-platform-reqs --no-dev
         unset COMPOSER_AUTH
-        mapfile -t plugins < <(php -r 'foreach (json_decode(file_get_contents("composer.lock"), true)["packages"] as $p) { if ($p["type"] === "wordpress-plugin") { echo ($p["extra"]["installer-name"] ?? explode("/", $p["name"])[1]), "\n"; } }')
+        php -r 'foreach (json_decode(file_get_contents("composer.lock"), true)["packages"] as $p) { if ($p["type"] === "wordpress-plugin") { echo ($p["extra"]["installer-name"] ?? explode("/", $p["name"])[1]), "\n"; } }' > "$cache/plugins.txt"
+        mapfile -t plugins < "$cache/plugins.txt"
+        rm "$cache/plugins.txt"
 
         mkdir -p "$site"
         cd "$site"
