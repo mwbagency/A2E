@@ -142,8 +142,10 @@
       shell: BASH
       run_as_script: true
       commands: |-
-        set -euo pipefail
+        set -Eeuo pipefail
         set +x
+        trap 'code=$?; printf "Deployment failed at script line %s (exit %s).\n" "$LINENO" "$code" >&2; exit "$code"' ERR
+        echo 'Checking deployment prerequisites...'
         umask 022
         export PATH="${PRODUCTION_PHP_DIRECTORY:+$PRODUCTION_PHP_DIRECTORY:}$PATH"
         wp() { command "${PRODUCTION_WP_CLI_BIN:-wp}" "$@"; }
@@ -156,11 +158,20 @@
         esac
         cache="$PWD/deploy-cache-production"
         # Separate document roots for staging/production, directly under the SSH home.
-        [[ "$(dirname "$site")" == "$PWD" && "$(basename "$site")" =~ ^[a-zA-Z0-9][a-zA-Z0-9_.-]*$ \
-          && "$(basename "$site")" != deploy-cache-* && ! -L "$site" ]]
+        if ! [[ "$(dirname "$site")" == "$PWD" && "$(basename "$site")" =~ ^[a-zA-Z0-9][a-zA-Z0-9_.-]*$ \
+          && "$(basename "$site")" != deploy-cache-* && ! -L "$site" ]]; then
+          echo "Invalid deployment path: $site. Use a non-symlink directory directly under $PWD." >&2
+          exit 1
+        fi
         exec 9>"$PWD/.deploy-production.lock"
-        flock -n 9
-        php -r 'exit(PHP_VERSION_ID >= 80300 && PHP_VERSION_ID < 90000 ? 0 : 1);'
+        flock -n 9 || { echo 'Could not acquire the deployment lock; check for another running deployment.' >&2; exit 1; }
+        php -r '
+          printf("CLI PHP %s (%s)\n", PHP_VERSION, PHP_BINARY);
+          if (PHP_VERSION_ID < 80300 || PHP_VERSION_ID >= 90000) {
+            fwrite(STDERR, "Deployment requires CLI PHP 8.3 or later within PHP 8.x. Set PRODUCTION_PHP_DIRECTORY to the correct PHP bin directory.\n");
+            exit(1);
+          }
+        '
         chmod 700 "$cache"
         # Check UAPI's JSON status without printing credentials or full API responses.
         cpanel() {
