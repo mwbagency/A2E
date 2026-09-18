@@ -223,11 +223,17 @@
         mapfile -t plugins < "$cache/plugins.txt"
         rm "$cache/plugins.txt"
 
+        # Older WP-CLI versions also exclude TinyMCE files when using --skip-content.
+        core="$cache/wordpress-core"
+        rm -rf "$core"
+        wp core download --path="$core" --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
+        wp core verify-checksums --path="$core" --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
+
         mkdir -p "$site"
         cd "$site"
         # File presence is not installation status: an empty database still needs core install.
         if [ ! -f wp-load.php ]; then
-          wp core download --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE" --skip-content --force
+          rsync -a --exclude='/wp-content/' "$core/" "$site/"
         fi
         if [ ! -f wp-config.php ]; then
           export STAGING_WORDPRESS_DB_NAME="${STAGING_WORDPRESS_DB_NAME:-${STAGING_SSH_USERNAME}_stg}"
@@ -290,8 +296,9 @@
         fi
 
         # Pin core intentionally. The check above prevents downgrading an existing site.
-        wp core download --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE" --skip-content --force
+        rsync -a --exclude='/wp-content/' "$core/" "$site/"
         wp core verify-checksums --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
+        rm -rf "$core"
         wp config set WP_ENVIRONMENT_TYPE staging
         wp config set WP_DEBUG false --raw
         wp config set WP_DEBUG_DISPLAY false --raw
