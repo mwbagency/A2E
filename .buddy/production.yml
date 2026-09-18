@@ -3,7 +3,7 @@
 # The website, database and first administrator are set up automatically; overrides are below.
 # For passwords/licences: Buddy Project settings -> YAML tools -> Encrypt.
 # Paste the COMPLETE !encrypted result and keep encrypted: true. Examples are not ciphertext.
-# Server: cPanel, PHP 8.3+ (CLI and web), Composer 2, WP-CLI, rsync and MySQL tools.
+# Server: cPanel, PHP 8.3+ (CLI and web), Composer 2, WP-CLI and MySQL tools.
 # Run staging successfully before deploying the same commit to production.
 - pipeline: Deploy to production
   on: CLICK
@@ -109,7 +109,7 @@
         # Upload only site code: no .env, WordPress config, uploads or development plugin.
         tar --exclude=wp-content/themes/one-base-theme/src \
           --exclude=.DS_Store --exclude=custom-media.css --exclude='*.pot' \
-          -czf .artifacts/buddy/site.tar.gz composer.json composer.lock .htaccess \
+          -czf .artifacts/buddy/site.tar.gz composer.json composer.lock .htaccess .buddy/deploy-files.sh \
           wp-content/mu-plugins wp-content/themes/one-base-theme
     - action: Check PHP
       type: BUILD
@@ -148,6 +148,9 @@
         echo 'Checking deployment prerequisites...'
         umask 022
         export PATH="${PRODUCTION_PHP_DIRECTORY:+$PRODUCTION_PHP_DIRECTORY:}$PATH"
+        for tool in tar cp mv rm mkdir mktemp flock; do
+          if ! command -v "$tool" >/dev/null 2>&1; then echo "Required server command is unavailable: $tool" >&2; exit 1; fi
+        done
         wp() { command "${PRODUCTION_WP_CLI_BIN:-wp}" "$@"; }
         composer() { command "${PRODUCTION_COMPOSER_BIN:-composer}" "$@"; }
         site="${PRODUCTION_WORDPRESS_PATH:-public_html}"
@@ -203,6 +206,7 @@
         rm -rf "$app"
         mkdir "$app"
         tar -xzf "$cache/site.tar.gz" -C "$app"
+        source "$app/.buddy/deploy-files.sh"
         cd "$app"
         export PRODUCTION_ACF_PRO_LICENSE PRODUCTION_ACF_PRO_SITE_URL PRODUCTION_GF_LICENSE_KEY PRODUCTION_GF_SITE_URL
         export COMPOSER_AUTH="$(php -r '
@@ -233,7 +237,7 @@
         cd "$site"
         # File presence is not installation status: an empty database still needs core install.
         if [ ! -f wp-load.php ]; then
-          rsync -a --exclude='/wp-content/' "$core/" "$site/"
+          copy_wordpress_core
         fi
         if [ ! -f wp-config.php ]; then
           export PRODUCTION_WORDPRESS_DB_NAME="${PRODUCTION_WORDPRESS_DB_NAME:-${PRODUCTION_SSH_USERNAME}_prd}"
@@ -296,7 +300,7 @@
         fi
 
         # Pin core intentionally. The check above prevents downgrading an existing site.
-        rsync -a --exclude='/wp-content/' "$core/" "$site/"
+        copy_wordpress_core
         wp core verify-checksums --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
         rm -rf "$core"
         wp config set WP_ENVIRONMENT_TYPE production
@@ -320,16 +324,7 @@
           wp core update-db --skip-plugins --skip-themes
         fi
 
-        # Delete stale files only inside repository-owned code. Retain uploads and other plugins.
-        mkdir -p wp-content/themes/one-base-theme wp-content/mu-plugins wp-content/plugins
-        rsync -a --delete "$app/wp-content/themes/one-base-theme/" wp-content/themes/one-base-theme/
-        rsync -a --delete --include='/one-*/***' --include='/one-*.php' --exclude='*' "$app/wp-content/mu-plugins/" wp-content/mu-plugins/
-        for plugin in "${plugins[@]}"; do
-          mkdir -p "wp-content/plugins/$plugin"
-          rsync -a --delete "$app/wp-content/plugins/$plugin/" "wp-content/plugins/$plugin/"
-        done
-        rsync -a --delete "$app/vendor/" vendor/
-        cp "$app/composer.json" "$app/composer.lock" .
+        deploy_site_code
         wp plugin activate "${plugins[@]}"
         wp plugin auto-updates disable "${plugins[@]}"
         wp theme activate one-base-theme
