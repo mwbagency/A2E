@@ -13,6 +13,8 @@ final class Setup
         add_filter('block_categories_all', [$this, 'register_block_category']);
         add_filter('default_template_types', [$this, 'describe_page_template']);
         add_filter('register_service_post_type_args', [$this, 'service_editor_template']);
+        add_filter('register_course_post_type_args', [$this, 'course_editor_template']);
+        add_action('enqueue_block_editor_assets', [$this, 'simple_page_starter']);
     }
 
     public function setup(): void
@@ -57,6 +59,35 @@ final class Setup
         $args['template'] = [['core/pattern', ['slug' => 'one-202x/page005_service-detail']]];
 
         return $args;
+    }
+
+    /** Give new courses editable section patterns; the single template owns the hero. */
+    public function course_editor_template(array $args): array
+    {
+        $args['template'] = [['core/pattern', ['slug' => 'one-202x/page014_course']]];
+
+        return $args;
+    }
+
+    /** Load per-page starter text only in the page editor; the template remains shared. */
+    public function simple_page_starter(): void
+    {
+        $screen = get_current_screen();
+        if (!$screen || $screen->base !== 'post' || $screen->post_type !== 'page') {
+            return;
+        }
+
+        $pattern = \WP_Block_Patterns_Registry::get_instance()->get_registered('one-202x/cont014_simple-page-starter');
+        if (!$pattern) {
+            return;
+        }
+
+        $path = 'assets/js/editor/simple-page-starter.js';
+        wp_enqueue_script('one-202x-simple-page-starter', get_theme_file_uri($path),
+            ['wp-dom-ready', 'wp-data', 'wp-blocks', 'wp-core-data', 'wp-editor'],
+            (new Assets())->version($path), true);
+        wp_add_inline_script('one-202x-simple-page-starter',
+            'window.one202xSimplePageStarter = ' . wp_json_encode($pattern['content']) . ';', 'before');
     }
 
     public function register_pattern_category(): void

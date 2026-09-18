@@ -65,12 +65,56 @@ final class Blocks
     {
         // Metadata registration happens on init, before WordPress renders page content.
         add_action('init', [$this, 'register']);
+        add_filter('block_core_navigation_render_inner_blocks', [$this, 'linked_dropdown_context'], 20);
+        add_filter('render_block_core/navigation', [$this, 'linked_dropdown_interactivity'], 20);
         add_filter(
             'render_block_core/navigation',
             [$this, 'isolate_mobile_navigation_context'],
             10,
             2
         );
+    }
+
+    /** Keep the parent URL and give linked dropdowns their own native toggle button. */
+    public function linked_dropdown_context(\WP_Block_List $blocks): \WP_Block_List
+    {
+        // Navigation renders its saved menu directly, bypassing render_block_context.
+        foreach ($blocks as $block) {
+            if ($block->name === 'core/navigation-submenu'
+                && in_array('is-style-a2e-linked-dropdown', explode(' ', $block->attributes['className'] ?? ''), true)) {
+                $block->context['submenuVisibility'] = 'hover';
+                $block->context['openSubmenusOnClick'] = null;
+                $block->context['showSubmenuIcon'] = true;
+            }
+            if ($block->inner_blocks instanceof \WP_Block_List) {
+                $this->linked_dropdown_context($block->inner_blocks);
+            }
+        }
+        return $blocks;
+    }
+
+    /** Enhance only opted-in submenus; Core still renders links, buttons and open state. */
+    public function linked_dropdown_interactivity(string $content): string
+    {
+        $tags = new \WP_HTML_Tag_Processor($content);
+        $found = false;
+        while ($tags->next_tag(['tag_name' => 'LI', 'class_name' => 'is-style-a2e-linked-dropdown'])) {
+            $found = true;
+            $tags->set_attribute('data-wp-on--pointerenter', 'one-202x/navigation::actions.enter');
+            $tags->set_attribute('data-wp-on--pointerleave', 'one-202x/navigation::actions.leave');
+            $tags->set_attribute('data-wp-on--keydown', 'one-202x/navigation::actions.escape');
+            $tags->set_attribute('data-wp-on-window--keydown', 'one-202x/navigation::actions.escape');
+            $tags->set_attribute('data-wp-on-window--click', 'one-202x/navigation::actions.outside');
+            if ($tags->next_tag(['tag_name' => 'BUTTON', 'class_name' => 'wp-block-navigation-submenu__toggle'])) {
+                $tags->set_attribute('data-wp-on--click', 'one-202x/navigation::actions.toggle');
+            }
+        }
+        if ($found) {
+            $path = 'assets/js/patterns/head/head001_navigation.js';
+            wp_enqueue_script_module('one-202x-linked-navigation', get_theme_file_uri($path),
+                ['@wordpress/interactivity'], (new Assets())->version($path));
+        }
+        return $tags->get_updated_html();
     }
 
     /**
@@ -126,6 +170,10 @@ final class Blocks
 
     public function register(): void
     {
+        register_block_style('core/navigation-submenu', [
+            'name' => 'a2e-linked-dropdown',
+            'label' => __('A2E linked dropdown', 'one-base-theme'),
+        ]);
         $assets = new Assets();
         $view_script = 'blocks/media-cover/view.js';
 

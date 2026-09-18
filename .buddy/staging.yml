@@ -18,9 +18,9 @@
     - key: STAGING_SSH_PORT
       value: '722'
     - key: STAGING_SSH_USERNAME
-      value: 'cpanel_account'
-    - key: STAGING_SSH_PASSWORD
-      value: '!encrypted PASTE_BUDDY_ENCRYPTED_SSH_PASSWORD_HERE'
+      value: 'a2emwb'
+    - key: PRODUCTION_SSH_PASSWORD
+      value: '!encrypted 0EPyVL4iG97wvjAh7zjXBOXRdO+RsP6uzREF78maey0=.d1GGSyLVbb2cb+4JPcAS8A=='
       encrypted: true
 
     # 2. Website overrides (optional). Default folder: public_html in the SSH account home.

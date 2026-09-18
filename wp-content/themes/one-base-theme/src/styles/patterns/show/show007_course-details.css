@@ -22,7 +22,7 @@
             height: 2rem;
         }
 
-        & h3 {
+        & :is(h2, h3) {
             font-size: var(--wp--preset--font-size--h-5);
             font-weight: 600;
             line-height: 1.25;

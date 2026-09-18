@@ -29,6 +29,7 @@ await build({
 	outdir: `${theme}/assets/js`,
 	bundle: true,
 	format: 'esm',
+	external: ['@wordpress/interactivity'],
 	target: 'es2020',
 	minify: production,
 	legalComments: 'none',

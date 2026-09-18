@@ -30,7 +30,12 @@ console.log(`JavaScript syntax and JSON parsing passed for ${count} files.`);
 
 // Use local PHP when available; otherwise use the project's existing Docker PHP.
 const php = spawnSync('php', ['--version'], { encoding: 'utf8' });
-const result = php.status === 0
-	? spawnSync('php', ['scripts/check-php.php'], { stdio: 'inherit' })
-	: spawnSync('docker', ['compose', 'run', '--rm', '--no-deps', '--entrypoint', 'php', 'wpcli', 'scripts/check-php.php'], { stdio: 'inherit' });
-if (result.error || result.status !== 0) throw result.error || new Error('PHP syntax check failed.');
+for (const args of [
+	['scripts/check-php.php'],
+	['skills/wordpress-site-build/scripts/check-page-patterns.php', 'wp-content/themes/one-base-theme'],
+]) {
+	const result = php.status === 0
+		? spawnSync('php', args, { stdio: 'inherit' })
+		: spawnSync('docker', ['compose', 'run', '--rm', '--no-deps', '--entrypoint', 'php', 'wpcli', ...args], { stdio: 'inherit' });
+	if (result.error || result.status !== 0) throw result.error || new Error(`PHP check failed: ${args[0]}`);
+}

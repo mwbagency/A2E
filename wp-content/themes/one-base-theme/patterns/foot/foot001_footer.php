@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Title: Footer
  * Description: A to E company details, social links, institution navigation, contacts and legal links.
@@ -19,7 +20,7 @@ $institution_links = [
 $legal_links = [
     [__('Privacy Policy', 'one-base-theme'), home_url('/privacy-policy/')],
     [__('Cookies Policy', 'one-base-theme'), home_url('/cookies-policy/')],
-    [__('Terms & Conditions', 'one-base-theme'), home_url('/terms-conditions/')],
+    [__('Terms & Conditions', 'one-base-theme'), home_url('/terms-and-conditions/')],
 ];
 ?>
 <!-- wp:group {"align":"full","className":"one-202x-footer","layout":{"type":"default"}} -->
@@ -31,12 +32,12 @@ $legal_links = [
             <!-- wp:group {"className":"one-202x-footer__brand","layout":{"type":"default"}} -->
             <div class="wp-block-group one-202x-footer__brand">
                 <!-- wp:image {"width":"232px","height":"86px","sizeSlug":"full","linkDestination":"custom","className":"one-202x-footer__logo"} -->
-                <figure class="wp-block-image size-full is-resized one-202x-footer__logo"><a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo esc_url(get_theme_file_uri('assets/images/a-to-e-logo-light.svg')); ?>" alt="<?php esc_attr_e('A to E Training & Solutions', 'one-base-theme'); ?>" style="width:232px;height:86px"/></a></figure>
+                <figure class="wp-block-image size-full is-resized one-202x-footer__logo"><a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo esc_url(get_theme_file_uri('assets/images/a-to-e-logo-light.svg')); ?>" alt="<?php esc_attr_e('A to E Training & Solutions', 'one-base-theme'); ?>" style="width:232px;height:86px" /></a></figure>
                 <!-- /wp:image -->
 
                 <!-- wp:group {"className":"one-202x-footer__company","layout":{"type":"default"}} -->
                 <div class="wp-block-group one-202x-footer__company">
-                    <!-- wp:paragraph -->
+                <!-- wp:paragraph -->
                     <p><?php esc_html_e("The UK's largest specialist healthcare training and clinical service provider, clinician-led since 2006.", 'one-base-theme'); ?></p>
                     <!-- /wp:paragraph -->
                     <!-- wp:paragraph -->
@@ -105,12 +106,12 @@ $legal_links = [
 
             <!-- wp:paragraph {"className":"one-202x-footer__copyright"} -->
             <p class="one-202x-footer__copyright"><?php
-                printf(
-                    /* translators: %s: Current year. */
-                    esc_html__('© %s A to E Training & Solutions Ltd. All rights reserved.', 'one-base-theme'),
-                    esc_html(wp_date('Y'))
-                );
-            ?></p>
+                                                    printf(
+                                                        /* translators: %s: Current year. */
+                                                        esc_html__('© %s A to E Training & Solutions Ltd. All rights reserved.', 'one-base-theme'),
+                                                        esc_html(wp_date('Y'))
+                                                    );
+                                                    ?></p>
             <!-- /wp:paragraph -->
         </div>
         <!-- /wp:group -->

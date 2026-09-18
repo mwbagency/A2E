@@ -1,0 +1,40 @@
+.one-202x-pattern-show020_course-navigation {
+    padding: 1rem var(--a2e-section-inset);
+    background: rgb(17 17 17 / 60%);
+    color: var(--wp--preset--color--base);
+
+    & .wp-block-navigation__container {
+        flex-wrap: nowrap;
+        gap: 1.75rem;
+        overflow-x: auto;
+        padding-block-end: 0.25rem;
+        scrollbar-width: thin;
+    }
+
+    & .wp-block-navigation-item {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    & .wp-block-navigation-item__content {
+        padding-block: 0.75rem;
+        border-radius: var(--wp--custom--radius--control);
+        line-height: 1.4;
+        text-decoration: none;
+
+        &[aria-current="location"] {
+            padding-inline: 1.5rem;
+            background: var(--wp--preset--color--base);
+            color: var(--wp--preset--color--contrast);
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: -2px;
+        }
+    }
+}

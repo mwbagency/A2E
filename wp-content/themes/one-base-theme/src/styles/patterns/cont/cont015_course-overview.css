@@ -1,0 +1,160 @@
+.one-202x-pattern-cont015_course-overview {
+    padding: 4.5rem var(--a2e-section-inset);
+    color: var(--wp--preset--color--contrast);
+
+    & > * {
+        margin-block: 0;
+    }
+
+    & > * + * {
+        margin-block-start: 2rem;
+    }
+
+    & .a2e-course-profile__top {
+        display: grid;
+        grid-template-columns: minmax(0, 856fr) minmax(0, 416fr);
+        gap: 1.5rem;
+
+        & > * {
+            min-inline-size: 0;
+            margin: 0;
+        }
+    }
+
+    & .a2e-course-profile__overview {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+
+        & > * {
+            margin: 0;
+        }
+    }
+
+    & .a2e-course-profile__overview-copy {
+        flex: 1;
+        padding: 1.5rem 1rem;
+        border: 0.5px solid currentColor;
+        border-block-start: 0;
+
+        & > * {
+            margin: 0;
+        }
+
+        & > * + * {
+            margin-block-start: 1rem;
+        }
+    }
+
+    & .a2e-course-profile__main {
+        inline-size: calc((100% - 1.5rem) * 856 / 1272);
+        scroll-margin-block-start: 1rem;
+
+        & > :first-child {
+            margin-block-start: 0;
+        }
+    }
+
+    & .a2e-course-profile__stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+        margin-block-start: 1.5rem;
+    }
+
+    & .a2e-course-profile__stat {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin: 0;
+
+        & > .wp-block-icon {
+            flex: 0 0 3.125rem;
+            inline-size: 3.125rem;
+            block-size: 3.125rem;
+            margin: 0;
+
+            & svg {
+                inline-size: 100%;
+                block-size: 100%;
+            }
+        }
+
+        & > .wp-block-group {
+            min-inline-size: 0;
+            margin: 0;
+
+            & > * {
+                margin: 0;
+                letter-spacing: 0;
+            }
+
+            & h3 {
+                font-weight: 700;
+            }
+
+            & p {
+                margin-block-start: 0.5rem;
+                line-height: 1.25;
+            }
+        }
+    }
+
+    & .a2e-course-profile__instructor {
+        padding: 1.5rem;
+        border: 0.5px solid currentColor;
+
+        & > p {
+            margin: 0 0 1rem;
+        }
+
+        & .one-202x-content-card--team-member {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 17.25rem);
+            align-items: center;
+            gap: 2rem;
+            padding: 0;
+            border: 0;
+            margin: 0;
+
+            & .one-202x-content-card__title {
+                font-size: var(--wp--preset--font-size--h-3);
+                font-weight: 300;
+                line-height: 1.05;
+            }
+
+            & .one-202x-content-card__media {
+                inline-size: 100%;
+            }
+
+            & .one-202x-content-card__image {
+                aspect-ratio: 1;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    @media (--tablet-down) {
+        padding-block: 3rem;
+
+        & .a2e-course-profile__stats {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (--mobile) {
+        & .a2e-course-profile__top,
+        & .a2e-course-profile__stats,
+        & .a2e-course-profile__instructor .one-202x-content-card--team-member {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        & .a2e-course-profile__main {
+            inline-size: 100%;
+        }
+
+        & .a2e-course-profile__instructor .one-202x-content-card__media {
+            max-inline-size: 17.25rem;
+        }
+    }
+}

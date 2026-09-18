@@ -1,0 +1,4 @@
+interface:
+  display_name: "WordPress Site Build"
+  short_description: "Build reusable WordPress themes and Figma layouts"
+  default_prompt: "Use $wordpress-site-build to implement this WordPress site using the existing theme, reusable patterns and project conventions."

@@ -342,6 +342,48 @@
     },
     "customTemplates": [
         {
+            "name": "courses-page",
+            "title": "Courses page — A2E",
+            "postTypes": [
+                "page"
+            ]
+        },
+        {
+            "name": "testimonials-page",
+            "title": "Client testimonials page — A2E",
+            "postTypes": [
+                "page"
+            ]
+        },
+        {
+            "name": "contact-page",
+            "title": "Contact page — A2E",
+            "postTypes": [
+                "page"
+            ]
+        },
+        {
+            "name": "confirmation-page",
+            "title": "Confirmation page — A2E",
+            "postTypes": [
+                "page"
+            ]
+        },
+        {
+            "name": "privacy-policy-page",
+            "title": "Privacy policy page — A2E",
+            "postTypes": [
+                "page"
+            ]
+        },
+        {
+            "name": "simple-page",
+            "title": "Simple page — A2E",
+            "postTypes": [
+                "page"
+            ]
+        },
+        {
             "name": "faqs-page",
             "title": "FAQs page — A2E",
             "postTypes": [
