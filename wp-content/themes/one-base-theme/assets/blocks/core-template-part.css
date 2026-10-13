@@ -587,7 +587,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
     }
 }
 
-@container one-202x-head (width > 78rem) {
+@container one-202x-head (width > 80rem) {
     body .one-202x-head {
         & .one-202x-head__utility-navigation {
             display: flex;
@@ -609,7 +609,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
     display: none;
 }
 
-@container one-202x-head (width <= 78rem) {
+@container one-202x-head (width <= 80rem) {
     .one-202x-head {
         &.has-background {
             padding: 1rem;

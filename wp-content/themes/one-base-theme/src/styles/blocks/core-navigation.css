@@ -214,7 +214,7 @@ body .one-202x-mobile-nav__menu .is-style-a2e-linked-dropdown {
     }
 }
 
-@container one-202x-head (width > 78rem) {
+@container one-202x-head (width > 80rem) {
     .one-202x-head__navigation {
         &,
         & > .wp-block-navigation__responsive-container:not(.is-menu-open),

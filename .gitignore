@@ -29,6 +29,7 @@ wp-config.php
 
 # Local uploads, plugin cache and generated files.
 /wp-content/uploads/
+/wp-content/upgrade/
 /wp-content/advanced-cache.php
 /wp-content/cache/
 /wp-content/settings/cache-enabler/

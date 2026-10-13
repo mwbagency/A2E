@@ -1,0 +1,26 @@
+.a2e-heading-panel {
+    display: grid;
+    align-items: center;
+    gap: var(--wp--preset--spacing--lg);
+
+    & > * {
+        min-inline-size: 0;
+    }
+
+    & .one-202x-section-intro__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wp--preset--spacing--sm);
+    }
+
+    & .wp-block-one-202x-media-cover {
+        min-height: 0;
+        aspect-ratio: 4 / 3;
+    }
+
+    @media (width > 37.5rem) {
+        &.has-image {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+}

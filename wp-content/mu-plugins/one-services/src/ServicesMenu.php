@@ -83,7 +83,8 @@ final class ServicesMenu
             'id' => $node['id'],
             'type' => $node['type'],
             'kind' => $node['type'] === 'service' ? 'post-type' : 'taxonomy',
-            'className' => 'a2e-services-menu__' . ($depth === 0 ? 'area' : ($node['type'] === 'service' ? 'course' : 'level')),
+            'className' => 'a2e-services-menu__' . ($depth === 0 ? 'area' : ($node['type'] === 'service' ? 'course' : 'level'))
+                . ($node['children'] ? ' is-style-a2e-linked-dropdown' : ''),
         ], array_map(fn($child) => $this->branch($child, $depth + 1), $node['children']));
     }
 

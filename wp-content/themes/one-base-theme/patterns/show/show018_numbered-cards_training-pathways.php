@@ -14,7 +14,7 @@ defined('ABSPATH') || exit;
     <!-- wp:group {"metadata":{"name":"Scrolling cards"},"className":"a2e-numbered-cards__track","layout":{"type":"default"}} -->
     <div class="wp-block-group a2e-numbered-cards__track">
                 <!-- wp:group {"metadata":{"name":"Image card"},"tagName":"article","className":"a2e-numbered-card a2e-numbered-card--reveal","layout":{"type":"default"}} -->
-        <article class="wp-block-group a2e-numbered-card">
+        <article class="wp-block-group a2e-numbered-card a2e-numbered-card--reveal">
             <!-- wp:group {"className":"a2e-numbered-card__content","layout":{"type":"default"}} -->
             <div class="wp-block-group a2e-numbered-card__content">
                 <!-- wp:paragraph {"className":"a2e-numbered-card__number","fontSize":"overline"} -->
@@ -40,7 +40,7 @@ defined('ABSPATH') || exit;
             <!-- /wp:one-202x/icon-button -->
 </article>
 <!-- /wp:group -->
-                <!-- wp:group {"metadata":{"name":"Text card"},"tagName":"article","className":"a2e-numbered-card a2e-numbered-card\u002d\u002dsolid","layout":{"type":"default"}} -->
+                <!-- wp:group {"metadata":{"name":"Text card"},"tagName":"article","className":"a2e-numbered-card a2e-numbered-card--reveal","layout":{"type":"default"}} -->
         <article class="wp-block-group a2e-numbered-card a2e-numbered-card--reveal">
             <!-- wp:group {"className":"a2e-numbered-card__content","layout":{"type":"default"}} -->
             <div class="wp-block-group a2e-numbered-card__content">
@@ -68,7 +68,7 @@ defined('ABSPATH') || exit;
 </article>
 <!-- /wp:group -->
                 <!-- wp:group {"metadata":{"name":"Image card"},"tagName":"article","className":"a2e-numbered-card a2e-numbered-card--reveal","layout":{"type":"default"}} -->
-        <article class="wp-block-group a2e-numbered-card">
+        <article class="wp-block-group a2e-numbered-card a2e-numbered-card--reveal">
             <!-- wp:group {"className":"a2e-numbered-card__content","layout":{"type":"default"}} -->
             <div class="wp-block-group a2e-numbered-card__content">
                 <!-- wp:paragraph {"className":"a2e-numbered-card__number","fontSize":"overline"} -->
@@ -95,7 +95,7 @@ defined('ABSPATH') || exit;
 </article>
 <!-- /wp:group -->
                 <!-- wp:group {"metadata":{"name":"Image card"},"tagName":"article","className":"a2e-numbered-card a2e-numbered-card--reveal","layout":{"type":"default"}} -->
-        <article class="wp-block-group a2e-numbered-card">
+        <article class="wp-block-group a2e-numbered-card a2e-numbered-card--reveal">
             <!-- wp:group {"className":"a2e-numbered-card__content","layout":{"type":"default"}} -->
             <div class="wp-block-group a2e-numbered-card__content">
                 <!-- wp:paragraph {"className":"a2e-numbered-card__number","fontSize":"overline"} -->
@@ -123,7 +123,7 @@ defined('ABSPATH') || exit;
 <!-- /wp:group -->
 
 <!-- wp:group {"metadata":{"name":"Image card"},"tagName":"article","className":"a2e-numbered-card a2e-numbered-card--reveal","layout":{"type":"default"}} -->
-        <article class="wp-block-group a2e-numbered-card">
+        <article class="wp-block-group a2e-numbered-card a2e-numbered-card--reveal">
             <!-- wp:group {"className":"a2e-numbered-card__content","layout":{"type":"default"}} -->
             <div class="wp-block-group a2e-numbered-card__content">
                 <!-- wp:paragraph {"className":"a2e-numbered-card__number","fontSize":"overline"} -->
@@ -151,7 +151,7 @@ defined('ABSPATH') || exit;
 <!-- /wp:group -->
 
 <!-- wp:group {"metadata":{"name":"Image card"},"tagName":"article","className":"a2e-numbered-card a2e-numbered-card--reveal","layout":{"type":"default"}} -->
-        <article class="wp-block-group a2e-numbered-card">
+        <article class="wp-block-group a2e-numbered-card a2e-numbered-card--reveal">
             <!-- wp:group {"className":"a2e-numbered-card__content","layout":{"type":"default"}} -->
             <div class="wp-block-group a2e-numbered-card__content">
                 <!-- wp:paragraph {"className":"a2e-numbered-card__number","fontSize":"overline"} -->
@@ -179,7 +179,7 @@ defined('ABSPATH') || exit;
 <!-- /wp:group -->
 
 <!-- wp:group {"metadata":{"name":"Image card"},"tagName":"article","className":"a2e-numbered-card a2e-numbered-card--reveal","layout":{"type":"default"}} -->
-        <article class="wp-block-group a2e-numbered-card">
+        <article class="wp-block-group a2e-numbered-card a2e-numbered-card--reveal">
             <!-- wp:group {"className":"a2e-numbered-card__content","layout":{"type":"default"}} -->
             <div class="wp-block-group a2e-numbered-card__content">
                 <!-- wp:paragraph {"className":"a2e-numbered-card__number","fontSize":"overline"} -->

@@ -144,7 +144,9 @@
       commands: |-
         set -Eeuo pipefail
         set +x
-        trap 'code=$?; printf "Deployment failed at script line %s (exit %s).\n" "$LINENO" "$code" >&2; exit "$code"' ERR
+        # Report a safe stage label; command text can contain passwords or licence keys.
+        stage='checking deployment prerequisites'
+        trap 'code=$?; printf "Deployment failed while %s at script line %s (exit %s).\n" "$stage" "$LINENO" "$code" >&2; exit "$code"' ERR
         echo 'Checking deployment prerequisites...'
         umask 022
         export PATH="${PRODUCTION_PHP_DIRECTORY:+$PRODUCTION_PHP_DIRECTORY:}$PATH"
@@ -186,6 +188,7 @@
           chmod 600 "$file"
           cat "$file"
         }
+        stage='resolving the deployment URL'
         # Use the existing site's canonical URL before falling back to cPanel discovery.
         url="${PRODUCTION_WORDPRESS_URL:-}"
         if [ -z "$url" ] && [ -f "$site/wp-config.php" ] && wp --path="$site" core is-installed --skip-plugins --skip-themes; then
@@ -197,10 +200,14 @@
           url="https://$domain"
         fi
         url="${url%/}"
-        [[ "$url" == https://* ]]
+        if ! [[ "$url" == https://* ]]; then
+          echo 'Deployment requires an HTTPS URL. Check PRODUCTION_WORDPRESS_URL and the existing WordPress home URL.' >&2
+          exit 1
+        fi
         export PRODUCTION_ACF_PRO_SITE_URL="${PRODUCTION_ACF_PRO_SITE_URL:-$url}"
         export PRODUCTION_GF_SITE_URL="${PRODUCTION_GF_SITE_URL:-$url}"
 
+        stage='installing Composer dependencies'
         # Install the committed plugin versions privately before changing the website.
         app="$cache/app"
         rm -rf "$app"
@@ -209,7 +216,7 @@
         source "$app/.buddy/deploy-files.sh"
         cd "$app"
         export PRODUCTION_ACF_PRO_LICENSE PRODUCTION_ACF_PRO_SITE_URL PRODUCTION_GF_LICENSE_KEY PRODUCTION_GF_SITE_URL
-        export COMPOSER_AUTH="$(php -r '
+        COMPOSER_AUTH="$(php -r '
           $auth = ["http-basic" => [
             "connect.advancedcustomfields.com" => ["username" => getenv("PRODUCTION_ACF_PRO_LICENSE"), "password" => getenv("PRODUCTION_ACF_PRO_SITE_URL")],
             "composer.gravity.io" => ["username" => getenv("PRODUCTION_GF_LICENSE_KEY"), "password" => getenv("PRODUCTION_GF_SITE_URL")]
@@ -219,7 +226,11 @@
           }
           echo json_encode($auth, JSON_THROW_ON_ERROR);
         ')"
-        test -n "$COMPOSER_AUTH"
+        if [ -z "$COMPOSER_AUTH" ]; then
+          echo 'Could not prepare Composer authentication; check both plugin licence settings.' >&2
+          exit 1
+        fi
+        export COMPOSER_AUTH
         composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
         composer check-platform-reqs --no-dev
         unset COMPOSER_AUTH
@@ -227,23 +238,29 @@
         mapfile -t plugins < "$cache/plugins.txt"
         rm "$cache/plugins.txt"
 
+        stage='downloading and verifying WordPress core'
         # Older WP-CLI versions also exclude TinyMCE files when using --skip-content.
         core="$cache/wordpress-core"
         rm -rf "$core"
         wp core download --path="$core" --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
         wp core verify-checksums --path="$core" --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
 
+        stage='preparing the document root'
         mkdir -p "$site"
         cd "$site"
         # File presence is not installation status: an empty database still needs core install.
         if [ ! -f wp-load.php ]; then
           copy_wordpress_core
         fi
+        stage='preparing the database and WordPress configuration'
         if [ ! -f wp-config.php ]; then
           export PRODUCTION_WORDPRESS_DB_NAME="${PRODUCTION_WORDPRESS_DB_NAME:-${PRODUCTION_SSH_USERNAME}_prd}"
           export PRODUCTION_WORDPRESS_DB_USER="${PRODUCTION_WORDPRESS_DB_USER:-${PRODUCTION_SSH_USERNAME}_prd}"
           if [ "${PRODUCTION_CREATE_DATABASE:-true}" = true ]; then
-            [[ "$PRODUCTION_WORDPRESS_DB_NAME" == "${PRODUCTION_SSH_USERNAME}_"* && "$PRODUCTION_WORDPRESS_DB_USER" == "${PRODUCTION_SSH_USERNAME}_"* ]]
+            if ! [[ "$PRODUCTION_WORDPRESS_DB_NAME" == "${PRODUCTION_SSH_USERNAME}_"* && "$PRODUCTION_WORDPRESS_DB_USER" == "${PRODUCTION_SSH_USERNAME}_"* ]]; then
+              echo 'Database creation requires the database name and user to begin with the SSH account name followed by an underscore. Check PRODUCTION_WORDPRESS_DB_NAME and PRODUCTION_WORDPRESS_DB_USER.' >&2
+              exit 1
+            fi
             users=$(cpanel Mysql list_users)
             databases=$(cpanel Mysql list_databases)
             user_exists=false
@@ -272,14 +289,22 @@
           chmod 600 "$cache/new-wp-config.php"
           mv "$cache/new-wp-config.php" wp-config.php
         fi
+        stage='checking the existing WordPress installation'
         chmod 600 wp-config.php
         installed=false
         if wp core is-installed --skip-plugins --skip-themes; then
           installed=true
-          test "$(wp option get home --skip-plugins --skip-themes)" = "$url"
+          stage='checking the existing WordPress URL'
+          existing_url=$(wp option get home --skip-plugins --skip-themes)
+          if [ "${existing_url%/}" != "$url" ]; then
+            printf 'Existing WordPress home URL (%s) differs from deployment URL (%s). Check PRODUCTION_WORDPRESS_URL; deployment will not change the saved URL.\n' "$existing_url" "$url" >&2
+            exit 1
+          fi
           wp eval 'if (is_multisite()) { WP_CLI::error("This pipeline supports single-site WordPress."); }' --skip-plugins --skip-themes
+          stage='checking the installed WordPress version'
           current_version=$(wp core version)
-          php -r 'exit(version_compare($argv[1], $argv[2], ">") ? 1 : 0);' "$current_version" "$WORDPRESS_VERSION"
+          php -r 'if (version_compare($argv[1], $argv[2], ">")) { fwrite(STDERR, "Installed WordPress " . $argv[1] . " is newer than requested " . $argv[2] . "; refusing to downgrade. Check WORDPRESS_VERSION.\n"); exit(1); }' "$current_version" "$WORDPRESS_VERSION"
+          stage='backing up the existing database'
           mkdir -p "$cache/backups"
           # One pre-deployment backup; keep the host's normal off-server backups as well.
           wp db export "$cache/backups/before-deploy.sql.tmp"
@@ -288,6 +313,7 @@
           wp maintenance-mode activate
         else
           # A connection error or an unfamiliar nonempty database stops deployment.
+          stage='checking the database before installation'
           tables=$(wp db query 'SHOW TABLES;' --batch --skip-column-names)
           if [ -n "$tables" ]; then echo 'Database is not empty; refusing a fresh install.' >&2; exit 1; fi
           PRODUCTION_WORDPRESS_ADMIN_USER="${PRODUCTION_WORDPRESS_ADMIN_USER:-mwb}"
@@ -299,10 +325,12 @@
           fi
         fi
 
+        stage='copying and verifying WordPress core'
         # Pin core intentionally. The check above prevents downgrading an existing site.
         copy_wordpress_core
         wp core verify-checksums --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
         rm -rf "$core"
+        stage='updating WordPress configuration'
         wp config set WP_ENVIRONMENT_TYPE production
         wp config set WP_DEBUG false --raw
         wp config set WP_DEBUG_DISPLAY false --raw
@@ -313,6 +341,7 @@
         wp config set GF_LICENSE_KEY "$(php -r 'echo var_export(getenv("PRODUCTION_GF_LICENSE_KEY"), true);')" --raw >/dev/null
         # Preserve host PHP handlers and redirects in an existing .htaccess.
         if [ ! -f .htaccess ]; then cp "$app/.htaccess" .htaccess; fi
+        stage='installing or updating the WordPress database'
         if [ "$installed" = false ]; then
           rm -f index.html index.htm
           # WP-CLI can echo prompted passwords to stdout.
@@ -326,7 +355,9 @@
           wp core update-db --skip-plugins --skip-themes
         fi
 
+        stage='deploying site code'
         deploy_site_code
+        stage='activating site components'
         wp plugin activate "${plugins[@]}"
         for plugin in "${plugins[@]}"; do
           auto_update=$(wp plugin auto-updates status "$plugin" --field=status)
@@ -335,6 +366,7 @@
         wp theme activate one-base-theme
         auto_update=$(wp theme auto-updates status one-base-theme --field=status)
         if [ "$auto_update" = enabled ]; then wp theme auto-updates disable one-base-theme; fi
+        stage='finishing deployment'
         wp option update blog_public 1
         wp rewrite flush
         wp cache flush

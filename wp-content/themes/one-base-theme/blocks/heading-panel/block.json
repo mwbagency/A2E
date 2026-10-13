@@ -1,0 +1,96 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "a2e/heading-panel",
+    "version": "1.0.0",
+    "title": "Heading Panel",
+    "category": "a2e",
+    "icon": "align-pull-left",
+    "description": "A heading, supporting text, buttons and optional image, edited with ACF fields.",
+    "textdomain": "one-base-theme",
+    "acf": {
+        "blockVersion": 3,
+        "renderTemplate": "render.php",
+        "fields": [
+            {
+                "name": "subtitle",
+                "label": "Subtitle",
+                "type": "text"
+            },
+            {
+                "name": "title",
+                "label": "Title",
+                "type": "text"
+            },
+            {
+                "name": "title_level",
+                "label": "Heading level",
+                "type": "select",
+                "choices": { "2": "H2", "3": "H3", "4": "H4", "5": "H5", "6": "H6" },
+                "default_value": "2"
+            },
+            {
+                "name": "description",
+                "label": "Description",
+                "type": "textarea",
+                "rows": 4,
+                "new_lines": "br"
+            },
+            {
+                "name": "buttons",
+                "label": "Buttons",
+                "type": "repeater",
+                "layout": "block",
+                "button_label": "Add button",
+                "sub_fields": [
+                    {
+                        "name": "link",
+                        "label": "Link",
+                        "type": "link",
+                        "return_format": "array",
+                        "required": 1
+                    },
+                    {
+                        "name": "style",
+                        "label": "Style",
+                        "type": "select",
+                        "choices": { "fill": "Filled", "outline-dark": "Outline" },
+                        "default_value": "fill"
+                    },
+                    {
+                        "name": "icon",
+                        "label": "Icon",
+                        "type": "select",
+                        "choices": {
+                            "": "No icon",
+                            "one-202x-regular/arrow-right": "Arrow right",
+                            "one-202x-regular/external-link": "External link"
+                        },
+                        "default_value": ""
+                    }
+                ]
+            },
+            {
+                "name": "image",
+                "label": "Image",
+                "type": "image",
+                "return_format": "array",
+                "preview_size": "medium",
+                "instructions": "Optional. Edit alternative text in the Media Library."
+            }
+        ]
+    },
+    "supports": {
+        "html": false,
+        "anchor": true,
+        "align": ["wide"],
+        "spacing": { "margin": true }
+    },
+    "style": [
+        "one-202x-section-intro-style",
+        "one-202x-icon-button-style",
+        "one-202x-media-cover-style",
+        "wp-block-icon",
+        "file:./style.css"
+    ]
+}

@@ -48,6 +48,8 @@
     }
 
     & .gform_footer {
+        --gf-form-footer-margin-y-start: 0;
+
         position: absolute;
         inset-block-start: 0.375rem;
         inset-inline-end: 0.5rem;
@@ -70,7 +72,7 @@
         }
     }
 
-    & .gform_wrapper .ginput_container_consent {
+    & .gform_wrapper .gfield--type-consent .ginput_container_consent {
         display: flex;
         justify-content: center;
         align-items: start;
@@ -88,6 +90,7 @@
 
         & .gfield_consent_label {
             margin: 0;
+            text-align: center;
             font-size: 1rem;
             font-weight: 400;
             line-height: 1.25;

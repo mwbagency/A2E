@@ -59,7 +59,8 @@
         }
     }
 
-    @media (width <= 64rem) {
+    /* Keep the largest value on one line before switching to three columns. */
+    @media (width <= 75rem) {
         padding-block: 3rem;
 
         & > .wp-block-columns {

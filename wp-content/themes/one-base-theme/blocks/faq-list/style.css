@@ -42,8 +42,6 @@
     }
 
     &[open] > summary {
-        padding-block-start: 1.5rem;
-
         &::after {
             mask-image: url("../../assets/icons/a2e-minus.svg");
         }
@@ -73,7 +71,7 @@
 }
 
 .one-faqs-faqs__answer {
-    padding: 0 1rem 1.5rem;
+    padding: 0 1rem 1rem;
 
     & > :first-child {
         margin-block-start: 0;
