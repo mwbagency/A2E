@@ -30,6 +30,7 @@
     #   value: '/home/cpanel_account/public_html'
     # - key: STAGING_WORDPRESS_URL
     #   value: 'https://staging.example.com'
+    # Minimum core version: existing equal or newer versions are retained.
     - key: WORDPRESS_VERSION
       value: '7.1'
     - key: WORDPRESS_LOCALE
@@ -238,12 +239,23 @@
         mapfile -t plugins < "$cache/plugins.txt"
         rm "$cache/plugins.txt"
 
-        stage='downloading and verifying WordPress core'
-        # Older WP-CLI versions also exclude TinyMCE files when using --skip-content.
+        stage='checking the installed WordPress version'
+        update_core=true
+        if [ -f "$site/wp-load.php" ]; then
+          current_version=$(wp --path="$site" core version)
+          update_core=$(php -r 'echo version_compare($argv[1], $argv[2], "<") ? "true" : "false";' "$current_version" "$WORDPRESS_VERSION")
+          if [ "$update_core" = false ]; then
+            printf 'Keeping installed WordPress %s (configured minimum %s); skipping core download and update.\n' "$current_version" "$WORDPRESS_VERSION"
+          fi
+        fi
         core="$cache/wordpress-core"
-        rm -rf "$core"
-        wp core download --path="$core" --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
-        wp core verify-checksums --path="$core" --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
+        if [ "$update_core" = true ]; then
+          stage='downloading and verifying WordPress core'
+          # Older WP-CLI versions also exclude TinyMCE files when using --skip-content.
+          rm -rf "$core"
+          wp core download --path="$core" --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
+          wp core verify-checksums --path="$core" --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
+        fi
 
         stage='preparing the document root'
         mkdir -p "$site"
@@ -301,9 +313,6 @@
             exit 1
           fi
           wp eval 'if (is_multisite()) { WP_CLI::error("This pipeline supports single-site WordPress."); }' --skip-plugins --skip-themes
-          stage='checking the installed WordPress version'
-          current_version=$(wp core version)
-          php -r 'if (version_compare($argv[1], $argv[2], ">")) { fwrite(STDERR, "Installed WordPress " . $argv[1] . " is newer than requested " . $argv[2] . "; refusing to downgrade. Check WORDPRESS_VERSION.\n"); exit(1); }' "$current_version" "$WORDPRESS_VERSION"
           stage='backing up the existing database'
           mkdir -p "$cache/backups"
           # One pre-deployment backup; keep the host's normal off-server backups as well.
@@ -325,11 +334,13 @@
           fi
         fi
 
-        stage='copying and verifying WordPress core'
-        # Pin core intentionally. The check above prevents downgrading an existing site.
-        copy_wordpress_core
-        wp core verify-checksums --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
-        rm -rf "$core"
+        # Replace core only for a fresh installation or an upgrade.
+        if [ "$update_core" = true ]; then
+          stage='copying and verifying WordPress core'
+          copy_wordpress_core
+          wp core verify-checksums --version="$WORDPRESS_VERSION" --locale="$WORDPRESS_LOCALE"
+          rm -rf "$core"
+        fi
         stage='updating WordPress configuration'
         wp config set WP_ENVIRONMENT_TYPE staging
         wp config set WP_DEBUG false --raw
@@ -351,7 +362,7 @@
           echo 'Success: WordPress installed successfully.'
           if [ "$generated_admin_password" = true ]; then echo "Initial administrator password is saved in $cache/administrator-password (SSH account only)."; fi
           wp rewrite structure '/%postname%/'
-        else
+        elif [ "$update_core" = true ]; then
           wp core update-db --skip-plugins --skip-themes
         fi
 
