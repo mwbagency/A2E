@@ -5,7 +5,7 @@
   "title": "Logo marquee",
   "category": "media",
   "icon": "images-alt2",
-  "description": "A looping row of logos with direction and pause controls. Edit the images using the Gallery inside.",
+  "description": "Add logos directly, then replace or reorder each image. Includes direction and pause controls.",
   "textdomain": "one-base-theme",
   "attributes": {
     "direction": { "type": "string", "enum": ["left", "right"], "default": "left" },
@@ -13,6 +13,7 @@
   },
   "supports": { "html": false, "anchor": true, "align": ["wide", "full"] },
   "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
   "viewScript": "file:./view.js",
   "style": "file:./style.css",
   "render": "file:./render.php"

@@ -11,6 +11,40 @@
 
 defined('ABSPATH') || exit;
 ?>
-<!-- wp:pattern {"slug":"one-202x/cont009_centred-intro_page-title"} /-->
+<?php
+// Page content; edit the inserted blocks independently.
+(static function (): void {
+?>
+<!-- wp:group {"align":"full","className":"one-202x-pattern-page009_simple","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull one-202x-pattern-page009_simple">
+    <!-- wp:group {"className":"one-202x-pattern-cont009_centred-intro","layout":{"type":"default"}} -->
+    <div class="wp-block-group one-202x-pattern-cont009_centred-intro">
+        <!-- wp:paragraph {"align":"center","className":"is-style-eyebrow"} -->
+        <p class="has-text-align-center is-style-eyebrow"><?php esc_html_e('Information', 'one-base-theme'); ?></p>
+        <!-- /wp:paragraph -->
 
-<!-- wp:pattern {"slug":"one-202x/cont014_page-content"} /-->
+        <!-- wp:post-title {"textAlign":"center","level":1,"className":"a2e-centred-intro__title","fontSize":"h-2"} /-->
+    </div>
+    <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+<?php
+})();
+?>
+
+<?php
+// Page content; edit the inserted blocks independently.
+(static function (): void {
+?>
+<!-- wp:group {"align":"full","className":"one-202x-pattern-page009_simple","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull one-202x-pattern-page009_simple">
+    <!-- wp:group {"className":"a2e-simple-page__body","layout":{"type":"constrained"}} -->
+    <div class="wp-block-group a2e-simple-page__body">
+        <!-- wp:post-content {"className":"a2e-simple-page__content","layout":{"type":"constrained"}} /-->
+    </div>
+    <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+<?php
+})();
+?>

@@ -9,24 +9,10 @@
  */
 
 defined('ABSPATH') || exit;
+
+ob_start();
 ?>
-<!-- wp:media-text {"align":"full","mediaType":"image","mediaWidth":58,"isStackedOnMobile":true,"verticalAlignment":"center","className":"one-202x-pattern-cont010_image-features","backgroundColor":"contrast","textColor":"base"} -->
-<div class="wp-block-media-text alignfull is-stacked-on-mobile is-vertically-aligned-center one-202x-pattern-cont010_image-features has-base-color has-contrast-background-color has-text-color has-background" style="grid-template-columns:58% auto"><figure class="wp-block-media-text__media"><img src="<?php echo esc_url(get_theme_file_uri('assets/images/placeholders/a2e-square.png')); ?>" alt=""/></figure><div class="wp-block-media-text__content">
-    <!-- wp:group {"className":"a2e-image-features__content","layout":{"type":"default"}} -->
-    <div class="wp-block-group a2e-image-features__content">
-        <!-- wp:group {"className":"a2e-image-features__heading","layout":{"type":"default"}} -->
-        <div class="wp-block-group a2e-image-features__heading">
-            <!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-            <p class="is-style-eyebrow"><?php esc_html_e('Lorem ipsum dolor', 'one-base-theme'); ?></p>
-            <!-- /wp:paragraph -->
-
-            <!-- wp:heading {"fontSize":"h-2"} -->
-            <h2 class="wp-block-heading has-h-2-font-size"><?php esc_html_e('Lorem ipsum dolor sit amet. Vehicula semper sceleris que massa maecenas.', 'one-base-theme'); ?></h2>
-            <!-- /wp:heading -->
-        </div>
-        <!-- /wp:group -->
-
-        <!-- wp:group {"className":"a2e-image-features__details","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"a2e-image-features__details","layout":{"type":"default"}} -->
         <div class="wp-block-group a2e-image-features__details">
             <!-- wp:paragraph -->
             <p><?php esc_html_e('Lorem ipsum dolor sit amet consectetur. Vitae neque cursus id vitae in aliquam ultrices id. Enim risus id vulputate montes morbi vestibulum massa facilisis ipsum. Semper id sit facilisi faucibus nunc dictum. Dignissim mattis sit pellentesque ac nunc nunc penatibus pellentesque. Nibh.', 'one-base-theme'); ?></p>
@@ -68,7 +54,14 @@ defined('ABSPATH') || exit;
             <!-- /wp:group -->
         </div>
         <!-- /wp:group -->
-    </div>
-    <!-- /wp:group -->
-</div></div>
-<!-- /wp:media-text -->
+<?php
+$details = ob_get_clean();
+get_template_part('pattern-layouts/image-features', null, [
+    'root_attributes' => ['align' => 'full', 'mediaType' => 'image', 'mediaWidth' => 58, 'isStackedOnMobile' => true, 'verticalAlignment' => 'center', 'className' => 'one-202x-pattern-cont010_image-features', 'backgroundColor' => 'contrast', 'textColor' => 'base'],
+    'root_class' => 'wp-block-media-text alignfull is-stacked-on-mobile is-vertically-aligned-center one-202x-pattern-cont010_image-features has-base-color has-contrast-background-color has-text-color has-background',
+    'grid_style' => 'grid-template-columns:58% auto',
+    'eyebrow' => (esc_html__('Lorem ipsum dolor', 'one-base-theme')),
+    'heading' => (esc_html__('Lorem ipsum dolor sit amet. Vehicula semper sceleris que massa maecenas.', 'one-base-theme')),
+    'media' => '<figure class="wp-block-media-text__media"><img src="' . (esc_url(get_theme_file_uri('assets/images/placeholders/a2e-square.png'))) . '" alt=""/></figure>',
+    'details' => $details,
+]);

@@ -1,7 +1,10 @@
 .one-202x-logo-marquee {
     --one-marquee-gap: 2.5rem;
+    --one-marquee-logo-height: 3.5rem;
+    --one-marquee-logo-max-width: 15rem;
     min-inline-size: 0;
 
+    & .one-202x-logo-marquee__track,
     & .wp-block-gallery.has-nested-images {
         display: flex;
         flex-wrap: wrap;
@@ -9,19 +12,35 @@
         gap: var(--one-marquee-gap);
         margin: 0;
 
-        & figure.wp-block-image {
+        /* Gutenberg uses additional wrappers around editable images. */
+        & .wp-block-image {
             &:not(#individual-image) {
-                flex: 0 0 var(--one-marquee-logo-width, 10rem);
-                inline-size: var(--one-marquee-logo-width, 10rem);
-                max-inline-size: 100%;
+                flex: 0 0 auto;
+                inline-size: auto;
+                max-inline-size: min(100%, var(--one-marquee-logo-max-width));
                 margin: 0;
             }
 
+            & .components-resizable-box__container,
+            & .block-editor-image__crop-area {
+                max-inline-size: var(--one-marquee-logo-max-width);
+                max-block-size: var(--one-marquee-logo-height);
+            }
+
             & img {
-                inline-size: var(--one-marquee-image-width, 100%);
-                block-size: var(--one-marquee-logo-height, 5rem);
+                inline-size: auto;
+                block-size: auto;
+                max-inline-size: min(100%, var(--one-marquee-logo-max-width));
+                max-block-size: var(--one-marquee-logo-height);
                 object-fit: contain;
             }
+        }
+
+        & .block-editor-media-placeholder {
+            flex: 0 1 20rem;
+            inline-size: min(100%, 20rem);
+            min-block-size: 0;
+            padding: 1rem;
         }
     }
 
@@ -64,12 +83,13 @@
                 padding-inline-end: var(--one-marquee-gap);
             }
 
+            & .one-202x-logo-marquee__track,
             & .wp-block-gallery.has-nested-images {
                 flex-wrap: nowrap;
             }
 
             & [data-marquee-clone] {
-                display: block;
+                display: flex;
             }
 
             &[data-direction="right"] .one-202x-logo-marquee__belt {
@@ -96,6 +116,7 @@
                     padding: 0;
                 }
 
+                & .one-202x-logo-marquee__track,
                 & .wp-block-gallery.has-nested-images {
                     flex-wrap: wrap;
                 }

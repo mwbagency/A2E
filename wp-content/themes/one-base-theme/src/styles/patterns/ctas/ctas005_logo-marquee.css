@@ -9,6 +9,8 @@
     background: var(--wp--preset--color--base);
     color: var(--wp--preset--color--contrast);
 
+    & .one-202x-logo-marquee__track,
+    & .one-202x-logo-marquee__editor-track,
     & .wp-block-gallery.has-nested-images {
         justify-content: center;
     }

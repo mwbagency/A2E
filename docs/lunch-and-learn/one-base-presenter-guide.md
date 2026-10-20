@@ -148,7 +148,7 @@ Do not put an entire section into **Create pattern** during this four-minute dem
 >
 > “The responsibility that comes with flexibility is testing. We still check the saved editor content, the real page, mobile layout and keyboard interactions. Reusing a block or a pattern gives us a stronger starting point, but it does not replace those checks.”
 
-**Optional code view:** the homepage composition file contains section references in display order. Explain that this removes duplicated section markup from page composition files. Named section variants still own their own markup and do not inherit later markup changes from a similarly named base file.
+**Optional code view:** the homepage composition combines page-specific blocks, shared layout partials with local content, and reusable section references. Explain that there is one registered section pattern per unique layout. Different copy, images, links and query selections belong in the page's blocks, not separate named patterns. Shared PHP layout source does not synchronise content already saved on pages.
 
 ## Slide 8 · Choosing the right starting point · 14:00–15:00
 
@@ -211,8 +211,8 @@ All theme-relative paths below are under `/Users/christopher/Docker/wordpress/a2
 | Change | Source | What to remember |
 | --- | --- | --- |
 | Brand defaults and widths | `theme.json` | Keep existing token slugs stable. Saved global styles and local block styles can override defaults. |
-| Arrange a page starter | `patterns/page/page001_homepage.php` or the relevant page pattern | After metadata and the access guard, use section-pattern references only. |
-| Change a section’s starting markup | `patterns/ctas/ctas004_centred-panel.php`, for example | Existing inserted copies keep their saved content. A named variant has independent markup. |
+| Arrange an existing page starter | `patterns/page/page001_homepage.php` or the relevant page composition | Use ordinary blocks, shared layout calls with local data, and canonical section references. Do not create a pattern just to populate another page. |
+| Change a section’s starting markup | `patterns/ctas/ctas004_centred-panel.php` and `pattern-layouts/centred-panel.php`, for example | Keep one registered pattern per unique layout. Existing inserted copies keep their saved content. |
 | Change section presentation | `src/styles/patterns/ctas/ctas004_centred-panel.css` | Preserve the marker `one-202x-pattern-ctas004_centred-panel`. Rebuild pattern CSS. |
 | Change or create a custom block | `blocks/<slug>/block.json`, renderer and matching script sources | `App/Blocks.php` discovers metadata. Reuse existing blocks before adding one. |
 | Style a custom block | `src/styles/blocks/<slug>/` | Rebuild block CSS. Do not edit generated output alone. |
@@ -236,10 +236,10 @@ Run the relevant build command, not every command automatically. Static checks d
 An actual page-composition reference looks like this:
 
 ```html
-<!-- wp:pattern {"slug":"one-202x/ctas004_centred-panel_training"} /-->
+<!-- wp:pattern {"slug":"one-202x/ctas004_centred-panel"} /-->
 ```
 
-The corresponding section keeps its marker class. Shared CSS can use the theme’s values:
+Use this reference when the supplied section content is suitable. Different page copy belongs in ordinary blocks or a shared layout call with local data. The section keeps its marker class so shared CSS can use the theme’s values:
 
 ```css
 .one-202x-pattern-ctas004_centred-panel {

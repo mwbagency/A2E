@@ -35,3 +35,19 @@ await build({
 	legalComments: 'none',
 	logLevel: 'info',
 });
+
+// Custom block entry points keep their metadata and built assets together.
+const blockEntries = (await entries(source)).filter((file) => file.startsWith(`${source}/blocks/`));
+if (blockEntries.length) {
+	await build({
+		entryPoints: blockEntries,
+		outbase: `${source}/blocks`,
+		outdir: `${theme}/blocks`,
+		bundle: true,
+		format: 'iife',
+		target: 'es2020',
+		minify: production,
+		legalComments: 'none',
+		logLevel: 'info',
+	});
+}

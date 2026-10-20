@@ -1,6 +1,6 @@
 ---
 name: wordpress-site-build
-description: Build and extend Gutenberg WordPress sites using an existing starter theme, Figma designs, reusable blocks, reference-based page patterns and plugin-owned content models. Use for theme architecture, page layouts, blocks, design tokens, listings and editor behaviour in this workflow.
+description: Build and extend Gutenberg WordPress sites using an existing starter theme, Figma designs, reusable blocks and layouts, editable page content and plugin-owned content models. Use for theme architecture, page layouts, blocks, design tokens, listings and editor behaviour in this workflow.
 ---
 
 # WordPress site build
@@ -41,11 +41,17 @@ an unrelated legacy site or migrating saved content as a side effect.
    typography, spacing, content width and wide width. Use exported SVG logos and
    icons or the established icon library. Keep missing licensed font assets
    explicit; retain planned references only when requested.
-4. Build reusable sections, then compose page-pattern files entirely from
-   `core/pattern` references. Keep registration metadata and a direct-access guard
-   in PHP page files; keep section markup, queries and data in section patterns.
+4. Register one pattern per unique reusable section layout. Different copy, media,
+   links, anchors or query selections belong in editable page content. Do not
+   create content-only variants or keep them as a hidden compatibility catalogue.
+   Existing page starters may combine pattern references, ordinary blocks and
+   shared source partials with local content data. Populate a page directly unless
+   a new reusable layout is requested; do not create a pattern merely to hold its
+   content or keep a page file reference-only.
    Read [architecture and patterns](references/architecture-patterns.md) before
-   choosing blocks, variants, templates or synchronisation.
+   choosing blocks, layouts, templates or synchronisation, and before removing
+   registered patterns. Audit references and capture output and saved-content
+   snapshots before removing duplicates; preserve exact content in their owners.
 5. Use readable nested CSS, one declaration per line, existing tokens and scoped
    classes. Edit sources and rebuild the corresponding assets. Respect max width,
    intentional full-bleed areas and mobile stacking. Trace unwanted spacing to
@@ -69,9 +75,10 @@ an unrelated legacy site or migrating saved content as a side effect.
   php /path/to/wordpress-site-build/scripts/check-page-patterns.php /path/to/theme
   ```
 
-  It checks PHP files under `patterns/page`, static slug references, missing
-  targets, duplicate slugs and reference cycles without loading WordPress or
-  writing data. Additional positional arguments explicitly allow slugs registered
+  It checks registered pattern files, static slug references, missing targets,
+  duplicate slugs and reference cycles without loading WordPress or writing data.
+  It permits page-specific blocks and shared source partials in page starters.
+  Additional positional arguments explicitly allow slugs registered
   outside the theme. Runtime-generated references and editor behaviour still need
   WordPress verification. A missing page-pattern directory is reported as a setup
   error, not a pass.

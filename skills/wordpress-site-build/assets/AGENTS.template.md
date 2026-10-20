@@ -25,10 +25,13 @@ this template. Keep workflow rules in the skill and project-specific facts here.
 - Page composition check: {{composition_check_command}}
 - Browser preview URL and representative pages: {{preview_targets}}
 
-Page patterns contain only section-pattern references after registration metadata
-and an optional access guard. Preserve inherited namespaces/categories; apply the
-site category to newly created components. Use the theme's design tokens, readable
-nested CSS, established icon/media controls and content widths.
+Follow the skill's layout and content ownership rules: one registered pattern per
+unique reusable layout, with page-specific content in editable page blocks or
+existing starter compositions. Do not retain content-only variants as hidden
+patterns. Audit references and capture snapshots before removing duplicates.
+Preserve inherited namespaces/categories; apply the site category to newly created
+components. Use the theme's design tokens, readable nested CSS, established
+icon/media controls and content widths.
 
 Preserve saved records and template customisations. Do not add automatic database
 seeding. Resolve missing recipients, external URLs and integration details from

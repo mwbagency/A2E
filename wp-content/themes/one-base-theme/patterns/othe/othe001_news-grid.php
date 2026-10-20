@@ -1,11 +1,11 @@
 <?php
 /**
- * Title: News grid
+ * Title: Content grid — filters and pagination
  * Slug: one-202x/othe001_news-grid
  * Categories: one-202x, one-202x-othe
  * Block Types: core/query
- * Description: Display recent posts with category filters above a responsive card grid and page navigation.
- * Keywords: othe001_news-grid, news, posts, articles, grid, cards
+ * Description: A heading, filters, responsive card grid and pagination. Choose the content type and query in the block settings; edit the heading on the page.
+ * Keywords: othe001_news-grid, news, posts, team, articles, grid, cards
  * Viewport Width: 1440
  */
 

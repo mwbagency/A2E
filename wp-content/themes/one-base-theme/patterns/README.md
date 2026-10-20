@@ -1,32 +1,59 @@
 # Page layouts and shared patterns
 
-Every file in `page/` is a composition only: after its registration header, it
-contains WordPress pattern references in display order. Section markup, content,
-queries and PHP data belong in the referenced section patterns:
+The section library contains one registered pattern per unique reusable layout.
+Insert a section and edit its text, images, links, anchors and query selections on
+the page. New content should not create a new pattern file, including a hidden
+pattern. Register a new section only for a different reusable layout.
+
+The existing files in `page/` preserve the supplied page designs. They combine
+ordinary blocks, shared `pattern-layouts/` calls with local content data, and
+references to sections that can be reused as supplied:
 
 ```html
 <!-- wp:pattern {"slug":"one-202x/show010_statistics-strip"} /-->
 ```
 
-The homepage references the statistics and accreditation patterns directly. The
-homepage and About Us layout also share `show014_blog-posts_latest-news` and
-`show013_testimonials_clients`. Edit those section files to change their shared
-source. Their existing CSS markers continue to load the same styles and scripts.
+Populate new pages in their saved editable blocks. Do not add a page starter just
+to store another page's copy, or create registered section presets to keep starter
+files reference-only.
 
-Sections with page-specific headings, images, buttons, anchors or query settings
-use named variants alongside the original section patterns. For example,
-`page011_contact` references `hero003_shapebanner_contact`,
-`form005_training-enquiry_contact` and `ctas004_centred-panel_corporate`.
-A plain pattern reference cannot pass different content into the referenced
-pattern. These variants preserve the designed content instead of reverting to
-generic defaults. A variant has its own markup; it does not inherit markup changes
-from a similarly named base pattern. Existing marker classes share the CSS and
-scripts. Layout wrappers needed by those classes live inside the section variants.
+## Shared source and pattern removal
 
-Reuse an existing section or variant wherever it is suitable. Create a variant
-only for a different section configuration, and keep the page file reference-only.
-The searchable FAQ hub keeps its search and category groups in one section because
-they share interactive state.
+Content-only section presets are removed from the registered library. Their
+designed content belongs directly in the existing page compositions. The retained
+page starters and structural template patterns keep their roles; hidden
+content-only compatibility patterns are not part of the library.
+
+The introduction, call-to-action, image/text and five shape-hero layouts share PHP
+source markup in `pattern-layouts/`. Reusable patterns and existing page starters
+can supply local content to those partials. Edit a shared partial for a family-wide
+source change. Image/text compositions keep their varied content blocks in a
+buffered slot, with the surrounding layout maintained once.
+
+Keep genuine design alternatives visible, including hero shapes, image/text with
+an information panel, the searchable FAQ hub and the testimonial grid.
+
+Before removing any further pattern, audit page files, templates, starter code and
+saved WordPress records for active references. Snapshot expanded output and saved
+content, preserve the exact blocks or shared-layout calls in their content owners,
+and compare output afterward. Saved blocks that only record a pattern's origin
+need no rewrite. If a saved record actively references a removed slug, expand it
+once only within the task's authorized scope. Preserve CSS markers, wrappers,
+assets and content; do not add automatic migrations or seed pages.
+
+WordPress caches pattern headers. After deploying pattern removals or metadata
+changes, refresh that cache once with `wp eval 'wp_get_theme()->delete_pattern_cache();'`
+(use the project's Docker WP-CLI command locally), then reload the editor. Do not
+add a theme-startup cache flush or content migration for this.
+
+## Accreditation marquee
+
+The accreditation marquee accepts individual Image blocks. Use **Add logos** to
+select multiple images directly; use each image's normal controls to replace,
+reorder, link or edit its alt text. Editor previews stay within 56px high and
+240px wide. Existing gallery-based marquees still render; **Ungroup existing
+logos** converts a plain gallery in the editor when requested, retaining the image
+blocks. Galleries with captions, anchors or dynamic sources are kept intact.
 
 ## References are not synced patterns
 
@@ -56,9 +83,9 @@ content to references or synced patterns.
 
 `single-course.html` supplies the shared header, dynamic course hero, Post Content
 and footer. The theme's `Setup::course_editor_template()` gives empty course editors
-`page014_course`, which contains only section-pattern references. WordPress expands
-these into independent editable blocks when creating a course; no existing records
-are seeded or overwritten.
+the `page014_course` composition. Its page-specific blocks and reusable section
+references become independent editable blocks when creating a course; no existing
+records are seeded or overwritten.
 
 Edit each course's overview, specifications, statistics, booking placeholder and
 query selections in its content. The hero reads its title, featured image, course
@@ -66,6 +93,6 @@ category and existing course fields. Keep section HTML anchors aligned with the
 editable Course section navigation links. The add-on course query excludes the
 current course by default.
 
-The corporate enquiry variant uses local Gravity Form 4, “A2E Course Corporate
+The corporate enquiry form uses local Gravity Form 4, “A2E Course Corporate
 Booking”. Its entries are stored without email notifications until a recipient is
 configured. The separate booking card remains inactive until booking is integrated.

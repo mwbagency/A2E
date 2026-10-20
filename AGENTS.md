@@ -25,9 +25,16 @@ belong to the current task.
 
 ## A2E conventions
 
-- Every `patterns/page/*.php` file contains only section-pattern references after
-  its metadata header and access guard. Keep page-specific copy in named section
-  variants; reuse existing variants first. Variants do not inherit base markup.
+- A2E's section library contains one registered pattern per unique reusable layout.
+  Populate new pages with editable blocks; do not create or retain hidden patterns
+  for different copy, images, links, anchors or query selections.
+- Existing `patterns/page/` compositions preserve the supplied page designs.
+  They may contain ordinary blocks, shared `pattern-layouts/` calls with local
+  content, and references to the reusable section library. Do not expand this
+  starter catalogue solely to populate another page.
+- `pattern-layouts/` owns shared PHP source markup for consolidated section
+  families. Shared source does not synchronise saved blocks. Section CSS markers
+  remain in page content where needed even after a content-only pattern is removed.
 - Use category `a2e` for A2E-created blocks/patterns. Inherited starter components
   retain their original categories and `one-202x` identifiers.
 - Use `theme.json` tokens and layout widths. CSS is readable and nested, with one
@@ -54,7 +61,7 @@ Run commands from the repository root:
 
 - `npm run build:css:patterns` for pattern CSS; use the matching `build:css:*`
   command for other CSS areas. `npm run build:js` builds scripts.
-- `npm run check` checks JS/JSON/PHP and reference-only page composition.
+- `npm run check` checks JS/JSON/PHP and pattern references (missing slugs/cycles).
 - `docker compose run --rm --no-deps wpcli …` runs WordPress CLI commands.
 - `git diff --check` checks whitespace in the diff.
 

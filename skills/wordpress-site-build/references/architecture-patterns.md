@@ -21,7 +21,7 @@ where the starter provides it. Do not hard-code a second manual registry.
 
 ## Page patterns
 
-A page pattern is a list of references, not a second copy of every section:
+A page pattern can compose references to reusable sections:
 
 ```php
 <?php
@@ -42,17 +42,52 @@ Use the site's actual registered slugs and categories. Newly created patterns us
 that site's category; retain the category and namespace of inherited starter
 components unless a rename is requested.
 
-Reuse an existing section reference first. A plain `core/pattern` reference cannot
-pass arbitrary heading, image or button parameters. When copy or structure differs,
-choose deliberately between editable content after insertion, a named section
-variant, or a shared structure with supported content overrides. Preserve Figma
-content; do not silently substitute generic placeholders to achieve reuse.
+Keep one registered section pattern per unique reusable layout. Insert an existing
+section and edit its content on the page by default. A new heading, image, link,
+anchor or query selection is page content, not another layout. Register a new
+pattern only for a genuinely different reusable layout. Reusable behaviour or
+controls may belong in a block instead of another pattern.
 
-A named variant is independently maintained markup unless it explicitly uses a
-shared implementation. Similar filenames or CSS classes do not create inheritance.
-Avoid cloning every section merely because its text differs, and do not promise
-that changing a base pattern updates its variants. Explain the trade-off when the
-user requires both independent content and global structural updates.
+A plain `core/pattern` reference cannot pass arbitrary content parameters. Do not
+work around that limitation by creating a pattern for every page's copy. If an
+existing page starter needs exact content, it may contain ordinary blocks or call
+shared theme source partials with local data. References remain useful for
+sections that can be reused as supplied. Preserve designed content and wrappers;
+do not replace them with generic defaults during consolidation.
+
+Do not add page-starter patterns solely to populate another page. A page starter
+is justified by a reusable composition, not by the existence of a new page.
+Keeping a content-only pattern registered with `Inserter: no` does not remove the
+duplicate; do not maintain a hidden catalogue of these variants.
+
+## Consolidating duplicate patterns
+
+1. Identify the canonical reusable layout and compare each candidate's structure.
+   Keep deliberate layout differences. Record the content, classes, wrappers,
+   anchors, media, links, form IDs and query settings that must survive.
+2. Audit references in page compositions, templates, template parts, starter code
+   and saved WordPress records, including reusable blocks and customised
+   templates. File searches alone are insufficient. Distinguish active
+   `core/pattern` references from origin metadata on already expanded blocks.
+3. Before removal, snapshot expanded source output and relevant saved content.
+   Capture representative rendered layouts when moving wrappers or markup.
+4. Put a content-only variant's exact blocks or shared-source call and local data
+   into the page composition or other source that owns that content. Reuse a
+   canonical reference only where its supplied content is identical. Shared PHP
+   partials can maintain repeated structure without registering extra patterns.
+5. If saved records actively reference a removed slug, perform only a
+   task-authorized one-off expansion into equivalent editable blocks, with the
+   prior content captured for recovery. Preserve unrelated records and
+   customisations. Never add startup migrations, seeding or automatic rewrites.
+6. Remove the duplicate registrations and files after their references are
+   resolved. Preserve asset-discovery markers in the resulting content. Refresh
+   the theme's pattern cache once when needed, then check the registered library,
+   expanded output, saved content, editor validity and representative rendering.
+
+Similar filenames or shared CSS do not create markup inheritance, and shared PHP
+source does not synchronise already inserted blocks. Explain that distinction
+when global updates are required; choose templates, synced patterns or suitable
+custom blocks explicitly.
 
 Layout wrappers belong within section patterns when needed by their styles. Keep
 interdependent UI, such as a searchable FAQ hub and its answer groups, in a

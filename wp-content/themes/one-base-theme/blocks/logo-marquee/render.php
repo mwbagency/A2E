@@ -16,7 +16,7 @@ $duration = min(120, max(10, (float) ($attributes['duration'] ?? 30)));
     <div class="one-202x-logo-marquee__viewport">
         <div class="one-202x-logo-marquee__belt">
             <div class="one-202x-logo-marquee__track" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
-                <?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Rendered inner Gallery. ?>
+                <?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Rendered image blocks, including legacy galleries. ?>
             </div>
         </div>
     </div>

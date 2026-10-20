@@ -1,6 +1,6 @@
 <?php
 /**
- * Read-only composition check; runs without WordPress or database access.
+ * Read-only pattern reference check; runs without WordPress or database access.
  * Usage: php check-page-patterns.php THEME_DIR [external/pattern-slug ...]
  */
 
@@ -56,7 +56,7 @@ foreach ($iterator as $file) {
             continue;
         }
         if ($isPage && array_keys($attrs) !== ['slug']) {
-            $errors[] = "$relative: page references accept only slug; put section configuration in the section pattern.";
+            $errors[] = "$relative: page references accept only slug; edit page blocks or use a shared source partial for instance content.";
         }
         $references[] = $attrs['slug'];
     }
@@ -67,28 +67,8 @@ foreach ($iterator as $file) {
     }
     $pages[] = $slug;
     $referenceCount += count($references);
-    $html = '';
-    $php = '';
-    foreach (token_get_all($source) as $token) {
-        if (!is_array($token)) {
-            $php .= $token;
-        } elseif ($token[0] === T_INLINE_HTML) {
-            $html .= $token[1];
-        } elseif (!in_array($token[0], [T_OPEN_TAG, T_CLOSE_TAG, T_WHITESPACE, T_COMMENT, T_DOC_COMMENT], true)) {
-            $php .= $token[1];
-        }
-    }
-    // A registration header and optional direct-access guard are all a page needs.
-    if ($php !== '' && !preg_match('/^defined\(([\'"])ABSPATH\1\)\|\|exit;$/', $php)) {
-        $errors[] = "$relative: move PHP content/data generation into section patterns.";
-    }
-    $remaining = preg_replace('/<!--\s*wp:pattern\b.*?-->/s', '', $html);
-    if (trim($remaining) !== '') {
-        $errors[] = "$relative: contains inline blocks or markup; use section-pattern references only.";
-    }
-    if ($references === []) {
-        $errors[] = "$relative: contains no section-pattern references.";
-    }
+    // Page starters may include ordinary blocks and shared PHP source partials.
+    // Lint PHP separately; runtime verification must cover generated references.
 }
 
 if ($pages === []) {
@@ -126,4 +106,4 @@ if ($errors !== []) {
     fwrite(STDERR, implode("\n", array_unique($errors)) . "\n");
     exit(1);
 }
-printf("Page composition passed: %d page patterns, %d references; no missing targets or cycles.\n", count($pages), $referenceCount);
+printf("Pattern references passed: %d page patterns, %d page references; no missing targets or cycles.\n", count($pages), $referenceCount);
