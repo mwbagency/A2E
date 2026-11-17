@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: center;
     width: fit-content;
+    min-inline-size: 0;
+    max-inline-size: 100%;
     gap: 0.625rem;
     padding: calc(0.75rem - 1px) calc(2rem - 1px);
     border: 1px solid transparent;
@@ -38,6 +40,11 @@
                 0 0 0 0.125rem var(--wp--preset--color--base),
                 0 0 0 0.25rem var(--wp--preset--color--contrast);
         }
+    }
+
+    & .one-202x-icon-button__label {
+        min-inline-size: 0;
+        overflow-wrap: anywhere;
     }
 
     & .wp-block-icon {
@@ -152,7 +159,8 @@
     }
 }
 
-.wp-block-one-202x-icon-button.a2e-button {
+/* Keep editor-selected text links and dark outlines distinct from filled buttons. */
+.wp-block-one-202x-icon-button.a2e-button:not(:where(.is-style-icon-link, .is-style-icon-link-accent, .is-style-outline-dark)) {
     --a2e-button-background: var(--wp--preset--color--accent);
     --a2e-button-text: var(--wp--preset--color--base);
 

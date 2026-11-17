@@ -84,6 +84,21 @@
         inline-size: 100%;
     }
 
+    /* Editorial labels and price notes must fit even without word separators. */
+    & .one-202x-content-card__metadata,
+    & .one-202x-content-card__product-price,
+    & .one-202x-content-card__programme-facts {
+        min-inline-size: 0;
+        max-inline-size: 100%;
+        overflow-wrap: anywhere;
+
+        & > * {
+            box-sizing: border-box;
+            min-inline-size: 0;
+            max-inline-size: 100%;
+        }
+    }
+
     & .one-202x-content-card__footer {
         margin-block-start: auto;
     }
