@@ -8,7 +8,8 @@
         align-items: center;
         gap: 0.5rem;
         padding: 1rem;
-        border: 0.5px solid var(--wp--preset--color--contrast);
+        border: 1px solid var(--wp--preset--color--contrast);
+        border-radius: var(--wp--custom--radius--card);
         background: var(--wp--preset--color--base);
         color: var(--wp--preset--color--contrast);
 
@@ -31,7 +32,7 @@
     }
 
     & > .wp-block-details {
-        margin-block-start: -0.5px;
+        margin-block-start: 1rem;
     }
 }
 

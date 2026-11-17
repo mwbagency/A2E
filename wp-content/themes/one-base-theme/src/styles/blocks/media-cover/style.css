@@ -6,6 +6,12 @@
     isolation: isolate;
     align-items: center;
     overflow: hidden;
+    border-radius: var(--wp--custom--radius--media);
+
+    &.a2e-hero003__media,
+    &.one-202x-pattern-hero001_fullbanner {
+        border-radius: 0;
+    }
 
     & .one-202x-media-cover__media,
     & .one-202x-media-cover__overlay {

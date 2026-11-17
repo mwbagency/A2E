@@ -1,0 +1,3 @@
+.wp-block-term-template > li > .wp-block-group.has-border-color {
+    border-radius: var(--wp--custom--radius--card);
+}

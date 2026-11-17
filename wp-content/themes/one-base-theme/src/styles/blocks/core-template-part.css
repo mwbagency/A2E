@@ -161,7 +161,7 @@ html {
         padding: 0.5rem;
         background: var(--wp--preset--color--base);
         border: 1px solid var(--wp--preset--color--grey-100);
-        border-radius: 0.5rem;
+        border-radius: var(--wp--custom--radius--card);
         box-shadow: none;
 
         & .wp-block-navigation-item__content {
@@ -448,7 +448,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
         padding: 0.75rem 2rem;
         color: var(--wp--preset--color--base);
         background: var(--wp--preset--color--accent);
-        border-radius: 6.25rem;
+        border-radius: var(--wp--custom--radius--control);
         font-size: var(--wp--preset--font-size--button);
         font-weight: var(--wp--custom--typography--font-weight--bold);
         line-height: 1.25rem;
@@ -536,7 +536,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
             color: var(--wp--preset--color--contrast);
             background: var(--wp--preset--color--base);
             border: 1px solid var(--wp--preset--color--grey-200);
-            border-radius: 0.5rem;
+            border-radius: var(--wp--custom--radius--field);
             font: inherit;
             font-size: 1rem;
         }
@@ -716,7 +716,36 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
     }
 
     & .one-202x-footer__main {
-        padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 5vw, 4.5rem);
+        --footer-brand-edge: calc(var(--a2e-section-inset) + 25.125rem);
+
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        min-block-size: 28.375rem;
+        padding: 4.5rem var(--a2e-section-inset);
+
+        &::before {
+            position: absolute;
+            z-index: -1;
+            inset-block: 0;
+            inset-inline-start: 0;
+            inline-size: var(--footer-brand-edge);
+            background: var(--wp--preset--color--base);
+            content: "";
+            pointer-events: none;
+        }
+
+        &::after {
+            position: absolute;
+            z-index: -1;
+            inset-block-start: -41px;
+            inset-inline-start: calc(var(--footer-brand-edge) - 127.1px);
+            inline-size: 255.8px;
+            block-size: 544.437px;
+            background: url("../images/design/footer-puzzle-edge.svg") center / contain no-repeat;
+            content: "";
+            pointer-events: none;
+        }
     }
 
     & .one-202x-footer__inner,
@@ -738,6 +767,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
         gap: 1.5rem;
         flex: 0 1 18.27125rem;
         min-width: 0;
+        color: var(--wp--preset--color--contrast);
     }
 
     & .one-202x-footer__logo {
@@ -750,6 +780,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
         }
 
         & img {
+            content: url("../images/a-to-e-logo.svg");
             max-width: 100%;
             object-fit: contain;
         }
@@ -880,8 +911,26 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
     }
 
     @media (--tablet-down) {
+        & .one-202x-footer__main {
+            padding-block: 0 3rem;
+
+            &::before,
+            &::after {
+                content: none;
+            }
+        }
+
         & .one-202x-footer__inner {
             flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        & .one-202x-footer__brand {
+            flex-basis: calc(100% + 2 * var(--a2e-section-inset));
+            width: calc(100% + 2 * var(--a2e-section-inset));
+            margin-inline: calc(-1 * var(--a2e-section-inset));
+            padding: 3rem var(--a2e-section-inset);
+            background: var(--wp--preset--color--base);
         }
 
         & .one-202x-footer__links {

@@ -29,14 +29,14 @@
 
                 &::marker {
                     font-size: var(--wp--preset--font-size--h-3);
-                    font-weight: 300;
+                    font-weight: var(--wp--custom--typography--font-weight--semibold);
                 }
 
                 & strong {
                     display: block;
                     margin-block-end: 2.5rem;
                     font-size: var(--wp--preset--font-size--h-3);
-                    font-weight: 300;
+                    font-weight: var(--wp--custom--typography--font-weight--semibold);
                     line-height: 1.1;
                     letter-spacing: -0.25px;
 

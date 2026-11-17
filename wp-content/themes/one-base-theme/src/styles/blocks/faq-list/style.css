@@ -2,7 +2,8 @@
 .wp-block-one-faqs-accordion-item {
     box-sizing: border-box;
     margin: 0;
-    border: 0.5px solid var(--wp--preset--color--contrast);
+    border: 1px solid var(--wp--preset--color--contrast);
+    border-radius: var(--wp--custom--radius--card);
     color: var(--wp--preset--color--contrast);
     background: var(--wp--preset--color--base);
     font-size: var(--wp--preset--font-size--small);
@@ -59,7 +60,7 @@
 .one-faqs-faqs__items {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    column-gap: 1.5rem;
+    gap: 1rem 1.5rem;
 
     .one-faqs-faqs--columns-2 & {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -67,7 +68,7 @@
 }
 
 .one-faqs-faqs__item + .one-faqs-faqs__item {
-    margin-block-start: -0.5px;
+    margin-block-start: 0;
 }
 
 .one-faqs-faqs__answer {

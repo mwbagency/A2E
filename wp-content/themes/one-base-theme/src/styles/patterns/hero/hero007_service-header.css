@@ -12,7 +12,7 @@
         mask-mode: alpha;
         mask-repeat: no-repeat;
         mask-position: center;
-        mask-size: 100% 100%;
+        mask-size: contain;
 
         & .wp-block-post-featured-image {
             position: absolute;

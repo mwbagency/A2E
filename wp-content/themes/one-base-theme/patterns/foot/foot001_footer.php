@@ -32,7 +32,7 @@ $legal_links = [
             <!-- wp:group {"className":"one-202x-footer__brand","layout":{"type":"default"}} -->
             <div class="wp-block-group one-202x-footer__brand">
                 <!-- wp:image {"width":"232px","height":"86px","sizeSlug":"full","linkDestination":"custom","className":"one-202x-footer__logo"} -->
-                <figure class="wp-block-image size-full is-resized one-202x-footer__logo"><a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo esc_url(get_theme_file_uri('assets/images/a-to-e-logo-light.svg')); ?>" alt="<?php esc_attr_e('A to E Training & Solutions', 'one-base-theme'); ?>" style="width:232px;height:86px" /></a></figure>
+                <figure class="wp-block-image size-full is-resized one-202x-footer__logo"><a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo esc_url(get_theme_file_uri('assets/images/a-to-e-logo.svg')); ?>" alt="<?php esc_attr_e('A to E Training & Solutions', 'one-base-theme'); ?>" style="width:232px;height:86px" /></a></figure>
                 <!-- /wp:image -->
 
                 <!-- wp:group {"className":"one-202x-footer__company","layout":{"type":"default"}} -->

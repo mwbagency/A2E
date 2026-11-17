@@ -24,7 +24,7 @@
             display: inline-flex;
             gap: 0.5em;
             align-items: center;
-            min-block-size: 1.5rem;
+            min-block-size: 2.75rem;
             cursor: pointer;
         }
 
@@ -47,18 +47,28 @@
     }
 
     & .one-202x-content-listing__pagination {
-        & a {
+        & :is(a, .current, .dots) {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-inline-size: 1.5rem;
-            min-block-size: 1.5rem;
+            min-inline-size: 2.75rem;
+            min-block-size: 2.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--wp--custom--radius--control);
+            font-size: var(--wp--preset--font-size--button);
+            line-height: 1.111111;
+            letter-spacing: 0;
+            text-decoration: none;
+        }
+
+        & a:hover {
+            background: var(--wp--preset--color--grey-100);
         }
 
         & .current {
+            background: var(--wp--preset--color--contrast);
+            color: var(--wp--preset--color--base);
             font-weight: 700;
-            text-decoration: underline;
-            text-underline-offset: 0.2em;
         }
     }
 

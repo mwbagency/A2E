@@ -1,0 +1,8 @@
+.wp-block-post-featured-image img {
+    border-radius: var(--wp--custom--radius--media);
+}
+
+/* The service hero is clipped by its supplied puzzle mask. */
+.a2e-hero003__media .wp-block-post-featured-image img {
+    border-radius: 0;
+}

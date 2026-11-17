@@ -6,6 +6,7 @@
     margin: 0;
     padding: 2rem;
     border: 1px solid var(--wp--preset--color--contrast);
+    border-radius: var(--wp--custom--radius--card);
     background: var(--wp--preset--color--base);
     color: var(--wp--preset--color--contrast);
     min-inline-size: 0;
@@ -49,6 +50,7 @@
     }
 
     & .one-202x-quote__name {
+        color: var(--wp--preset--color--green);
         font-size: var(--wp--preset--font-size--body);
         font-weight: 700;
         line-height: 1.4;

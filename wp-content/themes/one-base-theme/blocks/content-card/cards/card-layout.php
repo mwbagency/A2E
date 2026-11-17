@@ -22,6 +22,9 @@ $post_type = get_post_type($post_id);
 $is_search = $layout === 'search';
 $taxonomy = $post_type === 'post' ? 'category' : $post_type . '_category';
 $terms = !$is_search && taxonomy_exists($taxonomy) ? get_the_terms($post_id, $taxonomy) : false;
+$category_slug = is_array($terms) && isset($terms[0]->slug)
+    ? sanitize_html_class($terms[0]->slug)
+    : '';
 // Search cards identify the content type, so mixed results remain easy to scan.
 if ($is_search && $label === '') {
     $label = $post_type === 'post' ? __('Knowledge Hub', 'one-base-theme') : (get_post_type_object($post_type)->labels->name ?? '');
@@ -93,7 +96,7 @@ $reading_minutes = max(1, (int) ceil($word_count / 200));
         <?php if ($number !== '') : ?><p class="one-202x-content-card__number"><?php echo esc_html($number); ?></p><?php endif; ?>
         <?php if (in_array($layout, ['resource', 'programme', 'course', 'search'], true) && ($label !== '' || $layout === 'resource')) : ?>
             <div class="one-202x-content-card__metadata">
-                <?php if ($label !== '') : ?><span class="one-202x-content-card__tag"><?php echo esc_html($label); ?></span><?php endif; ?>
+                <?php if ($label !== '') : ?><span class="one-202x-content-card__tag<?php if ($category_slug !== '') { echo ' is-category-' . esc_attr($category_slug); } ?>"><?php echo esc_html($label); ?></span><?php endif; ?>
                 <?php if ($layout === 'resource') : ?><span class="one-202x-content-card__reading-time"><?php
                     /* translators: %d: estimated reading time in minutes. */
                     printf(esc_html__('%d min. read', 'one-base-theme'), $reading_minutes);

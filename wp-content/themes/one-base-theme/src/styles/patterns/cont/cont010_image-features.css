@@ -49,6 +49,7 @@
             block-size: auto;
             aspect-ratio: 680 / 706;
             object-fit: cover;
+            border-radius: var(--wp--custom--radius--media);
         }
     }
 

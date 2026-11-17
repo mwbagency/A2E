@@ -104,7 +104,8 @@ body .one-202x-mobile-nav__menu .is-style-a2e-linked-dropdown {
     flex: 0 0 2rem;
     width: 2rem;
     height: 2rem;
-    border: 0.25px solid var(--wp--preset--color--contrast);
+    border: 1px solid var(--wp--preset--color--contrast);
+    border-radius: var(--wp--custom--radius--field);
     background: url("../icons/a2e-puzzle.svg") center / 1.5rem 1.5rem no-repeat;
 }
 
@@ -262,7 +263,8 @@ body .one-202x-mobile-nav__menu .is-style-a2e-linked-dropdown {
                     height: auto;
                     margin: 0 auto;
                     padding: 1.5rem 1rem;
-                    border: 0.25px solid var(--wp--preset--color--contrast);
+                    border: 1px solid var(--wp--preset--color--contrast);
+                    border-radius: var(--wp--custom--radius--panel);
 
                     & > .wp-block-navigation-item {
                         width: calc(100% / 3 - 1rem);
@@ -280,7 +282,9 @@ body .one-202x-mobile-nav__menu .is-style-a2e-linked-dropdown {
                         height: 100%;
                         padding: 1.5rem 0;
                         border: 0;
-                        border-inline-start: 0.5px solid var(--wp--preset--color--grey-100);
+                        border-inline-start: 1px solid var(--wp--preset--color--grey-100);
+                        border-start-end-radius: var(--wp--custom--radius--panel);
+                        border-end-end-radius: var(--wp--custom--radius--panel);
                     }
 
                     &.a2e-services-menu__level > .wp-block-navigation__submenu-container {

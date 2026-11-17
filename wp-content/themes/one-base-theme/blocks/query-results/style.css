@@ -14,15 +14,24 @@
     }
 
     & .a2e-query-results__more {
-        padding: 0.75rem 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-block-size: 2.75rem;
+        padding: calc(0.75rem - 1px) calc(2rem - 1px);
         border: 1px solid currentColor;
         border-radius: var(--wp--custom--radius--control);
         background: var(--wp--preset--color--base);
-        color: var(--wp--preset--color--contrast);
+        color: var(--wp--preset--color--accent);
         font-size: var(--wp--preset--font-size--button);
         font-weight: 700;
         line-height: 1.111111;
+        letter-spacing: 0;
         text-decoration: none;
+
+        &:hover {
+            opacity: var(--wp--custom--button--hover-opacity);
+        }
     }
 
     & .a2e-query-results__loading {

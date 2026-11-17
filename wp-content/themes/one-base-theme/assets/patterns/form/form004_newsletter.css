@@ -4,7 +4,7 @@
     --one-form-border: var(--wp--preset--color--base);
     --one-form-placeholder: var(--wp--preset--color--base);
     --one-form-focus: var(--wp--preset--color--base);
-    --one-form-radius: 1.875rem;
+    --one-form-radius: var(--wp--custom--radius--field);
     --one-form-line-height: 1.25;
     --one-form-padding-inline: 0.75rem;
     --one-form-button-background: var(--wp--preset--color--accent);

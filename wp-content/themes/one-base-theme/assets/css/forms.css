@@ -9,7 +9,7 @@
     --one-form-background: var(--wp--preset--color--base, #fff);
     --one-form-border: var(--wp--preset--color--muted, #6b6c73);
     --one-form-border-width: 1px;
-    --one-form-radius: 0.5rem;
+    --one-form-radius: var(--wp--custom--radius--field);
     --one-form-height: 3rem;
     --one-form-padding-inline: 1rem;
     --one-form-padding-block: 0.75rem;
@@ -19,10 +19,15 @@
     --one-form-disabled-background: var(--wp--preset--color--surface, #f3f3f3);
     --one-form-label-weight: 600;
     --one-form-gap: var(--wp--preset--spacing--md, 1.5rem);
-    --one-form-button-background: var(--wp--preset--color--contrast, #191a23);
+    --one-form-button-background: var(--wp--preset--color--accent);
     --one-form-button-text: var(--wp--preset--color--base, #fff);
-    --one-form-button-hover-background: var(--wp--preset--color--accent, #b9ff66);
-    --one-form-button-hover-text: var(--wp--preset--color--contrast, #191a23);
+    --one-form-button-hover-background: var(--wp--preset--color--accent);
+    --one-form-button-hover-text: var(--wp--preset--color--base);
+    --one-form-button-radius: var(--wp--custom--radius--control);
+    --one-form-button-height: 2.75rem;
+    --one-form-button-font-size: var(--wp--preset--font-size--button);
+    --one-form-button-font-weight: 700;
+    --one-form-button-padding-inline: 2rem;
 }
 
 /* Native text fields; Gravity Forms uses its CSS API below. */
@@ -97,12 +102,16 @@
     }
 
     :where(form button[type="submit"], form input[type="submit"], form input[type="reset"]):not(:where(.gform_wrapper *)) {
-        min-block-size: var(--one-form-height);
+        min-block-size: var(--one-form-button-height);
         padding-block: var(--one-form-padding-block);
-        padding-inline: var(--one-form-padding-inline);
-        border: var(--one-form-border-width) solid transparent;
-        border-radius: var(--one-form-radius);
-        font: inherit;
+        padding-inline: var(--one-form-button-padding-inline);
+        border: 0;
+        border-radius: var(--one-form-button-radius);
+        font-family: var(--one-form-font);
+        font-size: var(--one-form-button-font-size);
+        font-weight: var(--one-form-button-font-weight);
+        line-height: 1.111111;
+        letter-spacing: 0;
         background: var(--one-form-button-background);
         color: var(--one-form-button-text);
         cursor: pointer;
@@ -110,6 +119,7 @@
         &:hover:not(:disabled) {
             background: var(--one-form-button-hover-background);
             color: var(--one-form-button-hover-text);
+            opacity: var(--wp--custom--button--hover-opacity);
         }
     }
 }
@@ -167,10 +177,11 @@ html .gform_wrapper.gform-theme--framework {
     --gf-ctrl-btn-bg-color-hover-primary: var(--one-form-button-hover-background);
     --gf-ctrl-btn-color-hover-primary: var(--one-form-button-hover-text);
     --gf-ctrl-btn-font-family: var(--one-form-font);
-    --gf-ctrl-btn-font-size: var(--one-form-font-size);
-    --gf-ctrl-btn-radius: var(--one-form-radius);
-    --gf-ctrl-btn-size: var(--one-form-height);
-    --gf-ctrl-btn-padding-x: var(--one-form-padding-inline);
+    --gf-ctrl-btn-font-size: var(--one-form-button-font-size);
+    --gf-ctrl-btn-font-weight: var(--one-form-button-font-weight);
+    --gf-ctrl-btn-radius: var(--one-form-button-radius);
+    --gf-ctrl-btn-size: var(--one-form-button-height);
+    --gf-ctrl-btn-padding-x: var(--one-form-button-padding-inline);
     --gf-ctrl-btn-padding-y: var(--one-form-padding-block);
     --gf-form-gap-y: var(--one-form-gap);
     --gf-form-gap-x: var(--one-form-gap);

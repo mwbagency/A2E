@@ -1,7 +1,7 @@
 .one-202x-pattern-form005_training-enquiry {
     --one-form-border: var(--wp--preset--color--contrast);
     --one-form-placeholder: var(--wp--preset--color--contrast);
-    --one-form-radius: 0.625rem;
+    --one-form-radius: var(--wp--custom--radius--field);
     --one-form-line-height: 1.25;
     --one-form-label-weight: 400;
     --one-form-padding-inline: 0.75rem;

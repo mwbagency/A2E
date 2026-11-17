@@ -6,7 +6,7 @@
         "useRootPaddingAwareAlignments": true,
         "layout": {
             "contentSize": "760px",
-            "wideSize": "1280px"
+            "wideSize": "1296px"
         },
         "viewport": {
             "mobile": "37.5rem",
@@ -89,7 +89,7 @@
                 {
                     "name": "Button outline",
                     "slug": "button-outline",
-                    "color": "#1E411E"
+                    "color": "#F24530"
                 }
             ]
         },
@@ -327,9 +327,11 @@
                 }
             },
             "radius": {
-                "card": "2px",
+                "card": "25px",
                 "control": "100px",
-                "panel": "3rem"
+                "panel": "25px",
+                "media": "25px",
+                "field": "12px"
             },
             "shadow": {
                 "card": "none"
@@ -485,7 +487,7 @@
                 "typography": {
                     "fontFamily": "var:preset|font-family|sans",
                     "fontSize": "var:preset|font-size|h-3",
-                    "fontWeight": "300",
+                    "fontWeight": "600",
                     "lineHeight": "1.047619",
                     "letterSpacing": "0",
                     "textTransform": "none"

@@ -16,6 +16,7 @@
     & .wp-block-one-202x-media-cover {
         min-height: 0;
         aspect-ratio: 4 / 3;
+        border-radius: var(--wp--custom--radius--media);
     }
 
     @media (width > 37.5rem) {

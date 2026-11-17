@@ -1,0 +1,4 @@
+.wp-block-cover:not(.alignfull) {
+    overflow: hidden;
+    border-radius: var(--wp--custom--radius--media);
+}

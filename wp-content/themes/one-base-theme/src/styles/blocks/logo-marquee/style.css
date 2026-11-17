@@ -46,14 +46,22 @@
 
     & .one-202x-logo-marquee__toggle {
         margin-block-start: var(--wp--preset--spacing--sm);
-        padding: 0.5rem 0.75rem;
+        padding: calc(0.75rem - 1px) calc(2rem - 1px);
         min-block-size: 2.75rem;
-        font: inherit;
-        color: inherit;
+        font-family: inherit;
+        font-size: var(--wp--preset--font-size--button);
+        font-weight: 700;
+        line-height: 1.111111;
+        letter-spacing: 0;
+        color: var(--wp--preset--color--accent);
         background: transparent;
         border: 1px solid currentColor;
-        border-radius: 0.25rem;
+        border-radius: var(--wp--custom--radius--control);
         cursor: pointer;
+
+        &:hover {
+            opacity: var(--wp--custom--button--hover-opacity);
+        }
 
         &[hidden] {
             display: none;

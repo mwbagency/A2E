@@ -1,5 +1,5 @@
 .wp-block-a2e-numbered-card {
-    --numbered-card-radius: 1.5rem;
+    --numbered-card-radius: var(--wp--custom--radius--card);
 
     position: relative;
     display: flex;

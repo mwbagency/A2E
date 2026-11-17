@@ -1,12 +1,112 @@
 .one-202x-pattern-ctas004_centred-panel {
-    padding-block: clamp(1.25rem, 5vw, 4.5rem);
+    position: relative;
+    isolation: isolate;
+    padding-block: 4.5rem;
     padding-inline: var(--a2e-section-inset);
+    background-image: url("../../images/design/clinical-team-cta.jpg");
+    background-size: cover;
+    background-position: center;
+
+    &::before {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background: linear-gradient(162.1deg, rgb(2 73 89 / 0%) 44.67%, var(--wp--preset--color--contrast) 86.6%);
+        content: "";
+        pointer-events: none;
+    }
 
     & > .one-202x-pattern-cont009_centred-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 689fr) minmax(0, 607fr);
+        grid-template-rows: auto auto 1fr auto auto;
+        align-items: start;
+        gap: 1rem 0;
+        min-block-size: 41.6875rem;
         margin: 0;
+        padding: 0 0 1.5rem;
+        background-color: transparent !important;
+        text-align: start;
+
+        & > * {
+            min-inline-size: 0;
+            margin: 0;
+        }
+
+        & > .is-style-eyebrow {
+            grid-column: 1;
+            grid-row: 1;
+            color: var(--wp--preset--color--contrast);
+            text-align: start;
+        }
+
+        & > .a2e-centred-intro__title {
+            grid-column: 1;
+            grid-row: 2;
+            max-inline-size: none;
+            margin: 0;
+            color: var(--wp--preset--color--contrast);
+            text-align: start;
+        }
 
         & > .a2e-centred-intro__description {
-            max-inline-size: min(41.875rem, var(--wp--style--global--content-size));
+            grid-column: 2;
+            grid-row: 4;
+            max-inline-size: none;
+            margin: 0;
+            color: var(--wp--preset--color--base);
+            text-align: start;
+        }
+
+        & > .is-style-eyebrow + .a2e-centred-intro__title {
+            margin-block-start: 0;
+        }
+
+        & > .a2e-centred-intro__actions {
+            grid-column: 2;
+            grid-row: 5;
+            justify-content: flex-start;
+            gap: 1rem;
+            margin-block-start: 1.5rem;
+        }
+    }
+
+    & .a2e-centred-intro__actions .wp-block-one-202x-icon-button:not(.is-style-outline) {
+        background-color: var(--wp--preset--color--accent) !important;
+        color: var(--wp--preset--color--base) !important;
+    }
+
+    & .a2e-centred-intro__actions .is-style-outline {
+        --a2e-button-background: transparent;
+        --a2e-button-text: var(--wp--preset--color--base);
+
+        background-color: transparent !important;
+        border-color: currentColor;
+        color: var(--wp--preset--color--base) !important;
+    }
+
+    @media (--tablet-down) {
+        padding-block: 3rem;
+
+        & > .one-202x-pattern-cont009_centred-intro {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            min-block-size: 38rem;
+        }
+    }
+
+    @media (--mobile) {
+        &::before {
+            background: linear-gradient(180deg, rgb(255 255 255 / 92%), rgb(255 255 255 / 65%) 35%, rgb(2 73 89 / 30%) 60%, var(--wp--preset--color--contrast));
+        }
+
+        & > .one-202x-pattern-cont009_centred-intro {
+            grid-template-columns: minmax(0, 1fr);
+            min-block-size: 40rem;
+
+            & > .a2e-centred-intro__description,
+            & > .a2e-centred-intro__actions {
+                grid-column: 1;
+            }
         }
     }
 }

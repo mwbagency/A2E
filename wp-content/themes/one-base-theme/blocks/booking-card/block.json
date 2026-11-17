@@ -1,6 +1,7 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
+    "version": "1.0.1",
   "name": "one-202x/booking-card",
   "title": "Booking card",
   "category": "a2e",

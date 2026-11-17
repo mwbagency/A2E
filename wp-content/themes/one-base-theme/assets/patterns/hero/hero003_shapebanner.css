@@ -114,18 +114,20 @@
 
     & > .a2e-hero003__media {
         grid-area: media;
+        align-self: start;
         width: var(--a2e-hero-media-width);
+        aspect-ratio: var(--a2e-hero-media-ratio);
         min-height: 0;
         margin: 0 0 0 var(--a2e-hero-media-offset);
 
-        /* Each variation uses its exported Figma alpha mask. */
+        /* Preserve the shape's proportions independently of the copy's height. */
         & .one-202x-media-cover__media,
         & .one-202x-media-cover__overlay {
             mask-image: var(--a2e-hero-mask);
             mask-mode: alpha;
             mask-repeat: no-repeat;
             mask-position: center;
-            mask-size: 100% 100%;
+            mask-size: contain;
         }
 
         & .one-202x-media-cover__video-control {
@@ -134,7 +136,9 @@
 
         /* Native manual-video controls need the full rectangular player. */
         &[data-playback-mode="manual"] {
+            align-self: stretch;
             width: 100%;
+            aspect-ratio: auto;
             margin: 0;
 
             & .one-202x-media-cover__media {
@@ -143,7 +147,7 @@
         }
     }
 
-    @media (max-width: 68.75rem) {
+    @media (max-width: 37.5rem) {
         &,
         &.a2e-hero003--media-left {
             grid-template-columns: minmax(0, 1fr);
@@ -172,6 +176,82 @@
             width: 100%;
             margin: 0;
             aspect-ratio: var(--a2e-hero-media-ratio);
+        }
+    }
+
+    @media (37.5rem < width <= 68.75rem) {
+        --a2e-hero-tablet-shift: clamp(6rem, 18vw, 12rem);
+
+        overflow: clip;
+        grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+
+        &.a2e-hero003--media-left {
+            grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+        }
+
+        & > .a2e-hero003__content {
+            isolation: isolate;
+            gap: 1.5rem;
+            padding-block: 3rem;
+
+            /* Keep the copy on a solid surface, then fade into the image. */
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                inset-block: 0;
+                inset-inline: calc(-1 * var(--a2e-section-inset)) -4rem;
+                background: linear-gradient(
+                    90deg,
+                    var(--wp--preset--color--base) 0%,
+                    var(--wp--preset--color--base) calc(100% - 3rem),
+                    transparent 100%
+                );
+                pointer-events: none;
+            }
+        }
+
+        &.a2e-hero003--media-left > .a2e-hero003__content::before {
+            inset-inline: -4rem calc(-1 * var(--a2e-section-inset));
+            background: linear-gradient(
+                270deg,
+                var(--wp--preset--color--base) 0%,
+                var(--wp--preset--color--base) calc(100% - 3rem),
+                transparent 100%
+            );
+        }
+
+        & .a2e-hero003__title {
+            padding-inline-end: 0;
+        }
+
+        /* Keep the desktop silhouette at full height and crop its outer edge. */
+        & > .a2e-hero003__media {
+            justify-self: start;
+            width: auto;
+            height: 100%;
+        }
+
+        &.a2e-hero003--media-left > .a2e-hero003__media {
+            justify-self: end;
+        }
+
+        & > .a2e-hero003__media:not([data-playback-mode="manual"]) {
+            translate: calc(-1 * var(--a2e-hero-tablet-shift)) 0;
+        }
+
+        &.a2e-hero003--media-left > .a2e-hero003__media:not([data-playback-mode="manual"]) {
+            translate: var(--a2e-hero-tablet-shift) 0;
+        }
+
+        /* Keep background-video controls inside the visible crop. */
+        & > .a2e-hero003__media[data-playback-mode="autoplay"] .one-202x-media-cover__video-control {
+            inset-block: 1.5rem auto;
+            inset-inline: calc(25vw - 3rem + var(--a2e-hero-tablet-shift)) auto;
+        }
+
+        &.a2e-hero003--media-left > .a2e-hero003__media[data-playback-mode="autoplay"] .one-202x-media-cover__video-control {
+            inset-inline: auto calc(1.5rem + var(--a2e-hero-tablet-shift));
         }
     }
 }

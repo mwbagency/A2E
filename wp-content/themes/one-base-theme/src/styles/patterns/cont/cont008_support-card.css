@@ -4,8 +4,8 @@
     flex-direction: column;
     gap: 2rem;
     padding: 2rem 1.5rem;
-    border: 0.5px solid var(--wp--preset--color--contrast);
-    border-radius: 2px;
+    border: 1px solid var(--wp--preset--color--contrast);
+    border-radius: var(--wp--custom--radius--card);
     background: var(--wp--preset--color--base);
     color: var(--wp--preset--color--contrast);
 

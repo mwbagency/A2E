@@ -5,13 +5,15 @@
     justify-content: center;
     width: fit-content;
     gap: 0.625rem;
-    padding: 0.75rem 1.25rem;
+    padding: calc(0.75rem - 1px) calc(2rem - 1px);
     border: 1px solid transparent;
-    border-radius: var(--wp--custom--radius--control, 0.875rem);
-    background: var(--wp--preset--color--contrast);
+    border-radius: var(--wp--custom--radius--control);
+    background: var(--wp--preset--color--accent);
     color: var(--wp--preset--color--base);
-    font-weight: var(--wp--custom--typography--font-weight--semibold, 600);
-    line-height: 1.2;
+    font-size: var(--wp--preset--font-size--button);
+    font-weight: 700;
+    line-height: 1.111111;
+    letter-spacing: 0;
     text-decoration: none;
     transition:
         background-color 160ms ease,
@@ -25,7 +27,8 @@
 
         &:hover {
             background: var(--wp--preset--color--accent);
-            color: var(--wp--preset--color--contrast);
+            color: var(--wp--preset--color--base);
+            opacity: var(--wp--custom--button--hover-opacity);
         }
 
         &:focus-visible {
@@ -175,7 +178,7 @@
         --a2e-button-text: var(--wp--preset--color--accent);
 
         padding: calc(0.75rem - 1px) calc(2rem - 1px);
-        border: 1px solid var(--wp--preset--color--button-outline);
+        border: 1px solid currentColor;
 
         a&:visited,
         a&:hover {

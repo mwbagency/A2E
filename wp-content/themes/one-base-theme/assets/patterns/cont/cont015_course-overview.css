@@ -25,6 +25,15 @@
         display: flex;
         flex-direction: column;
         gap: 0;
+        overflow: hidden;
+        border: 1px solid currentColor;
+        border-radius: var(--wp--custom--radius--card);
+
+        & > .one-202x-course-details__heading {
+            border: 0;
+            border-block-end: 1px solid currentColor;
+            border-radius: 0;
+        }
 
         & > * {
             margin: 0;
@@ -34,8 +43,7 @@
     & .a2e-course-profile__overview-copy {
         flex: 1;
         padding: 1.5rem 1rem;
-        border: 0.5px solid currentColor;
-        border-block-start: 0;
+        border: 0;
 
         & > * {
             margin: 0;
@@ -102,7 +110,8 @@
 
     & .a2e-course-profile__instructor {
         padding: 1.5rem;
-        border: 0.5px solid currentColor;
+        border: 1px solid currentColor;
+        border-radius: var(--wp--custom--radius--card);
 
         & > p {
             margin: 0 0 1rem;
@@ -119,7 +128,7 @@
 
             & .one-202x-content-card__title {
                 font-size: var(--wp--preset--font-size--h-3);
-                font-weight: 300;
+                font-weight: 600;
                 line-height: 1.05;
             }
 

@@ -22,7 +22,7 @@
         & > h2 {
             margin-block: 2rem 1.5rem;
             font-size: var(--wp--preset--font-size--h-3);
-            font-weight: 300;
+            font-weight: var(--wp--custom--typography--font-weight--semibold);
             line-height: 1.047619;
             letter-spacing: 0;
         }

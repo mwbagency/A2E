@@ -34,6 +34,7 @@
         padding: 0;
         scroll-snap-align: start;
         overflow-wrap: anywhere;
+        border-radius: var(--wp--custom--radius--card);
 
         & > * {
             margin: 0;
@@ -67,6 +68,8 @@
             position: relative;
             flex: 1;
             min-block-size: 18rem;
+            overflow: hidden;
+            border-radius: var(--wp--custom--radius--media);
 
             & img {
                 position: absolute;

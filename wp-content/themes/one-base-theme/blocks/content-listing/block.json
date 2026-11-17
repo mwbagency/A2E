@@ -2,7 +2,7 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "one-202x/content-listing",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "Content Listing (legacy)",
     "description": "Existing listings remain editable. For new listings, insert a News grid or Case study grid pattern.",
     "category": "theme",

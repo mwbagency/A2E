@@ -85,7 +85,7 @@
                 inline-size: 100%;
                 block-size: auto;
                 aspect-ratio: 1;
-                border-radius: 1.5rem;
+                border-radius: var(--wp--custom--radius--media);
                 object-fit: cover;
             }
         }

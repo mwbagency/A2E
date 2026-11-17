@@ -116,22 +116,6 @@
     & .wp-block-query-pagination {
         gap: 1rem;
         margin-block-start: 2rem;
-        font-size: var(--wp--preset--font-size--button);
-
-        & > * {
-            margin: 0;
-        }
-
-        & .page-numbers {
-            display: inline-block;
-            padding: 0.375rem 0.625rem;
-
-            &.current {
-                border-radius: 2px;
-                background: var(--wp--preset--color--contrast);
-                color: var(--wp--preset--color--base);
-            }
-        }
     }
 
     @media (max-width: 63.999rem) {

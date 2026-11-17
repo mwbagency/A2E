@@ -31,8 +31,8 @@
 
     & .one-faqs-faqs__item {
         margin: 0;
-        border: 0;
-        box-shadow: inset 0 0 0 0.5px currentColor;
+        border: 1px solid currentColor;
+        box-shadow: none;
     }
 
     & .one-faqs-faqs__answer {
