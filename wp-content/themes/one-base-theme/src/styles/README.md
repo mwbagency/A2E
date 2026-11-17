@@ -20,7 +20,7 @@ The shared styling follows the [updated Figma homepage](https://www.figma.com/de
 | Media sections and timelines | Rounded media, including Media Cover and ordinary Image blocks. Hero masks and logos retain their existing geometry. |
 | Testimonials | Rounded outlined quotes, green attribution, and exported puzzle details on the scrolling section. |
 | Forms, booking and FAQs | Shared field, card and control tokens, including native Details blocks and the course overview panel. |
-| Listing controls | Red primary submits, outlined load-more links, and 44px pill pagination in Query Loop and legacy Content Listing blocks. Category selection controls retain their blue selected state. |
+| Listing controls | Red primary submits, outlined load-more links, and 44px pill pagination in Query Loop blocks. Category selection controls retain their blue selected state. |
 | Navigation | Rounded dropdown panels, 1px dividers, and shared search-field corners; existing nested-menu behaviour stays in place. |
 | Native media and service categories | Featured Image, Video, Media & Text and inset Cover blocks use the media corners. Full-width covers and masked heroes keep their intended edges; term cards use card corners. |
 | Inner-page headings | Article, simple-page and service-step headings use the available SemiBold weight, matching the shared heading system. |

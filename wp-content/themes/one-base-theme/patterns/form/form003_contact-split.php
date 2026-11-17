@@ -25,9 +25,7 @@ defined('ABSPATH') || exit;
 <!-- /wp:column -->
 <!-- wp:column {"lock":{"move":true,"remove":true}} -->
 <div class="wp-block-column">
-    <!-- wp:one-202x/contact-form -->
     <!-- wp:gravityforms/form {"formId":"1","title":false,"description":false} /-->
-    <!-- /wp:one-202x/contact-form -->
 </div>
 <!-- /wp:column -->
 </div>
