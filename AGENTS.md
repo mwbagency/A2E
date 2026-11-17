@@ -28,10 +28,14 @@ belong to the current task.
 - A2E's section library contains one registered pattern per unique reusable layout.
   Populate new pages with editable blocks; do not create or retain hidden patterns
   for different copy, images, links, anchors or query selections.
-- Existing `patterns/page/` compositions preserve the supplied page designs.
+- The current build has only two active WordPress Pages: Homepage and Blocks.
+  Keep the reusable library focused on their demonstrated layouts and the
+  structural templates needed by existing content types. Do not restore removed
+  page starters, templates or unused custom blocks without a new requirement.
+- `patterns/page/` retains the homepage composition and structural article body.
   They may contain ordinary blocks, shared `pattern-layouts/` calls with local
-  content, and references to the reusable section library. Do not expand this
-  starter catalogue solely to populate another page.
+  content, and reusable sections. New page, service and course editors start
+  empty; do not add automatic starter population.
 - `pattern-layouts/` owns shared PHP source markup for consolidated section
   families. Shared source does not synchronise saved blocks. Section CSS markers
   remain in page content where needed even after a content-only pattern is removed.
@@ -45,7 +49,9 @@ belong to the current task.
   Preserve desktop design intent while providing usable mobile layouts.
 - Galano Grotesque Regular, Medium, SemiBold and Bold are available. Light and
   Italic are planned references; do not fabricate or download replacement assets.
-- Contact links use `/contact-us/`; News / Knowledge Hub links use `/news/`.
+- Site navigation contains Homepage (`/`) and Blocks (`/blocks/`). Demonstration
+  copy may retain intended future destinations; do not create pages merely to
+  populate those links. Future contact and news pages use `/contact-us/` and `/news/`.
 - Forms use Gravity Forms; post sharing uses AddToAny. Discover saved IDs rather
   than assuming a default. Social profile URLs remain unset until supplied.
 - The contact enquiry form's Subject choices and notification recipient await

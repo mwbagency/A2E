@@ -2,7 +2,7 @@
 
 /**
  * Title: Footer
- * Description: A to E company details, social links, institution navigation, contacts and legal links.
+ * Description: A to E company details, social links, page navigation and contact details.
  * Slug: one-202x/foot001_footer
  * Inserter: no
  */
@@ -10,17 +10,8 @@
 defined('ABSPATH') || exit;
 
 $institution_links = [
-    [__('About us', 'one-base-theme'), home_url('/about-us/')],
-    [__('Our Services', 'one-base-theme'), get_post_type_archive_link('service')],
-    [__('Who We Help', 'one-base-theme'), home_url('/who-we-help/')],
-    [__('Careers', 'one-base-theme'), home_url('/careers/')],
-    [__('Knowledge Hub', 'one-base-theme'), home_url('/news/')],
-];
-
-$legal_links = [
-    [__('Privacy Policy', 'one-base-theme'), home_url('/privacy-policy/')],
-    [__('Cookies Policy', 'one-base-theme'), home_url('/cookies-policy/')],
-    [__('Terms & Conditions', 'one-base-theme'), home_url('/terms-and-conditions/')],
+    [__('Homepage', 'one-base-theme'), home_url('/')],
+    [__('Blocks', 'one-base-theme'), home_url('/blocks/')],
 ];
 ?>
 <!-- wp:group {"align":"full","className":"one-202x-footer","layout":{"type":"default"}} -->
@@ -55,10 +46,10 @@ $legal_links = [
                 <!-- wp:group {"className":"one-202x-footer__column","layout":{"type":"default"}} -->
                 <div class="wp-block-group one-202x-footer__column">
                     <!-- wp:heading {"level":2,"className":"one-202x-footer__heading"} -->
-                    <h2 class="wp-block-heading one-202x-footer__heading"><?php esc_html_e('Institution', 'one-base-theme'); ?></h2>
+                    <h2 class="wp-block-heading one-202x-footer__heading"><?php esc_html_e('Pages', 'one-base-theme'); ?></h2>
                     <!-- /wp:heading -->
 
-                    <!-- wp:navigation {"ariaLabel":<?php echo wp_json_encode(__('Institution', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"overlayMenu":"never","showSubmenuIcon":false,"className":"one-202x-footer__navigation","layout":{"type":"flex","orientation":"vertical","justifyContent":"left","flexWrap":"nowrap"}} -->
+                    <!-- wp:navigation {"ariaLabel":<?php echo wp_json_encode(__('Pages', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"overlayMenu":"never","showSubmenuIcon":false,"className":"one-202x-footer__navigation","layout":{"type":"flex","orientation":"vertical","justifyContent":"left","flexWrap":"nowrap"}} -->
                     <?php foreach ($institution_links as [$label, $url]) : ?>
                         <!-- wp:navigation-link <?php echo wp_json_encode(['label' => $label, 'url' => $url, 'kind' => 'custom'], JSON_HEX_TAG | JSON_HEX_AMP); ?> /-->
                     <?php endforeach; ?>
@@ -98,12 +89,6 @@ $legal_links = [
     <div class="wp-block-group one-202x-footer__bottom has-contrast-color has-base-background-color has-text-color has-background">
         <!-- wp:group {"className":"one-202x-footer__bottom-inner","layout":{"type":"default"}} -->
         <div class="wp-block-group one-202x-footer__bottom-inner">
-            <!-- wp:navigation {"ariaLabel":<?php echo wp_json_encode(__('Legal', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"overlayMenu":"never","showSubmenuIcon":false,"className":"one-202x-footer__legal","layout":{"type":"flex","justifyContent":"left","flexWrap":"wrap"}} -->
-            <?php foreach ($legal_links as [$label, $url]) : ?>
-                <!-- wp:navigation-link <?php echo wp_json_encode(['label' => $label, 'url' => $url, 'kind' => 'custom'], JSON_HEX_TAG | JSON_HEX_AMP); ?> /-->
-            <?php endforeach; ?>
-            <!-- /wp:navigation -->
-
             <!-- wp:paragraph {"className":"one-202x-footer__copyright"} -->
             <p class="one-202x-footer__copyright"><?php
                                                     printf(

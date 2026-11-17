@@ -20,7 +20,7 @@ final class SiteContactFields extends FieldGroup
             'instructions' => __('Optional office or department name.', 'one-202x-platform')];
         return [
             ['id' => 'help', 'type' => 'message', 'label' => __('Used across the site', 'one-202x-platform'),
-                'message' => __('These are public business details. Shared Contact Details blocks update wherever they are used. The first telephone number is used in the default header. Existing manually entered page content remains independent.', 'one-202x-platform')],
+                'message' => __('These are public business details. Contact details entered directly in the site header, footer or page content are edited independently.', 'one-202x-platform')],
             ['id' => 'locations', 'type' => 'repeater', 'label' => __('Locations', 'one-202x-platform'),
                 'layout' => 'block', 'button_label' => __('Add location', 'one-202x-platform'),
                 'fields' => [$label, ['id' => 'address', 'type' => 'textarea', 'rows' => 4, 'required' => true,

@@ -16,7 +16,7 @@ The shared styling follows the [updated Figma homepage](https://www.figma.com/de
 | --- | --- |
 | Course/programme cards | Rounded image panels, category pills, titles at the top, facts and translucent price pills at the bottom. Category colours follow the category slug, including in reordered queries. |
 | Article, team and page cards | Shared card and media corners; circular team portraits retain their shape. |
-| Numbered cards | The section pattern and custom block use the same corner tokens. |
+| Numbered cards | The editable section pattern uses the shared corner tokens. |
 | Media sections and timelines | Rounded media, including Media Cover and ordinary Image blocks. Hero masks and logos retain their existing geometry. |
 | Testimonials | Rounded outlined quotes, green attribution, and exported puzzle details on the scrolling section. |
 | Forms, booking and FAQs | Shared field, card and control tokens, including native Details blocks and the course overview panel. |

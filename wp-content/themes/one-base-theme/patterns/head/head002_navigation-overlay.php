@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Head navigation overlay
- * Description: A to E mobile drawer using the shared primary and utility menus.
+ * Description: A to E mobile drawer using the shared primary menu.
  * Slug: one-202x/head002_navigation-overlay
  * Inserter: no
  */
@@ -27,16 +27,5 @@ defined('ABSPATH') || exit;
         'layout' => ['type' => 'flex', 'orientation' => 'vertical', 'justifyContent' => 'left', 'flexWrap' => 'nowrap'],
     ]); ?> /-->
 
-    <!-- wp:group {"className":"one-202x-mobile-nav__footer","layout":{"type":"default"}} -->
-    <div class="wp-block-group one-202x-mobile-nav__footer">
-        <!-- wp:navigation <?php echo wp_json_encode([
-            'ref' => 21,
-            'ariaLabel' => __('Utility navigation', 'one-base-theme'),
-            'overlayMenu' => 'never',
-            'className' => 'one-202x-mobile-nav__utility-navigation',
-            'layout' => ['type' => 'flex', 'orientation' => 'vertical', 'justifyContent' => 'left', 'flexWrap' => 'nowrap'],
-        ]); ?> /-->
-    </div>
-    <!-- /wp:group -->
 </div>
 <!-- /wp:group -->

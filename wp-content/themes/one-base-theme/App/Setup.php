@@ -12,9 +12,6 @@ final class Setup
         add_action('init', [$this, 'register_pattern_category']);
         add_filter('block_categories_all', [$this, 'register_block_category']);
         add_filter('default_template_types', [$this, 'describe_page_template']);
-        add_filter('register_service_post_type_args', [$this, 'service_editor_template']);
-        add_filter('register_course_post_type_args', [$this, 'course_editor_template']);
-        add_action('enqueue_block_editor_assets', [$this, 'simple_page_starter']);
     }
 
     public function setup(): void
@@ -47,47 +44,6 @@ final class Setup
         add_editor_style('assets/css/global.css');
 
         add_image_size('featured-card', 400, 300, true);
-    }
-
-    /**
-     * Start empty Services with editable blocks from the design. WordPress expands
-     * this unsynced pattern in the editor; existing content is never overwritten.
-     * The layout belongs to this theme, while registration and fields stay in the MU plugin.
-     */
-    public function service_editor_template(array $args): array
-    {
-        $args['template'] = [['core/pattern', ['slug' => 'one-202x/page005_service-detail']]];
-
-        return $args;
-    }
-
-    /** Give new courses editable section patterns; the single template owns the hero. */
-    public function course_editor_template(array $args): array
-    {
-        $args['template'] = [['core/pattern', ['slug' => 'one-202x/page014_course']]];
-
-        return $args;
-    }
-
-    /** Load per-page starter text only in the page editor; the template remains shared. */
-    public function simple_page_starter(): void
-    {
-        $screen = get_current_screen();
-        if (!$screen || $screen->base !== 'post' || $screen->post_type !== 'page') {
-            return;
-        }
-
-        // Plain starter copy belongs to the editor, not a second insertable pattern.
-        ob_start();
-        get_template_part('pattern-layouts/simple-page-content');
-        $content = ob_get_clean();
-
-        $path = 'assets/js/editor/simple-page-starter.js';
-        wp_enqueue_script('one-202x-simple-page-starter', get_theme_file_uri($path),
-            ['wp-dom-ready', 'wp-data', 'wp-blocks', 'wp-core-data', 'wp-editor'],
-            (new Assets())->version($path), true);
-        wp_add_inline_script('one-202x-simple-page-starter',
-            'window.one202xSimplePageStarter = ' . wp_json_encode($content) . ';', 'before');
     }
 
     public function register_pattern_category(): void
