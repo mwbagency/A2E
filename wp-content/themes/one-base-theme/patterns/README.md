@@ -31,6 +31,14 @@ pages on deployment.
 
 ## Editing the retained layouts
 
+Select an image, button or text block directly to edit its settings. The post
+editor disables automatic content-only mode for unsynced pattern copies, so there
+is no **Edit pattern** step. This applies to existing content and newly inserted
+sections. Their reusable definitions remain in theme code; changing a page only
+changes that page. Shared template parts retain WordPress's separate editing mode.
+Creating, editing or deleting database pattern definitions is disabled in the CMS.
+The theme's registered patterns remain available to insert as editable copies.
+
 - **Hero — shaped media and statistics:** select the outer Group and use
   **Hero appearance** to choose one of five shapes and the image side. The service
   header has its own fixed mask. Text, statistics, buttons and media stay editable.

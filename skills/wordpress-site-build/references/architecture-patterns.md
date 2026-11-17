@@ -108,6 +108,14 @@ content relationships. Origin metadata such as `patternName` is not proof of a
 synced relationship. Inspect saved markup and records before removing or migrating
 patterns. Do not equate file-level deduplication with updates to saved pages.
 
+When the project requires direct page editing, expose the inserted blocks' own
+image and button controls without a separate pattern-editing step. Inspect the
+installed editor's settings for automatic content-only mode on unsynced copies
+and disable that mode in post editors where supported. Keep code-defined pattern
+sources separate from page content; do not rewrite saved pages or strip origin
+metadata just to change the editing interface. Preserve shared template-part and
+synced-pattern protections.
+
 ## Templates and starter content
 
 - A selectable template needs a template file and the appropriate `theme.json`

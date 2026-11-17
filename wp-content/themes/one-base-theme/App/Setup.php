@@ -12,6 +12,8 @@ final class Setup
         add_action('init', [$this, 'register_pattern_category']);
         add_filter('block_categories_all', [$this, 'register_block_category']);
         add_filter('default_template_types', [$this, 'describe_page_template']);
+        add_filter('block_editor_settings_all', [$this, 'edit_inserted_patterns_as_blocks'], 10, 2);
+        add_filter('register_post_type_args', [$this, 'keep_pattern_definitions_in_code'], 10, 2);
     }
 
     public function setup(): void
@@ -79,6 +81,44 @@ final class Setup
         ]);
 
         return $categories;
+    }
+
+    /** Keep page-local copies directly editable without changing their code-defined source. */
+    public function edit_inserted_patterns_as_blocks(array $settings, \WP_Block_Editor_Context $context): array
+    {
+        if ($context->name === 'core/edit-post') {
+            // patternName records where blocks came from; it does not make them shared.
+            // Disable Core's automatic content-only mode for these inserted copies.
+            $settings['disableContentOnlyForUnsyncedPatterns'] = true;
+        }
+
+        return $settings;
+    }
+
+    /** The section catalogue is registered by the theme, not authored as wp_block records. */
+    public function keep_pattern_definitions_in_code(array $args, string $post_type): array
+    {
+        if ($post_type !== 'wp_block') {
+            return $args;
+        }
+
+        // Scope this to pattern definitions; page editing and pattern insertion stay available.
+        foreach ([
+            'create_posts',
+            'edit_posts',
+            'edit_others_posts',
+            'edit_private_posts',
+            'edit_published_posts',
+            'publish_posts',
+            'delete_posts',
+            'delete_others_posts',
+            'delete_private_posts',
+            'delete_published_posts',
+        ] as $capability) {
+            $args['capabilities'][$capability] = 'do_not_allow';
+        }
+
+        return $args;
     }
 
     /**

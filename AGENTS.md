@@ -28,6 +28,10 @@ belong to the current task.
 - A2E's section library contains one registered pattern per unique reusable layout.
   Populate new pages with editable blocks; do not create or retain hidden patterns
   for different copy, images, links, anchors or query selections.
+- Inserted sections are ordinary page content: image and button controls must be
+  available directly, without entering an Edit pattern mode. Keep the reusable
+  pattern definitions in code; page edits must never update a shared pattern.
+  CMS pattern creation and editing are disabled for this code-owned catalogue.
 - The main build has two WordPress Pages: Homepage and Blocks. The local
   **Blocks — Content Tests** page is an explicitly requested, editable QA copy;
   keep it out of navigation and do not turn its cases into registered patterns.
