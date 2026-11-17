@@ -77,17 +77,17 @@ final class Setup
             return;
         }
 
-        $pattern = \WP_Block_Patterns_Registry::get_instance()->get_registered('one-202x/cont014_simple-page-starter');
-        if (!$pattern) {
-            return;
-        }
+        // Plain starter copy belongs to the editor, not a second insertable pattern.
+        ob_start();
+        get_template_part('pattern-layouts/simple-page-content');
+        $content = ob_get_clean();
 
         $path = 'assets/js/editor/simple-page-starter.js';
         wp_enqueue_script('one-202x-simple-page-starter', get_theme_file_uri($path),
             ['wp-dom-ready', 'wp-data', 'wp-blocks', 'wp-core-data', 'wp-editor'],
             (new Assets())->version($path), true);
         wp_add_inline_script('one-202x-simple-page-starter',
-            'window.one202xSimplePageStarter = ' . wp_json_encode($pattern['content']) . ';', 'before');
+            'window.one202xSimplePageStarter = ' . wp_json_encode($content) . ';', 'before');
     }
 
     public function register_pattern_category(): void

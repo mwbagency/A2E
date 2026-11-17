@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Title: Hero — shape 1 with statistics
+ * Title: Hero — shaped media and statistics
  * Slug: one-202x/hero003_shapebanner
  * Categories: a2e
  * Keywords: hero, introduction, statistics, image, video, shape
- * Description: An introduction with three statistics, two buttons and shaped image or video media.
+ * Description: An introduction with editable statistics, buttons and image or video media. Select the outer Group to choose one of five shapes and the image side in Hero appearance.
  * Viewport Width: 1440
  */
 

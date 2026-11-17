@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Image and text — image left, icon features
+ * Title: Image and text — editable content
  * Slug: one-202x/cont010_image-features
  * Categories: a2e
- * Description: Switch the image left or right using Media & Text. Add or remove any blocks in the content column.
+ * Description: Switch the image left or right using Media & Text. Edit the text, icons and buttons, or add and remove blocks in the content column.
  * Keywords: image, text, features, icons, side by side
  * Viewport Width: 1440
  */

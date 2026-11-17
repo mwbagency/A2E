@@ -40,24 +40,26 @@
         margin-block: var(--wp--preset--spacing--lg) 0;
     }
 
-    &.a2e-columns--icons {
-        & > .wp-block-columns > .wp-block-column > .wp-block-icon {
-            display: flex;
-            align-items: center;
-            inline-size: 4.5rem;
-            block-size: 4.5rem;
-            margin: 0;
+    & > .wp-block-columns > .wp-block-column > .wp-block-icon {
+        display: flex;
+        align-items: center;
+        inline-size: 4.5rem;
+        block-size: 4.5rem;
+        margin: 0;
 
-            & svg {
-                inline-size: 100%;
-                block-size: 80%;
-            }
-
-            & + .wp-block-heading {
-                margin-block-start: 1.6875rem;
-            }
+        & svg {
+            inline-size: 100%;
+            block-size: 80%;
         }
 
+        & + .wp-block-heading {
+            margin-block-start: 1.6875rem;
+        }
+    }
+
+    /* Keep earlier insertions compatible; new columns respond to their content. */
+    &.a2e-columns--icons,
+    &:has(> .wp-block-columns > .wp-block-column:nth-child(4)) {
         @media (781px < width <= 64rem) {
             & > .wp-block-columns {
                 display: grid;

@@ -18,6 +18,7 @@
     &.a2e-hero003--shape-2 {
         --a2e-hero-mask: url("../../images/masks/hero-shape-2.png");
         --a2e-hero-media-width: 120.3436%;
+        --a2e-hero-media-offset: -20.3436%;
         --a2e-hero-media-ratio: 868.881 / 583;
     }
 
@@ -31,6 +32,7 @@
     &.a2e-hero003--shape-4 {
         --a2e-hero-mask: url("../../images/masks/hero-shape-4.png");
         --a2e-hero-media-width: 100.9701%;
+        --a2e-hero-media-offset: -0.9701%;
         --a2e-hero-media-ratio: 729.004 / 583;
     }
 

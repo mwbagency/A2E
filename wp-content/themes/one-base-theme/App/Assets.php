@@ -18,6 +18,7 @@ final class Assets
         // inside the block editor so its previews use the same field appearance.
         add_action('wp_enqueue_scripts', [$this, 'enqueue']);
         add_action('enqueue_block_assets', [$this, 'form_fields']);
+        add_action('enqueue_block_editor_assets', [$this, 'hero_controls']);
     }
 
     public function version(string $relative_path): string
@@ -36,6 +37,16 @@ final class Assets
     {
         $path = 'assets/css/forms.css';
         wp_enqueue_style('one-202x-forms', get_theme_file_uri($path), [], $this->version($path));
+    }
+
+    /** Appearance choices belong to the inserted hero, rather than extra patterns. */
+    public function hero_controls(): void
+    {
+        $path = 'assets/js/editor/shape-hero.js';
+        wp_enqueue_script('one-202x-shape-hero', get_theme_file_uri($path),
+            ['wp-block-editor', 'wp-components', 'wp-element', 'wp-hooks', 'wp-i18n'],
+            $this->version($path), true);
+        wp_set_script_translations('one-202x-shape-hero', 'one-base-theme', get_template_directory() . '/languages');
     }
 
     public function enqueue(): void

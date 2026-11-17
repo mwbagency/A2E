@@ -30,8 +30,35 @@ can supply local content to those partials. Edit a shared partial for a family-w
 source change. Image/text compositions keep their varied content blocks in a
 buffered slot, with the surrounding layout maintained once.
 
-Keep genuine design alternatives visible, including hero shapes, image/text with
-an information panel, the searchable FAQ hub and the testimonial grid.
+Keep genuine layout alternatives, including the searchable FAQ hub and testimonial
+grid. Appearance and content choices belong to the inserted blocks:
+
+- **Hero — shaped media and statistics:** select the outer Group, then use
+  **Hero appearance** to choose one of five shapes and the image side. The fixed
+  service header retains its own mask. Text, statistics, buttons and media remain
+  editable blocks.
+- **Image and text — editable content:** use the Media & Text toolbar to switch
+  the image side; edit the body blocks for icon features or an information panel.
+- **Columns — editable text, icons and buttons:** change the native Columns count
+  and insert or remove Icon blocks. Icon styling follows the content.
+- **Team members — selected or latest:** choose people and the result count in the
+  Query settings. Add an ordinary heading when needed.
+- **Logos — accreditation marquee:** replace the logo images and add an optional
+  introduction. Partner and accreditation logos share the same layout.
+- Insert the native **Breadcrumbs** block and choose its **A2E** style.
+
+The simple-page sample copy is shared by the existing page starter and the empty
+page editor through `pattern-layouts/simple-page-content.php`; it is not a
+separate registered section. The unused legacy Content Listing and Contact Form
+wrapper blocks have been removed. Use Query Loop with Content Card and the native
+Gravity Forms block respectively.
+
+The November 2026 cleanup reduced the theme catalogue from 84 to 74 patterns and
+18 to 16 custom blocks. All 112 saved records with content (including revisions)
+were checked: none actively referenced the removed patterns or blocks. Existing
+page content, template content, media, query choices and form IDs were preserved.
+The distinct content-feed, FAQ and testimonial layouts remain available; their
+different layouts and interactions are not content-only duplicates.
 
 Before removing any further pattern, audit page files, templates, starter code and
 saved WordPress records for active references. Snapshot expanded output and saved

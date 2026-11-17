@@ -41,7 +41,7 @@ defined('ABSPATH') || exit;
     <div class="wp-block-group a2e-simple-page__body">
         <!-- wp:group {"className":"a2e-simple-page__content","layout":{"type":"constrained"}} -->
         <div class="wp-block-group a2e-simple-page__content">
-            <!-- wp:pattern {"slug":"one-202x/cont014_simple-page-starter"} /-->
+            <?php get_template_part('pattern-layouts/simple-page-content'); ?>
         </div>
         <!-- /wp:group -->
     </div>

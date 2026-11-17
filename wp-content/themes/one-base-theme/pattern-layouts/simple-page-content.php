@@ -1,13 +1,5 @@
 <?php
-/**
- * Title: Simple page — starter text
- * Slug: one-202x/cont014_simple-page-starter
- * Categories: a2e
- * Description: Editable placeholder headings and paragraphs for a new Simple page. Each insertion creates an independent copy.
- * Post Types: page
- * Keywords: simple, policy, information, lorem ipsum
- * Viewport Width: 760
- */
+/** Editable sample content shared by the simple-page composition and empty-page editor. */
 defined('ABSPATH') || exit;
 ?>
 <!-- wp:heading -->

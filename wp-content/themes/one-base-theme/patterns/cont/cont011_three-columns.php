@@ -1,10 +1,10 @@
 <?php
 /**
- * Title: Three text columns and buttons
+ * Title: Columns — editable text, icons and buttons
  * Slug: one-202x/cont011_three-columns
  * Categories: a2e
- * Description: Three editable text columns with dividing lines and two centred buttons.
- * Keywords: columns, text, dividers, buttons
+ * Description: Editable columns with dividing lines and centred buttons. Change the column count and add or remove icons in the page editor.
+ * Keywords: columns, text, icons, features, dividers, buttons
  * Viewport Width: 1440
  */
 
