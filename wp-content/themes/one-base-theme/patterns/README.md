@@ -1,6 +1,6 @@
 # Minimal page and section library
 
-The active WordPress Pages are **Homepage** and **Blocks**. Their saved content is
+The main WordPress Pages are **Homepage** and **Blocks**. Their saved content is
 independently editable. The library contains 36 registered patterns (including
 structural header, footer, listing and article patterns) and 10 custom theme
 blocks. Keep one pattern per reusable layout; copy, images, links, anchors and
@@ -12,6 +12,22 @@ an obsolete Testimonials template and the utility menu were moved to WordPress
 Trash. The primary menu and footer now link to Homepage and Blocks. A local
 recovery snapshot was captured before the cleanup. No content-type records or
 Homepage/Blocks body content were rewritten.
+
+## Content variation checks
+
+The requested local **Blocks — Content Tests** page (`/blocks-content-tests/`)
+duplicates Blocks as ordinary editable content and adds focused edge cases. Its
+44 labelled sections cover short/long copy, portrait/square/landscape images and
+a wide SVG, zero to three buttons, optional icons, long unbroken labels and long
+booking-card fields. It is excluded from indexing and navigation. It adds no
+registered patterns or custom blocks and travels with the database, not Git.
+
+Query results and forms retain their existing records/settings; card renderer
+checks use isolated local fixtures rather than rewriting shared content. Check
+the saved page at phone, tablet and desktop widths, including keyboard reveal
+states, whenever changing shared styles. The original Homepage and Blocks remain
+the baseline; do not overwrite them with test content or automatically seed QA
+pages on deployment.
 
 ## Editing the retained layouts
 

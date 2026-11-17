@@ -239,6 +239,8 @@
         }
 
         & > .a2e-hero003__media:not([data-playback-mode="manual"]) {
+            /* Extra copy must not enlarge the silhouette and zoom into the photo. */
+            max-height: 36.4375rem;
             translate: calc(-1 * var(--a2e-hero-tablet-shift)) 0;
         }
 

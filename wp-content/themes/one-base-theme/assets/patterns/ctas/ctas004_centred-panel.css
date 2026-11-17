@@ -1,6 +1,7 @@
 .one-202x-pattern-ctas004_centred-panel {
     position: relative;
     isolation: isolate;
+    overflow: clip;
     padding-block: 4.5rem;
     padding-inline: var(--a2e-section-inset);
     background-image: url("../../images/design/clinical-team-cta.jpg");
@@ -17,6 +18,8 @@
     }
 
     & > .one-202x-pattern-cont009_centred-intro {
+        position: relative;
+        isolation: isolate;
         display: grid;
         grid-template-columns: minmax(0, 689fr) minmax(0, 607fr);
         grid-template-rows: auto auto 1fr auto auto;
@@ -27,6 +30,33 @@
         padding: 0 0 1.5rem;
         background-color: transparent !important;
         text-align: start;
+
+        /* Follow the actual text rows when copy grows or the photograph changes. */
+        &::before,
+        &::after {
+            z-index: -1;
+            align-self: stretch;
+            margin: -1.5rem;
+            background: var(--a2e-cta-text-scrim);
+            filter: blur(1rem);
+            pointer-events: none;
+        }
+
+        &:has(> .is-style-eyebrow, > .a2e-centred-intro__title)::before {
+            --a2e-cta-text-scrim: color-mix(in srgb, var(--wp--preset--color--base) 95%, transparent);
+
+            grid-column: 1;
+            grid-row: 1 / 3;
+            content: "";
+        }
+
+        &:has(> .a2e-centred-intro__description, > .a2e-centred-intro__actions)::after {
+            --a2e-cta-text-scrim: color-mix(in srgb, var(--wp--preset--color--contrast) 95%, transparent);
+
+            grid-column: 2;
+            grid-row: 4 / 6;
+            content: "";
+        }
 
         & > * {
             min-inline-size: 0;
@@ -71,7 +101,7 @@
         }
     }
 
-    & .a2e-centred-intro__actions .wp-block-one-202x-icon-button:not(.is-style-outline) {
+    & .a2e-centred-intro__actions .wp-block-one-202x-icon-button:not(.is-style-outline, .is-style-outline-dark, .is-style-icon-link, .is-style-icon-link-accent) {
         background-color: var(--wp--preset--color--accent) !important;
         color: var(--wp--preset--color--base) !important;
     }
@@ -104,7 +134,8 @@
             min-block-size: 40rem;
 
             & > .a2e-centred-intro__description,
-            & > .a2e-centred-intro__actions {
+            & > .a2e-centred-intro__actions,
+            &:has(> .a2e-centred-intro__description, > .a2e-centred-intro__actions)::after {
                 grid-column: 1;
             }
         }

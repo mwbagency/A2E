@@ -28,7 +28,9 @@ belong to the current task.
 - A2E's section library contains one registered pattern per unique reusable layout.
   Populate new pages with editable blocks; do not create or retain hidden patterns
   for different copy, images, links, anchors or query selections.
-- The current build has only two active WordPress Pages: Homepage and Blocks.
+- The main build has two WordPress Pages: Homepage and Blocks. The local
+  **Blocks — Content Tests** page is an explicitly requested, editable QA copy;
+  keep it out of navigation and do not turn its cases into registered patterns.
   Keep the reusable library focused on their demonstrated layouts and the
   structural templates needed by existing content types. Do not restore removed
   page starters, templates or unused custom blocks without a new requirement.
