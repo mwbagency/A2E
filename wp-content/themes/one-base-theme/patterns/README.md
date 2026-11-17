@@ -39,6 +39,17 @@ changes that page. Shared template parts retain WordPress's separate editing mod
 Creating, editing or deleting database pattern definitions is disabled in the CMS.
 The theme's registered patterns remain available to insert as editable copies.
 
+Homepage and Blocks use this same editing model. The three course-detail values
+in Blocks are ordinary paragraphs because that demonstration page is not a course
+record. Their original course pattern retains its field bindings. When copying a
+record-specific layout into a demonstration page, keep such adjustments local to
+the page's blocks.
+
+Query cards, FAQs, categories and forms still use their source records or plugin
+settings. Their page-level selection and presentation controls are directly
+editable, but changing a record's title, image or content belongs in that record's
+editor. A native Post Title block edits the page or post title itself.
+
 - **Hero — shaped media and statistics:** select the outer Group and use
   **Hero appearance** to choose one of five shapes and the image side. The service
   header has its own fixed mask. Text, statistics, buttons and media stay editable.

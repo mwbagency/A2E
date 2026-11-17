@@ -116,6 +116,12 @@ sources separate from page content; do not rewrite saved pages or strip origin
 metadata just to change the editing interface. Preserve shared template-part and
 synced-pattern protections.
 
+For a demonstration page that copies a record-specific layout, inspect bindings
+that depend on the original post type. If that context is absent and the copied
+values need direct editing, detach those bindings in the page's saved copy while
+preserving its content and the source layout. Keep intentional query results and
+shared content records under their existing owners.
+
 ## Templates and starter content
 
 - A selectable template needs a template file and the appropriate `theme.json`
