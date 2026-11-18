@@ -64,8 +64,10 @@ belong to the current task.
   user input. Inspect its current configuration before making changes.
 - Booking UI is editable design for a later integration unless the task changes
   that scope. Do not imply that its booking/payment backend is connected.
-- The database will be transferred. Do not add automatic defaults/seeding or
-  overwrite saved pages/templates. Only perform task-authorized one-off setup.
+- Staging contains live editorial content. Deploy only the changed application
+  files and keep the database, uploads, and saved pages and templates in place.
+  Never replace the entire staging site, import a local database, or restore a
+  local site backup over staging. Do not add automatic defaults or seeding.
 
 ## Commands and verification
 
