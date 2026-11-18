@@ -90,6 +90,10 @@
         letter-spacing: 0.5px;
     }
 
+    & .a2e-hero003__details > p + p {
+        margin-block-start: var(--wp--preset--spacing--sm);
+    }
+
     & .a2e-hero003__statistics {
         gap: 1.5rem 2rem;
         margin-block-start: 1.5rem;

@@ -33,6 +33,15 @@ html {
     }
 }
 
+/* The existing Team page uses a standalone Query Loop for this section. */
+.wp-block-query.one-202x-pattern-othe004_team-grid {
+    padding-block: 4.5rem;
+
+    @media (--tablet-down) {
+        padding-block: 3rem;
+    }
+}
+
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 0.25rem;
