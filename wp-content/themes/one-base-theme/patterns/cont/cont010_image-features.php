@@ -43,7 +43,7 @@ ob_start();
 
             <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","flexWrap":"wrap"},"className":"a2e-button-group"} -->
             <div class="wp-block-group a2e-button-group">
-                <!-- wp:one-202x/icon-button {"backgroundColor":"yellow","textColor":"contrast","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Lorem ipsum dolor', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                <!-- wp:one-202x/icon-button {"backgroundColor":"accent","textColor":"base","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Lorem ipsum dolor', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
                     <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
                 <!-- /wp:one-202x/icon-button -->
 

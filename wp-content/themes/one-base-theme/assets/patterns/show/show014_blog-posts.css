@@ -5,6 +5,10 @@
         margin-block-start: 3.125rem;
     }
 
+    & .one-202x-content-card--layout-resource:is(:hover, :focus-within) {
+        border-color: var(--wp--preset--color--yellow);
+    }
+
     @media (width <= 64rem) {
         padding-block: 3rem;
     }

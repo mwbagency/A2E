@@ -32,8 +32,15 @@
     }
 
     & > *,
-    & > .wp-block-group,
-    & .wp-block-group > * {
+    & :is(
+        .a2e-image-features__content,
+        .a2e-image-features__heading,
+        .a2e-image-features__details,
+        .a2e-image-features__list,
+        .a2e-image-features__point,
+        .a2e-image-features__point-text,
+        .a2e-image-features__information
+    ) > * {
         min-inline-size: 0;
         margin-block: 0;
     }
@@ -124,12 +131,44 @@
         }
     }
 
+    &.a2e-image-features--inset {
+        --a2e-image-panel-edge: clamp(0.5rem, 1.667vw, 1.5rem);
+        --a2e-image-panel-bleed: min(1.5rem, var(--a2e-image-panel-edge));
+
+        position: relative;
+        isolation: isolate;
+        padding-block: calc(3rem + var(--a2e-image-panel-edge));
+
+        &::before {
+            position: absolute;
+            z-index: -1;
+            inset-block: 3rem;
+            inset-inline: calc(var(--a2e-section-inset) - var(--a2e-image-panel-bleed));
+            border-radius: 3rem;
+            background: var(--wp--preset--color--base);
+            content: "";
+        }
+
+        & > .wp-block-media-text__content {
+            max-inline-size: 28rem;
+            color: var(--wp--preset--color--contrast);
+        }
+
+        & .a2e-image-features__details {
+            padding-inline-end: 0;
+        }
+
+        & > .wp-block-media-text__media :is(img, video) {
+            aspect-ratio: 4 / 5;
+        }
+    }
+
     @media (--tablet-down) {
         /* Native Media & Text saves its column widths inline. */
         &.is-stacked-on-mobile,
         &.wp-block-group {
             grid-template-columns: 100% !important;
-            gap: 3rem;
+            gap: clamp(1.5rem, 5vw, 3rem);
         }
 
         padding-block: 3rem;
@@ -151,6 +190,26 @@
 
         & .a2e-image-features__details {
             padding-inline-end: 0;
+        }
+
+        &.a2e-image-features--inset {
+            padding-block: calc(2rem + var(--a2e-image-panel-edge));
+
+            &::before {
+                inset-block: 2rem;
+                border-radius: var(--wp--custom--radius--media);
+            }
+
+            & > .wp-block-media-text__content {
+                inline-size: 100%;
+                max-inline-size: 42.5rem;
+                justify-self: center;
+                padding: 0 var(--a2e-image-panel-edge) var(--a2e-image-panel-edge);
+            }
+
+            & > .wp-block-media-text__media :is(img, video) {
+                aspect-ratio: 680 / 706;
+            }
         }
     }
 

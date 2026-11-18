@@ -77,8 +77,8 @@ ob_start();
 <?php
 $details = ob_get_clean();
 get_template_part('pattern-layouts/image-features', null, [
-    'root_attributes' => ['align' => 'full', 'mediaType' => 'image', 'mediaPosition' => 'right', 'mediaWidth' => 58, 'isStackedOnMobile' => true, 'verticalAlignment' => 'center', 'className' => 'one-202x-pattern-cont010_image-features', 'backgroundColor' => 'base', 'textColor' => 'contrast', 'metadata' => ['name' => 'Training delivered across the UK']],
-    'root_class' => 'wp-block-media-text alignfull has-media-on-the-right is-stacked-on-mobile is-vertically-aligned-center one-202x-pattern-cont010_image-features has-contrast-color has-base-background-color has-text-color has-background',
+    'root_attributes' => ['align' => 'full', 'mediaType' => 'image', 'mediaPosition' => 'right', 'mediaWidth' => 58, 'isStackedOnMobile' => true, 'verticalAlignment' => 'center', 'className' => 'one-202x-pattern-cont010_image-features', 'backgroundColor' => 'contrast', 'textColor' => 'base', 'metadata' => ['name' => 'Training delivered across the UK']],
+    'root_class' => 'wp-block-media-text alignfull has-media-on-the-right is-stacked-on-mobile is-vertically-aligned-center one-202x-pattern-cont010_image-features has-base-color has-contrast-background-color has-text-color has-background',
     'grid_style' => 'grid-template-columns:auto 58%',
     'eyebrow' => (wp_kses_post(__('National coverage', 'one-base-theme'))),
     'heading' => (wp_kses_post(__('Training delivered across the UK', 'one-base-theme'))),
@@ -167,7 +167,7 @@ ob_start();
 
             <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","flexWrap":"wrap"},"className":"a2e-button-group"} -->
             <div class="wp-block-group a2e-button-group">
-                <!-- wp:one-202x/icon-button {"backgroundColor":"yellow","textColor":"contrast","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('View our courses', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"url":"#courses"} -->
+                <!-- wp:one-202x/icon-button {"backgroundColor":"accent","textColor":"base","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('View our courses', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>,"url":"#courses"} -->
                     <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
                 <!-- /wp:one-202x/icon-button -->
 
@@ -178,8 +178,8 @@ ob_start();
 <?php
 $details = ob_get_clean();
 get_template_part('pattern-layouts/image-features', null, [
-    'root_attributes' => ['align' => 'full', 'mediaType' => 'image', 'mediaWidth' => 58, 'isStackedOnMobile' => true, 'verticalAlignment' => 'center', 'className' => 'one-202x-pattern-cont010_image-features', 'backgroundColor' => 'contrast', 'textColor' => 'base', 'metadata' => ['name' => 'A consultative and creative approach to every client']],
-    'root_class' => 'wp-block-media-text alignfull is-stacked-on-mobile is-vertically-aligned-center one-202x-pattern-cont010_image-features has-base-color has-contrast-background-color has-text-color has-background',
+    'root_attributes' => ['align' => 'full', 'mediaType' => 'image', 'mediaWidth' => 58, 'isStackedOnMobile' => true, 'verticalAlignment' => 'center', 'className' => 'one-202x-pattern-cont010_image-features a2e-image-features--inset', 'backgroundColor' => 'contrast', 'textColor' => 'base', 'metadata' => ['name' => 'A consultative and creative approach to every client']],
+    'root_class' => 'wp-block-media-text alignfull is-stacked-on-mobile is-vertically-aligned-center one-202x-pattern-cont010_image-features a2e-image-features--inset has-base-color has-contrast-background-color has-text-color has-background',
     'grid_style' => 'grid-template-columns:58% auto',
     'eyebrow' => (wp_kses_post(__('Our courses', 'one-base-theme'))),
     'heading' => (wp_kses_post(__('A consultative and creative approach to every client', 'one-base-theme'))),
@@ -423,7 +423,7 @@ ob_start();
 
             <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"flex","flexWrap":"wrap"},"className":"a2e-button-group"} -->
             <div class="wp-block-group a2e-button-group">
-                <!-- wp:one-202x/icon-button {"backgroundColor":"yellow","textColor":"contrast","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Read Our Story', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
+                <!-- wp:one-202x/icon-button {"backgroundColor":"accent","textColor":"base","className":"a2e-button","showIcon":false,"iconPosition":"right","text":<?php echo wp_json_encode(__('Read Our Story', 'one-base-theme'), JSON_HEX_TAG | JSON_HEX_AMP); ?>} -->
                     <!-- wp:icon {"icon":"core/arrow-right","lock":{"move":true,"remove":true}} /-->
                 <!-- /wp:one-202x/icon-button -->
 

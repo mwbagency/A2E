@@ -38,12 +38,12 @@
             align-self: stretch;
             margin: -1.5rem;
             background: var(--a2e-cta-text-scrim);
-            filter: blur(1rem);
+            filter: blur(1.75rem);
             pointer-events: none;
         }
 
         &:has(> .is-style-eyebrow, > .a2e-centred-intro__title)::before {
-            --a2e-cta-text-scrim: color-mix(in srgb, var(--wp--preset--color--base) 95%, transparent);
+            --a2e-cta-text-scrim: color-mix(in srgb, var(--wp--preset--color--base) 80%, transparent);
 
             grid-column: 1;
             grid-row: 1 / 3;

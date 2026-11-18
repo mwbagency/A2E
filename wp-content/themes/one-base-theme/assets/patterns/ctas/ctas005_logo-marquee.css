@@ -37,4 +37,8 @@
             opacity: 1;
         }
     }
+
+    @media (width <= 64rem) {
+        padding-block: clamp(2rem, 5vw, 4.375rem);
+    }
 }
