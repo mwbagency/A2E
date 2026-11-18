@@ -1,6 +1,43 @@
 #!/usr/bin/env bash
 
 # Sourced by the Buddy SSH script after it sets app, cache and site.
+deployment_enabled_maintenance=false
+
+start_deployment_maintenance() {
+  if wp maintenance-mode is-active --path="$site" --skip-plugins --skip-themes; then
+    echo 'Leaving the existing maintenance mode under operator control.'
+    return 0
+  fi
+
+  wp maintenance-mode activate --path="$site" --skip-plugins --skip-themes
+  deployment_enabled_maintenance=true
+  trap 'cleanup_deployment_on_exit "$?"' EXIT
+}
+
+finish_deployment_maintenance() {
+  if [ "$deployment_enabled_maintenance" = true ]; then
+    wp maintenance-mode deactivate --path="$site" --skip-plugins --skip-themes || return
+    deployment_enabled_maintenance=false
+  fi
+}
+
+cleanup_deployment_on_exit() {
+  local exit_status="$1"
+  if ! finish_deployment_maintenance; then
+    echo 'Could not turn off deployment maintenance mode.' >&2
+    if [ "$exit_status" -eq 0 ]; then
+      exit_status=1
+    fi
+  fi
+  exit "$exit_status"
+}
+
+activate_deployed_plugins() {
+  # Older WP-CLI passes null for --network on single-site activation. The AI
+  # plugin's activation listener requires a bool, so omit it from this CLI run.
+  wp plugin activate --skip-plugins=ai "$@"
+}
+
 copy_wordpress_core() {
   tar -C "$core" --exclude='./wp-content' -cf - . | tar -C "$site" -xf -
 }

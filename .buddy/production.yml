@@ -319,7 +319,8 @@
           wp db export "$cache/backups/before-deploy.sql.tmp"
           chmod 600 "$cache/backups/before-deploy.sql.tmp"
           mv "$cache/backups/before-deploy.sql.tmp" "$cache/backups/before-deploy.sql"
-          wp maintenance-mode activate
+          stage='enabling deployment maintenance mode'
+          start_deployment_maintenance
         else
           # A connection error or an unfamiliar nonempty database stops deployment.
           stage='checking the database before installation'
@@ -369,7 +370,7 @@
         stage='deploying site code'
         deploy_site_code
         stage='activating site components'
-        wp plugin activate "${plugins[@]}"
+        activate_deployed_plugins "${plugins[@]}"
         for plugin in "${plugins[@]}"; do
           auto_update=$(wp plugin auto-updates status "$plugin" --field=status)
           if [ "$auto_update" = enabled ]; then wp plugin auto-updates disable "$plugin"; fi
@@ -384,7 +385,8 @@
         # Removed pattern files must also leave WordPress's database-backed catalogue cache.
         wp eval 'wp_get_theme()->delete_pattern_cache();'
         wp eval 'if (class_exists("Cache_Enabler")) { Cache_Enabler::clear_complete_cache(); } if (!class_exists("One202x\\Platform\\Plugin") || !class_exists("GFForms") || !function_exists("acf")) { WP_CLI::error("Required site components did not load."); }'
-        wp maintenance-mode deactivate
+        stage='disabling deployment maintenance mode'
+        finish_deployment_maintenance
         echo 'Production deployment complete.'
       targets:
         - target: production-server
