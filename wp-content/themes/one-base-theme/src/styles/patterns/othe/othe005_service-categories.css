@@ -1,0 +1,28 @@
+.one-202x-pattern-othe005_service-categories {
+    padding-block: clamp(3rem, 5vw, 4.5rem);
+
+    & .wp-block-term-template > li {
+        min-inline-size: 0;
+
+        & > .wp-block-group {
+            block-size: 100%;
+            border-radius: var(--wp--custom--radius--card);
+        }
+    }
+
+    & .wp-block-term-name {
+        margin: 0;
+        line-height: 1.125;
+        letter-spacing: 0;
+
+        & a {
+            color: inherit;
+            text-decoration: none;
+
+            &:is(:hover, :focus-visible) {
+                text-decoration: underline;
+                text-underline-offset: 0.18em;
+            }
+        }
+    }
+}

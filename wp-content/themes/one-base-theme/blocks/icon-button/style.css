@@ -45,6 +45,9 @@
     & .one-202x-icon-button__label {
         min-inline-size: 0;
         overflow-wrap: anywhere;
+        text-align: center;
+        /* Galano's lettering sits above the line box's visual centre. */
+        translate: 0 var(--wp--custom--button--label-offset);
     }
 
     & .wp-block-icon {

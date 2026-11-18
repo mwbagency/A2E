@@ -103,7 +103,7 @@
 
     :where(form button[type="submit"], form input[type="submit"], form input[type="reset"]):not(:where(.gform_wrapper *)) {
         min-block-size: var(--one-form-button-height);
-        padding-block: var(--one-form-padding-block);
+        padding-block: calc(var(--one-form-padding-block) + var(--wp--custom--button--label-offset)) calc(var(--one-form-padding-block) - var(--wp--custom--button--label-offset));
         padding-inline: var(--one-form-button-padding-inline);
         border: 0;
         border-radius: var(--one-form-button-radius);
@@ -112,6 +112,7 @@
         font-weight: var(--one-form-button-font-weight);
         line-height: 1.111111;
         letter-spacing: 0;
+        text-align: center;
         background: var(--one-form-button-background);
         color: var(--one-form-button-text);
         cursor: pointer;
@@ -185,4 +186,9 @@ html .gform_wrapper.gform-theme--framework {
     --gf-ctrl-btn-padding-y: var(--one-form-padding-block);
     --gf-form-gap-y: var(--one-form-gap);
     --gf-form-gap-x: var(--one-form-gap);
+
+    & .gform_button:is(button, input) {
+        padding-block: calc(var(--gf-ctrl-btn-padding-y) + var(--wp--custom--button--label-offset)) calc(var(--gf-ctrl-btn-padding-y) - var(--wp--custom--button--label-offset));
+        text-align: center;
+    }
 }

@@ -17,6 +17,7 @@
 
     & > .one-202x-pattern-cont009_centred-intro {
         margin: 0;
+        border-radius: var(--wp--custom--radius--panel);
 
         & > * {
             max-inline-size: min(39.625rem, var(--wp--style--global--content-size));
@@ -130,5 +131,21 @@
     & .gform_confirmation_message {
         color: var(--wp--preset--color--base);
         text-align: center;
+    }
+
+    @media (width <= 37.5rem) {
+        & .gfield--type-email input[type="email"] {
+            padding-inline-end: var(--one-form-padding-inline);
+        }
+
+        & .gform_footer {
+            position: static;
+            margin-block-start: 1rem;
+
+            & .gform_button {
+                inline-size: 100%;
+                --gf-ctrl-btn-size: 2.75rem;
+            }
+        }
     }
 }

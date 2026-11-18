@@ -46,7 +46,8 @@
 
     & .one-202x-logo-marquee__toggle {
         margin-block-start: var(--wp--preset--spacing--sm);
-        padding: calc(0.75rem - 1px) calc(2rem - 1px);
+        padding-block: calc(0.75rem - 1px + var(--wp--custom--button--label-offset)) calc(0.75rem - 1px - var(--wp--custom--button--label-offset));
+        padding-inline: calc(2rem - 1px);
         min-block-size: 2.75rem;
         font-family: inherit;
         font-size: var(--wp--preset--font-size--button);

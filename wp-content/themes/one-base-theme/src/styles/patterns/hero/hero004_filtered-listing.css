@@ -6,7 +6,7 @@
         grid-template-columns: minmax(0, 8fr) minmax(0, 9fr);
         gap: var(--a2e-filtered-listing-gutter);
         margin: 0;
-        padding: clamp(4.5rem, 10vw, 9rem) var(--a2e-section-inset) 3.125rem;
+        padding: clamp(3rem, 5vw, 4.5rem) var(--a2e-section-inset) 3.125rem;
 
         & > * {
             min-width: 0;
@@ -26,11 +26,7 @@
         letter-spacing: -1.3px;
 
         & em {
-            font-family: var(--wp--preset--font-family--serif);
-            font-weight: 400;
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 0.12em;
+            font-style: normal;
         }
     }
 

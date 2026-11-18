@@ -19,7 +19,8 @@
             flex-shrink: 0;
             inline-size: 5.5rem;
             block-size: 5.5rem;
-            padding: 0.5rem;
+            padding-block: calc(0.5rem + var(--wp--custom--button--label-offset)) calc(0.5rem - var(--wp--custom--button--label-offset));
+            padding-inline: 0.5rem;
             border: 1px solid var(--wp--preset--color--contrast);
             border-radius: 50%;
             background: var(--wp--preset--color--base);

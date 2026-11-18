@@ -98,6 +98,10 @@
         padding-inline: var(--testimonial-gutter);
     }
 
+    :where(.wp-block-post-content > :not(.one-202x-pattern-show011_content-feed)) + &:not(.one-202x-pattern-show015_video-testimonials) {
+        padding-block-start: clamp(3rem, 5vw, 4.5rem);
+    }
+
     @media (--tablet-down) {
         padding-block: 0 3rem;
     }

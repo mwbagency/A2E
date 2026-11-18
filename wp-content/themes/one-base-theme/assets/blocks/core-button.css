@@ -4,10 +4,12 @@
         align-items: center;
         justify-content: center;
         gap: 0.625rem;
+        text-align: center;
     }
 
     .wp-block-button.is-style-outline-dark & {
-        padding: calc(0.75rem - 1px) calc(2rem - 1px);
+        padding-block: calc(0.75rem - 1px + var(--wp--custom--button--label-offset)) calc(0.75rem - 1px - var(--wp--custom--button--label-offset));
+        padding-inline: calc(2rem - 1px);
         border: 1px solid var(--wp--preset--color--button-outline);
         background: var(--wp--preset--color--base);
         color: var(--wp--preset--color--accent);

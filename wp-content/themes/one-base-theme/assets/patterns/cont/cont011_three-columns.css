@@ -1,7 +1,7 @@
 .one-202x-pattern-cont011_three-columns {
     --column-gap: clamp(3rem, 5.5556vw, 5rem);
 
-    padding-block: 0 4.5rem;
+    padding-block: clamp(3rem, 5vw, 4.5rem);
     padding-inline: var(--a2e-section-inset);
 
     & > .wp-block-columns {
@@ -73,8 +73,6 @@
     }
 
     @media (max-width: 781px) {
-        padding-block-end: 3rem;
-
         & > .wp-block-columns {
             gap: 2rem;
 

@@ -19,6 +19,10 @@
         justify-content: center;
         min-block-size: 2.75rem;
         padding: calc(0.75rem - 1px) calc(2rem - 1px);
+
+        &:not(.wp-block-one-202x-icon-button) {
+            padding-block: calc(0.75rem - 1px + var(--wp--custom--button--label-offset)) calc(0.75rem - 1px - var(--wp--custom--button--label-offset));
+        }
         border: 1px solid currentColor;
         border-radius: var(--wp--custom--radius--control);
         background: var(--wp--preset--color--base);

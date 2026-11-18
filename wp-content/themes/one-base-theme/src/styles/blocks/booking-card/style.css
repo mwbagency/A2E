@@ -76,13 +76,18 @@
     }
 
     & .one-202x-booking-card__button {
-        padding: 0.75rem 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding-block: calc(0.75rem + var(--wp--custom--button--label-offset)) calc(0.75rem - var(--wp--custom--button--label-offset));
+        padding-inline: 1rem;
         min-height: 2.75rem;
         border: 0;
         border-radius: 999px;
         background: var(--wp--preset--color--contrast);
         color: var(--wp--preset--color--base);
         font: 700 var(--wp--preset--font-size--button)/1.111111 var(--wp--preset--font-family--sans);
+        text-align: center;
         opacity: 1;
     }
 

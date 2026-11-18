@@ -445,7 +445,8 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
     body :is(.one-202x-head__navigation, .one-202x-mobile-nav__menu) & > .wp-block-navigation-item__content {
         box-sizing: border-box;
         justify-content: center;
-        padding: 0.75rem 2rem;
+        padding-block: calc(0.75rem + var(--wp--custom--button--label-offset)) calc(0.75rem - var(--wp--custom--button--label-offset));
+        padding-inline: 2rem;
         color: var(--wp--preset--color--base);
         background: var(--wp--preset--color--accent);
         border-radius: var(--wp--custom--radius--control);
@@ -453,6 +454,7 @@ body .one-202x-mobile-nav > .one-202x-mobile-nav__footer {
         font-weight: var(--wp--custom--typography--font-weight--bold);
         line-height: 1.25rem;
         letter-spacing: 0;
+        text-align: center;
         white-space: nowrap;
 
         &:hover {

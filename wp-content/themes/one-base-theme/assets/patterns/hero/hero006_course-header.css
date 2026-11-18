@@ -101,4 +101,15 @@
             min-inline-size: 0;
         }
     }
+
+    /* A course without a cover image still has a readable heading and facts. */
+    &.wp-block-cover:not(:has(> :is(.wp-block-cover__image-background, .wp-block-cover__video-background))) {
+        min-block-size: 0;
+        padding: clamp(3rem, 5vw, 4.5rem) var(--a2e-section-inset);
+        background-color: var(--wp--preset--color--contrast);
+
+        & > .wp-block-cover__background {
+            opacity: 0;
+        }
+    }
 }

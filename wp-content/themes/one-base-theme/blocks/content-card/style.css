@@ -237,7 +237,9 @@
     & .one-202x-content-card__link {
         justify-content: center;
         inline-size: 100%;
-        padding: 0.5rem 1rem;
+        padding-block: calc(0.5rem + var(--wp--custom--button--label-offset)) calc(0.5rem - var(--wp--custom--button--label-offset));
+        padding-inline: 1rem;
+        text-align: center;
         border-radius: var(--wp--custom--radius--control);
         background: var(--wp--preset--color--base);
         color: var(--wp--preset--color--contrast);

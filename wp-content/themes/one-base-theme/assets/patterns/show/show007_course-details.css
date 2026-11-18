@@ -40,3 +40,7 @@
     width: 100%;
     height: 100%;
 }
+
+:where(.wp-block-post-content, .is-root-container) > .one-202x-pattern-show007_course-details {
+    padding-block: clamp(3rem, 5vw, 4.5rem);
+}
