@@ -69,6 +69,7 @@
         padding-block: 6rem 4.5rem;
         flex-direction: column;
         justify-content: space-between;
+        gap: var(--wp--preset--spacing--md);
     }
 
     & .a2e-hero003__title {
@@ -164,7 +165,6 @@
         }
 
         & > .a2e-hero003__content {
-            gap: 1.5rem;
             padding: 3rem var(--a2e-hero-gutter);
         }
 
@@ -197,7 +197,6 @@
 
         & > .a2e-hero003__content {
             isolation: isolate;
-            gap: 1.5rem;
             padding-block: 3rem;
 
             /* Keep the copy on a solid surface, then fade into the image. */
