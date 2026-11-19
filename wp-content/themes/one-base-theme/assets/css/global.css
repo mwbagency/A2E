@@ -47,6 +47,11 @@ html {
     outline-offset: 0.25rem;
 }
 
+.wp-site-blocks ::selection {
+    background-color: var(--wp--preset--color--grey-200);
+    color: var(--wp--preset--color--contrast);
+}
+
 /* Native touch/keyboard scrolling remains available. Snap resumes on release. */
 :is(
     .a2e-numbered-cards__track,
